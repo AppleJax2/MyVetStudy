@@ -5,7 +5,7 @@ import AppError from '../utils/appError';
 import { User } from '../generated/prisma'; // Import User type
 
 // Define an interface extending Express Request to include the user property
-export interface AuthenticatedRequest extends Request {
+export interface AuthenticatedRequest<P = {}, Q = {}, B = {}> extends Request<P, {}, B, Q> {
     user?: User & { practiceId?: string | null }; // Make user optional initially, ensure practiceId is included
 }
 
