@@ -54,9 +54,9 @@ This document explains how to deploy the MyVetStudy application to production en
 2. Click "Add new site" → "Import an existing project"
 3. Connect to GitHub and select your repository
 4. Configure build settings:
-   - Base directory: `client` (since your frontend is in the client folder)
+   - Base directory: Leave blank (or `/` since the package.json is in the root)
    - Build command: `npm install && npm run build`
-   - Publish directory: `client/dist` (Vite's default build output directory)
+   - Publish directory: `dist` (Vite's default build output directory)
 
 ### 2. Configure Environment Variables
 
