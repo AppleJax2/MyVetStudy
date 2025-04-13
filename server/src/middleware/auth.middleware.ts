@@ -1,81 +1,67 @@
 import { Request, Response, NextFunction } from 'express';
-import { verifyToken } from '../utils/auth.utils';
-import { PrismaClient } from '@prisma/client';
+import jwt from 'jsonwebtoken';
+import prisma from '../utils/prisma.client';
+import AppError from '../utils/appError';
+import { User } from '../generated/prisma'; // Import User type
 
-const prisma = new PrismaClient();
-
-// Extend Express Request type to include user
-declare global {
-  namespace Express {
-    interface Request {
-      user?: {
-        userId: string;
-        email: string;
-        role: string;
-        practiceId?: string | null;
-      };
-    }
-  }
+// Define an interface extending Express Request to include the user property
+export interface AuthenticatedRequest extends Request {
+    user?: User & { practiceId?: string | null }; // Make user optional initially, ensure practiceId is included
 }
 
-// Middleware to authenticate and extract user from JWT token
-export const authenticate = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  try {
-    // Get token from header
-    const authHeader = req.headers.authorization;
-    
-    if (!authHeader || !authHeader.startsWith('Bearer ')) {
-      return res.status(401).json({ message: 'Unauthorized - No token provided' });
+export const authenticate = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+    try {
+        let token;
+        // 1) Check if token exists in headers
+        if (
+            req.headers.authorization &&
+            req.headers.authorization.startsWith('Bearer')
+        ) {
+            token = req.headers.authorization.split(' ')[1];
+        }
+        // TODO: Add check for token in cookies as well for web clients if needed
+
+        if (!token) {
+            return next(new AppError('You are not logged in! Please log in to get access.', 401));
+        }
+
+        // 2) Verify token
+        const decoded = jwt.verify(token, process.env.JWT_SECRET!) as { id: string };
+
+        // 3) Check if user still exists
+        const currentUser = await prisma.user.findUnique({
+            where: { id: decoded.id },
+            // Optionally include related data like role or practice if needed frequently
+            // include: { practice: true } // Example
+        });
+
+        if (!currentUser || !currentUser.isActive) {
+            return next(new AppError('The user belonging to this token no longer exists or is inactive.', 401));
+        }
+
+        // 4) Grant access to protected route
+        // Attach user to the request object
+        req.user = currentUser;
+        next();
+
+    } catch (error) {
+        if (error instanceof jwt.JsonWebTokenError) {
+            return next(new AppError('Invalid token. Please log in again.', 401));
+        }
+        if (error instanceof jwt.TokenExpiredError) {
+            return next(new AppError('Your token has expired! Please log in again.', 401));
+        }
+        // Pass other errors to the global error handler
+        next(error);
     }
-    
-    // Extract token
-    const token = authHeader.split(' ')[1];
-    
-    // Verify token
-    const decoded = verifyToken(token);
-    
-    // Check if user exists
-    const user = await prisma.user.findUnique({
-      where: { id: decoded.userId }
-    });
-    
-    if (!user) {
-      return res.status(401).json({ message: 'Unauthorized - Invalid user' });
-    }
-    
-    if (!user.isActive) {
-      return res.status(403).json({ message: 'Account deactivated' });
-    }
-    
-    // Add user info to request
-    req.user = {
-      userId: decoded.userId,
-      email: decoded.email,
-      role: decoded.role,
-      practiceId: decoded.practiceId
-    };
-    
-    next();
-  } catch (error) {
-    return res.status(401).json({ message: 'Unauthorized - Invalid token' });
-  }
 };
 
-// Middleware to restrict access based on user roles
-export const authorize = (allowedRoles: string[]) => {
-  return (req: Request, res: Response, next: NextFunction) => {
-    if (!req.user) {
-      return res.status(401).json({ message: 'Unauthorized - Authentication required' });
-    }
-    
-    if (!allowedRoles.includes(req.user.role)) {
-      return res.status(403).json({ message: 'Forbidden - Insufficient permissions' });
-    }
-    
-    next();
-  };
-}; 
+// TODO: Add authorization middleware (e.g., check roles)
+// export const authorize = (...roles: string[]) => {
+//     return (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+//         if (!req.user || !roles.includes(req.user.role)) {
+//             return next(new AppError('You do not have permission to perform this action', 403));
+//         }
+//         next();
+//     };
+// }; 
