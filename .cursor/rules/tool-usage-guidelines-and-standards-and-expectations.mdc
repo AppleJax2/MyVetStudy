@@ -1,0 +1,230 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+
+# Your rule content
+
+- You can @ files here
+- You can use markdown but dont have to
+
+1. General Guidance
+Purpose-Driven Invocations
+
+Only invoke a tool if it addresses the user’s specific need or if it provides tangible value to the current project context.
+
+Always evaluate whether the result of using the tool will move the project forward or provide clarifying, refined, or otherwise valuable output.
+
+Minimal Yet Effective
+
+Do not chain multiple tools unnecessarily. Ensure each tool serves a clear purpose and that you don’t overuse them without a coherent strategy.
+
+If a single tool or a single command can fulfill a requirement, use that rather than combining many tools with overlapping functionalities.
+
+Security and Privacy Considerations
+
+Do not expose credentials or sensitive data unless strictly necessary for the execution of a command (e.g., an API key).
+
+If logs, screenshots, or other outputs might contain sensitive data, redact or omit them before sharing externally.
+
+User Confirmation
+
+If an operation might have far-reaching or destructive effects (e.g., large-scale crawling or advanced prompts that might be costly), confirm with the user before proceeding.
+
+Iterative Collaboration
+
+When returning outputs or partial results, invite the user to refine or confirm next steps before launching the next tool. This promotes more accurate and customized solutions.
+
+2. FireCrawl (cmd /c npx -y @smithery/cli@latest run @mendableai/mcp-server-firecrawl --config "{\"fireCrawlApiKey\":\"YOUR_KEY\"}")
+Use Cases
+
+Large-scale web or data crawling tasks.
+
+Gathering information across multiple sources.
+
+Approach
+
+Prepare a well-defined target or scope before initiating FireCrawl.
+
+Use custom filters or settings (if available) to limit crawl scope and improve performance.
+
+Caveats
+
+Ensure you have permission to crawl the targeted source.
+
+Double-check that the data to be crawled does not violate any legal or ethical boundaries.
+
+3. Sequential Thinking (cmd /c npx -y @smithery/cli@latest run @smithery-ai/server-sequential-thinking --key YOUR_KEY)
+Use Cases
+
+Structured brainstorming or step-by-step problem-solving.
+
+When a problem requires logical breakdown into multiple stages or steps.
+
+Approach
+
+Outline the logical or creative steps needed (e.g., concept generation → iteration → final output).
+
+Let the tool assist in generating or organizing each step, then combine the results manually or programmatically.
+
+4. DeepView (cmd /c npx -y @smithery/cli@latest run @ai-1st/deepview-mcp --key YOUR_KEY)
+Use Cases
+
+In-depth analysis of a topic or dataset.
+
+Generating insights or visualizations (depending on DeepView’s capabilities).
+
+Approach
+
+Provide clear instructions or data context.
+
+If the tool supports interactive queries, iteratively refine your query to zero in on meaningful insights.
+
+5. Browser Tools
+The following commands facilitate automated browser interactions, valuable for web tests, data extractions, or process simulations. Use them when you need to:
+
+Navigate websites
+
+Interact with web elements
+
+Capture screenshots or logs
+
+Available Commands:
+
+browser_navigate: Navigate to a specified URL.
+
+browser_go_back: Simulate the browser’s back button.
+
+browser_go_forward: Simulate the browser’s forward button.
+
+browser_snapshot: Capture the current HTML or visual state.
+
+browser_click: Click on a specified element.
+
+browser_hover: Hover over a specific element.
+
+browser_type: Type text into an input field.
+
+browser_select_option: Select an option in a dropdown or similar UI component.
+
+browser_press_key: Simulate pressing a key (e.g., Enter, Tab).
+
+browser_wait: Introduce a delay to let elements load or processes complete.
+
+browser_get_console_logs: Retrieve console logs for debugging or analysis.
+
+browser_screenshot: Take a screenshot of the current page.
+
+Best Practices:
+
+Use short, targeted browser sessions.
+
+Ensure that any website interaction respects robots.txt and terms of service.
+
+Avoid holding the session open longer than needed to reduce resource usage.
+
+6. Check Domain Availability (cmd /c npx -y @smithery/cli@latest run @szypetike/domain-search-server --key YOUR_KEY)
+Use Cases
+
+Quickly verifying if a domain is available for purchase.
+
+Part of a brand- or product-development flow where domain selection is a factor.
+
+Approach
+
+Invoke only after you have a proposed domain name or a list of candidate names.
+
+Once results are returned, store or display them so the user can see which domains are free or taken.
+
+7. Image Generation (cmd /c npx -y @smithery/cli@latest run @JigsawStack/image-generation --key YOUR_KEY)
+Use Cases
+
+Creating concept imagery, prototyping brand visuals, or exploring design ideas.
+
+Generating AI-based artwork to accompany text or marketing content.
+
+Approach
+
+Provide a clear textual prompt specifying style, subject, and any constraints.
+
+If the user wants iterative changes, refine the prompt and regenerate until the desired style is achieved.
+
+8. Prompt Refinement (cmd /c npx -y @smithery/cli@latest run @FelippeFarias/refine-prompt --key YOUR_KEY)
+Use Cases
+
+Enhancing or clarifying a user’s request or your own internal system prompts.
+
+Converting user instructions into a more standardized format.
+
+Approach
+
+Provide the raw or initial prompt and let the tool propose improvements.
+
+Validate the refined result to ensure it still aligns with the original user intentions.
+
+9. Stock Analysis (cmd /c npx -y @smithery/cli@latest run @qubaomingg/stock-analysis-mcp --key YOUR_KEY)
+Use Cases
+
+Gathering financial data and analyzing stock performance or market trends.
+
+Generating reports on investment opportunities or risk factors.
+
+Approach
+
+Provide specific symbols, date ranges, or data metrics you need (e.g., historical price data, volume).
+
+Review the output carefully—always highlight that analysis is for informational purposes and not guaranteed investment advice.
+
+10. 21st Magic Component Tools
+Tools for building or refining “magic components,” searching for logos, or gathering inspiration:
+
+21st_magic_component_builder
+
+21st_magic_component_inspiration
+
+21st_magic_component_refiner
+
+logo_search
+
+Use Cases:
+
+UI/UX development, branding, or advanced design prototypes.
+
+Searching for logo ideas or component structures.
+
+Approach:
+
+Provide sketches or references of the design or function you want to build/refine.
+
+Use iterative steps: gather inspiration → build or refine with the AI → finalize or tweak the result.
+
+11. Implementation Pattern
+Assess
+
+Read the user’s request thoroughly.
+
+Determine whether any combination of the above tools will provide a meaningful solution.
+
+Plan
+
+Sketch out a sequence of tool invocations if necessary (e.g., refine the prompt, then navigate, then check domain availability).
+
+Execute
+
+Run each tool with minimal overhead. Provide only relevant arguments and keep logs where appropriate.
+
+Validate
+
+Check each result for completeness or correctness.
+
+If the result is incomplete, either re-run the tool with improved parameters or move on to the next step if partial data is sufficient.
+
+Present
+
+Format your final answer or partial updates clearly for the user or the next stage in the workflow.
+
+12. Balanced, Creative Utilization
+Innovation: The agent is encouraged to combine tools in unexpected ways (e.g., using FireCrawl to gather brand references, then generating images with Image Generation, then refining the prompt for deeper conceptual alignment).
+
+Restraint: Avoid multi-tool confusion. If the user only needs a domain check, do not also propose browsing tasks, or if the user only needs a single image, avoid sequential tasks that add complexity without benefit.
