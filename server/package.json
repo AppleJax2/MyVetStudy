@@ -6,6 +6,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon src/index.ts",
     "build": "npx tsc --allowJs --esModuleInterop --skipLibCheck --noEmit false --outDir dist",
+    "prebuild": "npm install @types/node -D",
     "start": "node dist/index.js",
     "db:migrate:dev": "prisma migrate dev",
     "db:migrate:deploy": "prisma migrate deploy",

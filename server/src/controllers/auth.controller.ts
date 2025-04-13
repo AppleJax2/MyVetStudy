@@ -1,8 +1,6 @@
 import { Request, Response } from 'express';
-import { PrismaClient } from '@prisma/client';
+import prisma from '../utils/prisma'; // Import shared Prisma instance
 import { hashPassword, comparePasswords, generateToken } from '../utils/auth.utils';
-
-const prisma = new PrismaClient();
 
 export const register = async (req: Request, res: Response) => {
   try {

@@ -1,7 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import { PrismaClient } from '@prisma/client';
+import prisma from './utils/prisma'; // Import the shared instance
 import authRoutes from './routes/auth.routes';
 import helmet from 'helmet';
 
@@ -9,7 +9,6 @@ dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 3000;
-export const prisma = new PrismaClient();
 
 // CORS configuration
 const corsOptions = {
@@ -36,12 +35,9 @@ app.get('/health', (req, res) => {
 });
 
 // Global error handler
-app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
+app.use((err: Error, req: any, res: any, next: any) => {
   console.error(err.stack);
-  res.status(500).json({
-    message: 'An unexpected error occurred',
-    error: process.env.NODE_ENV === 'development' ? err.message : undefined
-  });
+  res.status(500).send('Something went wrong!');
 });
 
 // Start server
