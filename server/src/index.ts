@@ -3,6 +3,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import { PrismaClient } from '@prisma/client';
 import authRoutes from './routes/auth.routes';
+import helmet from 'helmet';
 
 dotenv.config();
 
@@ -11,6 +12,7 @@ const port = process.env.PORT || 3000;
 export const prisma = new PrismaClient();
 
 // Middleware
+app.use(helmet());
 app.use(cors());
 app.use(express.json());
 
