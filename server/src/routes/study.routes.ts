@@ -18,6 +18,8 @@ import {
     studyPatientSchema,
     studyAssignmentSchema,
 } from '../schemas/study.schema';
+import symptomRoutes from './symptom.routes'; // Import symptom routes
+import studyPatientRoutes from './studyPatient.routes'; // Import the new study-patient router
 
 const router = express.Router();
 
@@ -54,16 +56,24 @@ router.delete(
     deleteStudy
 );
 
-// --- Study Patient Management --- //
+// --- Nested Routes --- //
+
+// Mount symptom routes: /studies/:studyId/symptoms
+router.use('/:studyId/symptoms', symptomRoutes);
+
+// Mount routes related to specific patients within a study: /studies/:studyId/patients
+router.use('/:studyId/patients', studyPatientRoutes);
+
+// --- Standalone Study Patient Management (Moved to studyPatient.routes if preferred) --- //
+// These could alternatively live inside studyPatient.routes if logic relates more to the specific patient context
 router.post(
     '/:studyId/patients/:patientId',
-    validate(studyPatientSchema), // Validate params
+    validate(studyPatientSchema),
     addPatientToStudy
 );
-
 router.delete(
     '/:studyId/patients/:patientId',
-    validate(studyPatientSchema), // Validate params
+    validate(studyPatientSchema),
     removePatientFromStudy
 );
 
