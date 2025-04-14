@@ -9,6 +9,12 @@ import {
     removePatientFromMonitoringPlan,
     assignUserToMonitoringPlan,
     unassignUserFromMonitoringPlan,
+    generateShareableLink,
+    getSymptomTemplates,
+    createSymptomTemplate,
+    updateSymptomTemplate,
+    deleteSymptomTemplate,
+    getMonitoringPlanByShareToken,
 } from '../controllers/monitoring-plan.controller';
 import { authenticate, authorize, authorizeVeterinarianOrHigher } from '../middleware/auth.middleware';
 import { validate } from '../middleware/validate.middleware';
@@ -17,6 +23,9 @@ import {
     updateMonitoringPlanSchema,
     monitoringPlanPatientSchema,
     monitoringPlanAssignmentSchema,
+    symptomTemplateSchema,
+    updateSymptomTemplateSchema,
+    deleteSymptomTemplateSchema,
 } from '../schemas/monitoring-plan.schema';
 import symptomRoutes from './symptom.routes';
 import { UserRole } from '../../generated/prisma';
@@ -47,6 +56,44 @@ router.get(
     '/:id',
     validate(updateMonitoringPlanSchema.pick({ params: true })),
     getMonitoringPlanById
+);
+
+// Generate shareable link for a monitoring plan
+router.post(
+    '/:id/share',
+    validate(updateMonitoringPlanSchema.pick({ params: true })),
+    generateShareableLink
+);
+
+// Get monitoring plan via shareable token (public access)
+router.get(
+    '/shared/:token',
+    getMonitoringPlanByShareToken
+);
+
+// Symptom template routes
+router.get(
+    '/:id/symptoms',
+    validate(updateMonitoringPlanSchema.pick({ params: true })),
+    getSymptomTemplates
+);
+
+router.post(
+    '/:id/symptoms',
+    validate(symptomTemplateSchema),
+    createSymptomTemplate
+);
+
+router.put(
+    '/:id/symptoms/:symptomId',
+    validate(updateSymptomTemplateSchema),
+    updateSymptomTemplate
+);
+
+router.delete(
+    '/:id/symptoms/:symptomId',
+    validate(deleteSymptomTemplateSchema),
+    deleteSymptomTemplate
 );
 
 // Updating a monitoring plan requires at least veterinarian privileges

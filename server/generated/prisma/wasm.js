@@ -182,7 +182,7 @@ exports.Prisma.PatientScalarFieldEnum = {
   medicalHistory: 'medicalHistory'
 };
 
-exports.Prisma.StudyScalarFieldEnum = {
+exports.Prisma.MonitoringPlanScalarFieldEnum = {
   id: 'id',
   title: 'title',
   description: 'description',
@@ -194,29 +194,30 @@ exports.Prisma.StudyScalarFieldEnum = {
   startDate: 'startDate',
   endDate: 'endDate',
   status: 'status',
-  isTemplate: 'isTemplate'
+  isTemplate: 'isTemplate',
+  shareToken: 'shareToken'
 };
 
-exports.Prisma.StudyPatientScalarFieldEnum = {
+exports.Prisma.MonitoringPlanPatientScalarFieldEnum = {
   id: 'id',
-  studyId: 'studyId',
+  monitoringPlanId: 'monitoringPlanId',
   patientId: 'patientId',
   enrollmentDate: 'enrollmentDate',
   exitDate: 'exitDate',
   isActive: 'isActive'
 };
 
-exports.Prisma.StudyAssignmentScalarFieldEnum = {
+exports.Prisma.MonitoringPlanAssignmentScalarFieldEnum = {
   id: 'id',
-  studyId: 'studyId',
+  monitoringPlanId: 'monitoringPlanId',
   userId: 'userId',
   assignedAt: 'assignedAt',
   role: 'role'
 };
 
-exports.Prisma.StudyNoteScalarFieldEnum = {
+exports.Prisma.MonitoringPlanNoteScalarFieldEnum = {
   id: 'id',
-  studyId: 'studyId',
+  monitoringPlanId: 'monitoringPlanId',
   content: 'content',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -232,7 +233,7 @@ exports.Prisma.SymptomTemplateScalarFieldEnum = {
   minValue: 'minValue',
   maxValue: 'maxValue',
   options: 'options',
-  studyId: 'studyId',
+  monitoringPlanId: 'monitoringPlanId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -241,7 +242,7 @@ exports.Prisma.ObservationScalarFieldEnum = {
   id: 'id',
   symptomTemplateId: 'symptomTemplateId',
   patientId: 'patientId',
-  studyPatientId: 'studyPatientId',
+  monitoringPlanPatientId: 'monitoringPlanPatientId',
   recordedById: 'recordedById',
   recordedAt: 'recordedAt',
   value: 'value',
@@ -253,7 +254,7 @@ exports.Prisma.TreatmentTemplateScalarFieldEnum = {
   name: 'name',
   description: 'description',
   protocol: 'protocol',
-  studyId: 'studyId',
+  monitoringPlanId: 'monitoringPlanId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -262,7 +263,7 @@ exports.Prisma.TreatmentScalarFieldEnum = {
   id: 'id',
   templateId: 'templateId',
   patientId: 'patientId',
-  studyPatientId: 'studyPatientId',
+  monitoringPlanPatientId: 'monitoringPlanPatientId',
   createdById: 'createdById',
   createdAt: 'createdAt',
   administeredAt: 'administeredAt',
@@ -370,7 +371,7 @@ exports.Sex = exports.$Enums.Sex = {
   UNKNOWN: 'UNKNOWN'
 };
 
-exports.StudyStatus = exports.$Enums.StudyStatus = {
+exports.MonitoringPlanStatus = exports.$Enums.MonitoringPlanStatus = {
   DRAFT: 'DRAFT',
   ACTIVE: 'ACTIVE',
   PAUSED: 'PAUSED',
@@ -378,7 +379,7 @@ exports.StudyStatus = exports.$Enums.StudyStatus = {
   ARCHIVED: 'ARCHIVED'
 };
 
-exports.StudyRole = exports.$Enums.StudyRole = {
+exports.MonitoringPlanRole = exports.$Enums.MonitoringPlanRole = {
   LEAD_RESEARCHER: 'LEAD_RESEARCHER',
   RESEARCHER: 'RESEARCHER',
   OBSERVER: 'OBSERVER',
@@ -405,10 +406,10 @@ exports.Prisma.ModelName = {
   Practice: 'Practice',
   SubscriptionHistory: 'SubscriptionHistory',
   Patient: 'Patient',
-  Study: 'Study',
-  StudyPatient: 'StudyPatient',
-  StudyAssignment: 'StudyAssignment',
-  StudyNote: 'StudyNote',
+  MonitoringPlan: 'MonitoringPlan',
+  MonitoringPlanPatient: 'MonitoringPlanPatient',
+  MonitoringPlanAssignment: 'MonitoringPlanAssignment',
+  MonitoringPlanNote: 'MonitoringPlanNote',
   SymptomTemplate: 'SymptomTemplate',
   Observation: 'Observation',
   TreatmentTemplate: 'TreatmentTemplate',

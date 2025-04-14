@@ -18,25 +18,25 @@ datasource db {
 
 // User and Authentication
 model User {
-  id                String            @id @default(uuid())
-  email             String            @unique
-  password          String
-  firstName         String
-  lastName          String
-  role              UserRole
-  createdAt         DateTime          @default(now())
-  updatedAt         DateTime          @updatedAt
-  isActive          Boolean           @default(true)
-  practiceId        String?
-  practice          Practice?         @relation(fields: [practiceId], references: [id])
-  createdStudies    Study[]           @relation("StudyCreator")
-  assignedStudies   StudyAssignment[]
-  createdTreatments Treatment[]       @relation("TreatmentCreator")
-  observations      Observation[]
-  createdPatients   Patient[]         @relation("PatientCreator")
-  notifications     Notification[]
-  resetToken        String?
-  resetTokenExpiry  DateTime?
+  id                      String                     @id @default(uuid())
+  email                   String                     @unique
+  password                String
+  firstName               String
+  lastName                String
+  role                    UserRole
+  createdAt               DateTime                   @default(now())
+  updatedAt               DateTime                   @updatedAt
+  isActive                Boolean                    @default(true)
+  practiceId              String?
+  practice                Practice?                  @relation(fields: [practiceId], references: [id])
+  createdMonitoringPlans  MonitoringPlan[]           @relation("MonitoringPlanCreator")
+  assignedMonitoringPlans MonitoringPlanAssignment[]
+  createdTreatments       Treatment[]                @relation("TreatmentCreator")
+  observations            Observation[]
+  createdPatients         Patient[]                  @relation("PatientCreator")
+  notifications           Notification[]
+  resetToken              String?
+  resetTokenExpiry        DateTime?
 }
 
 enum UserRole {
@@ -64,7 +64,7 @@ model Practice {
   isActive              Boolean               @default(true)
   users                 User[]
   patients              Patient[]
-  studies               Study[]
+  monitoringPlans       MonitoringPlan[]
   customBranding        Json?
   maxStorage            Int                   @default(20) // In MB
   currentStorage        Int                   @default(0) // In MB
@@ -99,29 +99,29 @@ model SubscriptionHistory {
 
 // Patient Records
 model Patient {
-  id             String         @id @default(uuid())
-  name           String
-  species        String
-  breed          String?
-  age            Int?
-  weight         Float?
-  sex            Sex?
-  practiceId     String
-  practice       Practice       @relation(fields: [practiceId], references: [id])
-  createdById    String
-  createdBy      User           @relation("PatientCreator", fields: [createdById], references: [id])
-  createdAt      DateTime       @default(now())
-  updatedAt      DateTime       @updatedAt
-  isActive       Boolean        @default(true)
-  ownerId        String?
-  ownerName      String?
-  ownerEmail     String?
-  ownerPhone     String?
-  studies        StudyPatient[]
-  observations   Observation[]
-  treatments     Treatment[]
-  medicalHistory Json?
-  files          File[]
+  id              String                  @id @default(uuid())
+  name            String
+  species         String
+  breed           String?
+  age             Int?
+  weight          Float?
+  sex             Sex?
+  practiceId      String
+  practice        Practice                @relation(fields: [practiceId], references: [id])
+  createdById     String
+  createdBy       User                    @relation("PatientCreator", fields: [createdById], references: [id])
+  createdAt       DateTime                @default(now())
+  updatedAt       DateTime                @updatedAt
+  isActive        Boolean                 @default(true)
+  ownerId         String?
+  ownerName       String?
+  ownerEmail      String?
+  ownerPhone      String?
+  monitoringPlans MonitoringPlanPatient[]
+  observations    Observation[]
+  treatments      Treatment[]
+  medicalHistory  Json?
+  files           File[]
 }
 
 enum Sex {
@@ -130,30 +130,31 @@ enum Sex {
   UNKNOWN
 }
 
-// Study and Research
-model Study {
-  id                 String              @id @default(uuid())
+// Monitoring Plan (formerly Study)
+model MonitoringPlan {
+  id                 String                     @id @default(uuid())
   title              String
   description        String?
   protocol           Json?
   practiceId         String
-  practice           Practice            @relation(fields: [practiceId], references: [id])
+  practice           Practice                   @relation(fields: [practiceId], references: [id])
   createdById        String
-  createdBy          User                @relation("StudyCreator", fields: [createdById], references: [id])
-  createdAt          DateTime            @default(now())
-  updatedAt          DateTime            @updatedAt
+  createdBy          User                       @relation("MonitoringPlanCreator", fields: [createdById], references: [id])
+  createdAt          DateTime                   @default(now())
+  updatedAt          DateTime                   @updatedAt
   startDate          DateTime?
   endDate            DateTime?
-  status             StudyStatus         @default(DRAFT)
-  isTemplate         Boolean             @default(false)
-  patients           StudyPatient[]
-  assignedUsers      StudyAssignment[]
+  status             MonitoringPlanStatus       @default(DRAFT)
+  isTemplate         Boolean                    @default(false)
+  shareToken         String?                    @unique
+  patients           MonitoringPlanPatient[]
+  assignedUsers      MonitoringPlanAssignment[]
   symptomTemplates   SymptomTemplate[]
   treatmentTemplates TreatmentTemplate[]
-  notes              StudyNote[]
+  notes              MonitoringPlanNote[]
 }
 
-enum StudyStatus {
+enum MonitoringPlanStatus {
   DRAFT
   ACTIVE
   PAUSED
@@ -161,66 +162,66 @@ enum StudyStatus {
   ARCHIVED
 }
 
-model StudyPatient {
-  id             String        @id @default(uuid())
-  studyId        String
-  study          Study         @relation(fields: [studyId], references: [id])
-  patientId      String
-  patient        Patient       @relation(fields: [patientId], references: [id])
-  enrollmentDate DateTime      @default(now())
-  exitDate       DateTime?
-  isActive       Boolean       @default(true)
-  observations   Observation[]
-  treatments     Treatment[]
+model MonitoringPlanPatient {
+  id               String         @id @default(uuid())
+  monitoringPlanId String
+  monitoringPlan   MonitoringPlan @relation(fields: [monitoringPlanId], references: [id])
+  patientId        String
+  patient          Patient        @relation(fields: [patientId], references: [id])
+  enrollmentDate   DateTime       @default(now())
+  exitDate         DateTime?
+  isActive         Boolean        @default(true)
+  observations     Observation[]
+  treatments       Treatment[]
 
-  @@unique([studyId, patientId])
+  @@unique([monitoringPlanId, patientId])
 }
 
-model StudyAssignment {
-  id         String    @id @default(uuid())
-  studyId    String
-  study      Study     @relation(fields: [studyId], references: [id])
-  userId     String
-  user       User      @relation(fields: [userId], references: [id])
-  assignedAt DateTime  @default(now())
-  role       StudyRole
+model MonitoringPlanAssignment {
+  id               String             @id @default(uuid())
+  monitoringPlanId String
+  monitoringPlan   MonitoringPlan     @relation(fields: [monitoringPlanId], references: [id])
+  userId           String
+  user             User               @relation(fields: [userId], references: [id])
+  assignedAt       DateTime           @default(now())
+  role             MonitoringPlanRole
 
-  @@unique([studyId, userId])
+  @@unique([monitoringPlanId, userId])
 }
 
-enum StudyRole {
+enum MonitoringPlanRole {
   LEAD_RESEARCHER
   RESEARCHER
   OBSERVER
   ASSISTANT
 }
 
-model StudyNote {
-  id        String   @id @default(uuid())
-  studyId   String
-  study     Study    @relation(fields: [studyId], references: [id])
-  content   String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+model MonitoringPlanNote {
+  id               String         @id @default(uuid())
+  monitoringPlanId String
+  monitoringPlan   MonitoringPlan @relation(fields: [monitoringPlanId], references: [id])
+  content          String
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
 }
 
 // Symptom Tracking
 model SymptomTemplate {
-  id              String           @id @default(uuid())
-  name            String
-  description     String?
-  category        String?
-  dataType        SymptomDataType
-  units           String?
-  minValue        Float?
-  maxValue        Float?
-  options         Json? // For enumeration types
-  studyId         String
-  study           Study            @relation(fields: [studyId], references: [id])
-  createdAt       DateTime         @default(now())
-  updatedAt       DateTime         @updatedAt
-  observations    Observation[]
-  alertThresholds AlertThreshold[]
+  id               String           @id @default(uuid())
+  name             String
+  description      String?
+  category         String?
+  dataType         SymptomDataType
+  units            String?
+  minValue         Float?
+  maxValue         Float?
+  options          Json? // For enumeration types
+  monitoringPlanId String
+  monitoringPlan   MonitoringPlan   @relation(fields: [monitoringPlanId], references: [id])
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+  observations     Observation[]
+  alertThresholds  AlertThreshold[]
 }
 
 enum SymptomDataType {
@@ -233,52 +234,52 @@ enum SymptomDataType {
 }
 
 model Observation {
-  id                String          @id @default(uuid())
-  symptomTemplateId String
-  symptomTemplate   SymptomTemplate @relation(fields: [symptomTemplateId], references: [id])
-  patientId         String
-  patient           Patient         @relation(fields: [patientId], references: [id])
-  studyPatientId    String
-  studyPatient      StudyPatient    @relation(fields: [studyPatientId], references: [id])
-  recordedById      String
-  recordedBy        User            @relation(fields: [recordedById], references: [id])
-  recordedAt        DateTime        @default(now())
-  value             Json
-  notes             String?
-  files             File[]
-  alerts            Alert[]
+  id                      String                @id @default(uuid())
+  symptomTemplateId       String
+  symptomTemplate         SymptomTemplate       @relation(fields: [symptomTemplateId], references: [id])
+  patientId               String
+  patient                 Patient               @relation(fields: [patientId], references: [id])
+  monitoringPlanPatientId String
+  monitoringPlanPatient   MonitoringPlanPatient @relation(fields: [monitoringPlanPatientId], references: [id])
+  recordedById            String
+  recordedBy              User                  @relation(fields: [recordedById], references: [id])
+  recordedAt              DateTime              @default(now())
+  value                   Json
+  notes                   String?
+  files                   File[]
+  alerts                  Alert[]
 }
 
 // Treatment Tracking
 model TreatmentTemplate {
-  id          String      @id @default(uuid())
-  name        String
-  description String?
-  protocol    Json?
-  studyId     String
-  study       Study       @relation(fields: [studyId], references: [id])
-  createdAt   DateTime    @default(now())
-  updatedAt   DateTime    @updatedAt
-  treatments  Treatment[]
+  id               String         @id @default(uuid())
+  name             String
+  description      String?
+  protocol         Json?
+  monitoringPlanId String
+  monitoringPlan   MonitoringPlan @relation(fields: [monitoringPlanId], references: [id])
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+  treatments       Treatment[]
 }
 
 model Treatment {
-  id             String             @id @default(uuid())
-  templateId     String?
-  template       TreatmentTemplate? @relation(fields: [templateId], references: [id])
-  patientId      String
-  patient        Patient            @relation(fields: [patientId], references: [id])
-  studyPatientId String
-  studyPatient   StudyPatient       @relation(fields: [studyPatientId], references: [id])
-  createdById    String
-  createdBy      User               @relation("TreatmentCreator", fields: [createdById], references: [id])
-  createdAt      DateTime           @default(now())
-  administeredAt DateTime
-  name           String // Directly specified or from template
-  description    String?
-  dosage         String?
-  notes          String?
-  files          File[]
+  id                      String                @id @default(uuid())
+  templateId              String?
+  template                TreatmentTemplate?    @relation(fields: [templateId], references: [id])
+  patientId               String
+  patient                 Patient               @relation(fields: [patientId], references: [id])
+  monitoringPlanPatientId String
+  monitoringPlanPatient   MonitoringPlanPatient @relation(fields: [monitoringPlanPatientId], references: [id])
+  createdById             String
+  createdBy               User                  @relation("TreatmentCreator", fields: [createdById], references: [id])
+  createdAt               DateTime              @default(now())
+  administeredAt          DateTime
+  name                    String // Directly specified or from template
+  description             String?
+  dosage                  String?
+  notes                   String?
+  files                   File[]
 }
 
 // Alerts and Notifications

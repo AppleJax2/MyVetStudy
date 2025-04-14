@@ -1,11 +1,22 @@
 import { z } from 'zod';
 import { MonitoringPlanStatus, MonitoringPlanRole } from '../generated/prisma';
 
+// Define the protocol schema for better type safety
+const protocolSchema = z.object({
+    frequency: z.object({
+        times: z.number().int().positive(),
+        period: z.enum(['DAY', 'WEEK', 'MONTH'])
+    }).optional(),
+    duration: z.number().int().positive().optional(),
+    reminderEnabled: z.boolean().optional(),
+    shareableLink: z.boolean().optional()
+});
+
 // Base schema for common monitoring plan fields
 const monitoringPlanBaseSchema = z.object({
     title: z.string().min(3, 'Title must be at least 3 characters long').max(255),
     description: z.string().max(1000).optional(),
-    protocol: z.record(z.any()).optional(), // Assuming protocol is a JSON object
+    protocol: protocolSchema.optional(),
     startDate: z.coerce.date().optional(),
     endDate: z.coerce.date().optional(),
     status: z.nativeEnum(MonitoringPlanStatus).optional().default(MonitoringPlanStatus.DRAFT),
@@ -44,8 +55,43 @@ export const monitoringPlanAssignmentSchema = z.object({
     }).optional(), // Body is optional for unassigning
 });
 
-// Type inference for controllers/services
+// Schemas for symptom templates
+export const symptomTemplateSchema = z.object({
+    params: z.object({
+        id: z.string().uuid('Invalid monitoring plan ID format'),
+    }),
+    body: z.object({
+        name: z.string().min(1, 'Name is required').max(255),
+        description: z.string().max(1000).optional(),
+        category: z.string().max(100).optional(),
+        dataType: z.enum(['NUMERIC', 'BOOLEAN', 'SCALE', 'ENUMERATION', 'TEXT', 'IMAGE']),
+        units: z.string().max(50).optional(),
+        minValue: z.number().optional(),
+        maxValue: z.number().optional(),
+        options: z.record(z.any()).optional(), // For enumeration types
+    }),
+});
+
+export const updateSymptomTemplateSchema = z.object({
+    params: z.object({
+        id: z.string().uuid('Invalid monitoring plan ID format'),
+        symptomId: z.string().uuid('Invalid symptom template ID format'),
+    }),
+    body: symptomTemplateSchema.shape.body.partial(),
+});
+
+export const deleteSymptomTemplateSchema = z.object({
+    params: z.object({
+        id: z.string().uuid('Invalid monitoring plan ID format'),
+        symptomId: z.string().uuid('Invalid symptom template ID format'),
+    }),
+});
+
+// Define TypeScript types from the Zod schemas
 export type CreateMonitoringPlanInput = z.infer<typeof createMonitoringPlanSchema>;
 export type UpdateMonitoringPlanInput = z.infer<typeof updateMonitoringPlanSchema>;
 export type MonitoringPlanPatientInput = z.infer<typeof monitoringPlanPatientSchema>;
-export type MonitoringPlanAssignmentInput = z.infer<typeof monitoringPlanAssignmentSchema>; 
+export type MonitoringPlanAssignmentInput = z.infer<typeof monitoringPlanAssignmentSchema>;
+export type SymptomTemplateInput = z.infer<typeof symptomTemplateSchema>;
+export type UpdateSymptomTemplateInput = z.infer<typeof updateSymptomTemplateSchema>;
+export type DeleteSymptomTemplateInput = z.infer<typeof deleteSymptomTemplateSchema>; 

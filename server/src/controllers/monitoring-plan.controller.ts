@@ -1,9 +1,11 @@
 import { Request, Response, NextFunction } from 'express';
 import * as monitoringPlanService from '../services/monitoring-plan.service';
 import { CreateMonitoringPlanInput, UpdateMonitoringPlanInput, MonitoringPlanAssignmentInput } from '../schemas/monitoring-plan.schema';
+import { SymptomTemplateInput, UpdateSymptomTemplateInput, DeleteSymptomTemplateInput } from '../schemas/symptom-template.schema';
 import AppError from '../utils/appError';
 import { AuthenticatedRequest } from '../middleware/auth.middleware';
 import { MonitoringPlanStatus } from '../generated/prisma';
+import prisma from '../utils/prisma.client';
 
 export const createMonitoringPlan = async (req: AuthenticatedRequest<{}, {}, CreateMonitoringPlanInput['body']>, res: Response, next: NextFunction) => {
     try {
@@ -274,6 +276,267 @@ export const unassignUserFromMonitoringPlan = async (req: AuthenticatedRequest<{
 
         res.status(204).send(); // No content on successful unassignment
 
+    } catch (error) {
+        next(error);
+    }
+};
+
+export const generateShareableLink = async (req: AuthenticatedRequest<{ id: string }>, res: Response, next: NextFunction) => {
+    try {
+        const { id } = req.params;
+        const userId = req.user?.id;
+        
+        if (!userId) {
+            return next(new AppError('Authentication required', 401));
+        }
+        
+        // Generate a unique token for sharing
+        const shareToken = Buffer.from(`${id}-${Date.now()}-${Math.random().toString(36).substring(2, 15)}`).toString('base64');
+        
+        // Create shareable link
+        const shareableLink = `${process.env.FRONTEND_URL || 'http://localhost:3000'}/shared/monitoring-plan/${shareToken}`;
+        
+        // Save the shareable link to the monitoring plan
+        const updatedPlan = await monitoringPlanService.updateMonitoringPlan(
+            id,
+            { 
+                shareToken, 
+                // Also make sure the protocol has the shareableLink flag enabled
+                protocol: { 
+                    shareableLink: true 
+                }
+            },
+            userId
+        );
+        
+        res.status(200).json({
+            status: 'success',
+            message: 'Shareable link generated successfully',
+            data: {
+                shareableLink,
+                shareToken
+            }
+        });
+    } catch (error) {
+        next(error);
+    }
+};
+
+// Symptom template controllers
+export const getSymptomTemplates = async (req: AuthenticatedRequest<{ id: string }>, res: Response, next: NextFunction) => {
+    try {
+        const { id } = req.params;
+        const userId = req.user?.id;
+        const practiceId = req.user?.practiceId;
+        
+        if (!userId || !practiceId) {
+            return next(new AppError('Authentication required', 401));
+        }
+        
+        const symptoms = await prisma.symptomTemplate.findMany({
+            where: {
+                monitoringPlanId: id,
+                monitoringPlan: {
+                    practiceId: practiceId
+                }
+            }
+        });
+        
+        res.status(200).json({
+            status: 'success',
+            data: symptoms
+        });
+    } catch (error) {
+        next(error);
+    }
+};
+
+export const createSymptomTemplate = async (req: AuthenticatedRequest<{ id: string }, {}, SymptomTemplateInput['body']>, res: Response, next: NextFunction) => {
+    try {
+        const { id } = req.params;
+        const symptomData = req.body;
+        const userId = req.user?.id;
+        const practiceId = req.user?.practiceId;
+        
+        if (!userId || !practiceId) {
+            return next(new AppError('Authentication required', 401));
+        }
+        
+        // Verify the monitoring plan exists and user has access
+        const monitoringPlan = await prisma.monitoringPlan.findFirst({
+            where: {
+                id,
+                practiceId
+            }
+        });
+        
+        if (!monitoringPlan) {
+            return next(new AppError('Monitoring plan not found or access denied', 404));
+        }
+        
+        // Create the symptom template
+        const symptomTemplate = await prisma.symptomTemplate.create({
+            data: {
+                ...symptomData,
+                monitoringPlan: {
+                    connect: { id }
+                }
+            }
+        });
+        
+        res.status(201).json({
+            status: 'success',
+            message: 'Symptom template created successfully',
+            data: {
+                symptomTemplate
+            }
+        });
+    } catch (error) {
+        next(error);
+    }
+};
+
+export const updateSymptomTemplate = async (req: AuthenticatedRequest<UpdateSymptomTemplateInput['params'], {}, UpdateSymptomTemplateInput['body']>, res: Response, next: NextFunction) => {
+    try {
+        const { id, symptomId } = req.params;
+        const symptomData = req.body;
+        const userId = req.user?.id;
+        const practiceId = req.user?.practiceId;
+        
+        if (!userId || !practiceId) {
+            return next(new AppError('Authentication required', 401));
+        }
+        
+        // Verify the symptom template exists and belongs to the monitoring plan
+        const existingSymptom = await prisma.symptomTemplate.findFirst({
+            where: {
+                id: symptomId,
+                monitoringPlanId: id,
+                monitoringPlan: {
+                    practiceId
+                }
+            }
+        });
+        
+        if (!existingSymptom) {
+            return next(new AppError('Symptom template not found or access denied', 404));
+        }
+        
+        // Update the symptom template
+        const updatedSymptom = await prisma.symptomTemplate.update({
+            where: {
+                id: symptomId
+            },
+            data: symptomData
+        });
+        
+        res.status(200).json({
+            status: 'success',
+            message: 'Symptom template updated successfully',
+            data: {
+                symptomTemplate: updatedSymptom
+            }
+        });
+    } catch (error) {
+        next(error);
+    }
+};
+
+export const deleteSymptomTemplate = async (req: AuthenticatedRequest<DeleteSymptomTemplateInput['params']>, res: Response, next: NextFunction) => {
+    try {
+        const { id, symptomId } = req.params;
+        const userId = req.user?.id;
+        const practiceId = req.user?.practiceId;
+        
+        if (!userId || !practiceId) {
+            return next(new AppError('Authentication required', 401));
+        }
+        
+        // Verify the symptom template exists and belongs to the monitoring plan
+        const existingSymptom = await prisma.symptomTemplate.findFirst({
+            where: {
+                id: symptomId,
+                monitoringPlanId: id,
+                monitoringPlan: {
+                    practiceId
+                }
+            }
+        });
+        
+        if (!existingSymptom) {
+            return next(new AppError('Symptom template not found or access denied', 404));
+        }
+        
+        // Check if the symptom template has observations (prevent deletion if it does)
+        const observationCount = await prisma.observation.count({
+            where: {
+                symptomTemplateId: symptomId
+            }
+        });
+        
+        if (observationCount > 0) {
+            return next(new AppError('Cannot delete symptom template with existing observations', 400));
+        }
+        
+        // Delete the symptom template
+        await prisma.symptomTemplate.delete({
+            where: {
+                id: symptomId
+            }
+        });
+        
+        res.status(200).json({
+            status: 'success',
+            message: 'Symptom template deleted successfully'
+        });
+    } catch (error) {
+        next(error);
+    }
+};
+
+export const getMonitoringPlanByShareToken = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const { token } = req.params;
+        
+        if (!token) {
+            return next(new AppError('Share token is required', 400));
+        }
+        
+        // Find the monitoring plan with the given share token
+        const monitoringPlan = await prisma.monitoringPlan.findUnique({
+            where: {
+                shareToken: token
+            },
+            include: {
+                symptomTemplates: true,
+                _count: {
+                    select: {
+                        patients: true
+                    }
+                }
+            }
+        });
+        
+        if (!monitoringPlan) {
+            return next(new AppError('Invalid or expired share token', 404));
+        }
+        
+        // Return a limited view of the monitoring plan for privacy
+        res.status(200).json({
+            status: 'success',
+            data: {
+                id: monitoringPlan.id,
+                title: monitoringPlan.title,
+                description: monitoringPlan.description,
+                protocol: monitoringPlan.protocol,
+                startDate: monitoringPlan.startDate,
+                endDate: monitoringPlan.endDate,
+                status: monitoringPlan.status,
+                symptomTemplates: monitoringPlan.symptomTemplates,
+                patientCount: monitoringPlan._count.patients,
+                shareableLink: true
+            }
+        });
     } catch (error) {
         next(error);
     }

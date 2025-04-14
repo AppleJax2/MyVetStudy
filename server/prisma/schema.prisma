@@ -146,6 +146,7 @@ model MonitoringPlan {
   endDate           DateTime?
   status            MonitoringPlanStatus      @default(DRAFT)
   isTemplate        Boolean          @default(false)
+  shareToken        String?          @unique
   patients          MonitoringPlanPatient[]
   assignedUsers     MonitoringPlanAssignment[]
   symptomTemplates  SymptomTemplate[]

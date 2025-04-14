@@ -34,25 +34,25 @@ export type SubscriptionHistory = $Result.DefaultSelection<Prisma.$SubscriptionH
  */
 export type Patient = $Result.DefaultSelection<Prisma.$PatientPayload>
 /**
- * Model Study
+ * Model MonitoringPlan
  * 
  */
-export type Study = $Result.DefaultSelection<Prisma.$StudyPayload>
+export type MonitoringPlan = $Result.DefaultSelection<Prisma.$MonitoringPlanPayload>
 /**
- * Model StudyPatient
+ * Model MonitoringPlanPatient
  * 
  */
-export type StudyPatient = $Result.DefaultSelection<Prisma.$StudyPatientPayload>
+export type MonitoringPlanPatient = $Result.DefaultSelection<Prisma.$MonitoringPlanPatientPayload>
 /**
- * Model StudyAssignment
+ * Model MonitoringPlanAssignment
  * 
  */
-export type StudyAssignment = $Result.DefaultSelection<Prisma.$StudyAssignmentPayload>
+export type MonitoringPlanAssignment = $Result.DefaultSelection<Prisma.$MonitoringPlanAssignmentPayload>
 /**
- * Model StudyNote
+ * Model MonitoringPlanNote
  * 
  */
-export type StudyNote = $Result.DefaultSelection<Prisma.$StudyNotePayload>
+export type MonitoringPlanNote = $Result.DefaultSelection<Prisma.$MonitoringPlanNotePayload>
 /**
  * Model SymptomTemplate
  * 
@@ -138,7 +138,7 @@ export const Sex: {
 export type Sex = (typeof Sex)[keyof typeof Sex]
 
 
-export const StudyStatus: {
+export const MonitoringPlanStatus: {
   DRAFT: 'DRAFT',
   ACTIVE: 'ACTIVE',
   PAUSED: 'PAUSED',
@@ -146,17 +146,17 @@ export const StudyStatus: {
   ARCHIVED: 'ARCHIVED'
 };
 
-export type StudyStatus = (typeof StudyStatus)[keyof typeof StudyStatus]
+export type MonitoringPlanStatus = (typeof MonitoringPlanStatus)[keyof typeof MonitoringPlanStatus]
 
 
-export const StudyRole: {
+export const MonitoringPlanRole: {
   LEAD_RESEARCHER: 'LEAD_RESEARCHER',
   RESEARCHER: 'RESEARCHER',
   OBSERVER: 'OBSERVER',
   ASSISTANT: 'ASSISTANT'
 };
 
-export type StudyRole = (typeof StudyRole)[keyof typeof StudyRole]
+export type MonitoringPlanRole = (typeof MonitoringPlanRole)[keyof typeof MonitoringPlanRole]
 
 
 export const SymptomDataType: {
@@ -197,13 +197,13 @@ export type Sex = $Enums.Sex
 
 export const Sex: typeof $Enums.Sex
 
-export type StudyStatus = $Enums.StudyStatus
+export type MonitoringPlanStatus = $Enums.MonitoringPlanStatus
 
-export const StudyStatus: typeof $Enums.StudyStatus
+export const MonitoringPlanStatus: typeof $Enums.MonitoringPlanStatus
 
-export type StudyRole = $Enums.StudyRole
+export type MonitoringPlanRole = $Enums.MonitoringPlanRole
 
-export const StudyRole: typeof $Enums.StudyRole
+export const MonitoringPlanRole: typeof $Enums.MonitoringPlanRole
 
 export type SymptomDataType = $Enums.SymptomDataType
 
@@ -379,44 +379,44 @@ export class PrismaClient<
   get patient(): Prisma.PatientDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.study`: Exposes CRUD operations for the **Study** model.
+   * `prisma.monitoringPlan`: Exposes CRUD operations for the **MonitoringPlan** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more Studies
-    * const studies = await prisma.study.findMany()
+    * // Fetch zero or more MonitoringPlans
+    * const monitoringPlans = await prisma.monitoringPlan.findMany()
     * ```
     */
-  get study(): Prisma.StudyDelegate<ExtArgs, ClientOptions>;
+  get monitoringPlan(): Prisma.MonitoringPlanDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.studyPatient`: Exposes CRUD operations for the **StudyPatient** model.
+   * `prisma.monitoringPlanPatient`: Exposes CRUD operations for the **MonitoringPlanPatient** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more StudyPatients
-    * const studyPatients = await prisma.studyPatient.findMany()
+    * // Fetch zero or more MonitoringPlanPatients
+    * const monitoringPlanPatients = await prisma.monitoringPlanPatient.findMany()
     * ```
     */
-  get studyPatient(): Prisma.StudyPatientDelegate<ExtArgs, ClientOptions>;
+  get monitoringPlanPatient(): Prisma.MonitoringPlanPatientDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.studyAssignment`: Exposes CRUD operations for the **StudyAssignment** model.
+   * `prisma.monitoringPlanAssignment`: Exposes CRUD operations for the **MonitoringPlanAssignment** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more StudyAssignments
-    * const studyAssignments = await prisma.studyAssignment.findMany()
+    * // Fetch zero or more MonitoringPlanAssignments
+    * const monitoringPlanAssignments = await prisma.monitoringPlanAssignment.findMany()
     * ```
     */
-  get studyAssignment(): Prisma.StudyAssignmentDelegate<ExtArgs, ClientOptions>;
+  get monitoringPlanAssignment(): Prisma.MonitoringPlanAssignmentDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.studyNote`: Exposes CRUD operations for the **StudyNote** model.
+   * `prisma.monitoringPlanNote`: Exposes CRUD operations for the **MonitoringPlanNote** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more StudyNotes
-    * const studyNotes = await prisma.studyNote.findMany()
+    * // Fetch zero or more MonitoringPlanNotes
+    * const monitoringPlanNotes = await prisma.monitoringPlanNote.findMany()
     * ```
     */
-  get studyNote(): Prisma.StudyNoteDelegate<ExtArgs, ClientOptions>;
+  get monitoringPlanNote(): Prisma.MonitoringPlanNoteDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.symptomTemplate`: Exposes CRUD operations for the **SymptomTemplate** model.
@@ -941,10 +941,10 @@ export namespace Prisma {
     Practice: 'Practice',
     SubscriptionHistory: 'SubscriptionHistory',
     Patient: 'Patient',
-    Study: 'Study',
-    StudyPatient: 'StudyPatient',
-    StudyAssignment: 'StudyAssignment',
-    StudyNote: 'StudyNote',
+    MonitoringPlan: 'MonitoringPlan',
+    MonitoringPlanPatient: 'MonitoringPlanPatient',
+    MonitoringPlanAssignment: 'MonitoringPlanAssignment',
+    MonitoringPlanNote: 'MonitoringPlanNote',
     SymptomTemplate: 'SymptomTemplate',
     Observation: 'Observation',
     TreatmentTemplate: 'TreatmentTemplate',
@@ -971,7 +971,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "practice" | "subscriptionHistory" | "patient" | "study" | "studyPatient" | "studyAssignment" | "studyNote" | "symptomTemplate" | "observation" | "treatmentTemplate" | "treatment" | "alertThreshold" | "alert" | "notification" | "file"
+      modelProps: "user" | "practice" | "subscriptionHistory" | "patient" | "monitoringPlan" | "monitoringPlanPatient" | "monitoringPlanAssignment" | "monitoringPlanNote" | "symptomTemplate" | "observation" | "treatmentTemplate" | "treatment" | "alertThreshold" | "alert" | "notification" | "file"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1271,299 +1271,299 @@ export namespace Prisma {
           }
         }
       }
-      Study: {
-        payload: Prisma.$StudyPayload<ExtArgs>
-        fields: Prisma.StudyFieldRefs
+      MonitoringPlan: {
+        payload: Prisma.$MonitoringPlanPayload<ExtArgs>
+        fields: Prisma.MonitoringPlanFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.StudyFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StudyPayload> | null
+            args: Prisma.MonitoringPlanFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MonitoringPlanPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.StudyFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StudyPayload>
+            args: Prisma.MonitoringPlanFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MonitoringPlanPayload>
           }
           findFirst: {
-            args: Prisma.StudyFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StudyPayload> | null
+            args: Prisma.MonitoringPlanFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MonitoringPlanPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.StudyFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StudyPayload>
+            args: Prisma.MonitoringPlanFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MonitoringPlanPayload>
           }
           findMany: {
-            args: Prisma.StudyFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StudyPayload>[]
+            args: Prisma.MonitoringPlanFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MonitoringPlanPayload>[]
           }
           create: {
-            args: Prisma.StudyCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StudyPayload>
+            args: Prisma.MonitoringPlanCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MonitoringPlanPayload>
           }
           createMany: {
-            args: Prisma.StudyCreateManyArgs<ExtArgs>
+            args: Prisma.MonitoringPlanCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
           createManyAndReturn: {
-            args: Prisma.StudyCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StudyPayload>[]
+            args: Prisma.MonitoringPlanCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MonitoringPlanPayload>[]
           }
           delete: {
-            args: Prisma.StudyDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StudyPayload>
+            args: Prisma.MonitoringPlanDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MonitoringPlanPayload>
           }
           update: {
-            args: Prisma.StudyUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StudyPayload>
+            args: Prisma.MonitoringPlanUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MonitoringPlanPayload>
           }
           deleteMany: {
-            args: Prisma.StudyDeleteManyArgs<ExtArgs>
+            args: Prisma.MonitoringPlanDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.StudyUpdateManyArgs<ExtArgs>
+            args: Prisma.MonitoringPlanUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateManyAndReturn: {
-            args: Prisma.StudyUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StudyPayload>[]
+            args: Prisma.MonitoringPlanUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MonitoringPlanPayload>[]
           }
           upsert: {
-            args: Prisma.StudyUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StudyPayload>
+            args: Prisma.MonitoringPlanUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MonitoringPlanPayload>
           }
           aggregate: {
-            args: Prisma.StudyAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateStudy>
+            args: Prisma.MonitoringPlanAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateMonitoringPlan>
           }
           groupBy: {
-            args: Prisma.StudyGroupByArgs<ExtArgs>
-            result: $Utils.Optional<StudyGroupByOutputType>[]
+            args: Prisma.MonitoringPlanGroupByArgs<ExtArgs>
+            result: $Utils.Optional<MonitoringPlanGroupByOutputType>[]
           }
           count: {
-            args: Prisma.StudyCountArgs<ExtArgs>
-            result: $Utils.Optional<StudyCountAggregateOutputType> | number
+            args: Prisma.MonitoringPlanCountArgs<ExtArgs>
+            result: $Utils.Optional<MonitoringPlanCountAggregateOutputType> | number
           }
         }
       }
-      StudyPatient: {
-        payload: Prisma.$StudyPatientPayload<ExtArgs>
-        fields: Prisma.StudyPatientFieldRefs
+      MonitoringPlanPatient: {
+        payload: Prisma.$MonitoringPlanPatientPayload<ExtArgs>
+        fields: Prisma.MonitoringPlanPatientFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.StudyPatientFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StudyPatientPayload> | null
+            args: Prisma.MonitoringPlanPatientFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MonitoringPlanPatientPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.StudyPatientFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StudyPatientPayload>
+            args: Prisma.MonitoringPlanPatientFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MonitoringPlanPatientPayload>
           }
           findFirst: {
-            args: Prisma.StudyPatientFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StudyPatientPayload> | null
+            args: Prisma.MonitoringPlanPatientFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MonitoringPlanPatientPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.StudyPatientFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StudyPatientPayload>
+            args: Prisma.MonitoringPlanPatientFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MonitoringPlanPatientPayload>
           }
           findMany: {
-            args: Prisma.StudyPatientFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StudyPatientPayload>[]
+            args: Prisma.MonitoringPlanPatientFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MonitoringPlanPatientPayload>[]
           }
           create: {
-            args: Prisma.StudyPatientCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StudyPatientPayload>
+            args: Prisma.MonitoringPlanPatientCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MonitoringPlanPatientPayload>
           }
           createMany: {
-            args: Prisma.StudyPatientCreateManyArgs<ExtArgs>
+            args: Prisma.MonitoringPlanPatientCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
           createManyAndReturn: {
-            args: Prisma.StudyPatientCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StudyPatientPayload>[]
+            args: Prisma.MonitoringPlanPatientCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MonitoringPlanPatientPayload>[]
           }
           delete: {
-            args: Prisma.StudyPatientDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StudyPatientPayload>
+            args: Prisma.MonitoringPlanPatientDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MonitoringPlanPatientPayload>
           }
           update: {
-            args: Prisma.StudyPatientUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StudyPatientPayload>
+            args: Prisma.MonitoringPlanPatientUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MonitoringPlanPatientPayload>
           }
           deleteMany: {
-            args: Prisma.StudyPatientDeleteManyArgs<ExtArgs>
+            args: Prisma.MonitoringPlanPatientDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.StudyPatientUpdateManyArgs<ExtArgs>
+            args: Prisma.MonitoringPlanPatientUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateManyAndReturn: {
-            args: Prisma.StudyPatientUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StudyPatientPayload>[]
+            args: Prisma.MonitoringPlanPatientUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MonitoringPlanPatientPayload>[]
           }
           upsert: {
-            args: Prisma.StudyPatientUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StudyPatientPayload>
+            args: Prisma.MonitoringPlanPatientUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MonitoringPlanPatientPayload>
           }
           aggregate: {
-            args: Prisma.StudyPatientAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateStudyPatient>
+            args: Prisma.MonitoringPlanPatientAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateMonitoringPlanPatient>
           }
           groupBy: {
-            args: Prisma.StudyPatientGroupByArgs<ExtArgs>
-            result: $Utils.Optional<StudyPatientGroupByOutputType>[]
+            args: Prisma.MonitoringPlanPatientGroupByArgs<ExtArgs>
+            result: $Utils.Optional<MonitoringPlanPatientGroupByOutputType>[]
           }
           count: {
-            args: Prisma.StudyPatientCountArgs<ExtArgs>
-            result: $Utils.Optional<StudyPatientCountAggregateOutputType> | number
+            args: Prisma.MonitoringPlanPatientCountArgs<ExtArgs>
+            result: $Utils.Optional<MonitoringPlanPatientCountAggregateOutputType> | number
           }
         }
       }
-      StudyAssignment: {
-        payload: Prisma.$StudyAssignmentPayload<ExtArgs>
-        fields: Prisma.StudyAssignmentFieldRefs
+      MonitoringPlanAssignment: {
+        payload: Prisma.$MonitoringPlanAssignmentPayload<ExtArgs>
+        fields: Prisma.MonitoringPlanAssignmentFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.StudyAssignmentFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StudyAssignmentPayload> | null
+            args: Prisma.MonitoringPlanAssignmentFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MonitoringPlanAssignmentPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.StudyAssignmentFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StudyAssignmentPayload>
+            args: Prisma.MonitoringPlanAssignmentFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MonitoringPlanAssignmentPayload>
           }
           findFirst: {
-            args: Prisma.StudyAssignmentFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StudyAssignmentPayload> | null
+            args: Prisma.MonitoringPlanAssignmentFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MonitoringPlanAssignmentPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.StudyAssignmentFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StudyAssignmentPayload>
+            args: Prisma.MonitoringPlanAssignmentFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MonitoringPlanAssignmentPayload>
           }
           findMany: {
-            args: Prisma.StudyAssignmentFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StudyAssignmentPayload>[]
+            args: Prisma.MonitoringPlanAssignmentFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MonitoringPlanAssignmentPayload>[]
           }
           create: {
-            args: Prisma.StudyAssignmentCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StudyAssignmentPayload>
+            args: Prisma.MonitoringPlanAssignmentCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MonitoringPlanAssignmentPayload>
           }
           createMany: {
-            args: Prisma.StudyAssignmentCreateManyArgs<ExtArgs>
+            args: Prisma.MonitoringPlanAssignmentCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
           createManyAndReturn: {
-            args: Prisma.StudyAssignmentCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StudyAssignmentPayload>[]
+            args: Prisma.MonitoringPlanAssignmentCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MonitoringPlanAssignmentPayload>[]
           }
           delete: {
-            args: Prisma.StudyAssignmentDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StudyAssignmentPayload>
+            args: Prisma.MonitoringPlanAssignmentDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MonitoringPlanAssignmentPayload>
           }
           update: {
-            args: Prisma.StudyAssignmentUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StudyAssignmentPayload>
+            args: Prisma.MonitoringPlanAssignmentUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MonitoringPlanAssignmentPayload>
           }
           deleteMany: {
-            args: Prisma.StudyAssignmentDeleteManyArgs<ExtArgs>
+            args: Prisma.MonitoringPlanAssignmentDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.StudyAssignmentUpdateManyArgs<ExtArgs>
+            args: Prisma.MonitoringPlanAssignmentUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateManyAndReturn: {
-            args: Prisma.StudyAssignmentUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StudyAssignmentPayload>[]
+            args: Prisma.MonitoringPlanAssignmentUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MonitoringPlanAssignmentPayload>[]
           }
           upsert: {
-            args: Prisma.StudyAssignmentUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StudyAssignmentPayload>
+            args: Prisma.MonitoringPlanAssignmentUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MonitoringPlanAssignmentPayload>
           }
           aggregate: {
-            args: Prisma.StudyAssignmentAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateStudyAssignment>
+            args: Prisma.MonitoringPlanAssignmentAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateMonitoringPlanAssignment>
           }
           groupBy: {
-            args: Prisma.StudyAssignmentGroupByArgs<ExtArgs>
-            result: $Utils.Optional<StudyAssignmentGroupByOutputType>[]
+            args: Prisma.MonitoringPlanAssignmentGroupByArgs<ExtArgs>
+            result: $Utils.Optional<MonitoringPlanAssignmentGroupByOutputType>[]
           }
           count: {
-            args: Prisma.StudyAssignmentCountArgs<ExtArgs>
-            result: $Utils.Optional<StudyAssignmentCountAggregateOutputType> | number
+            args: Prisma.MonitoringPlanAssignmentCountArgs<ExtArgs>
+            result: $Utils.Optional<MonitoringPlanAssignmentCountAggregateOutputType> | number
           }
         }
       }
-      StudyNote: {
-        payload: Prisma.$StudyNotePayload<ExtArgs>
-        fields: Prisma.StudyNoteFieldRefs
+      MonitoringPlanNote: {
+        payload: Prisma.$MonitoringPlanNotePayload<ExtArgs>
+        fields: Prisma.MonitoringPlanNoteFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.StudyNoteFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StudyNotePayload> | null
+            args: Prisma.MonitoringPlanNoteFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MonitoringPlanNotePayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.StudyNoteFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StudyNotePayload>
+            args: Prisma.MonitoringPlanNoteFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MonitoringPlanNotePayload>
           }
           findFirst: {
-            args: Prisma.StudyNoteFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StudyNotePayload> | null
+            args: Prisma.MonitoringPlanNoteFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MonitoringPlanNotePayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.StudyNoteFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StudyNotePayload>
+            args: Prisma.MonitoringPlanNoteFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MonitoringPlanNotePayload>
           }
           findMany: {
-            args: Prisma.StudyNoteFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StudyNotePayload>[]
+            args: Prisma.MonitoringPlanNoteFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MonitoringPlanNotePayload>[]
           }
           create: {
-            args: Prisma.StudyNoteCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StudyNotePayload>
+            args: Prisma.MonitoringPlanNoteCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MonitoringPlanNotePayload>
           }
           createMany: {
-            args: Prisma.StudyNoteCreateManyArgs<ExtArgs>
+            args: Prisma.MonitoringPlanNoteCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
           createManyAndReturn: {
-            args: Prisma.StudyNoteCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StudyNotePayload>[]
+            args: Prisma.MonitoringPlanNoteCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MonitoringPlanNotePayload>[]
           }
           delete: {
-            args: Prisma.StudyNoteDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StudyNotePayload>
+            args: Prisma.MonitoringPlanNoteDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MonitoringPlanNotePayload>
           }
           update: {
-            args: Prisma.StudyNoteUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StudyNotePayload>
+            args: Prisma.MonitoringPlanNoteUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MonitoringPlanNotePayload>
           }
           deleteMany: {
-            args: Prisma.StudyNoteDeleteManyArgs<ExtArgs>
+            args: Prisma.MonitoringPlanNoteDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.StudyNoteUpdateManyArgs<ExtArgs>
+            args: Prisma.MonitoringPlanNoteUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateManyAndReturn: {
-            args: Prisma.StudyNoteUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StudyNotePayload>[]
+            args: Prisma.MonitoringPlanNoteUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MonitoringPlanNotePayload>[]
           }
           upsert: {
-            args: Prisma.StudyNoteUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StudyNotePayload>
+            args: Prisma.MonitoringPlanNoteUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MonitoringPlanNotePayload>
           }
           aggregate: {
-            args: Prisma.StudyNoteAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateStudyNote>
+            args: Prisma.MonitoringPlanNoteAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateMonitoringPlanNote>
           }
           groupBy: {
-            args: Prisma.StudyNoteGroupByArgs<ExtArgs>
-            result: $Utils.Optional<StudyNoteGroupByOutputType>[]
+            args: Prisma.MonitoringPlanNoteGroupByArgs<ExtArgs>
+            result: $Utils.Optional<MonitoringPlanNoteGroupByOutputType>[]
           }
           count: {
-            args: Prisma.StudyNoteCountArgs<ExtArgs>
-            result: $Utils.Optional<StudyNoteCountAggregateOutputType> | number
+            args: Prisma.MonitoringPlanNoteCountArgs<ExtArgs>
+            result: $Utils.Optional<MonitoringPlanNoteCountAggregateOutputType> | number
           }
         }
       }
@@ -2247,10 +2247,10 @@ export namespace Prisma {
     practice?: PracticeOmit
     subscriptionHistory?: SubscriptionHistoryOmit
     patient?: PatientOmit
-    study?: StudyOmit
-    studyPatient?: StudyPatientOmit
-    studyAssignment?: StudyAssignmentOmit
-    studyNote?: StudyNoteOmit
+    monitoringPlan?: MonitoringPlanOmit
+    monitoringPlanPatient?: MonitoringPlanPatientOmit
+    monitoringPlanAssignment?: MonitoringPlanAssignmentOmit
+    monitoringPlanNote?: MonitoringPlanNoteOmit
     symptomTemplate?: SymptomTemplateOmit
     observation?: ObservationOmit
     treatmentTemplate?: TreatmentTemplateOmit
@@ -2353,8 +2353,8 @@ export namespace Prisma {
    */
 
   export type UserCountOutputType = {
-    createdStudies: number
-    assignedStudies: number
+    createdMonitoringPlans: number
+    assignedMonitoringPlans: number
     createdTreatments: number
     observations: number
     createdPatients: number
@@ -2362,8 +2362,8 @@ export namespace Prisma {
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    createdStudies?: boolean | UserCountOutputTypeCountCreatedStudiesArgs
-    assignedStudies?: boolean | UserCountOutputTypeCountAssignedStudiesArgs
+    createdMonitoringPlans?: boolean | UserCountOutputTypeCountCreatedMonitoringPlansArgs
+    assignedMonitoringPlans?: boolean | UserCountOutputTypeCountAssignedMonitoringPlansArgs
     createdTreatments?: boolean | UserCountOutputTypeCountCreatedTreatmentsArgs
     observations?: boolean | UserCountOutputTypeCountObservationsArgs
     createdPatients?: boolean | UserCountOutputTypeCountCreatedPatientsArgs
@@ -2384,15 +2384,15 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountCreatedStudiesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: StudyWhereInput
+  export type UserCountOutputTypeCountCreatedMonitoringPlansArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MonitoringPlanWhereInput
   }
 
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountAssignedStudiesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: StudyAssignmentWhereInput
+  export type UserCountOutputTypeCountAssignedMonitoringPlansArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MonitoringPlanAssignmentWhereInput
   }
 
   /**
@@ -2431,14 +2431,14 @@ export namespace Prisma {
   export type PracticeCountOutputType = {
     users: number
     patients: number
-    studies: number
+    monitoringPlans: number
     subscriptionHistory: number
   }
 
   export type PracticeCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     users?: boolean | PracticeCountOutputTypeCountUsersArgs
     patients?: boolean | PracticeCountOutputTypeCountPatientsArgs
-    studies?: boolean | PracticeCountOutputTypeCountStudiesArgs
+    monitoringPlans?: boolean | PracticeCountOutputTypeCountMonitoringPlansArgs
     subscriptionHistory?: boolean | PracticeCountOutputTypeCountSubscriptionHistoryArgs
   }
 
@@ -2470,8 +2470,8 @@ export namespace Prisma {
   /**
    * PracticeCountOutputType without action
    */
-  export type PracticeCountOutputTypeCountStudiesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: StudyWhereInput
+  export type PracticeCountOutputTypeCountMonitoringPlansArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MonitoringPlanWhereInput
   }
 
   /**
@@ -2487,14 +2487,14 @@ export namespace Prisma {
    */
 
   export type PatientCountOutputType = {
-    studies: number
+    monitoringPlans: number
     observations: number
     treatments: number
     files: number
   }
 
   export type PatientCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    studies?: boolean | PatientCountOutputTypeCountStudiesArgs
+    monitoringPlans?: boolean | PatientCountOutputTypeCountMonitoringPlansArgs
     observations?: boolean | PatientCountOutputTypeCountObservationsArgs
     treatments?: boolean | PatientCountOutputTypeCountTreatmentsArgs
     files?: boolean | PatientCountOutputTypeCountFilesArgs
@@ -2514,8 +2514,8 @@ export namespace Prisma {
   /**
    * PatientCountOutputType without action
    */
-  export type PatientCountOutputTypeCountStudiesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: StudyPatientWhereInput
+  export type PatientCountOutputTypeCountMonitoringPlansArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MonitoringPlanPatientWhereInput
   }
 
   /**
@@ -2541,10 +2541,10 @@ export namespace Prisma {
 
 
   /**
-   * Count Type StudyCountOutputType
+   * Count Type MonitoringPlanCountOutputType
    */
 
-  export type StudyCountOutputType = {
+  export type MonitoringPlanCountOutputType = {
     patients: number
     assignedUsers: number
     symptomTemplates: number
@@ -2552,97 +2552,97 @@ export namespace Prisma {
     notes: number
   }
 
-  export type StudyCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    patients?: boolean | StudyCountOutputTypeCountPatientsArgs
-    assignedUsers?: boolean | StudyCountOutputTypeCountAssignedUsersArgs
-    symptomTemplates?: boolean | StudyCountOutputTypeCountSymptomTemplatesArgs
-    treatmentTemplates?: boolean | StudyCountOutputTypeCountTreatmentTemplatesArgs
-    notes?: boolean | StudyCountOutputTypeCountNotesArgs
+  export type MonitoringPlanCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    patients?: boolean | MonitoringPlanCountOutputTypeCountPatientsArgs
+    assignedUsers?: boolean | MonitoringPlanCountOutputTypeCountAssignedUsersArgs
+    symptomTemplates?: boolean | MonitoringPlanCountOutputTypeCountSymptomTemplatesArgs
+    treatmentTemplates?: boolean | MonitoringPlanCountOutputTypeCountTreatmentTemplatesArgs
+    notes?: boolean | MonitoringPlanCountOutputTypeCountNotesArgs
   }
 
   // Custom InputTypes
   /**
-   * StudyCountOutputType without action
+   * MonitoringPlanCountOutputType without action
    */
-  export type StudyCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlanCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the StudyCountOutputType
+     * Select specific fields to fetch from the MonitoringPlanCountOutputType
      */
-    select?: StudyCountOutputTypeSelect<ExtArgs> | null
+    select?: MonitoringPlanCountOutputTypeSelect<ExtArgs> | null
   }
 
   /**
-   * StudyCountOutputType without action
+   * MonitoringPlanCountOutputType without action
    */
-  export type StudyCountOutputTypeCountPatientsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: StudyPatientWhereInput
+  export type MonitoringPlanCountOutputTypeCountPatientsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MonitoringPlanPatientWhereInput
   }
 
   /**
-   * StudyCountOutputType without action
+   * MonitoringPlanCountOutputType without action
    */
-  export type StudyCountOutputTypeCountAssignedUsersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: StudyAssignmentWhereInput
+  export type MonitoringPlanCountOutputTypeCountAssignedUsersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MonitoringPlanAssignmentWhereInput
   }
 
   /**
-   * StudyCountOutputType without action
+   * MonitoringPlanCountOutputType without action
    */
-  export type StudyCountOutputTypeCountSymptomTemplatesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlanCountOutputTypeCountSymptomTemplatesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: SymptomTemplateWhereInput
   }
 
   /**
-   * StudyCountOutputType without action
+   * MonitoringPlanCountOutputType without action
    */
-  export type StudyCountOutputTypeCountTreatmentTemplatesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlanCountOutputTypeCountTreatmentTemplatesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: TreatmentTemplateWhereInput
   }
 
   /**
-   * StudyCountOutputType without action
+   * MonitoringPlanCountOutputType without action
    */
-  export type StudyCountOutputTypeCountNotesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: StudyNoteWhereInput
+  export type MonitoringPlanCountOutputTypeCountNotesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MonitoringPlanNoteWhereInput
   }
 
 
   /**
-   * Count Type StudyPatientCountOutputType
+   * Count Type MonitoringPlanPatientCountOutputType
    */
 
-  export type StudyPatientCountOutputType = {
+  export type MonitoringPlanPatientCountOutputType = {
     observations: number
     treatments: number
   }
 
-  export type StudyPatientCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    observations?: boolean | StudyPatientCountOutputTypeCountObservationsArgs
-    treatments?: boolean | StudyPatientCountOutputTypeCountTreatmentsArgs
+  export type MonitoringPlanPatientCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    observations?: boolean | MonitoringPlanPatientCountOutputTypeCountObservationsArgs
+    treatments?: boolean | MonitoringPlanPatientCountOutputTypeCountTreatmentsArgs
   }
 
   // Custom InputTypes
   /**
-   * StudyPatientCountOutputType without action
+   * MonitoringPlanPatientCountOutputType without action
    */
-  export type StudyPatientCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlanPatientCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the StudyPatientCountOutputType
+     * Select specific fields to fetch from the MonitoringPlanPatientCountOutputType
      */
-    select?: StudyPatientCountOutputTypeSelect<ExtArgs> | null
+    select?: MonitoringPlanPatientCountOutputTypeSelect<ExtArgs> | null
   }
 
   /**
-   * StudyPatientCountOutputType without action
+   * MonitoringPlanPatientCountOutputType without action
    */
-  export type StudyPatientCountOutputTypeCountObservationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlanPatientCountOutputTypeCountObservationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ObservationWhereInput
   }
 
   /**
-   * StudyPatientCountOutputType without action
+   * MonitoringPlanPatientCountOutputType without action
    */
-  export type StudyPatientCountOutputTypeCountTreatmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlanPatientCountOutputTypeCountTreatmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: TreatmentWhereInput
   }
 
@@ -3076,8 +3076,8 @@ export namespace Prisma {
     resetToken?: boolean
     resetTokenExpiry?: boolean
     practice?: boolean | User$practiceArgs<ExtArgs>
-    createdStudies?: boolean | User$createdStudiesArgs<ExtArgs>
-    assignedStudies?: boolean | User$assignedStudiesArgs<ExtArgs>
+    createdMonitoringPlans?: boolean | User$createdMonitoringPlansArgs<ExtArgs>
+    assignedMonitoringPlans?: boolean | User$assignedMonitoringPlansArgs<ExtArgs>
     createdTreatments?: boolean | User$createdTreatmentsArgs<ExtArgs>
     observations?: boolean | User$observationsArgs<ExtArgs>
     createdPatients?: boolean | User$createdPatientsArgs<ExtArgs>
@@ -3135,8 +3135,8 @@ export namespace Prisma {
   export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "password" | "firstName" | "lastName" | "role" | "createdAt" | "updatedAt" | "isActive" | "practiceId" | "resetToken" | "resetTokenExpiry", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     practice?: boolean | User$practiceArgs<ExtArgs>
-    createdStudies?: boolean | User$createdStudiesArgs<ExtArgs>
-    assignedStudies?: boolean | User$assignedStudiesArgs<ExtArgs>
+    createdMonitoringPlans?: boolean | User$createdMonitoringPlansArgs<ExtArgs>
+    assignedMonitoringPlans?: boolean | User$assignedMonitoringPlansArgs<ExtArgs>
     createdTreatments?: boolean | User$createdTreatmentsArgs<ExtArgs>
     observations?: boolean | User$observationsArgs<ExtArgs>
     createdPatients?: boolean | User$createdPatientsArgs<ExtArgs>
@@ -3154,8 +3154,8 @@ export namespace Prisma {
     name: "User"
     objects: {
       practice: Prisma.$PracticePayload<ExtArgs> | null
-      createdStudies: Prisma.$StudyPayload<ExtArgs>[]
-      assignedStudies: Prisma.$StudyAssignmentPayload<ExtArgs>[]
+      createdMonitoringPlans: Prisma.$MonitoringPlanPayload<ExtArgs>[]
+      assignedMonitoringPlans: Prisma.$MonitoringPlanAssignmentPayload<ExtArgs>[]
       createdTreatments: Prisma.$TreatmentPayload<ExtArgs>[]
       observations: Prisma.$ObservationPayload<ExtArgs>[]
       createdPatients: Prisma.$PatientPayload<ExtArgs>[]
@@ -3569,8 +3569,8 @@ export namespace Prisma {
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     practice<T extends User$practiceArgs<ExtArgs> = {}>(args?: Subset<T, User$practiceArgs<ExtArgs>>): Prisma__PracticeClient<$Result.GetResult<Prisma.$PracticePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    createdStudies<T extends User$createdStudiesArgs<ExtArgs> = {}>(args?: Subset<T, User$createdStudiesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StudyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    assignedStudies<T extends User$assignedStudiesArgs<ExtArgs> = {}>(args?: Subset<T, User$assignedStudiesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StudyAssignmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    createdMonitoringPlans<T extends User$createdMonitoringPlansArgs<ExtArgs> = {}>(args?: Subset<T, User$createdMonitoringPlansArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MonitoringPlanPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    assignedMonitoringPlans<T extends User$assignedMonitoringPlansArgs<ExtArgs> = {}>(args?: Subset<T, User$assignedMonitoringPlansArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MonitoringPlanAssignmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     createdTreatments<T extends User$createdTreatmentsArgs<ExtArgs> = {}>(args?: Subset<T, User$createdTreatmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TreatmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     observations<T extends User$observationsArgs<ExtArgs> = {}>(args?: Subset<T, User$observationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ObservationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     createdPatients<T extends User$createdPatientsArgs<ExtArgs> = {}>(args?: Subset<T, User$createdPatientsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PatientPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -4031,51 +4031,51 @@ export namespace Prisma {
   }
 
   /**
-   * User.createdStudies
+   * User.createdMonitoringPlans
    */
-  export type User$createdStudiesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$createdMonitoringPlansArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Study
+     * Select specific fields to fetch from the MonitoringPlan
      */
-    select?: StudySelect<ExtArgs> | null
+    select?: MonitoringPlanSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Study
+     * Omit specific fields from the MonitoringPlan
      */
-    omit?: StudyOmit<ExtArgs> | null
+    omit?: MonitoringPlanOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StudyInclude<ExtArgs> | null
-    where?: StudyWhereInput
-    orderBy?: StudyOrderByWithRelationInput | StudyOrderByWithRelationInput[]
-    cursor?: StudyWhereUniqueInput
+    include?: MonitoringPlanInclude<ExtArgs> | null
+    where?: MonitoringPlanWhereInput
+    orderBy?: MonitoringPlanOrderByWithRelationInput | MonitoringPlanOrderByWithRelationInput[]
+    cursor?: MonitoringPlanWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: StudyScalarFieldEnum | StudyScalarFieldEnum[]
+    distinct?: MonitoringPlanScalarFieldEnum | MonitoringPlanScalarFieldEnum[]
   }
 
   /**
-   * User.assignedStudies
+   * User.assignedMonitoringPlans
    */
-  export type User$assignedStudiesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$assignedMonitoringPlansArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the StudyAssignment
+     * Select specific fields to fetch from the MonitoringPlanAssignment
      */
-    select?: StudyAssignmentSelect<ExtArgs> | null
+    select?: MonitoringPlanAssignmentSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the StudyAssignment
+     * Omit specific fields from the MonitoringPlanAssignment
      */
-    omit?: StudyAssignmentOmit<ExtArgs> | null
+    omit?: MonitoringPlanAssignmentOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StudyAssignmentInclude<ExtArgs> | null
-    where?: StudyAssignmentWhereInput
-    orderBy?: StudyAssignmentOrderByWithRelationInput | StudyAssignmentOrderByWithRelationInput[]
-    cursor?: StudyAssignmentWhereUniqueInput
+    include?: MonitoringPlanAssignmentInclude<ExtArgs> | null
+    where?: MonitoringPlanAssignmentWhereInput
+    orderBy?: MonitoringPlanAssignmentOrderByWithRelationInput | MonitoringPlanAssignmentOrderByWithRelationInput[]
+    cursor?: MonitoringPlanAssignmentWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: StudyAssignmentScalarFieldEnum | StudyAssignmentScalarFieldEnum[]
+    distinct?: MonitoringPlanAssignmentScalarFieldEnum | MonitoringPlanAssignmentScalarFieldEnum[]
   }
 
   /**
@@ -4481,7 +4481,7 @@ export namespace Prisma {
     currentStorage?: boolean
     users?: boolean | Practice$usersArgs<ExtArgs>
     patients?: boolean | Practice$patientsArgs<ExtArgs>
-    studies?: boolean | Practice$studiesArgs<ExtArgs>
+    monitoringPlans?: boolean | Practice$monitoringPlansArgs<ExtArgs>
     subscriptionHistory?: boolean | Practice$subscriptionHistoryArgs<ExtArgs>
     _count?: boolean | PracticeCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["practice"]>
@@ -4547,7 +4547,7 @@ export namespace Prisma {
   export type PracticeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     users?: boolean | Practice$usersArgs<ExtArgs>
     patients?: boolean | Practice$patientsArgs<ExtArgs>
-    studies?: boolean | Practice$studiesArgs<ExtArgs>
+    monitoringPlans?: boolean | Practice$monitoringPlansArgs<ExtArgs>
     subscriptionHistory?: boolean | Practice$subscriptionHistoryArgs<ExtArgs>
     _count?: boolean | PracticeCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -4559,7 +4559,7 @@ export namespace Prisma {
     objects: {
       users: Prisma.$UserPayload<ExtArgs>[]
       patients: Prisma.$PatientPayload<ExtArgs>[]
-      studies: Prisma.$StudyPayload<ExtArgs>[]
+      monitoringPlans: Prisma.$MonitoringPlanPayload<ExtArgs>[]
       subscriptionHistory: Prisma.$SubscriptionHistoryPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -4975,7 +4975,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     users<T extends Practice$usersArgs<ExtArgs> = {}>(args?: Subset<T, Practice$usersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     patients<T extends Practice$patientsArgs<ExtArgs> = {}>(args?: Subset<T, Practice$patientsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PatientPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    studies<T extends Practice$studiesArgs<ExtArgs> = {}>(args?: Subset<T, Practice$studiesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StudyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    monitoringPlans<T extends Practice$monitoringPlansArgs<ExtArgs> = {}>(args?: Subset<T, Practice$monitoringPlansArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MonitoringPlanPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     subscriptionHistory<T extends Practice$subscriptionHistoryArgs<ExtArgs> = {}>(args?: Subset<T, Practice$subscriptionHistoryArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SubscriptionHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -5458,27 +5458,27 @@ export namespace Prisma {
   }
 
   /**
-   * Practice.studies
+   * Practice.monitoringPlans
    */
-  export type Practice$studiesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Practice$monitoringPlansArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Study
+     * Select specific fields to fetch from the MonitoringPlan
      */
-    select?: StudySelect<ExtArgs> | null
+    select?: MonitoringPlanSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Study
+     * Omit specific fields from the MonitoringPlan
      */
-    omit?: StudyOmit<ExtArgs> | null
+    omit?: MonitoringPlanOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StudyInclude<ExtArgs> | null
-    where?: StudyWhereInput
-    orderBy?: StudyOrderByWithRelationInput | StudyOrderByWithRelationInput[]
-    cursor?: StudyWhereUniqueInput
+    include?: MonitoringPlanInclude<ExtArgs> | null
+    where?: MonitoringPlanWhereInput
+    orderBy?: MonitoringPlanOrderByWithRelationInput | MonitoringPlanOrderByWithRelationInput[]
+    cursor?: MonitoringPlanWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: StudyScalarFieldEnum | StudyScalarFieldEnum[]
+    distinct?: MonitoringPlanScalarFieldEnum | MonitoringPlanScalarFieldEnum[]
   }
 
   /**
@@ -6951,7 +6951,7 @@ export namespace Prisma {
     medicalHistory?: boolean
     practice?: boolean | PracticeDefaultArgs<ExtArgs>
     createdBy?: boolean | UserDefaultArgs<ExtArgs>
-    studies?: boolean | Patient$studiesArgs<ExtArgs>
+    monitoringPlans?: boolean | Patient$monitoringPlansArgs<ExtArgs>
     observations?: boolean | Patient$observationsArgs<ExtArgs>
     treatments?: boolean | Patient$treatmentsArgs<ExtArgs>
     files?: boolean | Patient$filesArgs<ExtArgs>
@@ -7026,7 +7026,7 @@ export namespace Prisma {
   export type PatientInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     practice?: boolean | PracticeDefaultArgs<ExtArgs>
     createdBy?: boolean | UserDefaultArgs<ExtArgs>
-    studies?: boolean | Patient$studiesArgs<ExtArgs>
+    monitoringPlans?: boolean | Patient$monitoringPlansArgs<ExtArgs>
     observations?: boolean | Patient$observationsArgs<ExtArgs>
     treatments?: boolean | Patient$treatmentsArgs<ExtArgs>
     files?: boolean | Patient$filesArgs<ExtArgs>
@@ -7046,7 +7046,7 @@ export namespace Prisma {
     objects: {
       practice: Prisma.$PracticePayload<ExtArgs>
       createdBy: Prisma.$UserPayload<ExtArgs>
-      studies: Prisma.$StudyPatientPayload<ExtArgs>[]
+      monitoringPlans: Prisma.$MonitoringPlanPatientPayload<ExtArgs>[]
       observations: Prisma.$ObservationPayload<ExtArgs>[]
       treatments: Prisma.$TreatmentPayload<ExtArgs>[]
       files: Prisma.$FilePayload<ExtArgs>[]
@@ -7465,7 +7465,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     practice<T extends PracticeDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PracticeDefaultArgs<ExtArgs>>): Prisma__PracticeClient<$Result.GetResult<Prisma.$PracticePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     createdBy<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    studies<T extends Patient$studiesArgs<ExtArgs> = {}>(args?: Subset<T, Patient$studiesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StudyPatientPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    monitoringPlans<T extends Patient$monitoringPlansArgs<ExtArgs> = {}>(args?: Subset<T, Patient$monitoringPlansArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MonitoringPlanPatientPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     observations<T extends Patient$observationsArgs<ExtArgs> = {}>(args?: Subset<T, Patient$observationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ObservationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     treatments<T extends Patient$treatmentsArgs<ExtArgs> = {}>(args?: Subset<T, Patient$treatmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TreatmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     files<T extends Patient$filesArgs<ExtArgs> = {}>(args?: Subset<T, Patient$filesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FilePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -7911,27 +7911,27 @@ export namespace Prisma {
   }
 
   /**
-   * Patient.studies
+   * Patient.monitoringPlans
    */
-  export type Patient$studiesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Patient$monitoringPlansArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the StudyPatient
+     * Select specific fields to fetch from the MonitoringPlanPatient
      */
-    select?: StudyPatientSelect<ExtArgs> | null
+    select?: MonitoringPlanPatientSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the StudyPatient
+     * Omit specific fields from the MonitoringPlanPatient
      */
-    omit?: StudyPatientOmit<ExtArgs> | null
+    omit?: MonitoringPlanPatientOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StudyPatientInclude<ExtArgs> | null
-    where?: StudyPatientWhereInput
-    orderBy?: StudyPatientOrderByWithRelationInput | StudyPatientOrderByWithRelationInput[]
-    cursor?: StudyPatientWhereUniqueInput
+    include?: MonitoringPlanPatientInclude<ExtArgs> | null
+    where?: MonitoringPlanPatientWhereInput
+    orderBy?: MonitoringPlanPatientOrderByWithRelationInput | MonitoringPlanPatientOrderByWithRelationInput[]
+    cursor?: MonitoringPlanPatientWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: StudyPatientScalarFieldEnum | StudyPatientScalarFieldEnum[]
+    distinct?: MonitoringPlanPatientScalarFieldEnum | MonitoringPlanPatientScalarFieldEnum[]
   }
 
   /**
@@ -8026,16 +8026,16 @@ export namespace Prisma {
 
 
   /**
-   * Model Study
+   * Model MonitoringPlan
    */
 
-  export type AggregateStudy = {
-    _count: StudyCountAggregateOutputType | null
-    _min: StudyMinAggregateOutputType | null
-    _max: StudyMaxAggregateOutputType | null
+  export type AggregateMonitoringPlan = {
+    _count: MonitoringPlanCountAggregateOutputType | null
+    _min: MonitoringPlanMinAggregateOutputType | null
+    _max: MonitoringPlanMaxAggregateOutputType | null
   }
 
-  export type StudyMinAggregateOutputType = {
+  export type MonitoringPlanMinAggregateOutputType = {
     id: string | null
     title: string | null
     description: string | null
@@ -8045,11 +8045,12 @@ export namespace Prisma {
     updatedAt: Date | null
     startDate: Date | null
     endDate: Date | null
-    status: $Enums.StudyStatus | null
+    status: $Enums.MonitoringPlanStatus | null
     isTemplate: boolean | null
+    shareToken: string | null
   }
 
-  export type StudyMaxAggregateOutputType = {
+  export type MonitoringPlanMaxAggregateOutputType = {
     id: string | null
     title: string | null
     description: string | null
@@ -8059,11 +8060,12 @@ export namespace Prisma {
     updatedAt: Date | null
     startDate: Date | null
     endDate: Date | null
-    status: $Enums.StudyStatus | null
+    status: $Enums.MonitoringPlanStatus | null
     isTemplate: boolean | null
+    shareToken: string | null
   }
 
-  export type StudyCountAggregateOutputType = {
+  export type MonitoringPlanCountAggregateOutputType = {
     id: number
     title: number
     description: number
@@ -8076,11 +8078,12 @@ export namespace Prisma {
     endDate: number
     status: number
     isTemplate: number
+    shareToken: number
     _all: number
   }
 
 
-  export type StudyMinAggregateInputType = {
+  export type MonitoringPlanMinAggregateInputType = {
     id?: true
     title?: true
     description?: true
@@ -8092,9 +8095,10 @@ export namespace Prisma {
     endDate?: true
     status?: true
     isTemplate?: true
+    shareToken?: true
   }
 
-  export type StudyMaxAggregateInputType = {
+  export type MonitoringPlanMaxAggregateInputType = {
     id?: true
     title?: true
     description?: true
@@ -8106,9 +8110,10 @@ export namespace Prisma {
     endDate?: true
     status?: true
     isTemplate?: true
+    shareToken?: true
   }
 
-  export type StudyCountAggregateInputType = {
+  export type MonitoringPlanCountAggregateInputType = {
     id?: true
     title?: true
     description?: true
@@ -8121,82 +8126,83 @@ export namespace Prisma {
     endDate?: true
     status?: true
     isTemplate?: true
+    shareToken?: true
     _all?: true
   }
 
-  export type StudyAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlanAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which Study to aggregate.
+     * Filter which MonitoringPlan to aggregate.
      */
-    where?: StudyWhereInput
+    where?: MonitoringPlanWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Studies to fetch.
+     * Determine the order of MonitoringPlans to fetch.
      */
-    orderBy?: StudyOrderByWithRelationInput | StudyOrderByWithRelationInput[]
+    orderBy?: MonitoringPlanOrderByWithRelationInput | MonitoringPlanOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: StudyWhereUniqueInput
+    cursor?: MonitoringPlanWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Studies from the position of the cursor.
+     * Take `±n` MonitoringPlans from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Studies.
+     * Skip the first `n` MonitoringPlans.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned Studies
+     * Count returned MonitoringPlans
     **/
-    _count?: true | StudyCountAggregateInputType
+    _count?: true | MonitoringPlanCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: StudyMinAggregateInputType
+    _min?: MonitoringPlanMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: StudyMaxAggregateInputType
+    _max?: MonitoringPlanMaxAggregateInputType
   }
 
-  export type GetStudyAggregateType<T extends StudyAggregateArgs> = {
-        [P in keyof T & keyof AggregateStudy]: P extends '_count' | 'count'
+  export type GetMonitoringPlanAggregateType<T extends MonitoringPlanAggregateArgs> = {
+        [P in keyof T & keyof AggregateMonitoringPlan]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateStudy[P]>
-      : GetScalarType<T[P], AggregateStudy[P]>
+        : GetScalarType<T[P], AggregateMonitoringPlan[P]>
+      : GetScalarType<T[P], AggregateMonitoringPlan[P]>
   }
 
 
 
 
-  export type StudyGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: StudyWhereInput
-    orderBy?: StudyOrderByWithAggregationInput | StudyOrderByWithAggregationInput[]
-    by: StudyScalarFieldEnum[] | StudyScalarFieldEnum
-    having?: StudyScalarWhereWithAggregatesInput
+  export type MonitoringPlanGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MonitoringPlanWhereInput
+    orderBy?: MonitoringPlanOrderByWithAggregationInput | MonitoringPlanOrderByWithAggregationInput[]
+    by: MonitoringPlanScalarFieldEnum[] | MonitoringPlanScalarFieldEnum
+    having?: MonitoringPlanScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: StudyCountAggregateInputType | true
-    _min?: StudyMinAggregateInputType
-    _max?: StudyMaxAggregateInputType
+    _count?: MonitoringPlanCountAggregateInputType | true
+    _min?: MonitoringPlanMinAggregateInputType
+    _max?: MonitoringPlanMaxAggregateInputType
   }
 
-  export type StudyGroupByOutputType = {
+  export type MonitoringPlanGroupByOutputType = {
     id: string
     title: string
     description: string | null
@@ -8207,28 +8213,29 @@ export namespace Prisma {
     updatedAt: Date
     startDate: Date | null
     endDate: Date | null
-    status: $Enums.StudyStatus
+    status: $Enums.MonitoringPlanStatus
     isTemplate: boolean
-    _count: StudyCountAggregateOutputType | null
-    _min: StudyMinAggregateOutputType | null
-    _max: StudyMaxAggregateOutputType | null
+    shareToken: string | null
+    _count: MonitoringPlanCountAggregateOutputType | null
+    _min: MonitoringPlanMinAggregateOutputType | null
+    _max: MonitoringPlanMaxAggregateOutputType | null
   }
 
-  type GetStudyGroupByPayload<T extends StudyGroupByArgs> = Prisma.PrismaPromise<
+  type GetMonitoringPlanGroupByPayload<T extends MonitoringPlanGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<StudyGroupByOutputType, T['by']> &
+      PickEnumerable<MonitoringPlanGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof StudyGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof MonitoringPlanGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], StudyGroupByOutputType[P]>
-            : GetScalarType<T[P], StudyGroupByOutputType[P]>
+              : GetScalarType<T[P], MonitoringPlanGroupByOutputType[P]>
+            : GetScalarType<T[P], MonitoringPlanGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type StudySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type MonitoringPlanSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     title?: boolean
     description?: boolean
@@ -8241,17 +8248,18 @@ export namespace Prisma {
     endDate?: boolean
     status?: boolean
     isTemplate?: boolean
+    shareToken?: boolean
     practice?: boolean | PracticeDefaultArgs<ExtArgs>
     createdBy?: boolean | UserDefaultArgs<ExtArgs>
-    patients?: boolean | Study$patientsArgs<ExtArgs>
-    assignedUsers?: boolean | Study$assignedUsersArgs<ExtArgs>
-    symptomTemplates?: boolean | Study$symptomTemplatesArgs<ExtArgs>
-    treatmentTemplates?: boolean | Study$treatmentTemplatesArgs<ExtArgs>
-    notes?: boolean | Study$notesArgs<ExtArgs>
-    _count?: boolean | StudyCountOutputTypeDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["study"]>
+    patients?: boolean | MonitoringPlan$patientsArgs<ExtArgs>
+    assignedUsers?: boolean | MonitoringPlan$assignedUsersArgs<ExtArgs>
+    symptomTemplates?: boolean | MonitoringPlan$symptomTemplatesArgs<ExtArgs>
+    treatmentTemplates?: boolean | MonitoringPlan$treatmentTemplatesArgs<ExtArgs>
+    notes?: boolean | MonitoringPlan$notesArgs<ExtArgs>
+    _count?: boolean | MonitoringPlanCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["monitoringPlan"]>
 
-  export type StudySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type MonitoringPlanSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     title?: boolean
     description?: boolean
@@ -8264,11 +8272,12 @@ export namespace Prisma {
     endDate?: boolean
     status?: boolean
     isTemplate?: boolean
+    shareToken?: boolean
     practice?: boolean | PracticeDefaultArgs<ExtArgs>
     createdBy?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["study"]>
+  }, ExtArgs["result"]["monitoringPlan"]>
 
-  export type StudySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type MonitoringPlanSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     title?: boolean
     description?: boolean
@@ -8281,11 +8290,12 @@ export namespace Prisma {
     endDate?: boolean
     status?: boolean
     isTemplate?: boolean
+    shareToken?: boolean
     practice?: boolean | PracticeDefaultArgs<ExtArgs>
     createdBy?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["study"]>
+  }, ExtArgs["result"]["monitoringPlan"]>
 
-  export type StudySelectScalar = {
+  export type MonitoringPlanSelectScalar = {
     id?: boolean
     title?: boolean
     description?: boolean
@@ -8298,38 +8308,39 @@ export namespace Prisma {
     endDate?: boolean
     status?: boolean
     isTemplate?: boolean
+    shareToken?: boolean
   }
 
-  export type StudyOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "protocol" | "practiceId" | "createdById" | "createdAt" | "updatedAt" | "startDate" | "endDate" | "status" | "isTemplate", ExtArgs["result"]["study"]>
-  export type StudyInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlanOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "protocol" | "practiceId" | "createdById" | "createdAt" | "updatedAt" | "startDate" | "endDate" | "status" | "isTemplate" | "shareToken", ExtArgs["result"]["monitoringPlan"]>
+  export type MonitoringPlanInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     practice?: boolean | PracticeDefaultArgs<ExtArgs>
     createdBy?: boolean | UserDefaultArgs<ExtArgs>
-    patients?: boolean | Study$patientsArgs<ExtArgs>
-    assignedUsers?: boolean | Study$assignedUsersArgs<ExtArgs>
-    symptomTemplates?: boolean | Study$symptomTemplatesArgs<ExtArgs>
-    treatmentTemplates?: boolean | Study$treatmentTemplatesArgs<ExtArgs>
-    notes?: boolean | Study$notesArgs<ExtArgs>
-    _count?: boolean | StudyCountOutputTypeDefaultArgs<ExtArgs>
+    patients?: boolean | MonitoringPlan$patientsArgs<ExtArgs>
+    assignedUsers?: boolean | MonitoringPlan$assignedUsersArgs<ExtArgs>
+    symptomTemplates?: boolean | MonitoringPlan$symptomTemplatesArgs<ExtArgs>
+    treatmentTemplates?: boolean | MonitoringPlan$treatmentTemplatesArgs<ExtArgs>
+    notes?: boolean | MonitoringPlan$notesArgs<ExtArgs>
+    _count?: boolean | MonitoringPlanCountOutputTypeDefaultArgs<ExtArgs>
   }
-  export type StudyIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlanIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     practice?: boolean | PracticeDefaultArgs<ExtArgs>
     createdBy?: boolean | UserDefaultArgs<ExtArgs>
   }
-  export type StudyIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlanIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     practice?: boolean | PracticeDefaultArgs<ExtArgs>
     createdBy?: boolean | UserDefaultArgs<ExtArgs>
   }
 
-  export type $StudyPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Study"
+  export type $MonitoringPlanPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "MonitoringPlan"
     objects: {
       practice: Prisma.$PracticePayload<ExtArgs>
       createdBy: Prisma.$UserPayload<ExtArgs>
-      patients: Prisma.$StudyPatientPayload<ExtArgs>[]
-      assignedUsers: Prisma.$StudyAssignmentPayload<ExtArgs>[]
+      patients: Prisma.$MonitoringPlanPatientPayload<ExtArgs>[]
+      assignedUsers: Prisma.$MonitoringPlanAssignmentPayload<ExtArgs>[]
       symptomTemplates: Prisma.$SymptomTemplatePayload<ExtArgs>[]
       treatmentTemplates: Prisma.$TreatmentTemplatePayload<ExtArgs>[]
-      notes: Prisma.$StudyNotePayload<ExtArgs>[]
+      notes: Prisma.$MonitoringPlanNotePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -8342,138 +8353,139 @@ export namespace Prisma {
       updatedAt: Date
       startDate: Date | null
       endDate: Date | null
-      status: $Enums.StudyStatus
+      status: $Enums.MonitoringPlanStatus
       isTemplate: boolean
-    }, ExtArgs["result"]["study"]>
+      shareToken: string | null
+    }, ExtArgs["result"]["monitoringPlan"]>
     composites: {}
   }
 
-  type StudyGetPayload<S extends boolean | null | undefined | StudyDefaultArgs> = $Result.GetResult<Prisma.$StudyPayload, S>
+  type MonitoringPlanGetPayload<S extends boolean | null | undefined | MonitoringPlanDefaultArgs> = $Result.GetResult<Prisma.$MonitoringPlanPayload, S>
 
-  type StudyCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<StudyFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: StudyCountAggregateInputType | true
+  type MonitoringPlanCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<MonitoringPlanFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: MonitoringPlanCountAggregateInputType | true
     }
 
-  export interface StudyDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Study'], meta: { name: 'Study' } }
+  export interface MonitoringPlanDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['MonitoringPlan'], meta: { name: 'MonitoringPlan' } }
     /**
-     * Find zero or one Study that matches the filter.
-     * @param {StudyFindUniqueArgs} args - Arguments to find a Study
+     * Find zero or one MonitoringPlan that matches the filter.
+     * @param {MonitoringPlanFindUniqueArgs} args - Arguments to find a MonitoringPlan
      * @example
-     * // Get one Study
-     * const study = await prisma.study.findUnique({
+     * // Get one MonitoringPlan
+     * const monitoringPlan = await prisma.monitoringPlan.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUnique<T extends StudyFindUniqueArgs>(args: SelectSubset<T, StudyFindUniqueArgs<ExtArgs>>): Prisma__StudyClient<$Result.GetResult<Prisma.$StudyPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findUnique<T extends MonitoringPlanFindUniqueArgs>(args: SelectSubset<T, MonitoringPlanFindUniqueArgs<ExtArgs>>): Prisma__MonitoringPlanClient<$Result.GetResult<Prisma.$MonitoringPlanPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find one Study that matches the filter or throw an error with `error.code='P2025'`
+     * Find one MonitoringPlan that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
-     * @param {StudyFindUniqueOrThrowArgs} args - Arguments to find a Study
+     * @param {MonitoringPlanFindUniqueOrThrowArgs} args - Arguments to find a MonitoringPlan
      * @example
-     * // Get one Study
-     * const study = await prisma.study.findUniqueOrThrow({
+     * // Get one MonitoringPlan
+     * const monitoringPlan = await prisma.monitoringPlan.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUniqueOrThrow<T extends StudyFindUniqueOrThrowArgs>(args: SelectSubset<T, StudyFindUniqueOrThrowArgs<ExtArgs>>): Prisma__StudyClient<$Result.GetResult<Prisma.$StudyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findUniqueOrThrow<T extends MonitoringPlanFindUniqueOrThrowArgs>(args: SelectSubset<T, MonitoringPlanFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MonitoringPlanClient<$Result.GetResult<Prisma.$MonitoringPlanPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first Study that matches the filter.
+     * Find the first MonitoringPlan that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {StudyFindFirstArgs} args - Arguments to find a Study
+     * @param {MonitoringPlanFindFirstArgs} args - Arguments to find a MonitoringPlan
      * @example
-     * // Get one Study
-     * const study = await prisma.study.findFirst({
+     * // Get one MonitoringPlan
+     * const monitoringPlan = await prisma.monitoringPlan.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirst<T extends StudyFindFirstArgs>(args?: SelectSubset<T, StudyFindFirstArgs<ExtArgs>>): Prisma__StudyClient<$Result.GetResult<Prisma.$StudyPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findFirst<T extends MonitoringPlanFindFirstArgs>(args?: SelectSubset<T, MonitoringPlanFindFirstArgs<ExtArgs>>): Prisma__MonitoringPlanClient<$Result.GetResult<Prisma.$MonitoringPlanPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first Study that matches the filter or
+     * Find the first MonitoringPlan that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {StudyFindFirstOrThrowArgs} args - Arguments to find a Study
+     * @param {MonitoringPlanFindFirstOrThrowArgs} args - Arguments to find a MonitoringPlan
      * @example
-     * // Get one Study
-     * const study = await prisma.study.findFirstOrThrow({
+     * // Get one MonitoringPlan
+     * const monitoringPlan = await prisma.monitoringPlan.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirstOrThrow<T extends StudyFindFirstOrThrowArgs>(args?: SelectSubset<T, StudyFindFirstOrThrowArgs<ExtArgs>>): Prisma__StudyClient<$Result.GetResult<Prisma.$StudyPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findFirstOrThrow<T extends MonitoringPlanFindFirstOrThrowArgs>(args?: SelectSubset<T, MonitoringPlanFindFirstOrThrowArgs<ExtArgs>>): Prisma__MonitoringPlanClient<$Result.GetResult<Prisma.$MonitoringPlanPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find zero or more Studies that matches the filter.
+     * Find zero or more MonitoringPlans that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {StudyFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {MonitoringPlanFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all Studies
-     * const studies = await prisma.study.findMany()
+     * // Get all MonitoringPlans
+     * const monitoringPlans = await prisma.monitoringPlan.findMany()
      * 
-     * // Get first 10 Studies
-     * const studies = await prisma.study.findMany({ take: 10 })
+     * // Get first 10 MonitoringPlans
+     * const monitoringPlans = await prisma.monitoringPlan.findMany({ take: 10 })
      * 
      * // Only select the `id`
-     * const studyWithIdOnly = await prisma.study.findMany({ select: { id: true } })
+     * const monitoringPlanWithIdOnly = await prisma.monitoringPlan.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends StudyFindManyArgs>(args?: SelectSubset<T, StudyFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StudyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+    findMany<T extends MonitoringPlanFindManyArgs>(args?: SelectSubset<T, MonitoringPlanFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MonitoringPlanPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
-     * Create a Study.
-     * @param {StudyCreateArgs} args - Arguments to create a Study.
+     * Create a MonitoringPlan.
+     * @param {MonitoringPlanCreateArgs} args - Arguments to create a MonitoringPlan.
      * @example
-     * // Create one Study
-     * const Study = await prisma.study.create({
+     * // Create one MonitoringPlan
+     * const MonitoringPlan = await prisma.monitoringPlan.create({
      *   data: {
-     *     // ... data to create a Study
+     *     // ... data to create a MonitoringPlan
      *   }
      * })
      * 
      */
-    create<T extends StudyCreateArgs>(args: SelectSubset<T, StudyCreateArgs<ExtArgs>>): Prisma__StudyClient<$Result.GetResult<Prisma.$StudyPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    create<T extends MonitoringPlanCreateArgs>(args: SelectSubset<T, MonitoringPlanCreateArgs<ExtArgs>>): Prisma__MonitoringPlanClient<$Result.GetResult<Prisma.$MonitoringPlanPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Create many Studies.
-     * @param {StudyCreateManyArgs} args - Arguments to create many Studies.
+     * Create many MonitoringPlans.
+     * @param {MonitoringPlanCreateManyArgs} args - Arguments to create many MonitoringPlans.
      * @example
-     * // Create many Studies
-     * const study = await prisma.study.createMany({
+     * // Create many MonitoringPlans
+     * const monitoringPlan = await prisma.monitoringPlan.createMany({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      *     
      */
-    createMany<T extends StudyCreateManyArgs>(args?: SelectSubset<T, StudyCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends MonitoringPlanCreateManyArgs>(args?: SelectSubset<T, MonitoringPlanCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create many Studies and returns the data saved in the database.
-     * @param {StudyCreateManyAndReturnArgs} args - Arguments to create many Studies.
+     * Create many MonitoringPlans and returns the data saved in the database.
+     * @param {MonitoringPlanCreateManyAndReturnArgs} args - Arguments to create many MonitoringPlans.
      * @example
-     * // Create many Studies
-     * const study = await prisma.study.createManyAndReturn({
+     * // Create many MonitoringPlans
+     * const monitoringPlan = await prisma.monitoringPlan.createManyAndReturn({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      * 
-     * // Create many Studies and only return the `id`
-     * const studyWithIdOnly = await prisma.study.createManyAndReturn({
+     * // Create many MonitoringPlans and only return the `id`
+     * const monitoringPlanWithIdOnly = await prisma.monitoringPlan.createManyAndReturn({
      *   select: { id: true },
      *   data: [
      *     // ... provide data here
@@ -8483,28 +8495,28 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends StudyCreateManyAndReturnArgs>(args?: SelectSubset<T, StudyCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StudyPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+    createManyAndReturn<T extends MonitoringPlanCreateManyAndReturnArgs>(args?: SelectSubset<T, MonitoringPlanCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MonitoringPlanPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Delete a Study.
-     * @param {StudyDeleteArgs} args - Arguments to delete one Study.
+     * Delete a MonitoringPlan.
+     * @param {MonitoringPlanDeleteArgs} args - Arguments to delete one MonitoringPlan.
      * @example
-     * // Delete one Study
-     * const Study = await prisma.study.delete({
+     * // Delete one MonitoringPlan
+     * const MonitoringPlan = await prisma.monitoringPlan.delete({
      *   where: {
-     *     // ... filter to delete one Study
+     *     // ... filter to delete one MonitoringPlan
      *   }
      * })
      * 
      */
-    delete<T extends StudyDeleteArgs>(args: SelectSubset<T, StudyDeleteArgs<ExtArgs>>): Prisma__StudyClient<$Result.GetResult<Prisma.$StudyPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    delete<T extends MonitoringPlanDeleteArgs>(args: SelectSubset<T, MonitoringPlanDeleteArgs<ExtArgs>>): Prisma__MonitoringPlanClient<$Result.GetResult<Prisma.$MonitoringPlanPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Update one Study.
-     * @param {StudyUpdateArgs} args - Arguments to update one Study.
+     * Update one MonitoringPlan.
+     * @param {MonitoringPlanUpdateArgs} args - Arguments to update one MonitoringPlan.
      * @example
-     * // Update one Study
-     * const study = await prisma.study.update({
+     * // Update one MonitoringPlan
+     * const monitoringPlan = await prisma.monitoringPlan.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -8514,30 +8526,30 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends StudyUpdateArgs>(args: SelectSubset<T, StudyUpdateArgs<ExtArgs>>): Prisma__StudyClient<$Result.GetResult<Prisma.$StudyPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    update<T extends MonitoringPlanUpdateArgs>(args: SelectSubset<T, MonitoringPlanUpdateArgs<ExtArgs>>): Prisma__MonitoringPlanClient<$Result.GetResult<Prisma.$MonitoringPlanPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Delete zero or more Studies.
-     * @param {StudyDeleteManyArgs} args - Arguments to filter Studies to delete.
+     * Delete zero or more MonitoringPlans.
+     * @param {MonitoringPlanDeleteManyArgs} args - Arguments to filter MonitoringPlans to delete.
      * @example
-     * // Delete a few Studies
-     * const { count } = await prisma.study.deleteMany({
+     * // Delete a few MonitoringPlans
+     * const { count } = await prisma.monitoringPlan.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
      */
-    deleteMany<T extends StudyDeleteManyArgs>(args?: SelectSubset<T, StudyDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends MonitoringPlanDeleteManyArgs>(args?: SelectSubset<T, MonitoringPlanDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more Studies.
+     * Update zero or more MonitoringPlans.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {StudyUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {MonitoringPlanUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many Studies
-     * const study = await prisma.study.updateMany({
+     * // Update many MonitoringPlans
+     * const monitoringPlan = await prisma.monitoringPlan.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -8547,14 +8559,14 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends StudyUpdateManyArgs>(args: SelectSubset<T, StudyUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends MonitoringPlanUpdateManyArgs>(args: SelectSubset<T, MonitoringPlanUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more Studies and returns the data updated in the database.
-     * @param {StudyUpdateManyAndReturnArgs} args - Arguments to update many Studies.
+     * Update zero or more MonitoringPlans and returns the data updated in the database.
+     * @param {MonitoringPlanUpdateManyAndReturnArgs} args - Arguments to update many MonitoringPlans.
      * @example
-     * // Update many Studies
-     * const study = await prisma.study.updateManyAndReturn({
+     * // Update many MonitoringPlans
+     * const monitoringPlan = await prisma.monitoringPlan.updateManyAndReturn({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -8563,8 +8575,8 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more Studies and only return the `id`
-     * const studyWithIdOnly = await prisma.study.updateManyAndReturn({
+     * // Update zero or more MonitoringPlans and only return the `id`
+     * const monitoringPlanWithIdOnly = await prisma.monitoringPlan.updateManyAndReturn({
      *   select: { id: true },
      *   where: {
      *     // ... provide filter here
@@ -8577,56 +8589,56 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends StudyUpdateManyAndReturnArgs>(args: SelectSubset<T, StudyUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StudyPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+    updateManyAndReturn<T extends MonitoringPlanUpdateManyAndReturnArgs>(args: SelectSubset<T, MonitoringPlanUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MonitoringPlanPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Create or update one Study.
-     * @param {StudyUpsertArgs} args - Arguments to update or create a Study.
+     * Create or update one MonitoringPlan.
+     * @param {MonitoringPlanUpsertArgs} args - Arguments to update or create a MonitoringPlan.
      * @example
-     * // Update or create a Study
-     * const study = await prisma.study.upsert({
+     * // Update or create a MonitoringPlan
+     * const monitoringPlan = await prisma.monitoringPlan.upsert({
      *   create: {
-     *     // ... data to create a Study
+     *     // ... data to create a MonitoringPlan
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the Study we want to update
+     *     // ... the filter for the MonitoringPlan we want to update
      *   }
      * })
      */
-    upsert<T extends StudyUpsertArgs>(args: SelectSubset<T, StudyUpsertArgs<ExtArgs>>): Prisma__StudyClient<$Result.GetResult<Prisma.$StudyPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    upsert<T extends MonitoringPlanUpsertArgs>(args: SelectSubset<T, MonitoringPlanUpsertArgs<ExtArgs>>): Prisma__MonitoringPlanClient<$Result.GetResult<Prisma.$MonitoringPlanPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
-     * Count the number of Studies.
+     * Count the number of MonitoringPlans.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {StudyCountArgs} args - Arguments to filter Studies to count.
+     * @param {MonitoringPlanCountArgs} args - Arguments to filter MonitoringPlans to count.
      * @example
-     * // Count the number of Studies
-     * const count = await prisma.study.count({
+     * // Count the number of MonitoringPlans
+     * const count = await prisma.monitoringPlan.count({
      *   where: {
-     *     // ... the filter for the Studies we want to count
+     *     // ... the filter for the MonitoringPlans we want to count
      *   }
      * })
     **/
-    count<T extends StudyCountArgs>(
-      args?: Subset<T, StudyCountArgs>,
+    count<T extends MonitoringPlanCountArgs>(
+      args?: Subset<T, MonitoringPlanCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], StudyCountAggregateOutputType>
+          : GetScalarType<T['select'], MonitoringPlanCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a Study.
+     * Allows you to perform aggregations operations on a MonitoringPlan.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {StudyAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {MonitoringPlanAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -8646,13 +8658,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends StudyAggregateArgs>(args: Subset<T, StudyAggregateArgs>): Prisma.PrismaPromise<GetStudyAggregateType<T>>
+    aggregate<T extends MonitoringPlanAggregateArgs>(args: Subset<T, MonitoringPlanAggregateArgs>): Prisma.PrismaPromise<GetMonitoringPlanAggregateType<T>>
 
     /**
-     * Group by Study.
+     * Group by MonitoringPlan.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {StudyGroupByArgs} args - Group by arguments.
+     * @param {MonitoringPlanGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -8667,14 +8679,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends StudyGroupByArgs,
+      T extends MonitoringPlanGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: StudyGroupByArgs['orderBy'] }
-        : { orderBy?: StudyGroupByArgs['orderBy'] },
+        ? { orderBy: MonitoringPlanGroupByArgs['orderBy'] }
+        : { orderBy?: MonitoringPlanGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -8723,28 +8735,28 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, StudyGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetStudyGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, MonitoringPlanGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMonitoringPlanGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the Study model
+   * Fields of the MonitoringPlan model
    */
-  readonly fields: StudyFieldRefs;
+  readonly fields: MonitoringPlanFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for Study.
+   * The delegate class that acts as a "Promise-like" for MonitoringPlan.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__StudyClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__MonitoringPlanClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     practice<T extends PracticeDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PracticeDefaultArgs<ExtArgs>>): Prisma__PracticeClient<$Result.GetResult<Prisma.$PracticePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     createdBy<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    patients<T extends Study$patientsArgs<ExtArgs> = {}>(args?: Subset<T, Study$patientsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StudyPatientPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    assignedUsers<T extends Study$assignedUsersArgs<ExtArgs> = {}>(args?: Subset<T, Study$assignedUsersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StudyAssignmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    symptomTemplates<T extends Study$symptomTemplatesArgs<ExtArgs> = {}>(args?: Subset<T, Study$symptomTemplatesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SymptomTemplatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    treatmentTemplates<T extends Study$treatmentTemplatesArgs<ExtArgs> = {}>(args?: Subset<T, Study$treatmentTemplatesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TreatmentTemplatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    notes<T extends Study$notesArgs<ExtArgs> = {}>(args?: Subset<T, Study$notesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StudyNotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    patients<T extends MonitoringPlan$patientsArgs<ExtArgs> = {}>(args?: Subset<T, MonitoringPlan$patientsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MonitoringPlanPatientPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    assignedUsers<T extends MonitoringPlan$assignedUsersArgs<ExtArgs> = {}>(args?: Subset<T, MonitoringPlan$assignedUsersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MonitoringPlanAssignmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    symptomTemplates<T extends MonitoringPlan$symptomTemplatesArgs<ExtArgs> = {}>(args?: Subset<T, MonitoringPlan$symptomTemplatesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SymptomTemplatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    treatmentTemplates<T extends MonitoringPlan$treatmentTemplatesArgs<ExtArgs> = {}>(args?: Subset<T, MonitoringPlan$treatmentTemplatesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TreatmentTemplatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    notes<T extends MonitoringPlan$notesArgs<ExtArgs> = {}>(args?: Subset<T, MonitoringPlan$notesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MonitoringPlanNotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -8771,468 +8783,469 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the Study model
+   * Fields of the MonitoringPlan model
    */
-  interface StudyFieldRefs {
-    readonly id: FieldRef<"Study", 'String'>
-    readonly title: FieldRef<"Study", 'String'>
-    readonly description: FieldRef<"Study", 'String'>
-    readonly protocol: FieldRef<"Study", 'Json'>
-    readonly practiceId: FieldRef<"Study", 'String'>
-    readonly createdById: FieldRef<"Study", 'String'>
-    readonly createdAt: FieldRef<"Study", 'DateTime'>
-    readonly updatedAt: FieldRef<"Study", 'DateTime'>
-    readonly startDate: FieldRef<"Study", 'DateTime'>
-    readonly endDate: FieldRef<"Study", 'DateTime'>
-    readonly status: FieldRef<"Study", 'StudyStatus'>
-    readonly isTemplate: FieldRef<"Study", 'Boolean'>
+  interface MonitoringPlanFieldRefs {
+    readonly id: FieldRef<"MonitoringPlan", 'String'>
+    readonly title: FieldRef<"MonitoringPlan", 'String'>
+    readonly description: FieldRef<"MonitoringPlan", 'String'>
+    readonly protocol: FieldRef<"MonitoringPlan", 'Json'>
+    readonly practiceId: FieldRef<"MonitoringPlan", 'String'>
+    readonly createdById: FieldRef<"MonitoringPlan", 'String'>
+    readonly createdAt: FieldRef<"MonitoringPlan", 'DateTime'>
+    readonly updatedAt: FieldRef<"MonitoringPlan", 'DateTime'>
+    readonly startDate: FieldRef<"MonitoringPlan", 'DateTime'>
+    readonly endDate: FieldRef<"MonitoringPlan", 'DateTime'>
+    readonly status: FieldRef<"MonitoringPlan", 'MonitoringPlanStatus'>
+    readonly isTemplate: FieldRef<"MonitoringPlan", 'Boolean'>
+    readonly shareToken: FieldRef<"MonitoringPlan", 'String'>
   }
     
 
   // Custom InputTypes
   /**
-   * Study findUnique
+   * MonitoringPlan findUnique
    */
-  export type StudyFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlanFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Study
+     * Select specific fields to fetch from the MonitoringPlan
      */
-    select?: StudySelect<ExtArgs> | null
+    select?: MonitoringPlanSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Study
+     * Omit specific fields from the MonitoringPlan
      */
-    omit?: StudyOmit<ExtArgs> | null
+    omit?: MonitoringPlanOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StudyInclude<ExtArgs> | null
+    include?: MonitoringPlanInclude<ExtArgs> | null
     /**
-     * Filter, which Study to fetch.
+     * Filter, which MonitoringPlan to fetch.
      */
-    where: StudyWhereUniqueInput
+    where: MonitoringPlanWhereUniqueInput
   }
 
   /**
-   * Study findUniqueOrThrow
+   * MonitoringPlan findUniqueOrThrow
    */
-  export type StudyFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlanFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Study
+     * Select specific fields to fetch from the MonitoringPlan
      */
-    select?: StudySelect<ExtArgs> | null
+    select?: MonitoringPlanSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Study
+     * Omit specific fields from the MonitoringPlan
      */
-    omit?: StudyOmit<ExtArgs> | null
+    omit?: MonitoringPlanOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StudyInclude<ExtArgs> | null
+    include?: MonitoringPlanInclude<ExtArgs> | null
     /**
-     * Filter, which Study to fetch.
+     * Filter, which MonitoringPlan to fetch.
      */
-    where: StudyWhereUniqueInput
+    where: MonitoringPlanWhereUniqueInput
   }
 
   /**
-   * Study findFirst
+   * MonitoringPlan findFirst
    */
-  export type StudyFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlanFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Study
+     * Select specific fields to fetch from the MonitoringPlan
      */
-    select?: StudySelect<ExtArgs> | null
+    select?: MonitoringPlanSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Study
+     * Omit specific fields from the MonitoringPlan
      */
-    omit?: StudyOmit<ExtArgs> | null
+    omit?: MonitoringPlanOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StudyInclude<ExtArgs> | null
+    include?: MonitoringPlanInclude<ExtArgs> | null
     /**
-     * Filter, which Study to fetch.
+     * Filter, which MonitoringPlan to fetch.
      */
-    where?: StudyWhereInput
+    where?: MonitoringPlanWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Studies to fetch.
+     * Determine the order of MonitoringPlans to fetch.
      */
-    orderBy?: StudyOrderByWithRelationInput | StudyOrderByWithRelationInput[]
+    orderBy?: MonitoringPlanOrderByWithRelationInput | MonitoringPlanOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for Studies.
+     * Sets the position for searching for MonitoringPlans.
      */
-    cursor?: StudyWhereUniqueInput
+    cursor?: MonitoringPlanWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Studies from the position of the cursor.
+     * Take `±n` MonitoringPlans from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Studies.
+     * Skip the first `n` MonitoringPlans.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of Studies.
+     * Filter by unique combinations of MonitoringPlans.
      */
-    distinct?: StudyScalarFieldEnum | StudyScalarFieldEnum[]
+    distinct?: MonitoringPlanScalarFieldEnum | MonitoringPlanScalarFieldEnum[]
   }
 
   /**
-   * Study findFirstOrThrow
+   * MonitoringPlan findFirstOrThrow
    */
-  export type StudyFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlanFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Study
+     * Select specific fields to fetch from the MonitoringPlan
      */
-    select?: StudySelect<ExtArgs> | null
+    select?: MonitoringPlanSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Study
+     * Omit specific fields from the MonitoringPlan
      */
-    omit?: StudyOmit<ExtArgs> | null
+    omit?: MonitoringPlanOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StudyInclude<ExtArgs> | null
+    include?: MonitoringPlanInclude<ExtArgs> | null
     /**
-     * Filter, which Study to fetch.
+     * Filter, which MonitoringPlan to fetch.
      */
-    where?: StudyWhereInput
+    where?: MonitoringPlanWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Studies to fetch.
+     * Determine the order of MonitoringPlans to fetch.
      */
-    orderBy?: StudyOrderByWithRelationInput | StudyOrderByWithRelationInput[]
+    orderBy?: MonitoringPlanOrderByWithRelationInput | MonitoringPlanOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for Studies.
+     * Sets the position for searching for MonitoringPlans.
      */
-    cursor?: StudyWhereUniqueInput
+    cursor?: MonitoringPlanWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Studies from the position of the cursor.
+     * Take `±n` MonitoringPlans from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Studies.
+     * Skip the first `n` MonitoringPlans.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of Studies.
+     * Filter by unique combinations of MonitoringPlans.
      */
-    distinct?: StudyScalarFieldEnum | StudyScalarFieldEnum[]
+    distinct?: MonitoringPlanScalarFieldEnum | MonitoringPlanScalarFieldEnum[]
   }
 
   /**
-   * Study findMany
+   * MonitoringPlan findMany
    */
-  export type StudyFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlanFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Study
+     * Select specific fields to fetch from the MonitoringPlan
      */
-    select?: StudySelect<ExtArgs> | null
+    select?: MonitoringPlanSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Study
+     * Omit specific fields from the MonitoringPlan
      */
-    omit?: StudyOmit<ExtArgs> | null
+    omit?: MonitoringPlanOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StudyInclude<ExtArgs> | null
+    include?: MonitoringPlanInclude<ExtArgs> | null
     /**
-     * Filter, which Studies to fetch.
+     * Filter, which MonitoringPlans to fetch.
      */
-    where?: StudyWhereInput
+    where?: MonitoringPlanWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Studies to fetch.
+     * Determine the order of MonitoringPlans to fetch.
      */
-    orderBy?: StudyOrderByWithRelationInput | StudyOrderByWithRelationInput[]
+    orderBy?: MonitoringPlanOrderByWithRelationInput | MonitoringPlanOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing Studies.
+     * Sets the position for listing MonitoringPlans.
      */
-    cursor?: StudyWhereUniqueInput
+    cursor?: MonitoringPlanWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Studies from the position of the cursor.
+     * Take `±n` MonitoringPlans from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Studies.
+     * Skip the first `n` MonitoringPlans.
      */
     skip?: number
-    distinct?: StudyScalarFieldEnum | StudyScalarFieldEnum[]
+    distinct?: MonitoringPlanScalarFieldEnum | MonitoringPlanScalarFieldEnum[]
   }
 
   /**
-   * Study create
+   * MonitoringPlan create
    */
-  export type StudyCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlanCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Study
+     * Select specific fields to fetch from the MonitoringPlan
      */
-    select?: StudySelect<ExtArgs> | null
+    select?: MonitoringPlanSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Study
+     * Omit specific fields from the MonitoringPlan
      */
-    omit?: StudyOmit<ExtArgs> | null
+    omit?: MonitoringPlanOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StudyInclude<ExtArgs> | null
+    include?: MonitoringPlanInclude<ExtArgs> | null
     /**
-     * The data needed to create a Study.
+     * The data needed to create a MonitoringPlan.
      */
-    data: XOR<StudyCreateInput, StudyUncheckedCreateInput>
+    data: XOR<MonitoringPlanCreateInput, MonitoringPlanUncheckedCreateInput>
   }
 
   /**
-   * Study createMany
+   * MonitoringPlan createMany
    */
-  export type StudyCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlanCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many Studies.
+     * The data used to create many MonitoringPlans.
      */
-    data: StudyCreateManyInput | StudyCreateManyInput[]
+    data: MonitoringPlanCreateManyInput | MonitoringPlanCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * Study createManyAndReturn
+   * MonitoringPlan createManyAndReturn
    */
-  export type StudyCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlanCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Study
+     * Select specific fields to fetch from the MonitoringPlan
      */
-    select?: StudySelectCreateManyAndReturn<ExtArgs> | null
+    select?: MonitoringPlanSelectCreateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the Study
+     * Omit specific fields from the MonitoringPlan
      */
-    omit?: StudyOmit<ExtArgs> | null
+    omit?: MonitoringPlanOmit<ExtArgs> | null
     /**
-     * The data used to create many Studies.
+     * The data used to create many MonitoringPlans.
      */
-    data: StudyCreateManyInput | StudyCreateManyInput[]
+    data: MonitoringPlanCreateManyInput | MonitoringPlanCreateManyInput[]
     skipDuplicates?: boolean
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StudyIncludeCreateManyAndReturn<ExtArgs> | null
+    include?: MonitoringPlanIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * Study update
+   * MonitoringPlan update
    */
-  export type StudyUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlanUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Study
+     * Select specific fields to fetch from the MonitoringPlan
      */
-    select?: StudySelect<ExtArgs> | null
+    select?: MonitoringPlanSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Study
+     * Omit specific fields from the MonitoringPlan
      */
-    omit?: StudyOmit<ExtArgs> | null
+    omit?: MonitoringPlanOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StudyInclude<ExtArgs> | null
+    include?: MonitoringPlanInclude<ExtArgs> | null
     /**
-     * The data needed to update a Study.
+     * The data needed to update a MonitoringPlan.
      */
-    data: XOR<StudyUpdateInput, StudyUncheckedUpdateInput>
+    data: XOR<MonitoringPlanUpdateInput, MonitoringPlanUncheckedUpdateInput>
     /**
-     * Choose, which Study to update.
+     * Choose, which MonitoringPlan to update.
      */
-    where: StudyWhereUniqueInput
+    where: MonitoringPlanWhereUniqueInput
   }
 
   /**
-   * Study updateMany
+   * MonitoringPlan updateMany
    */
-  export type StudyUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlanUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update Studies.
+     * The data used to update MonitoringPlans.
      */
-    data: XOR<StudyUpdateManyMutationInput, StudyUncheckedUpdateManyInput>
+    data: XOR<MonitoringPlanUpdateManyMutationInput, MonitoringPlanUncheckedUpdateManyInput>
     /**
-     * Filter which Studies to update
+     * Filter which MonitoringPlans to update
      */
-    where?: StudyWhereInput
+    where?: MonitoringPlanWhereInput
     /**
-     * Limit how many Studies to update.
+     * Limit how many MonitoringPlans to update.
      */
     limit?: number
   }
 
   /**
-   * Study updateManyAndReturn
+   * MonitoringPlan updateManyAndReturn
    */
-  export type StudyUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlanUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Study
+     * Select specific fields to fetch from the MonitoringPlan
      */
-    select?: StudySelectUpdateManyAndReturn<ExtArgs> | null
+    select?: MonitoringPlanSelectUpdateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the Study
+     * Omit specific fields from the MonitoringPlan
      */
-    omit?: StudyOmit<ExtArgs> | null
+    omit?: MonitoringPlanOmit<ExtArgs> | null
     /**
-     * The data used to update Studies.
+     * The data used to update MonitoringPlans.
      */
-    data: XOR<StudyUpdateManyMutationInput, StudyUncheckedUpdateManyInput>
+    data: XOR<MonitoringPlanUpdateManyMutationInput, MonitoringPlanUncheckedUpdateManyInput>
     /**
-     * Filter which Studies to update
+     * Filter which MonitoringPlans to update
      */
-    where?: StudyWhereInput
+    where?: MonitoringPlanWhereInput
     /**
-     * Limit how many Studies to update.
+     * Limit how many MonitoringPlans to update.
      */
     limit?: number
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StudyIncludeUpdateManyAndReturn<ExtArgs> | null
+    include?: MonitoringPlanIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * Study upsert
+   * MonitoringPlan upsert
    */
-  export type StudyUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlanUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Study
+     * Select specific fields to fetch from the MonitoringPlan
      */
-    select?: StudySelect<ExtArgs> | null
+    select?: MonitoringPlanSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Study
+     * Omit specific fields from the MonitoringPlan
      */
-    omit?: StudyOmit<ExtArgs> | null
+    omit?: MonitoringPlanOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StudyInclude<ExtArgs> | null
+    include?: MonitoringPlanInclude<ExtArgs> | null
     /**
-     * The filter to search for the Study to update in case it exists.
+     * The filter to search for the MonitoringPlan to update in case it exists.
      */
-    where: StudyWhereUniqueInput
+    where: MonitoringPlanWhereUniqueInput
     /**
-     * In case the Study found by the `where` argument doesn't exist, create a new Study with this data.
+     * In case the MonitoringPlan found by the `where` argument doesn't exist, create a new MonitoringPlan with this data.
      */
-    create: XOR<StudyCreateInput, StudyUncheckedCreateInput>
+    create: XOR<MonitoringPlanCreateInput, MonitoringPlanUncheckedCreateInput>
     /**
-     * In case the Study was found with the provided `where` argument, update it with this data.
+     * In case the MonitoringPlan was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<StudyUpdateInput, StudyUncheckedUpdateInput>
+    update: XOR<MonitoringPlanUpdateInput, MonitoringPlanUncheckedUpdateInput>
   }
 
   /**
-   * Study delete
+   * MonitoringPlan delete
    */
-  export type StudyDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlanDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Study
+     * Select specific fields to fetch from the MonitoringPlan
      */
-    select?: StudySelect<ExtArgs> | null
+    select?: MonitoringPlanSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Study
+     * Omit specific fields from the MonitoringPlan
      */
-    omit?: StudyOmit<ExtArgs> | null
+    omit?: MonitoringPlanOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StudyInclude<ExtArgs> | null
+    include?: MonitoringPlanInclude<ExtArgs> | null
     /**
-     * Filter which Study to delete.
+     * Filter which MonitoringPlan to delete.
      */
-    where: StudyWhereUniqueInput
+    where: MonitoringPlanWhereUniqueInput
   }
 
   /**
-   * Study deleteMany
+   * MonitoringPlan deleteMany
    */
-  export type StudyDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlanDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which Studies to delete
+     * Filter which MonitoringPlans to delete
      */
-    where?: StudyWhereInput
+    where?: MonitoringPlanWhereInput
     /**
-     * Limit how many Studies to delete.
+     * Limit how many MonitoringPlans to delete.
      */
     limit?: number
   }
 
   /**
-   * Study.patients
+   * MonitoringPlan.patients
    */
-  export type Study$patientsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlan$patientsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the StudyPatient
+     * Select specific fields to fetch from the MonitoringPlanPatient
      */
-    select?: StudyPatientSelect<ExtArgs> | null
+    select?: MonitoringPlanPatientSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the StudyPatient
+     * Omit specific fields from the MonitoringPlanPatient
      */
-    omit?: StudyPatientOmit<ExtArgs> | null
+    omit?: MonitoringPlanPatientOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StudyPatientInclude<ExtArgs> | null
-    where?: StudyPatientWhereInput
-    orderBy?: StudyPatientOrderByWithRelationInput | StudyPatientOrderByWithRelationInput[]
-    cursor?: StudyPatientWhereUniqueInput
+    include?: MonitoringPlanPatientInclude<ExtArgs> | null
+    where?: MonitoringPlanPatientWhereInput
+    orderBy?: MonitoringPlanPatientOrderByWithRelationInput | MonitoringPlanPatientOrderByWithRelationInput[]
+    cursor?: MonitoringPlanPatientWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: StudyPatientScalarFieldEnum | StudyPatientScalarFieldEnum[]
+    distinct?: MonitoringPlanPatientScalarFieldEnum | MonitoringPlanPatientScalarFieldEnum[]
   }
 
   /**
-   * Study.assignedUsers
+   * MonitoringPlan.assignedUsers
    */
-  export type Study$assignedUsersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlan$assignedUsersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the StudyAssignment
+     * Select specific fields to fetch from the MonitoringPlanAssignment
      */
-    select?: StudyAssignmentSelect<ExtArgs> | null
+    select?: MonitoringPlanAssignmentSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the StudyAssignment
+     * Omit specific fields from the MonitoringPlanAssignment
      */
-    omit?: StudyAssignmentOmit<ExtArgs> | null
+    omit?: MonitoringPlanAssignmentOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StudyAssignmentInclude<ExtArgs> | null
-    where?: StudyAssignmentWhereInput
-    orderBy?: StudyAssignmentOrderByWithRelationInput | StudyAssignmentOrderByWithRelationInput[]
-    cursor?: StudyAssignmentWhereUniqueInput
+    include?: MonitoringPlanAssignmentInclude<ExtArgs> | null
+    where?: MonitoringPlanAssignmentWhereInput
+    orderBy?: MonitoringPlanAssignmentOrderByWithRelationInput | MonitoringPlanAssignmentOrderByWithRelationInput[]
+    cursor?: MonitoringPlanAssignmentWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: StudyAssignmentScalarFieldEnum | StudyAssignmentScalarFieldEnum[]
+    distinct?: MonitoringPlanAssignmentScalarFieldEnum | MonitoringPlanAssignmentScalarFieldEnum[]
   }
 
   /**
-   * Study.symptomTemplates
+   * MonitoringPlan.symptomTemplates
    */
-  export type Study$symptomTemplatesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlan$symptomTemplatesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the SymptomTemplate
      */
@@ -9254,9 +9267,9 @@ export namespace Prisma {
   }
 
   /**
-   * Study.treatmentTemplates
+   * MonitoringPlan.treatmentTemplates
    */
-  export type Study$treatmentTemplatesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlan$treatmentTemplatesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the TreatmentTemplate
      */
@@ -9278,79 +9291,79 @@ export namespace Prisma {
   }
 
   /**
-   * Study.notes
+   * MonitoringPlan.notes
    */
-  export type Study$notesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlan$notesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the StudyNote
+     * Select specific fields to fetch from the MonitoringPlanNote
      */
-    select?: StudyNoteSelect<ExtArgs> | null
+    select?: MonitoringPlanNoteSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the StudyNote
+     * Omit specific fields from the MonitoringPlanNote
      */
-    omit?: StudyNoteOmit<ExtArgs> | null
+    omit?: MonitoringPlanNoteOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StudyNoteInclude<ExtArgs> | null
-    where?: StudyNoteWhereInput
-    orderBy?: StudyNoteOrderByWithRelationInput | StudyNoteOrderByWithRelationInput[]
-    cursor?: StudyNoteWhereUniqueInput
+    include?: MonitoringPlanNoteInclude<ExtArgs> | null
+    where?: MonitoringPlanNoteWhereInput
+    orderBy?: MonitoringPlanNoteOrderByWithRelationInput | MonitoringPlanNoteOrderByWithRelationInput[]
+    cursor?: MonitoringPlanNoteWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: StudyNoteScalarFieldEnum | StudyNoteScalarFieldEnum[]
+    distinct?: MonitoringPlanNoteScalarFieldEnum | MonitoringPlanNoteScalarFieldEnum[]
   }
 
   /**
-   * Study without action
+   * MonitoringPlan without action
    */
-  export type StudyDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlanDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Study
+     * Select specific fields to fetch from the MonitoringPlan
      */
-    select?: StudySelect<ExtArgs> | null
+    select?: MonitoringPlanSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Study
+     * Omit specific fields from the MonitoringPlan
      */
-    omit?: StudyOmit<ExtArgs> | null
+    omit?: MonitoringPlanOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StudyInclude<ExtArgs> | null
+    include?: MonitoringPlanInclude<ExtArgs> | null
   }
 
 
   /**
-   * Model StudyPatient
+   * Model MonitoringPlanPatient
    */
 
-  export type AggregateStudyPatient = {
-    _count: StudyPatientCountAggregateOutputType | null
-    _min: StudyPatientMinAggregateOutputType | null
-    _max: StudyPatientMaxAggregateOutputType | null
+  export type AggregateMonitoringPlanPatient = {
+    _count: MonitoringPlanPatientCountAggregateOutputType | null
+    _min: MonitoringPlanPatientMinAggregateOutputType | null
+    _max: MonitoringPlanPatientMaxAggregateOutputType | null
   }
 
-  export type StudyPatientMinAggregateOutputType = {
+  export type MonitoringPlanPatientMinAggregateOutputType = {
     id: string | null
-    studyId: string | null
+    monitoringPlanId: string | null
     patientId: string | null
     enrollmentDate: Date | null
     exitDate: Date | null
     isActive: boolean | null
   }
 
-  export type StudyPatientMaxAggregateOutputType = {
+  export type MonitoringPlanPatientMaxAggregateOutputType = {
     id: string | null
-    studyId: string | null
+    monitoringPlanId: string | null
     patientId: string | null
     enrollmentDate: Date | null
     exitDate: Date | null
     isActive: boolean | null
   }
 
-  export type StudyPatientCountAggregateOutputType = {
+  export type MonitoringPlanPatientCountAggregateOutputType = {
     id: number
-    studyId: number
+    monitoringPlanId: number
     patientId: number
     enrollmentDate: number
     exitDate: number
@@ -9359,27 +9372,27 @@ export namespace Prisma {
   }
 
 
-  export type StudyPatientMinAggregateInputType = {
+  export type MonitoringPlanPatientMinAggregateInputType = {
     id?: true
-    studyId?: true
+    monitoringPlanId?: true
     patientId?: true
     enrollmentDate?: true
     exitDate?: true
     isActive?: true
   }
 
-  export type StudyPatientMaxAggregateInputType = {
+  export type MonitoringPlanPatientMaxAggregateInputType = {
     id?: true
-    studyId?: true
+    monitoringPlanId?: true
     patientId?: true
     enrollmentDate?: true
     exitDate?: true
     isActive?: true
   }
 
-  export type StudyPatientCountAggregateInputType = {
+  export type MonitoringPlanPatientCountAggregateInputType = {
     id?: true
-    studyId?: true
+    monitoringPlanId?: true
     patientId?: true
     enrollmentDate?: true
     exitDate?: true
@@ -9387,311 +9400,311 @@ export namespace Prisma {
     _all?: true
   }
 
-  export type StudyPatientAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlanPatientAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which StudyPatient to aggregate.
+     * Filter which MonitoringPlanPatient to aggregate.
      */
-    where?: StudyPatientWhereInput
+    where?: MonitoringPlanPatientWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of StudyPatients to fetch.
+     * Determine the order of MonitoringPlanPatients to fetch.
      */
-    orderBy?: StudyPatientOrderByWithRelationInput | StudyPatientOrderByWithRelationInput[]
+    orderBy?: MonitoringPlanPatientOrderByWithRelationInput | MonitoringPlanPatientOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: StudyPatientWhereUniqueInput
+    cursor?: MonitoringPlanPatientWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` StudyPatients from the position of the cursor.
+     * Take `±n` MonitoringPlanPatients from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` StudyPatients.
+     * Skip the first `n` MonitoringPlanPatients.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned StudyPatients
+     * Count returned MonitoringPlanPatients
     **/
-    _count?: true | StudyPatientCountAggregateInputType
+    _count?: true | MonitoringPlanPatientCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: StudyPatientMinAggregateInputType
+    _min?: MonitoringPlanPatientMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: StudyPatientMaxAggregateInputType
+    _max?: MonitoringPlanPatientMaxAggregateInputType
   }
 
-  export type GetStudyPatientAggregateType<T extends StudyPatientAggregateArgs> = {
-        [P in keyof T & keyof AggregateStudyPatient]: P extends '_count' | 'count'
+  export type GetMonitoringPlanPatientAggregateType<T extends MonitoringPlanPatientAggregateArgs> = {
+        [P in keyof T & keyof AggregateMonitoringPlanPatient]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateStudyPatient[P]>
-      : GetScalarType<T[P], AggregateStudyPatient[P]>
+        : GetScalarType<T[P], AggregateMonitoringPlanPatient[P]>
+      : GetScalarType<T[P], AggregateMonitoringPlanPatient[P]>
   }
 
 
 
 
-  export type StudyPatientGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: StudyPatientWhereInput
-    orderBy?: StudyPatientOrderByWithAggregationInput | StudyPatientOrderByWithAggregationInput[]
-    by: StudyPatientScalarFieldEnum[] | StudyPatientScalarFieldEnum
-    having?: StudyPatientScalarWhereWithAggregatesInput
+  export type MonitoringPlanPatientGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MonitoringPlanPatientWhereInput
+    orderBy?: MonitoringPlanPatientOrderByWithAggregationInput | MonitoringPlanPatientOrderByWithAggregationInput[]
+    by: MonitoringPlanPatientScalarFieldEnum[] | MonitoringPlanPatientScalarFieldEnum
+    having?: MonitoringPlanPatientScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: StudyPatientCountAggregateInputType | true
-    _min?: StudyPatientMinAggregateInputType
-    _max?: StudyPatientMaxAggregateInputType
+    _count?: MonitoringPlanPatientCountAggregateInputType | true
+    _min?: MonitoringPlanPatientMinAggregateInputType
+    _max?: MonitoringPlanPatientMaxAggregateInputType
   }
 
-  export type StudyPatientGroupByOutputType = {
+  export type MonitoringPlanPatientGroupByOutputType = {
     id: string
-    studyId: string
+    monitoringPlanId: string
     patientId: string
     enrollmentDate: Date
     exitDate: Date | null
     isActive: boolean
-    _count: StudyPatientCountAggregateOutputType | null
-    _min: StudyPatientMinAggregateOutputType | null
-    _max: StudyPatientMaxAggregateOutputType | null
+    _count: MonitoringPlanPatientCountAggregateOutputType | null
+    _min: MonitoringPlanPatientMinAggregateOutputType | null
+    _max: MonitoringPlanPatientMaxAggregateOutputType | null
   }
 
-  type GetStudyPatientGroupByPayload<T extends StudyPatientGroupByArgs> = Prisma.PrismaPromise<
+  type GetMonitoringPlanPatientGroupByPayload<T extends MonitoringPlanPatientGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<StudyPatientGroupByOutputType, T['by']> &
+      PickEnumerable<MonitoringPlanPatientGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof StudyPatientGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof MonitoringPlanPatientGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], StudyPatientGroupByOutputType[P]>
-            : GetScalarType<T[P], StudyPatientGroupByOutputType[P]>
+              : GetScalarType<T[P], MonitoringPlanPatientGroupByOutputType[P]>
+            : GetScalarType<T[P], MonitoringPlanPatientGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type StudyPatientSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type MonitoringPlanPatientSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    studyId?: boolean
+    monitoringPlanId?: boolean
     patientId?: boolean
     enrollmentDate?: boolean
     exitDate?: boolean
     isActive?: boolean
-    study?: boolean | StudyDefaultArgs<ExtArgs>
+    monitoringPlan?: boolean | MonitoringPlanDefaultArgs<ExtArgs>
     patient?: boolean | PatientDefaultArgs<ExtArgs>
-    observations?: boolean | StudyPatient$observationsArgs<ExtArgs>
-    treatments?: boolean | StudyPatient$treatmentsArgs<ExtArgs>
-    _count?: boolean | StudyPatientCountOutputTypeDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["studyPatient"]>
+    observations?: boolean | MonitoringPlanPatient$observationsArgs<ExtArgs>
+    treatments?: boolean | MonitoringPlanPatient$treatmentsArgs<ExtArgs>
+    _count?: boolean | MonitoringPlanPatientCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["monitoringPlanPatient"]>
 
-  export type StudyPatientSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type MonitoringPlanPatientSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    studyId?: boolean
+    monitoringPlanId?: boolean
     patientId?: boolean
     enrollmentDate?: boolean
     exitDate?: boolean
     isActive?: boolean
-    study?: boolean | StudyDefaultArgs<ExtArgs>
+    monitoringPlan?: boolean | MonitoringPlanDefaultArgs<ExtArgs>
     patient?: boolean | PatientDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["studyPatient"]>
+  }, ExtArgs["result"]["monitoringPlanPatient"]>
 
-  export type StudyPatientSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type MonitoringPlanPatientSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    studyId?: boolean
+    monitoringPlanId?: boolean
     patientId?: boolean
     enrollmentDate?: boolean
     exitDate?: boolean
     isActive?: boolean
-    study?: boolean | StudyDefaultArgs<ExtArgs>
+    monitoringPlan?: boolean | MonitoringPlanDefaultArgs<ExtArgs>
     patient?: boolean | PatientDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["studyPatient"]>
+  }, ExtArgs["result"]["monitoringPlanPatient"]>
 
-  export type StudyPatientSelectScalar = {
+  export type MonitoringPlanPatientSelectScalar = {
     id?: boolean
-    studyId?: boolean
+    monitoringPlanId?: boolean
     patientId?: boolean
     enrollmentDate?: boolean
     exitDate?: boolean
     isActive?: boolean
   }
 
-  export type StudyPatientOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "studyId" | "patientId" | "enrollmentDate" | "exitDate" | "isActive", ExtArgs["result"]["studyPatient"]>
-  export type StudyPatientInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    study?: boolean | StudyDefaultArgs<ExtArgs>
+  export type MonitoringPlanPatientOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "monitoringPlanId" | "patientId" | "enrollmentDate" | "exitDate" | "isActive", ExtArgs["result"]["monitoringPlanPatient"]>
+  export type MonitoringPlanPatientInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    monitoringPlan?: boolean | MonitoringPlanDefaultArgs<ExtArgs>
     patient?: boolean | PatientDefaultArgs<ExtArgs>
-    observations?: boolean | StudyPatient$observationsArgs<ExtArgs>
-    treatments?: boolean | StudyPatient$treatmentsArgs<ExtArgs>
-    _count?: boolean | StudyPatientCountOutputTypeDefaultArgs<ExtArgs>
+    observations?: boolean | MonitoringPlanPatient$observationsArgs<ExtArgs>
+    treatments?: boolean | MonitoringPlanPatient$treatmentsArgs<ExtArgs>
+    _count?: boolean | MonitoringPlanPatientCountOutputTypeDefaultArgs<ExtArgs>
   }
-  export type StudyPatientIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    study?: boolean | StudyDefaultArgs<ExtArgs>
+  export type MonitoringPlanPatientIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    monitoringPlan?: boolean | MonitoringPlanDefaultArgs<ExtArgs>
     patient?: boolean | PatientDefaultArgs<ExtArgs>
   }
-  export type StudyPatientIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    study?: boolean | StudyDefaultArgs<ExtArgs>
+  export type MonitoringPlanPatientIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    monitoringPlan?: boolean | MonitoringPlanDefaultArgs<ExtArgs>
     patient?: boolean | PatientDefaultArgs<ExtArgs>
   }
 
-  export type $StudyPatientPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "StudyPatient"
+  export type $MonitoringPlanPatientPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "MonitoringPlanPatient"
     objects: {
-      study: Prisma.$StudyPayload<ExtArgs>
+      monitoringPlan: Prisma.$MonitoringPlanPayload<ExtArgs>
       patient: Prisma.$PatientPayload<ExtArgs>
       observations: Prisma.$ObservationPayload<ExtArgs>[]
       treatments: Prisma.$TreatmentPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      studyId: string
+      monitoringPlanId: string
       patientId: string
       enrollmentDate: Date
       exitDate: Date | null
       isActive: boolean
-    }, ExtArgs["result"]["studyPatient"]>
+    }, ExtArgs["result"]["monitoringPlanPatient"]>
     composites: {}
   }
 
-  type StudyPatientGetPayload<S extends boolean | null | undefined | StudyPatientDefaultArgs> = $Result.GetResult<Prisma.$StudyPatientPayload, S>
+  type MonitoringPlanPatientGetPayload<S extends boolean | null | undefined | MonitoringPlanPatientDefaultArgs> = $Result.GetResult<Prisma.$MonitoringPlanPatientPayload, S>
 
-  type StudyPatientCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<StudyPatientFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: StudyPatientCountAggregateInputType | true
+  type MonitoringPlanPatientCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<MonitoringPlanPatientFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: MonitoringPlanPatientCountAggregateInputType | true
     }
 
-  export interface StudyPatientDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['StudyPatient'], meta: { name: 'StudyPatient' } }
+  export interface MonitoringPlanPatientDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['MonitoringPlanPatient'], meta: { name: 'MonitoringPlanPatient' } }
     /**
-     * Find zero or one StudyPatient that matches the filter.
-     * @param {StudyPatientFindUniqueArgs} args - Arguments to find a StudyPatient
+     * Find zero or one MonitoringPlanPatient that matches the filter.
+     * @param {MonitoringPlanPatientFindUniqueArgs} args - Arguments to find a MonitoringPlanPatient
      * @example
-     * // Get one StudyPatient
-     * const studyPatient = await prisma.studyPatient.findUnique({
+     * // Get one MonitoringPlanPatient
+     * const monitoringPlanPatient = await prisma.monitoringPlanPatient.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUnique<T extends StudyPatientFindUniqueArgs>(args: SelectSubset<T, StudyPatientFindUniqueArgs<ExtArgs>>): Prisma__StudyPatientClient<$Result.GetResult<Prisma.$StudyPatientPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findUnique<T extends MonitoringPlanPatientFindUniqueArgs>(args: SelectSubset<T, MonitoringPlanPatientFindUniqueArgs<ExtArgs>>): Prisma__MonitoringPlanPatientClient<$Result.GetResult<Prisma.$MonitoringPlanPatientPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find one StudyPatient that matches the filter or throw an error with `error.code='P2025'`
+     * Find one MonitoringPlanPatient that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
-     * @param {StudyPatientFindUniqueOrThrowArgs} args - Arguments to find a StudyPatient
+     * @param {MonitoringPlanPatientFindUniqueOrThrowArgs} args - Arguments to find a MonitoringPlanPatient
      * @example
-     * // Get one StudyPatient
-     * const studyPatient = await prisma.studyPatient.findUniqueOrThrow({
+     * // Get one MonitoringPlanPatient
+     * const monitoringPlanPatient = await prisma.monitoringPlanPatient.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUniqueOrThrow<T extends StudyPatientFindUniqueOrThrowArgs>(args: SelectSubset<T, StudyPatientFindUniqueOrThrowArgs<ExtArgs>>): Prisma__StudyPatientClient<$Result.GetResult<Prisma.$StudyPatientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findUniqueOrThrow<T extends MonitoringPlanPatientFindUniqueOrThrowArgs>(args: SelectSubset<T, MonitoringPlanPatientFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MonitoringPlanPatientClient<$Result.GetResult<Prisma.$MonitoringPlanPatientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first StudyPatient that matches the filter.
+     * Find the first MonitoringPlanPatient that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {StudyPatientFindFirstArgs} args - Arguments to find a StudyPatient
+     * @param {MonitoringPlanPatientFindFirstArgs} args - Arguments to find a MonitoringPlanPatient
      * @example
-     * // Get one StudyPatient
-     * const studyPatient = await prisma.studyPatient.findFirst({
+     * // Get one MonitoringPlanPatient
+     * const monitoringPlanPatient = await prisma.monitoringPlanPatient.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirst<T extends StudyPatientFindFirstArgs>(args?: SelectSubset<T, StudyPatientFindFirstArgs<ExtArgs>>): Prisma__StudyPatientClient<$Result.GetResult<Prisma.$StudyPatientPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findFirst<T extends MonitoringPlanPatientFindFirstArgs>(args?: SelectSubset<T, MonitoringPlanPatientFindFirstArgs<ExtArgs>>): Prisma__MonitoringPlanPatientClient<$Result.GetResult<Prisma.$MonitoringPlanPatientPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first StudyPatient that matches the filter or
+     * Find the first MonitoringPlanPatient that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {StudyPatientFindFirstOrThrowArgs} args - Arguments to find a StudyPatient
+     * @param {MonitoringPlanPatientFindFirstOrThrowArgs} args - Arguments to find a MonitoringPlanPatient
      * @example
-     * // Get one StudyPatient
-     * const studyPatient = await prisma.studyPatient.findFirstOrThrow({
+     * // Get one MonitoringPlanPatient
+     * const monitoringPlanPatient = await prisma.monitoringPlanPatient.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirstOrThrow<T extends StudyPatientFindFirstOrThrowArgs>(args?: SelectSubset<T, StudyPatientFindFirstOrThrowArgs<ExtArgs>>): Prisma__StudyPatientClient<$Result.GetResult<Prisma.$StudyPatientPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findFirstOrThrow<T extends MonitoringPlanPatientFindFirstOrThrowArgs>(args?: SelectSubset<T, MonitoringPlanPatientFindFirstOrThrowArgs<ExtArgs>>): Prisma__MonitoringPlanPatientClient<$Result.GetResult<Prisma.$MonitoringPlanPatientPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find zero or more StudyPatients that matches the filter.
+     * Find zero or more MonitoringPlanPatients that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {StudyPatientFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {MonitoringPlanPatientFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all StudyPatients
-     * const studyPatients = await prisma.studyPatient.findMany()
+     * // Get all MonitoringPlanPatients
+     * const monitoringPlanPatients = await prisma.monitoringPlanPatient.findMany()
      * 
-     * // Get first 10 StudyPatients
-     * const studyPatients = await prisma.studyPatient.findMany({ take: 10 })
+     * // Get first 10 MonitoringPlanPatients
+     * const monitoringPlanPatients = await prisma.monitoringPlanPatient.findMany({ take: 10 })
      * 
      * // Only select the `id`
-     * const studyPatientWithIdOnly = await prisma.studyPatient.findMany({ select: { id: true } })
+     * const monitoringPlanPatientWithIdOnly = await prisma.monitoringPlanPatient.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends StudyPatientFindManyArgs>(args?: SelectSubset<T, StudyPatientFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StudyPatientPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+    findMany<T extends MonitoringPlanPatientFindManyArgs>(args?: SelectSubset<T, MonitoringPlanPatientFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MonitoringPlanPatientPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
-     * Create a StudyPatient.
-     * @param {StudyPatientCreateArgs} args - Arguments to create a StudyPatient.
+     * Create a MonitoringPlanPatient.
+     * @param {MonitoringPlanPatientCreateArgs} args - Arguments to create a MonitoringPlanPatient.
      * @example
-     * // Create one StudyPatient
-     * const StudyPatient = await prisma.studyPatient.create({
+     * // Create one MonitoringPlanPatient
+     * const MonitoringPlanPatient = await prisma.monitoringPlanPatient.create({
      *   data: {
-     *     // ... data to create a StudyPatient
+     *     // ... data to create a MonitoringPlanPatient
      *   }
      * })
      * 
      */
-    create<T extends StudyPatientCreateArgs>(args: SelectSubset<T, StudyPatientCreateArgs<ExtArgs>>): Prisma__StudyPatientClient<$Result.GetResult<Prisma.$StudyPatientPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    create<T extends MonitoringPlanPatientCreateArgs>(args: SelectSubset<T, MonitoringPlanPatientCreateArgs<ExtArgs>>): Prisma__MonitoringPlanPatientClient<$Result.GetResult<Prisma.$MonitoringPlanPatientPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Create many StudyPatients.
-     * @param {StudyPatientCreateManyArgs} args - Arguments to create many StudyPatients.
+     * Create many MonitoringPlanPatients.
+     * @param {MonitoringPlanPatientCreateManyArgs} args - Arguments to create many MonitoringPlanPatients.
      * @example
-     * // Create many StudyPatients
-     * const studyPatient = await prisma.studyPatient.createMany({
+     * // Create many MonitoringPlanPatients
+     * const monitoringPlanPatient = await prisma.monitoringPlanPatient.createMany({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      *     
      */
-    createMany<T extends StudyPatientCreateManyArgs>(args?: SelectSubset<T, StudyPatientCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends MonitoringPlanPatientCreateManyArgs>(args?: SelectSubset<T, MonitoringPlanPatientCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create many StudyPatients and returns the data saved in the database.
-     * @param {StudyPatientCreateManyAndReturnArgs} args - Arguments to create many StudyPatients.
+     * Create many MonitoringPlanPatients and returns the data saved in the database.
+     * @param {MonitoringPlanPatientCreateManyAndReturnArgs} args - Arguments to create many MonitoringPlanPatients.
      * @example
-     * // Create many StudyPatients
-     * const studyPatient = await prisma.studyPatient.createManyAndReturn({
+     * // Create many MonitoringPlanPatients
+     * const monitoringPlanPatient = await prisma.monitoringPlanPatient.createManyAndReturn({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      * 
-     * // Create many StudyPatients and only return the `id`
-     * const studyPatientWithIdOnly = await prisma.studyPatient.createManyAndReturn({
+     * // Create many MonitoringPlanPatients and only return the `id`
+     * const monitoringPlanPatientWithIdOnly = await prisma.monitoringPlanPatient.createManyAndReturn({
      *   select: { id: true },
      *   data: [
      *     // ... provide data here
@@ -9701,28 +9714,28 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends StudyPatientCreateManyAndReturnArgs>(args?: SelectSubset<T, StudyPatientCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StudyPatientPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+    createManyAndReturn<T extends MonitoringPlanPatientCreateManyAndReturnArgs>(args?: SelectSubset<T, MonitoringPlanPatientCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MonitoringPlanPatientPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Delete a StudyPatient.
-     * @param {StudyPatientDeleteArgs} args - Arguments to delete one StudyPatient.
+     * Delete a MonitoringPlanPatient.
+     * @param {MonitoringPlanPatientDeleteArgs} args - Arguments to delete one MonitoringPlanPatient.
      * @example
-     * // Delete one StudyPatient
-     * const StudyPatient = await prisma.studyPatient.delete({
+     * // Delete one MonitoringPlanPatient
+     * const MonitoringPlanPatient = await prisma.monitoringPlanPatient.delete({
      *   where: {
-     *     // ... filter to delete one StudyPatient
+     *     // ... filter to delete one MonitoringPlanPatient
      *   }
      * })
      * 
      */
-    delete<T extends StudyPatientDeleteArgs>(args: SelectSubset<T, StudyPatientDeleteArgs<ExtArgs>>): Prisma__StudyPatientClient<$Result.GetResult<Prisma.$StudyPatientPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    delete<T extends MonitoringPlanPatientDeleteArgs>(args: SelectSubset<T, MonitoringPlanPatientDeleteArgs<ExtArgs>>): Prisma__MonitoringPlanPatientClient<$Result.GetResult<Prisma.$MonitoringPlanPatientPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Update one StudyPatient.
-     * @param {StudyPatientUpdateArgs} args - Arguments to update one StudyPatient.
+     * Update one MonitoringPlanPatient.
+     * @param {MonitoringPlanPatientUpdateArgs} args - Arguments to update one MonitoringPlanPatient.
      * @example
-     * // Update one StudyPatient
-     * const studyPatient = await prisma.studyPatient.update({
+     * // Update one MonitoringPlanPatient
+     * const monitoringPlanPatient = await prisma.monitoringPlanPatient.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -9732,30 +9745,30 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends StudyPatientUpdateArgs>(args: SelectSubset<T, StudyPatientUpdateArgs<ExtArgs>>): Prisma__StudyPatientClient<$Result.GetResult<Prisma.$StudyPatientPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    update<T extends MonitoringPlanPatientUpdateArgs>(args: SelectSubset<T, MonitoringPlanPatientUpdateArgs<ExtArgs>>): Prisma__MonitoringPlanPatientClient<$Result.GetResult<Prisma.$MonitoringPlanPatientPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Delete zero or more StudyPatients.
-     * @param {StudyPatientDeleteManyArgs} args - Arguments to filter StudyPatients to delete.
+     * Delete zero or more MonitoringPlanPatients.
+     * @param {MonitoringPlanPatientDeleteManyArgs} args - Arguments to filter MonitoringPlanPatients to delete.
      * @example
-     * // Delete a few StudyPatients
-     * const { count } = await prisma.studyPatient.deleteMany({
+     * // Delete a few MonitoringPlanPatients
+     * const { count } = await prisma.monitoringPlanPatient.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
      */
-    deleteMany<T extends StudyPatientDeleteManyArgs>(args?: SelectSubset<T, StudyPatientDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends MonitoringPlanPatientDeleteManyArgs>(args?: SelectSubset<T, MonitoringPlanPatientDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more StudyPatients.
+     * Update zero or more MonitoringPlanPatients.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {StudyPatientUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {MonitoringPlanPatientUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many StudyPatients
-     * const studyPatient = await prisma.studyPatient.updateMany({
+     * // Update many MonitoringPlanPatients
+     * const monitoringPlanPatient = await prisma.monitoringPlanPatient.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -9765,14 +9778,14 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends StudyPatientUpdateManyArgs>(args: SelectSubset<T, StudyPatientUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends MonitoringPlanPatientUpdateManyArgs>(args: SelectSubset<T, MonitoringPlanPatientUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more StudyPatients and returns the data updated in the database.
-     * @param {StudyPatientUpdateManyAndReturnArgs} args - Arguments to update many StudyPatients.
+     * Update zero or more MonitoringPlanPatients and returns the data updated in the database.
+     * @param {MonitoringPlanPatientUpdateManyAndReturnArgs} args - Arguments to update many MonitoringPlanPatients.
      * @example
-     * // Update many StudyPatients
-     * const studyPatient = await prisma.studyPatient.updateManyAndReturn({
+     * // Update many MonitoringPlanPatients
+     * const monitoringPlanPatient = await prisma.monitoringPlanPatient.updateManyAndReturn({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -9781,8 +9794,8 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more StudyPatients and only return the `id`
-     * const studyPatientWithIdOnly = await prisma.studyPatient.updateManyAndReturn({
+     * // Update zero or more MonitoringPlanPatients and only return the `id`
+     * const monitoringPlanPatientWithIdOnly = await prisma.monitoringPlanPatient.updateManyAndReturn({
      *   select: { id: true },
      *   where: {
      *     // ... provide filter here
@@ -9795,56 +9808,56 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends StudyPatientUpdateManyAndReturnArgs>(args: SelectSubset<T, StudyPatientUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StudyPatientPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+    updateManyAndReturn<T extends MonitoringPlanPatientUpdateManyAndReturnArgs>(args: SelectSubset<T, MonitoringPlanPatientUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MonitoringPlanPatientPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Create or update one StudyPatient.
-     * @param {StudyPatientUpsertArgs} args - Arguments to update or create a StudyPatient.
+     * Create or update one MonitoringPlanPatient.
+     * @param {MonitoringPlanPatientUpsertArgs} args - Arguments to update or create a MonitoringPlanPatient.
      * @example
-     * // Update or create a StudyPatient
-     * const studyPatient = await prisma.studyPatient.upsert({
+     * // Update or create a MonitoringPlanPatient
+     * const monitoringPlanPatient = await prisma.monitoringPlanPatient.upsert({
      *   create: {
-     *     // ... data to create a StudyPatient
+     *     // ... data to create a MonitoringPlanPatient
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the StudyPatient we want to update
+     *     // ... the filter for the MonitoringPlanPatient we want to update
      *   }
      * })
      */
-    upsert<T extends StudyPatientUpsertArgs>(args: SelectSubset<T, StudyPatientUpsertArgs<ExtArgs>>): Prisma__StudyPatientClient<$Result.GetResult<Prisma.$StudyPatientPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    upsert<T extends MonitoringPlanPatientUpsertArgs>(args: SelectSubset<T, MonitoringPlanPatientUpsertArgs<ExtArgs>>): Prisma__MonitoringPlanPatientClient<$Result.GetResult<Prisma.$MonitoringPlanPatientPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
-     * Count the number of StudyPatients.
+     * Count the number of MonitoringPlanPatients.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {StudyPatientCountArgs} args - Arguments to filter StudyPatients to count.
+     * @param {MonitoringPlanPatientCountArgs} args - Arguments to filter MonitoringPlanPatients to count.
      * @example
-     * // Count the number of StudyPatients
-     * const count = await prisma.studyPatient.count({
+     * // Count the number of MonitoringPlanPatients
+     * const count = await prisma.monitoringPlanPatient.count({
      *   where: {
-     *     // ... the filter for the StudyPatients we want to count
+     *     // ... the filter for the MonitoringPlanPatients we want to count
      *   }
      * })
     **/
-    count<T extends StudyPatientCountArgs>(
-      args?: Subset<T, StudyPatientCountArgs>,
+    count<T extends MonitoringPlanPatientCountArgs>(
+      args?: Subset<T, MonitoringPlanPatientCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], StudyPatientCountAggregateOutputType>
+          : GetScalarType<T['select'], MonitoringPlanPatientCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a StudyPatient.
+     * Allows you to perform aggregations operations on a MonitoringPlanPatient.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {StudyPatientAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {MonitoringPlanPatientAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -9864,13 +9877,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends StudyPatientAggregateArgs>(args: Subset<T, StudyPatientAggregateArgs>): Prisma.PrismaPromise<GetStudyPatientAggregateType<T>>
+    aggregate<T extends MonitoringPlanPatientAggregateArgs>(args: Subset<T, MonitoringPlanPatientAggregateArgs>): Prisma.PrismaPromise<GetMonitoringPlanPatientAggregateType<T>>
 
     /**
-     * Group by StudyPatient.
+     * Group by MonitoringPlanPatient.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {StudyPatientGroupByArgs} args - Group by arguments.
+     * @param {MonitoringPlanPatientGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -9885,14 +9898,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends StudyPatientGroupByArgs,
+      T extends MonitoringPlanPatientGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: StudyPatientGroupByArgs['orderBy'] }
-        : { orderBy?: StudyPatientGroupByArgs['orderBy'] },
+        ? { orderBy: MonitoringPlanPatientGroupByArgs['orderBy'] }
+        : { orderBy?: MonitoringPlanPatientGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -9941,25 +9954,25 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, StudyPatientGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetStudyPatientGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, MonitoringPlanPatientGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMonitoringPlanPatientGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the StudyPatient model
+   * Fields of the MonitoringPlanPatient model
    */
-  readonly fields: StudyPatientFieldRefs;
+  readonly fields: MonitoringPlanPatientFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for StudyPatient.
+   * The delegate class that acts as a "Promise-like" for MonitoringPlanPatient.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__StudyPatientClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__MonitoringPlanPatientClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    study<T extends StudyDefaultArgs<ExtArgs> = {}>(args?: Subset<T, StudyDefaultArgs<ExtArgs>>): Prisma__StudyClient<$Result.GetResult<Prisma.$StudyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    monitoringPlan<T extends MonitoringPlanDefaultArgs<ExtArgs> = {}>(args?: Subset<T, MonitoringPlanDefaultArgs<ExtArgs>>): Prisma__MonitoringPlanClient<$Result.GetResult<Prisma.$MonitoringPlanPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     patient<T extends PatientDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PatientDefaultArgs<ExtArgs>>): Prisma__PatientClient<$Result.GetResult<Prisma.$PatientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    observations<T extends StudyPatient$observationsArgs<ExtArgs> = {}>(args?: Subset<T, StudyPatient$observationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ObservationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    treatments<T extends StudyPatient$treatmentsArgs<ExtArgs> = {}>(args?: Subset<T, StudyPatient$treatmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TreatmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    observations<T extends MonitoringPlanPatient$observationsArgs<ExtArgs> = {}>(args?: Subset<T, MonitoringPlanPatient$observationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ObservationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    treatments<T extends MonitoringPlanPatient$treatmentsArgs<ExtArgs> = {}>(args?: Subset<T, MonitoringPlanPatient$treatmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TreatmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -9986,414 +9999,414 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the StudyPatient model
+   * Fields of the MonitoringPlanPatient model
    */
-  interface StudyPatientFieldRefs {
-    readonly id: FieldRef<"StudyPatient", 'String'>
-    readonly studyId: FieldRef<"StudyPatient", 'String'>
-    readonly patientId: FieldRef<"StudyPatient", 'String'>
-    readonly enrollmentDate: FieldRef<"StudyPatient", 'DateTime'>
-    readonly exitDate: FieldRef<"StudyPatient", 'DateTime'>
-    readonly isActive: FieldRef<"StudyPatient", 'Boolean'>
+  interface MonitoringPlanPatientFieldRefs {
+    readonly id: FieldRef<"MonitoringPlanPatient", 'String'>
+    readonly monitoringPlanId: FieldRef<"MonitoringPlanPatient", 'String'>
+    readonly patientId: FieldRef<"MonitoringPlanPatient", 'String'>
+    readonly enrollmentDate: FieldRef<"MonitoringPlanPatient", 'DateTime'>
+    readonly exitDate: FieldRef<"MonitoringPlanPatient", 'DateTime'>
+    readonly isActive: FieldRef<"MonitoringPlanPatient", 'Boolean'>
   }
     
 
   // Custom InputTypes
   /**
-   * StudyPatient findUnique
+   * MonitoringPlanPatient findUnique
    */
-  export type StudyPatientFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlanPatientFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the StudyPatient
+     * Select specific fields to fetch from the MonitoringPlanPatient
      */
-    select?: StudyPatientSelect<ExtArgs> | null
+    select?: MonitoringPlanPatientSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the StudyPatient
+     * Omit specific fields from the MonitoringPlanPatient
      */
-    omit?: StudyPatientOmit<ExtArgs> | null
+    omit?: MonitoringPlanPatientOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StudyPatientInclude<ExtArgs> | null
+    include?: MonitoringPlanPatientInclude<ExtArgs> | null
     /**
-     * Filter, which StudyPatient to fetch.
+     * Filter, which MonitoringPlanPatient to fetch.
      */
-    where: StudyPatientWhereUniqueInput
+    where: MonitoringPlanPatientWhereUniqueInput
   }
 
   /**
-   * StudyPatient findUniqueOrThrow
+   * MonitoringPlanPatient findUniqueOrThrow
    */
-  export type StudyPatientFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlanPatientFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the StudyPatient
+     * Select specific fields to fetch from the MonitoringPlanPatient
      */
-    select?: StudyPatientSelect<ExtArgs> | null
+    select?: MonitoringPlanPatientSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the StudyPatient
+     * Omit specific fields from the MonitoringPlanPatient
      */
-    omit?: StudyPatientOmit<ExtArgs> | null
+    omit?: MonitoringPlanPatientOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StudyPatientInclude<ExtArgs> | null
+    include?: MonitoringPlanPatientInclude<ExtArgs> | null
     /**
-     * Filter, which StudyPatient to fetch.
+     * Filter, which MonitoringPlanPatient to fetch.
      */
-    where: StudyPatientWhereUniqueInput
+    where: MonitoringPlanPatientWhereUniqueInput
   }
 
   /**
-   * StudyPatient findFirst
+   * MonitoringPlanPatient findFirst
    */
-  export type StudyPatientFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlanPatientFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the StudyPatient
+     * Select specific fields to fetch from the MonitoringPlanPatient
      */
-    select?: StudyPatientSelect<ExtArgs> | null
+    select?: MonitoringPlanPatientSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the StudyPatient
+     * Omit specific fields from the MonitoringPlanPatient
      */
-    omit?: StudyPatientOmit<ExtArgs> | null
+    omit?: MonitoringPlanPatientOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StudyPatientInclude<ExtArgs> | null
+    include?: MonitoringPlanPatientInclude<ExtArgs> | null
     /**
-     * Filter, which StudyPatient to fetch.
+     * Filter, which MonitoringPlanPatient to fetch.
      */
-    where?: StudyPatientWhereInput
+    where?: MonitoringPlanPatientWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of StudyPatients to fetch.
+     * Determine the order of MonitoringPlanPatients to fetch.
      */
-    orderBy?: StudyPatientOrderByWithRelationInput | StudyPatientOrderByWithRelationInput[]
+    orderBy?: MonitoringPlanPatientOrderByWithRelationInput | MonitoringPlanPatientOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for StudyPatients.
+     * Sets the position for searching for MonitoringPlanPatients.
      */
-    cursor?: StudyPatientWhereUniqueInput
+    cursor?: MonitoringPlanPatientWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` StudyPatients from the position of the cursor.
+     * Take `±n` MonitoringPlanPatients from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` StudyPatients.
+     * Skip the first `n` MonitoringPlanPatients.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of StudyPatients.
+     * Filter by unique combinations of MonitoringPlanPatients.
      */
-    distinct?: StudyPatientScalarFieldEnum | StudyPatientScalarFieldEnum[]
+    distinct?: MonitoringPlanPatientScalarFieldEnum | MonitoringPlanPatientScalarFieldEnum[]
   }
 
   /**
-   * StudyPatient findFirstOrThrow
+   * MonitoringPlanPatient findFirstOrThrow
    */
-  export type StudyPatientFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlanPatientFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the StudyPatient
+     * Select specific fields to fetch from the MonitoringPlanPatient
      */
-    select?: StudyPatientSelect<ExtArgs> | null
+    select?: MonitoringPlanPatientSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the StudyPatient
+     * Omit specific fields from the MonitoringPlanPatient
      */
-    omit?: StudyPatientOmit<ExtArgs> | null
+    omit?: MonitoringPlanPatientOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StudyPatientInclude<ExtArgs> | null
+    include?: MonitoringPlanPatientInclude<ExtArgs> | null
     /**
-     * Filter, which StudyPatient to fetch.
+     * Filter, which MonitoringPlanPatient to fetch.
      */
-    where?: StudyPatientWhereInput
+    where?: MonitoringPlanPatientWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of StudyPatients to fetch.
+     * Determine the order of MonitoringPlanPatients to fetch.
      */
-    orderBy?: StudyPatientOrderByWithRelationInput | StudyPatientOrderByWithRelationInput[]
+    orderBy?: MonitoringPlanPatientOrderByWithRelationInput | MonitoringPlanPatientOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for StudyPatients.
+     * Sets the position for searching for MonitoringPlanPatients.
      */
-    cursor?: StudyPatientWhereUniqueInput
+    cursor?: MonitoringPlanPatientWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` StudyPatients from the position of the cursor.
+     * Take `±n` MonitoringPlanPatients from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` StudyPatients.
+     * Skip the first `n` MonitoringPlanPatients.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of StudyPatients.
+     * Filter by unique combinations of MonitoringPlanPatients.
      */
-    distinct?: StudyPatientScalarFieldEnum | StudyPatientScalarFieldEnum[]
+    distinct?: MonitoringPlanPatientScalarFieldEnum | MonitoringPlanPatientScalarFieldEnum[]
   }
 
   /**
-   * StudyPatient findMany
+   * MonitoringPlanPatient findMany
    */
-  export type StudyPatientFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlanPatientFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the StudyPatient
+     * Select specific fields to fetch from the MonitoringPlanPatient
      */
-    select?: StudyPatientSelect<ExtArgs> | null
+    select?: MonitoringPlanPatientSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the StudyPatient
+     * Omit specific fields from the MonitoringPlanPatient
      */
-    omit?: StudyPatientOmit<ExtArgs> | null
+    omit?: MonitoringPlanPatientOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StudyPatientInclude<ExtArgs> | null
+    include?: MonitoringPlanPatientInclude<ExtArgs> | null
     /**
-     * Filter, which StudyPatients to fetch.
+     * Filter, which MonitoringPlanPatients to fetch.
      */
-    where?: StudyPatientWhereInput
+    where?: MonitoringPlanPatientWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of StudyPatients to fetch.
+     * Determine the order of MonitoringPlanPatients to fetch.
      */
-    orderBy?: StudyPatientOrderByWithRelationInput | StudyPatientOrderByWithRelationInput[]
+    orderBy?: MonitoringPlanPatientOrderByWithRelationInput | MonitoringPlanPatientOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing StudyPatients.
+     * Sets the position for listing MonitoringPlanPatients.
      */
-    cursor?: StudyPatientWhereUniqueInput
+    cursor?: MonitoringPlanPatientWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` StudyPatients from the position of the cursor.
+     * Take `±n` MonitoringPlanPatients from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` StudyPatients.
+     * Skip the first `n` MonitoringPlanPatients.
      */
     skip?: number
-    distinct?: StudyPatientScalarFieldEnum | StudyPatientScalarFieldEnum[]
+    distinct?: MonitoringPlanPatientScalarFieldEnum | MonitoringPlanPatientScalarFieldEnum[]
   }
 
   /**
-   * StudyPatient create
+   * MonitoringPlanPatient create
    */
-  export type StudyPatientCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlanPatientCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the StudyPatient
+     * Select specific fields to fetch from the MonitoringPlanPatient
      */
-    select?: StudyPatientSelect<ExtArgs> | null
+    select?: MonitoringPlanPatientSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the StudyPatient
+     * Omit specific fields from the MonitoringPlanPatient
      */
-    omit?: StudyPatientOmit<ExtArgs> | null
+    omit?: MonitoringPlanPatientOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StudyPatientInclude<ExtArgs> | null
+    include?: MonitoringPlanPatientInclude<ExtArgs> | null
     /**
-     * The data needed to create a StudyPatient.
+     * The data needed to create a MonitoringPlanPatient.
      */
-    data: XOR<StudyPatientCreateInput, StudyPatientUncheckedCreateInput>
+    data: XOR<MonitoringPlanPatientCreateInput, MonitoringPlanPatientUncheckedCreateInput>
   }
 
   /**
-   * StudyPatient createMany
+   * MonitoringPlanPatient createMany
    */
-  export type StudyPatientCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlanPatientCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many StudyPatients.
+     * The data used to create many MonitoringPlanPatients.
      */
-    data: StudyPatientCreateManyInput | StudyPatientCreateManyInput[]
+    data: MonitoringPlanPatientCreateManyInput | MonitoringPlanPatientCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * StudyPatient createManyAndReturn
+   * MonitoringPlanPatient createManyAndReturn
    */
-  export type StudyPatientCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlanPatientCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the StudyPatient
+     * Select specific fields to fetch from the MonitoringPlanPatient
      */
-    select?: StudyPatientSelectCreateManyAndReturn<ExtArgs> | null
+    select?: MonitoringPlanPatientSelectCreateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the StudyPatient
+     * Omit specific fields from the MonitoringPlanPatient
      */
-    omit?: StudyPatientOmit<ExtArgs> | null
+    omit?: MonitoringPlanPatientOmit<ExtArgs> | null
     /**
-     * The data used to create many StudyPatients.
+     * The data used to create many MonitoringPlanPatients.
      */
-    data: StudyPatientCreateManyInput | StudyPatientCreateManyInput[]
+    data: MonitoringPlanPatientCreateManyInput | MonitoringPlanPatientCreateManyInput[]
     skipDuplicates?: boolean
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StudyPatientIncludeCreateManyAndReturn<ExtArgs> | null
+    include?: MonitoringPlanPatientIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * StudyPatient update
+   * MonitoringPlanPatient update
    */
-  export type StudyPatientUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlanPatientUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the StudyPatient
+     * Select specific fields to fetch from the MonitoringPlanPatient
      */
-    select?: StudyPatientSelect<ExtArgs> | null
+    select?: MonitoringPlanPatientSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the StudyPatient
+     * Omit specific fields from the MonitoringPlanPatient
      */
-    omit?: StudyPatientOmit<ExtArgs> | null
+    omit?: MonitoringPlanPatientOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StudyPatientInclude<ExtArgs> | null
+    include?: MonitoringPlanPatientInclude<ExtArgs> | null
     /**
-     * The data needed to update a StudyPatient.
+     * The data needed to update a MonitoringPlanPatient.
      */
-    data: XOR<StudyPatientUpdateInput, StudyPatientUncheckedUpdateInput>
+    data: XOR<MonitoringPlanPatientUpdateInput, MonitoringPlanPatientUncheckedUpdateInput>
     /**
-     * Choose, which StudyPatient to update.
+     * Choose, which MonitoringPlanPatient to update.
      */
-    where: StudyPatientWhereUniqueInput
+    where: MonitoringPlanPatientWhereUniqueInput
   }
 
   /**
-   * StudyPatient updateMany
+   * MonitoringPlanPatient updateMany
    */
-  export type StudyPatientUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlanPatientUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update StudyPatients.
+     * The data used to update MonitoringPlanPatients.
      */
-    data: XOR<StudyPatientUpdateManyMutationInput, StudyPatientUncheckedUpdateManyInput>
+    data: XOR<MonitoringPlanPatientUpdateManyMutationInput, MonitoringPlanPatientUncheckedUpdateManyInput>
     /**
-     * Filter which StudyPatients to update
+     * Filter which MonitoringPlanPatients to update
      */
-    where?: StudyPatientWhereInput
+    where?: MonitoringPlanPatientWhereInput
     /**
-     * Limit how many StudyPatients to update.
+     * Limit how many MonitoringPlanPatients to update.
      */
     limit?: number
   }
 
   /**
-   * StudyPatient updateManyAndReturn
+   * MonitoringPlanPatient updateManyAndReturn
    */
-  export type StudyPatientUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlanPatientUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the StudyPatient
+     * Select specific fields to fetch from the MonitoringPlanPatient
      */
-    select?: StudyPatientSelectUpdateManyAndReturn<ExtArgs> | null
+    select?: MonitoringPlanPatientSelectUpdateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the StudyPatient
+     * Omit specific fields from the MonitoringPlanPatient
      */
-    omit?: StudyPatientOmit<ExtArgs> | null
+    omit?: MonitoringPlanPatientOmit<ExtArgs> | null
     /**
-     * The data used to update StudyPatients.
+     * The data used to update MonitoringPlanPatients.
      */
-    data: XOR<StudyPatientUpdateManyMutationInput, StudyPatientUncheckedUpdateManyInput>
+    data: XOR<MonitoringPlanPatientUpdateManyMutationInput, MonitoringPlanPatientUncheckedUpdateManyInput>
     /**
-     * Filter which StudyPatients to update
+     * Filter which MonitoringPlanPatients to update
      */
-    where?: StudyPatientWhereInput
+    where?: MonitoringPlanPatientWhereInput
     /**
-     * Limit how many StudyPatients to update.
+     * Limit how many MonitoringPlanPatients to update.
      */
     limit?: number
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StudyPatientIncludeUpdateManyAndReturn<ExtArgs> | null
+    include?: MonitoringPlanPatientIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * StudyPatient upsert
+   * MonitoringPlanPatient upsert
    */
-  export type StudyPatientUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlanPatientUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the StudyPatient
+     * Select specific fields to fetch from the MonitoringPlanPatient
      */
-    select?: StudyPatientSelect<ExtArgs> | null
+    select?: MonitoringPlanPatientSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the StudyPatient
+     * Omit specific fields from the MonitoringPlanPatient
      */
-    omit?: StudyPatientOmit<ExtArgs> | null
+    omit?: MonitoringPlanPatientOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StudyPatientInclude<ExtArgs> | null
+    include?: MonitoringPlanPatientInclude<ExtArgs> | null
     /**
-     * The filter to search for the StudyPatient to update in case it exists.
+     * The filter to search for the MonitoringPlanPatient to update in case it exists.
      */
-    where: StudyPatientWhereUniqueInput
+    where: MonitoringPlanPatientWhereUniqueInput
     /**
-     * In case the StudyPatient found by the `where` argument doesn't exist, create a new StudyPatient with this data.
+     * In case the MonitoringPlanPatient found by the `where` argument doesn't exist, create a new MonitoringPlanPatient with this data.
      */
-    create: XOR<StudyPatientCreateInput, StudyPatientUncheckedCreateInput>
+    create: XOR<MonitoringPlanPatientCreateInput, MonitoringPlanPatientUncheckedCreateInput>
     /**
-     * In case the StudyPatient was found with the provided `where` argument, update it with this data.
+     * In case the MonitoringPlanPatient was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<StudyPatientUpdateInput, StudyPatientUncheckedUpdateInput>
+    update: XOR<MonitoringPlanPatientUpdateInput, MonitoringPlanPatientUncheckedUpdateInput>
   }
 
   /**
-   * StudyPatient delete
+   * MonitoringPlanPatient delete
    */
-  export type StudyPatientDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlanPatientDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the StudyPatient
+     * Select specific fields to fetch from the MonitoringPlanPatient
      */
-    select?: StudyPatientSelect<ExtArgs> | null
+    select?: MonitoringPlanPatientSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the StudyPatient
+     * Omit specific fields from the MonitoringPlanPatient
      */
-    omit?: StudyPatientOmit<ExtArgs> | null
+    omit?: MonitoringPlanPatientOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StudyPatientInclude<ExtArgs> | null
+    include?: MonitoringPlanPatientInclude<ExtArgs> | null
     /**
-     * Filter which StudyPatient to delete.
+     * Filter which MonitoringPlanPatient to delete.
      */
-    where: StudyPatientWhereUniqueInput
+    where: MonitoringPlanPatientWhereUniqueInput
   }
 
   /**
-   * StudyPatient deleteMany
+   * MonitoringPlanPatient deleteMany
    */
-  export type StudyPatientDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlanPatientDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which StudyPatients to delete
+     * Filter which MonitoringPlanPatients to delete
      */
-    where?: StudyPatientWhereInput
+    where?: MonitoringPlanPatientWhereInput
     /**
-     * Limit how many StudyPatients to delete.
+     * Limit how many MonitoringPlanPatients to delete.
      */
     limit?: number
   }
 
   /**
-   * StudyPatient.observations
+   * MonitoringPlanPatient.observations
    */
-  export type StudyPatient$observationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlanPatient$observationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Observation
      */
@@ -10415,9 +10428,9 @@ export namespace Prisma {
   }
 
   /**
-   * StudyPatient.treatments
+   * MonitoringPlanPatient.treatments
    */
-  export type StudyPatient$treatmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlanPatient$treatmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Treatment
      */
@@ -10439,53 +10452,53 @@ export namespace Prisma {
   }
 
   /**
-   * StudyPatient without action
+   * MonitoringPlanPatient without action
    */
-  export type StudyPatientDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlanPatientDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the StudyPatient
+     * Select specific fields to fetch from the MonitoringPlanPatient
      */
-    select?: StudyPatientSelect<ExtArgs> | null
+    select?: MonitoringPlanPatientSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the StudyPatient
+     * Omit specific fields from the MonitoringPlanPatient
      */
-    omit?: StudyPatientOmit<ExtArgs> | null
+    omit?: MonitoringPlanPatientOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StudyPatientInclude<ExtArgs> | null
+    include?: MonitoringPlanPatientInclude<ExtArgs> | null
   }
 
 
   /**
-   * Model StudyAssignment
+   * Model MonitoringPlanAssignment
    */
 
-  export type AggregateStudyAssignment = {
-    _count: StudyAssignmentCountAggregateOutputType | null
-    _min: StudyAssignmentMinAggregateOutputType | null
-    _max: StudyAssignmentMaxAggregateOutputType | null
+  export type AggregateMonitoringPlanAssignment = {
+    _count: MonitoringPlanAssignmentCountAggregateOutputType | null
+    _min: MonitoringPlanAssignmentMinAggregateOutputType | null
+    _max: MonitoringPlanAssignmentMaxAggregateOutputType | null
   }
 
-  export type StudyAssignmentMinAggregateOutputType = {
+  export type MonitoringPlanAssignmentMinAggregateOutputType = {
     id: string | null
-    studyId: string | null
+    monitoringPlanId: string | null
     userId: string | null
     assignedAt: Date | null
-    role: $Enums.StudyRole | null
+    role: $Enums.MonitoringPlanRole | null
   }
 
-  export type StudyAssignmentMaxAggregateOutputType = {
+  export type MonitoringPlanAssignmentMaxAggregateOutputType = {
     id: string | null
-    studyId: string | null
+    monitoringPlanId: string | null
     userId: string | null
     assignedAt: Date | null
-    role: $Enums.StudyRole | null
+    role: $Enums.MonitoringPlanRole | null
   }
 
-  export type StudyAssignmentCountAggregateOutputType = {
+  export type MonitoringPlanAssignmentCountAggregateOutputType = {
     id: number
-    studyId: number
+    monitoringPlanId: number
     userId: number
     assignedAt: number
     role: number
@@ -10493,322 +10506,322 @@ export namespace Prisma {
   }
 
 
-  export type StudyAssignmentMinAggregateInputType = {
+  export type MonitoringPlanAssignmentMinAggregateInputType = {
     id?: true
-    studyId?: true
+    monitoringPlanId?: true
     userId?: true
     assignedAt?: true
     role?: true
   }
 
-  export type StudyAssignmentMaxAggregateInputType = {
+  export type MonitoringPlanAssignmentMaxAggregateInputType = {
     id?: true
-    studyId?: true
+    monitoringPlanId?: true
     userId?: true
     assignedAt?: true
     role?: true
   }
 
-  export type StudyAssignmentCountAggregateInputType = {
+  export type MonitoringPlanAssignmentCountAggregateInputType = {
     id?: true
-    studyId?: true
+    monitoringPlanId?: true
     userId?: true
     assignedAt?: true
     role?: true
     _all?: true
   }
 
-  export type StudyAssignmentAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlanAssignmentAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which StudyAssignment to aggregate.
+     * Filter which MonitoringPlanAssignment to aggregate.
      */
-    where?: StudyAssignmentWhereInput
+    where?: MonitoringPlanAssignmentWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of StudyAssignments to fetch.
+     * Determine the order of MonitoringPlanAssignments to fetch.
      */
-    orderBy?: StudyAssignmentOrderByWithRelationInput | StudyAssignmentOrderByWithRelationInput[]
+    orderBy?: MonitoringPlanAssignmentOrderByWithRelationInput | MonitoringPlanAssignmentOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: StudyAssignmentWhereUniqueInput
+    cursor?: MonitoringPlanAssignmentWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` StudyAssignments from the position of the cursor.
+     * Take `±n` MonitoringPlanAssignments from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` StudyAssignments.
+     * Skip the first `n` MonitoringPlanAssignments.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned StudyAssignments
+     * Count returned MonitoringPlanAssignments
     **/
-    _count?: true | StudyAssignmentCountAggregateInputType
+    _count?: true | MonitoringPlanAssignmentCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: StudyAssignmentMinAggregateInputType
+    _min?: MonitoringPlanAssignmentMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: StudyAssignmentMaxAggregateInputType
+    _max?: MonitoringPlanAssignmentMaxAggregateInputType
   }
 
-  export type GetStudyAssignmentAggregateType<T extends StudyAssignmentAggregateArgs> = {
-        [P in keyof T & keyof AggregateStudyAssignment]: P extends '_count' | 'count'
+  export type GetMonitoringPlanAssignmentAggregateType<T extends MonitoringPlanAssignmentAggregateArgs> = {
+        [P in keyof T & keyof AggregateMonitoringPlanAssignment]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateStudyAssignment[P]>
-      : GetScalarType<T[P], AggregateStudyAssignment[P]>
+        : GetScalarType<T[P], AggregateMonitoringPlanAssignment[P]>
+      : GetScalarType<T[P], AggregateMonitoringPlanAssignment[P]>
   }
 
 
 
 
-  export type StudyAssignmentGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: StudyAssignmentWhereInput
-    orderBy?: StudyAssignmentOrderByWithAggregationInput | StudyAssignmentOrderByWithAggregationInput[]
-    by: StudyAssignmentScalarFieldEnum[] | StudyAssignmentScalarFieldEnum
-    having?: StudyAssignmentScalarWhereWithAggregatesInput
+  export type MonitoringPlanAssignmentGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MonitoringPlanAssignmentWhereInput
+    orderBy?: MonitoringPlanAssignmentOrderByWithAggregationInput | MonitoringPlanAssignmentOrderByWithAggregationInput[]
+    by: MonitoringPlanAssignmentScalarFieldEnum[] | MonitoringPlanAssignmentScalarFieldEnum
+    having?: MonitoringPlanAssignmentScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: StudyAssignmentCountAggregateInputType | true
-    _min?: StudyAssignmentMinAggregateInputType
-    _max?: StudyAssignmentMaxAggregateInputType
+    _count?: MonitoringPlanAssignmentCountAggregateInputType | true
+    _min?: MonitoringPlanAssignmentMinAggregateInputType
+    _max?: MonitoringPlanAssignmentMaxAggregateInputType
   }
 
-  export type StudyAssignmentGroupByOutputType = {
+  export type MonitoringPlanAssignmentGroupByOutputType = {
     id: string
-    studyId: string
+    monitoringPlanId: string
     userId: string
     assignedAt: Date
-    role: $Enums.StudyRole
-    _count: StudyAssignmentCountAggregateOutputType | null
-    _min: StudyAssignmentMinAggregateOutputType | null
-    _max: StudyAssignmentMaxAggregateOutputType | null
+    role: $Enums.MonitoringPlanRole
+    _count: MonitoringPlanAssignmentCountAggregateOutputType | null
+    _min: MonitoringPlanAssignmentMinAggregateOutputType | null
+    _max: MonitoringPlanAssignmentMaxAggregateOutputType | null
   }
 
-  type GetStudyAssignmentGroupByPayload<T extends StudyAssignmentGroupByArgs> = Prisma.PrismaPromise<
+  type GetMonitoringPlanAssignmentGroupByPayload<T extends MonitoringPlanAssignmentGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<StudyAssignmentGroupByOutputType, T['by']> &
+      PickEnumerable<MonitoringPlanAssignmentGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof StudyAssignmentGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof MonitoringPlanAssignmentGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], StudyAssignmentGroupByOutputType[P]>
-            : GetScalarType<T[P], StudyAssignmentGroupByOutputType[P]>
+              : GetScalarType<T[P], MonitoringPlanAssignmentGroupByOutputType[P]>
+            : GetScalarType<T[P], MonitoringPlanAssignmentGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type StudyAssignmentSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type MonitoringPlanAssignmentSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    studyId?: boolean
+    monitoringPlanId?: boolean
     userId?: boolean
     assignedAt?: boolean
     role?: boolean
-    study?: boolean | StudyDefaultArgs<ExtArgs>
+    monitoringPlan?: boolean | MonitoringPlanDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["studyAssignment"]>
+  }, ExtArgs["result"]["monitoringPlanAssignment"]>
 
-  export type StudyAssignmentSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type MonitoringPlanAssignmentSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    studyId?: boolean
+    monitoringPlanId?: boolean
     userId?: boolean
     assignedAt?: boolean
     role?: boolean
-    study?: boolean | StudyDefaultArgs<ExtArgs>
+    monitoringPlan?: boolean | MonitoringPlanDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["studyAssignment"]>
+  }, ExtArgs["result"]["monitoringPlanAssignment"]>
 
-  export type StudyAssignmentSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type MonitoringPlanAssignmentSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    studyId?: boolean
+    monitoringPlanId?: boolean
     userId?: boolean
     assignedAt?: boolean
     role?: boolean
-    study?: boolean | StudyDefaultArgs<ExtArgs>
+    monitoringPlan?: boolean | MonitoringPlanDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["studyAssignment"]>
+  }, ExtArgs["result"]["monitoringPlanAssignment"]>
 
-  export type StudyAssignmentSelectScalar = {
+  export type MonitoringPlanAssignmentSelectScalar = {
     id?: boolean
-    studyId?: boolean
+    monitoringPlanId?: boolean
     userId?: boolean
     assignedAt?: boolean
     role?: boolean
   }
 
-  export type StudyAssignmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "studyId" | "userId" | "assignedAt" | "role", ExtArgs["result"]["studyAssignment"]>
-  export type StudyAssignmentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    study?: boolean | StudyDefaultArgs<ExtArgs>
+  export type MonitoringPlanAssignmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "monitoringPlanId" | "userId" | "assignedAt" | "role", ExtArgs["result"]["monitoringPlanAssignment"]>
+  export type MonitoringPlanAssignmentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    monitoringPlan?: boolean | MonitoringPlanDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
-  export type StudyAssignmentIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    study?: boolean | StudyDefaultArgs<ExtArgs>
+  export type MonitoringPlanAssignmentIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    monitoringPlan?: boolean | MonitoringPlanDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
-  export type StudyAssignmentIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    study?: boolean | StudyDefaultArgs<ExtArgs>
+  export type MonitoringPlanAssignmentIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    monitoringPlan?: boolean | MonitoringPlanDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
 
-  export type $StudyAssignmentPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "StudyAssignment"
+  export type $MonitoringPlanAssignmentPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "MonitoringPlanAssignment"
     objects: {
-      study: Prisma.$StudyPayload<ExtArgs>
+      monitoringPlan: Prisma.$MonitoringPlanPayload<ExtArgs>
       user: Prisma.$UserPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      studyId: string
+      monitoringPlanId: string
       userId: string
       assignedAt: Date
-      role: $Enums.StudyRole
-    }, ExtArgs["result"]["studyAssignment"]>
+      role: $Enums.MonitoringPlanRole
+    }, ExtArgs["result"]["monitoringPlanAssignment"]>
     composites: {}
   }
 
-  type StudyAssignmentGetPayload<S extends boolean | null | undefined | StudyAssignmentDefaultArgs> = $Result.GetResult<Prisma.$StudyAssignmentPayload, S>
+  type MonitoringPlanAssignmentGetPayload<S extends boolean | null | undefined | MonitoringPlanAssignmentDefaultArgs> = $Result.GetResult<Prisma.$MonitoringPlanAssignmentPayload, S>
 
-  type StudyAssignmentCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<StudyAssignmentFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: StudyAssignmentCountAggregateInputType | true
+  type MonitoringPlanAssignmentCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<MonitoringPlanAssignmentFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: MonitoringPlanAssignmentCountAggregateInputType | true
     }
 
-  export interface StudyAssignmentDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['StudyAssignment'], meta: { name: 'StudyAssignment' } }
+  export interface MonitoringPlanAssignmentDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['MonitoringPlanAssignment'], meta: { name: 'MonitoringPlanAssignment' } }
     /**
-     * Find zero or one StudyAssignment that matches the filter.
-     * @param {StudyAssignmentFindUniqueArgs} args - Arguments to find a StudyAssignment
+     * Find zero or one MonitoringPlanAssignment that matches the filter.
+     * @param {MonitoringPlanAssignmentFindUniqueArgs} args - Arguments to find a MonitoringPlanAssignment
      * @example
-     * // Get one StudyAssignment
-     * const studyAssignment = await prisma.studyAssignment.findUnique({
+     * // Get one MonitoringPlanAssignment
+     * const monitoringPlanAssignment = await prisma.monitoringPlanAssignment.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUnique<T extends StudyAssignmentFindUniqueArgs>(args: SelectSubset<T, StudyAssignmentFindUniqueArgs<ExtArgs>>): Prisma__StudyAssignmentClient<$Result.GetResult<Prisma.$StudyAssignmentPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findUnique<T extends MonitoringPlanAssignmentFindUniqueArgs>(args: SelectSubset<T, MonitoringPlanAssignmentFindUniqueArgs<ExtArgs>>): Prisma__MonitoringPlanAssignmentClient<$Result.GetResult<Prisma.$MonitoringPlanAssignmentPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find one StudyAssignment that matches the filter or throw an error with `error.code='P2025'`
+     * Find one MonitoringPlanAssignment that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
-     * @param {StudyAssignmentFindUniqueOrThrowArgs} args - Arguments to find a StudyAssignment
+     * @param {MonitoringPlanAssignmentFindUniqueOrThrowArgs} args - Arguments to find a MonitoringPlanAssignment
      * @example
-     * // Get one StudyAssignment
-     * const studyAssignment = await prisma.studyAssignment.findUniqueOrThrow({
+     * // Get one MonitoringPlanAssignment
+     * const monitoringPlanAssignment = await prisma.monitoringPlanAssignment.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUniqueOrThrow<T extends StudyAssignmentFindUniqueOrThrowArgs>(args: SelectSubset<T, StudyAssignmentFindUniqueOrThrowArgs<ExtArgs>>): Prisma__StudyAssignmentClient<$Result.GetResult<Prisma.$StudyAssignmentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findUniqueOrThrow<T extends MonitoringPlanAssignmentFindUniqueOrThrowArgs>(args: SelectSubset<T, MonitoringPlanAssignmentFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MonitoringPlanAssignmentClient<$Result.GetResult<Prisma.$MonitoringPlanAssignmentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first StudyAssignment that matches the filter.
+     * Find the first MonitoringPlanAssignment that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {StudyAssignmentFindFirstArgs} args - Arguments to find a StudyAssignment
+     * @param {MonitoringPlanAssignmentFindFirstArgs} args - Arguments to find a MonitoringPlanAssignment
      * @example
-     * // Get one StudyAssignment
-     * const studyAssignment = await prisma.studyAssignment.findFirst({
+     * // Get one MonitoringPlanAssignment
+     * const monitoringPlanAssignment = await prisma.monitoringPlanAssignment.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirst<T extends StudyAssignmentFindFirstArgs>(args?: SelectSubset<T, StudyAssignmentFindFirstArgs<ExtArgs>>): Prisma__StudyAssignmentClient<$Result.GetResult<Prisma.$StudyAssignmentPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findFirst<T extends MonitoringPlanAssignmentFindFirstArgs>(args?: SelectSubset<T, MonitoringPlanAssignmentFindFirstArgs<ExtArgs>>): Prisma__MonitoringPlanAssignmentClient<$Result.GetResult<Prisma.$MonitoringPlanAssignmentPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first StudyAssignment that matches the filter or
+     * Find the first MonitoringPlanAssignment that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {StudyAssignmentFindFirstOrThrowArgs} args - Arguments to find a StudyAssignment
+     * @param {MonitoringPlanAssignmentFindFirstOrThrowArgs} args - Arguments to find a MonitoringPlanAssignment
      * @example
-     * // Get one StudyAssignment
-     * const studyAssignment = await prisma.studyAssignment.findFirstOrThrow({
+     * // Get one MonitoringPlanAssignment
+     * const monitoringPlanAssignment = await prisma.monitoringPlanAssignment.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirstOrThrow<T extends StudyAssignmentFindFirstOrThrowArgs>(args?: SelectSubset<T, StudyAssignmentFindFirstOrThrowArgs<ExtArgs>>): Prisma__StudyAssignmentClient<$Result.GetResult<Prisma.$StudyAssignmentPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findFirstOrThrow<T extends MonitoringPlanAssignmentFindFirstOrThrowArgs>(args?: SelectSubset<T, MonitoringPlanAssignmentFindFirstOrThrowArgs<ExtArgs>>): Prisma__MonitoringPlanAssignmentClient<$Result.GetResult<Prisma.$MonitoringPlanAssignmentPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find zero or more StudyAssignments that matches the filter.
+     * Find zero or more MonitoringPlanAssignments that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {StudyAssignmentFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {MonitoringPlanAssignmentFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all StudyAssignments
-     * const studyAssignments = await prisma.studyAssignment.findMany()
+     * // Get all MonitoringPlanAssignments
+     * const monitoringPlanAssignments = await prisma.monitoringPlanAssignment.findMany()
      * 
-     * // Get first 10 StudyAssignments
-     * const studyAssignments = await prisma.studyAssignment.findMany({ take: 10 })
+     * // Get first 10 MonitoringPlanAssignments
+     * const monitoringPlanAssignments = await prisma.monitoringPlanAssignment.findMany({ take: 10 })
      * 
      * // Only select the `id`
-     * const studyAssignmentWithIdOnly = await prisma.studyAssignment.findMany({ select: { id: true } })
+     * const monitoringPlanAssignmentWithIdOnly = await prisma.monitoringPlanAssignment.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends StudyAssignmentFindManyArgs>(args?: SelectSubset<T, StudyAssignmentFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StudyAssignmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+    findMany<T extends MonitoringPlanAssignmentFindManyArgs>(args?: SelectSubset<T, MonitoringPlanAssignmentFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MonitoringPlanAssignmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
-     * Create a StudyAssignment.
-     * @param {StudyAssignmentCreateArgs} args - Arguments to create a StudyAssignment.
+     * Create a MonitoringPlanAssignment.
+     * @param {MonitoringPlanAssignmentCreateArgs} args - Arguments to create a MonitoringPlanAssignment.
      * @example
-     * // Create one StudyAssignment
-     * const StudyAssignment = await prisma.studyAssignment.create({
+     * // Create one MonitoringPlanAssignment
+     * const MonitoringPlanAssignment = await prisma.monitoringPlanAssignment.create({
      *   data: {
-     *     // ... data to create a StudyAssignment
+     *     // ... data to create a MonitoringPlanAssignment
      *   }
      * })
      * 
      */
-    create<T extends StudyAssignmentCreateArgs>(args: SelectSubset<T, StudyAssignmentCreateArgs<ExtArgs>>): Prisma__StudyAssignmentClient<$Result.GetResult<Prisma.$StudyAssignmentPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    create<T extends MonitoringPlanAssignmentCreateArgs>(args: SelectSubset<T, MonitoringPlanAssignmentCreateArgs<ExtArgs>>): Prisma__MonitoringPlanAssignmentClient<$Result.GetResult<Prisma.$MonitoringPlanAssignmentPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Create many StudyAssignments.
-     * @param {StudyAssignmentCreateManyArgs} args - Arguments to create many StudyAssignments.
+     * Create many MonitoringPlanAssignments.
+     * @param {MonitoringPlanAssignmentCreateManyArgs} args - Arguments to create many MonitoringPlanAssignments.
      * @example
-     * // Create many StudyAssignments
-     * const studyAssignment = await prisma.studyAssignment.createMany({
+     * // Create many MonitoringPlanAssignments
+     * const monitoringPlanAssignment = await prisma.monitoringPlanAssignment.createMany({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      *     
      */
-    createMany<T extends StudyAssignmentCreateManyArgs>(args?: SelectSubset<T, StudyAssignmentCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends MonitoringPlanAssignmentCreateManyArgs>(args?: SelectSubset<T, MonitoringPlanAssignmentCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create many StudyAssignments and returns the data saved in the database.
-     * @param {StudyAssignmentCreateManyAndReturnArgs} args - Arguments to create many StudyAssignments.
+     * Create many MonitoringPlanAssignments and returns the data saved in the database.
+     * @param {MonitoringPlanAssignmentCreateManyAndReturnArgs} args - Arguments to create many MonitoringPlanAssignments.
      * @example
-     * // Create many StudyAssignments
-     * const studyAssignment = await prisma.studyAssignment.createManyAndReturn({
+     * // Create many MonitoringPlanAssignments
+     * const monitoringPlanAssignment = await prisma.monitoringPlanAssignment.createManyAndReturn({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      * 
-     * // Create many StudyAssignments and only return the `id`
-     * const studyAssignmentWithIdOnly = await prisma.studyAssignment.createManyAndReturn({
+     * // Create many MonitoringPlanAssignments and only return the `id`
+     * const monitoringPlanAssignmentWithIdOnly = await prisma.monitoringPlanAssignment.createManyAndReturn({
      *   select: { id: true },
      *   data: [
      *     // ... provide data here
@@ -10818,28 +10831,28 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends StudyAssignmentCreateManyAndReturnArgs>(args?: SelectSubset<T, StudyAssignmentCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StudyAssignmentPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+    createManyAndReturn<T extends MonitoringPlanAssignmentCreateManyAndReturnArgs>(args?: SelectSubset<T, MonitoringPlanAssignmentCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MonitoringPlanAssignmentPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Delete a StudyAssignment.
-     * @param {StudyAssignmentDeleteArgs} args - Arguments to delete one StudyAssignment.
+     * Delete a MonitoringPlanAssignment.
+     * @param {MonitoringPlanAssignmentDeleteArgs} args - Arguments to delete one MonitoringPlanAssignment.
      * @example
-     * // Delete one StudyAssignment
-     * const StudyAssignment = await prisma.studyAssignment.delete({
+     * // Delete one MonitoringPlanAssignment
+     * const MonitoringPlanAssignment = await prisma.monitoringPlanAssignment.delete({
      *   where: {
-     *     // ... filter to delete one StudyAssignment
+     *     // ... filter to delete one MonitoringPlanAssignment
      *   }
      * })
      * 
      */
-    delete<T extends StudyAssignmentDeleteArgs>(args: SelectSubset<T, StudyAssignmentDeleteArgs<ExtArgs>>): Prisma__StudyAssignmentClient<$Result.GetResult<Prisma.$StudyAssignmentPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    delete<T extends MonitoringPlanAssignmentDeleteArgs>(args: SelectSubset<T, MonitoringPlanAssignmentDeleteArgs<ExtArgs>>): Prisma__MonitoringPlanAssignmentClient<$Result.GetResult<Prisma.$MonitoringPlanAssignmentPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Update one StudyAssignment.
-     * @param {StudyAssignmentUpdateArgs} args - Arguments to update one StudyAssignment.
+     * Update one MonitoringPlanAssignment.
+     * @param {MonitoringPlanAssignmentUpdateArgs} args - Arguments to update one MonitoringPlanAssignment.
      * @example
-     * // Update one StudyAssignment
-     * const studyAssignment = await prisma.studyAssignment.update({
+     * // Update one MonitoringPlanAssignment
+     * const monitoringPlanAssignment = await prisma.monitoringPlanAssignment.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -10849,30 +10862,30 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends StudyAssignmentUpdateArgs>(args: SelectSubset<T, StudyAssignmentUpdateArgs<ExtArgs>>): Prisma__StudyAssignmentClient<$Result.GetResult<Prisma.$StudyAssignmentPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    update<T extends MonitoringPlanAssignmentUpdateArgs>(args: SelectSubset<T, MonitoringPlanAssignmentUpdateArgs<ExtArgs>>): Prisma__MonitoringPlanAssignmentClient<$Result.GetResult<Prisma.$MonitoringPlanAssignmentPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Delete zero or more StudyAssignments.
-     * @param {StudyAssignmentDeleteManyArgs} args - Arguments to filter StudyAssignments to delete.
+     * Delete zero or more MonitoringPlanAssignments.
+     * @param {MonitoringPlanAssignmentDeleteManyArgs} args - Arguments to filter MonitoringPlanAssignments to delete.
      * @example
-     * // Delete a few StudyAssignments
-     * const { count } = await prisma.studyAssignment.deleteMany({
+     * // Delete a few MonitoringPlanAssignments
+     * const { count } = await prisma.monitoringPlanAssignment.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
      */
-    deleteMany<T extends StudyAssignmentDeleteManyArgs>(args?: SelectSubset<T, StudyAssignmentDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends MonitoringPlanAssignmentDeleteManyArgs>(args?: SelectSubset<T, MonitoringPlanAssignmentDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more StudyAssignments.
+     * Update zero or more MonitoringPlanAssignments.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {StudyAssignmentUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {MonitoringPlanAssignmentUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many StudyAssignments
-     * const studyAssignment = await prisma.studyAssignment.updateMany({
+     * // Update many MonitoringPlanAssignments
+     * const monitoringPlanAssignment = await prisma.monitoringPlanAssignment.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -10882,14 +10895,14 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends StudyAssignmentUpdateManyArgs>(args: SelectSubset<T, StudyAssignmentUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends MonitoringPlanAssignmentUpdateManyArgs>(args: SelectSubset<T, MonitoringPlanAssignmentUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more StudyAssignments and returns the data updated in the database.
-     * @param {StudyAssignmentUpdateManyAndReturnArgs} args - Arguments to update many StudyAssignments.
+     * Update zero or more MonitoringPlanAssignments and returns the data updated in the database.
+     * @param {MonitoringPlanAssignmentUpdateManyAndReturnArgs} args - Arguments to update many MonitoringPlanAssignments.
      * @example
-     * // Update many StudyAssignments
-     * const studyAssignment = await prisma.studyAssignment.updateManyAndReturn({
+     * // Update many MonitoringPlanAssignments
+     * const monitoringPlanAssignment = await prisma.monitoringPlanAssignment.updateManyAndReturn({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -10898,8 +10911,8 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more StudyAssignments and only return the `id`
-     * const studyAssignmentWithIdOnly = await prisma.studyAssignment.updateManyAndReturn({
+     * // Update zero or more MonitoringPlanAssignments and only return the `id`
+     * const monitoringPlanAssignmentWithIdOnly = await prisma.monitoringPlanAssignment.updateManyAndReturn({
      *   select: { id: true },
      *   where: {
      *     // ... provide filter here
@@ -10912,56 +10925,56 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends StudyAssignmentUpdateManyAndReturnArgs>(args: SelectSubset<T, StudyAssignmentUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StudyAssignmentPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+    updateManyAndReturn<T extends MonitoringPlanAssignmentUpdateManyAndReturnArgs>(args: SelectSubset<T, MonitoringPlanAssignmentUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MonitoringPlanAssignmentPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Create or update one StudyAssignment.
-     * @param {StudyAssignmentUpsertArgs} args - Arguments to update or create a StudyAssignment.
+     * Create or update one MonitoringPlanAssignment.
+     * @param {MonitoringPlanAssignmentUpsertArgs} args - Arguments to update or create a MonitoringPlanAssignment.
      * @example
-     * // Update or create a StudyAssignment
-     * const studyAssignment = await prisma.studyAssignment.upsert({
+     * // Update or create a MonitoringPlanAssignment
+     * const monitoringPlanAssignment = await prisma.monitoringPlanAssignment.upsert({
      *   create: {
-     *     // ... data to create a StudyAssignment
+     *     // ... data to create a MonitoringPlanAssignment
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the StudyAssignment we want to update
+     *     // ... the filter for the MonitoringPlanAssignment we want to update
      *   }
      * })
      */
-    upsert<T extends StudyAssignmentUpsertArgs>(args: SelectSubset<T, StudyAssignmentUpsertArgs<ExtArgs>>): Prisma__StudyAssignmentClient<$Result.GetResult<Prisma.$StudyAssignmentPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    upsert<T extends MonitoringPlanAssignmentUpsertArgs>(args: SelectSubset<T, MonitoringPlanAssignmentUpsertArgs<ExtArgs>>): Prisma__MonitoringPlanAssignmentClient<$Result.GetResult<Prisma.$MonitoringPlanAssignmentPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
-     * Count the number of StudyAssignments.
+     * Count the number of MonitoringPlanAssignments.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {StudyAssignmentCountArgs} args - Arguments to filter StudyAssignments to count.
+     * @param {MonitoringPlanAssignmentCountArgs} args - Arguments to filter MonitoringPlanAssignments to count.
      * @example
-     * // Count the number of StudyAssignments
-     * const count = await prisma.studyAssignment.count({
+     * // Count the number of MonitoringPlanAssignments
+     * const count = await prisma.monitoringPlanAssignment.count({
      *   where: {
-     *     // ... the filter for the StudyAssignments we want to count
+     *     // ... the filter for the MonitoringPlanAssignments we want to count
      *   }
      * })
     **/
-    count<T extends StudyAssignmentCountArgs>(
-      args?: Subset<T, StudyAssignmentCountArgs>,
+    count<T extends MonitoringPlanAssignmentCountArgs>(
+      args?: Subset<T, MonitoringPlanAssignmentCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], StudyAssignmentCountAggregateOutputType>
+          : GetScalarType<T['select'], MonitoringPlanAssignmentCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a StudyAssignment.
+     * Allows you to perform aggregations operations on a MonitoringPlanAssignment.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {StudyAssignmentAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {MonitoringPlanAssignmentAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -10981,13 +10994,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends StudyAssignmentAggregateArgs>(args: Subset<T, StudyAssignmentAggregateArgs>): Prisma.PrismaPromise<GetStudyAssignmentAggregateType<T>>
+    aggregate<T extends MonitoringPlanAssignmentAggregateArgs>(args: Subset<T, MonitoringPlanAssignmentAggregateArgs>): Prisma.PrismaPromise<GetMonitoringPlanAssignmentAggregateType<T>>
 
     /**
-     * Group by StudyAssignment.
+     * Group by MonitoringPlanAssignment.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {StudyAssignmentGroupByArgs} args - Group by arguments.
+     * @param {MonitoringPlanAssignmentGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -11002,14 +11015,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends StudyAssignmentGroupByArgs,
+      T extends MonitoringPlanAssignmentGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: StudyAssignmentGroupByArgs['orderBy'] }
-        : { orderBy?: StudyAssignmentGroupByArgs['orderBy'] },
+        ? { orderBy: MonitoringPlanAssignmentGroupByArgs['orderBy'] }
+        : { orderBy?: MonitoringPlanAssignmentGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -11058,22 +11071,22 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, StudyAssignmentGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetStudyAssignmentGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, MonitoringPlanAssignmentGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMonitoringPlanAssignmentGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the StudyAssignment model
+   * Fields of the MonitoringPlanAssignment model
    */
-  readonly fields: StudyAssignmentFieldRefs;
+  readonly fields: MonitoringPlanAssignmentFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for StudyAssignment.
+   * The delegate class that acts as a "Promise-like" for MonitoringPlanAssignment.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__StudyAssignmentClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__MonitoringPlanAssignmentClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    study<T extends StudyDefaultArgs<ExtArgs> = {}>(args?: Subset<T, StudyDefaultArgs<ExtArgs>>): Prisma__StudyClient<$Result.GetResult<Prisma.$StudyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    monitoringPlan<T extends MonitoringPlanDefaultArgs<ExtArgs> = {}>(args?: Subset<T, MonitoringPlanDefaultArgs<ExtArgs>>): Prisma__MonitoringPlanClient<$Result.GetResult<Prisma.$MonitoringPlanPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -11101,457 +11114,457 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the StudyAssignment model
+   * Fields of the MonitoringPlanAssignment model
    */
-  interface StudyAssignmentFieldRefs {
-    readonly id: FieldRef<"StudyAssignment", 'String'>
-    readonly studyId: FieldRef<"StudyAssignment", 'String'>
-    readonly userId: FieldRef<"StudyAssignment", 'String'>
-    readonly assignedAt: FieldRef<"StudyAssignment", 'DateTime'>
-    readonly role: FieldRef<"StudyAssignment", 'StudyRole'>
+  interface MonitoringPlanAssignmentFieldRefs {
+    readonly id: FieldRef<"MonitoringPlanAssignment", 'String'>
+    readonly monitoringPlanId: FieldRef<"MonitoringPlanAssignment", 'String'>
+    readonly userId: FieldRef<"MonitoringPlanAssignment", 'String'>
+    readonly assignedAt: FieldRef<"MonitoringPlanAssignment", 'DateTime'>
+    readonly role: FieldRef<"MonitoringPlanAssignment", 'MonitoringPlanRole'>
   }
     
 
   // Custom InputTypes
   /**
-   * StudyAssignment findUnique
+   * MonitoringPlanAssignment findUnique
    */
-  export type StudyAssignmentFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlanAssignmentFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the StudyAssignment
+     * Select specific fields to fetch from the MonitoringPlanAssignment
      */
-    select?: StudyAssignmentSelect<ExtArgs> | null
+    select?: MonitoringPlanAssignmentSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the StudyAssignment
+     * Omit specific fields from the MonitoringPlanAssignment
      */
-    omit?: StudyAssignmentOmit<ExtArgs> | null
+    omit?: MonitoringPlanAssignmentOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StudyAssignmentInclude<ExtArgs> | null
+    include?: MonitoringPlanAssignmentInclude<ExtArgs> | null
     /**
-     * Filter, which StudyAssignment to fetch.
+     * Filter, which MonitoringPlanAssignment to fetch.
      */
-    where: StudyAssignmentWhereUniqueInput
+    where: MonitoringPlanAssignmentWhereUniqueInput
   }
 
   /**
-   * StudyAssignment findUniqueOrThrow
+   * MonitoringPlanAssignment findUniqueOrThrow
    */
-  export type StudyAssignmentFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlanAssignmentFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the StudyAssignment
+     * Select specific fields to fetch from the MonitoringPlanAssignment
      */
-    select?: StudyAssignmentSelect<ExtArgs> | null
+    select?: MonitoringPlanAssignmentSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the StudyAssignment
+     * Omit specific fields from the MonitoringPlanAssignment
      */
-    omit?: StudyAssignmentOmit<ExtArgs> | null
+    omit?: MonitoringPlanAssignmentOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StudyAssignmentInclude<ExtArgs> | null
+    include?: MonitoringPlanAssignmentInclude<ExtArgs> | null
     /**
-     * Filter, which StudyAssignment to fetch.
+     * Filter, which MonitoringPlanAssignment to fetch.
      */
-    where: StudyAssignmentWhereUniqueInput
+    where: MonitoringPlanAssignmentWhereUniqueInput
   }
 
   /**
-   * StudyAssignment findFirst
+   * MonitoringPlanAssignment findFirst
    */
-  export type StudyAssignmentFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlanAssignmentFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the StudyAssignment
+     * Select specific fields to fetch from the MonitoringPlanAssignment
      */
-    select?: StudyAssignmentSelect<ExtArgs> | null
+    select?: MonitoringPlanAssignmentSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the StudyAssignment
+     * Omit specific fields from the MonitoringPlanAssignment
      */
-    omit?: StudyAssignmentOmit<ExtArgs> | null
+    omit?: MonitoringPlanAssignmentOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StudyAssignmentInclude<ExtArgs> | null
+    include?: MonitoringPlanAssignmentInclude<ExtArgs> | null
     /**
-     * Filter, which StudyAssignment to fetch.
+     * Filter, which MonitoringPlanAssignment to fetch.
      */
-    where?: StudyAssignmentWhereInput
+    where?: MonitoringPlanAssignmentWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of StudyAssignments to fetch.
+     * Determine the order of MonitoringPlanAssignments to fetch.
      */
-    orderBy?: StudyAssignmentOrderByWithRelationInput | StudyAssignmentOrderByWithRelationInput[]
+    orderBy?: MonitoringPlanAssignmentOrderByWithRelationInput | MonitoringPlanAssignmentOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for StudyAssignments.
+     * Sets the position for searching for MonitoringPlanAssignments.
      */
-    cursor?: StudyAssignmentWhereUniqueInput
+    cursor?: MonitoringPlanAssignmentWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` StudyAssignments from the position of the cursor.
+     * Take `±n` MonitoringPlanAssignments from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` StudyAssignments.
+     * Skip the first `n` MonitoringPlanAssignments.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of StudyAssignments.
+     * Filter by unique combinations of MonitoringPlanAssignments.
      */
-    distinct?: StudyAssignmentScalarFieldEnum | StudyAssignmentScalarFieldEnum[]
+    distinct?: MonitoringPlanAssignmentScalarFieldEnum | MonitoringPlanAssignmentScalarFieldEnum[]
   }
 
   /**
-   * StudyAssignment findFirstOrThrow
+   * MonitoringPlanAssignment findFirstOrThrow
    */
-  export type StudyAssignmentFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlanAssignmentFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the StudyAssignment
+     * Select specific fields to fetch from the MonitoringPlanAssignment
      */
-    select?: StudyAssignmentSelect<ExtArgs> | null
+    select?: MonitoringPlanAssignmentSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the StudyAssignment
+     * Omit specific fields from the MonitoringPlanAssignment
      */
-    omit?: StudyAssignmentOmit<ExtArgs> | null
+    omit?: MonitoringPlanAssignmentOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StudyAssignmentInclude<ExtArgs> | null
+    include?: MonitoringPlanAssignmentInclude<ExtArgs> | null
     /**
-     * Filter, which StudyAssignment to fetch.
+     * Filter, which MonitoringPlanAssignment to fetch.
      */
-    where?: StudyAssignmentWhereInput
+    where?: MonitoringPlanAssignmentWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of StudyAssignments to fetch.
+     * Determine the order of MonitoringPlanAssignments to fetch.
      */
-    orderBy?: StudyAssignmentOrderByWithRelationInput | StudyAssignmentOrderByWithRelationInput[]
+    orderBy?: MonitoringPlanAssignmentOrderByWithRelationInput | MonitoringPlanAssignmentOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for StudyAssignments.
+     * Sets the position for searching for MonitoringPlanAssignments.
      */
-    cursor?: StudyAssignmentWhereUniqueInput
+    cursor?: MonitoringPlanAssignmentWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` StudyAssignments from the position of the cursor.
+     * Take `±n` MonitoringPlanAssignments from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` StudyAssignments.
+     * Skip the first `n` MonitoringPlanAssignments.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of StudyAssignments.
+     * Filter by unique combinations of MonitoringPlanAssignments.
      */
-    distinct?: StudyAssignmentScalarFieldEnum | StudyAssignmentScalarFieldEnum[]
+    distinct?: MonitoringPlanAssignmentScalarFieldEnum | MonitoringPlanAssignmentScalarFieldEnum[]
   }
 
   /**
-   * StudyAssignment findMany
+   * MonitoringPlanAssignment findMany
    */
-  export type StudyAssignmentFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlanAssignmentFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the StudyAssignment
+     * Select specific fields to fetch from the MonitoringPlanAssignment
      */
-    select?: StudyAssignmentSelect<ExtArgs> | null
+    select?: MonitoringPlanAssignmentSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the StudyAssignment
+     * Omit specific fields from the MonitoringPlanAssignment
      */
-    omit?: StudyAssignmentOmit<ExtArgs> | null
+    omit?: MonitoringPlanAssignmentOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StudyAssignmentInclude<ExtArgs> | null
+    include?: MonitoringPlanAssignmentInclude<ExtArgs> | null
     /**
-     * Filter, which StudyAssignments to fetch.
+     * Filter, which MonitoringPlanAssignments to fetch.
      */
-    where?: StudyAssignmentWhereInput
+    where?: MonitoringPlanAssignmentWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of StudyAssignments to fetch.
+     * Determine the order of MonitoringPlanAssignments to fetch.
      */
-    orderBy?: StudyAssignmentOrderByWithRelationInput | StudyAssignmentOrderByWithRelationInput[]
+    orderBy?: MonitoringPlanAssignmentOrderByWithRelationInput | MonitoringPlanAssignmentOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing StudyAssignments.
+     * Sets the position for listing MonitoringPlanAssignments.
      */
-    cursor?: StudyAssignmentWhereUniqueInput
+    cursor?: MonitoringPlanAssignmentWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` StudyAssignments from the position of the cursor.
+     * Take `±n` MonitoringPlanAssignments from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` StudyAssignments.
+     * Skip the first `n` MonitoringPlanAssignments.
      */
     skip?: number
-    distinct?: StudyAssignmentScalarFieldEnum | StudyAssignmentScalarFieldEnum[]
+    distinct?: MonitoringPlanAssignmentScalarFieldEnum | MonitoringPlanAssignmentScalarFieldEnum[]
   }
 
   /**
-   * StudyAssignment create
+   * MonitoringPlanAssignment create
    */
-  export type StudyAssignmentCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlanAssignmentCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the StudyAssignment
+     * Select specific fields to fetch from the MonitoringPlanAssignment
      */
-    select?: StudyAssignmentSelect<ExtArgs> | null
+    select?: MonitoringPlanAssignmentSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the StudyAssignment
+     * Omit specific fields from the MonitoringPlanAssignment
      */
-    omit?: StudyAssignmentOmit<ExtArgs> | null
+    omit?: MonitoringPlanAssignmentOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StudyAssignmentInclude<ExtArgs> | null
+    include?: MonitoringPlanAssignmentInclude<ExtArgs> | null
     /**
-     * The data needed to create a StudyAssignment.
+     * The data needed to create a MonitoringPlanAssignment.
      */
-    data: XOR<StudyAssignmentCreateInput, StudyAssignmentUncheckedCreateInput>
+    data: XOR<MonitoringPlanAssignmentCreateInput, MonitoringPlanAssignmentUncheckedCreateInput>
   }
 
   /**
-   * StudyAssignment createMany
+   * MonitoringPlanAssignment createMany
    */
-  export type StudyAssignmentCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlanAssignmentCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many StudyAssignments.
+     * The data used to create many MonitoringPlanAssignments.
      */
-    data: StudyAssignmentCreateManyInput | StudyAssignmentCreateManyInput[]
+    data: MonitoringPlanAssignmentCreateManyInput | MonitoringPlanAssignmentCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * StudyAssignment createManyAndReturn
+   * MonitoringPlanAssignment createManyAndReturn
    */
-  export type StudyAssignmentCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlanAssignmentCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the StudyAssignment
+     * Select specific fields to fetch from the MonitoringPlanAssignment
      */
-    select?: StudyAssignmentSelectCreateManyAndReturn<ExtArgs> | null
+    select?: MonitoringPlanAssignmentSelectCreateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the StudyAssignment
+     * Omit specific fields from the MonitoringPlanAssignment
      */
-    omit?: StudyAssignmentOmit<ExtArgs> | null
+    omit?: MonitoringPlanAssignmentOmit<ExtArgs> | null
     /**
-     * The data used to create many StudyAssignments.
+     * The data used to create many MonitoringPlanAssignments.
      */
-    data: StudyAssignmentCreateManyInput | StudyAssignmentCreateManyInput[]
+    data: MonitoringPlanAssignmentCreateManyInput | MonitoringPlanAssignmentCreateManyInput[]
     skipDuplicates?: boolean
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StudyAssignmentIncludeCreateManyAndReturn<ExtArgs> | null
+    include?: MonitoringPlanAssignmentIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * StudyAssignment update
+   * MonitoringPlanAssignment update
    */
-  export type StudyAssignmentUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlanAssignmentUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the StudyAssignment
+     * Select specific fields to fetch from the MonitoringPlanAssignment
      */
-    select?: StudyAssignmentSelect<ExtArgs> | null
+    select?: MonitoringPlanAssignmentSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the StudyAssignment
+     * Omit specific fields from the MonitoringPlanAssignment
      */
-    omit?: StudyAssignmentOmit<ExtArgs> | null
+    omit?: MonitoringPlanAssignmentOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StudyAssignmentInclude<ExtArgs> | null
+    include?: MonitoringPlanAssignmentInclude<ExtArgs> | null
     /**
-     * The data needed to update a StudyAssignment.
+     * The data needed to update a MonitoringPlanAssignment.
      */
-    data: XOR<StudyAssignmentUpdateInput, StudyAssignmentUncheckedUpdateInput>
+    data: XOR<MonitoringPlanAssignmentUpdateInput, MonitoringPlanAssignmentUncheckedUpdateInput>
     /**
-     * Choose, which StudyAssignment to update.
+     * Choose, which MonitoringPlanAssignment to update.
      */
-    where: StudyAssignmentWhereUniqueInput
+    where: MonitoringPlanAssignmentWhereUniqueInput
   }
 
   /**
-   * StudyAssignment updateMany
+   * MonitoringPlanAssignment updateMany
    */
-  export type StudyAssignmentUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlanAssignmentUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update StudyAssignments.
+     * The data used to update MonitoringPlanAssignments.
      */
-    data: XOR<StudyAssignmentUpdateManyMutationInput, StudyAssignmentUncheckedUpdateManyInput>
+    data: XOR<MonitoringPlanAssignmentUpdateManyMutationInput, MonitoringPlanAssignmentUncheckedUpdateManyInput>
     /**
-     * Filter which StudyAssignments to update
+     * Filter which MonitoringPlanAssignments to update
      */
-    where?: StudyAssignmentWhereInput
+    where?: MonitoringPlanAssignmentWhereInput
     /**
-     * Limit how many StudyAssignments to update.
+     * Limit how many MonitoringPlanAssignments to update.
      */
     limit?: number
   }
 
   /**
-   * StudyAssignment updateManyAndReturn
+   * MonitoringPlanAssignment updateManyAndReturn
    */
-  export type StudyAssignmentUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlanAssignmentUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the StudyAssignment
+     * Select specific fields to fetch from the MonitoringPlanAssignment
      */
-    select?: StudyAssignmentSelectUpdateManyAndReturn<ExtArgs> | null
+    select?: MonitoringPlanAssignmentSelectUpdateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the StudyAssignment
+     * Omit specific fields from the MonitoringPlanAssignment
      */
-    omit?: StudyAssignmentOmit<ExtArgs> | null
+    omit?: MonitoringPlanAssignmentOmit<ExtArgs> | null
     /**
-     * The data used to update StudyAssignments.
+     * The data used to update MonitoringPlanAssignments.
      */
-    data: XOR<StudyAssignmentUpdateManyMutationInput, StudyAssignmentUncheckedUpdateManyInput>
+    data: XOR<MonitoringPlanAssignmentUpdateManyMutationInput, MonitoringPlanAssignmentUncheckedUpdateManyInput>
     /**
-     * Filter which StudyAssignments to update
+     * Filter which MonitoringPlanAssignments to update
      */
-    where?: StudyAssignmentWhereInput
+    where?: MonitoringPlanAssignmentWhereInput
     /**
-     * Limit how many StudyAssignments to update.
+     * Limit how many MonitoringPlanAssignments to update.
      */
     limit?: number
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StudyAssignmentIncludeUpdateManyAndReturn<ExtArgs> | null
+    include?: MonitoringPlanAssignmentIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * StudyAssignment upsert
+   * MonitoringPlanAssignment upsert
    */
-  export type StudyAssignmentUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlanAssignmentUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the StudyAssignment
+     * Select specific fields to fetch from the MonitoringPlanAssignment
      */
-    select?: StudyAssignmentSelect<ExtArgs> | null
+    select?: MonitoringPlanAssignmentSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the StudyAssignment
+     * Omit specific fields from the MonitoringPlanAssignment
      */
-    omit?: StudyAssignmentOmit<ExtArgs> | null
+    omit?: MonitoringPlanAssignmentOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StudyAssignmentInclude<ExtArgs> | null
+    include?: MonitoringPlanAssignmentInclude<ExtArgs> | null
     /**
-     * The filter to search for the StudyAssignment to update in case it exists.
+     * The filter to search for the MonitoringPlanAssignment to update in case it exists.
      */
-    where: StudyAssignmentWhereUniqueInput
+    where: MonitoringPlanAssignmentWhereUniqueInput
     /**
-     * In case the StudyAssignment found by the `where` argument doesn't exist, create a new StudyAssignment with this data.
+     * In case the MonitoringPlanAssignment found by the `where` argument doesn't exist, create a new MonitoringPlanAssignment with this data.
      */
-    create: XOR<StudyAssignmentCreateInput, StudyAssignmentUncheckedCreateInput>
+    create: XOR<MonitoringPlanAssignmentCreateInput, MonitoringPlanAssignmentUncheckedCreateInput>
     /**
-     * In case the StudyAssignment was found with the provided `where` argument, update it with this data.
+     * In case the MonitoringPlanAssignment was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<StudyAssignmentUpdateInput, StudyAssignmentUncheckedUpdateInput>
+    update: XOR<MonitoringPlanAssignmentUpdateInput, MonitoringPlanAssignmentUncheckedUpdateInput>
   }
 
   /**
-   * StudyAssignment delete
+   * MonitoringPlanAssignment delete
    */
-  export type StudyAssignmentDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlanAssignmentDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the StudyAssignment
+     * Select specific fields to fetch from the MonitoringPlanAssignment
      */
-    select?: StudyAssignmentSelect<ExtArgs> | null
+    select?: MonitoringPlanAssignmentSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the StudyAssignment
+     * Omit specific fields from the MonitoringPlanAssignment
      */
-    omit?: StudyAssignmentOmit<ExtArgs> | null
+    omit?: MonitoringPlanAssignmentOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StudyAssignmentInclude<ExtArgs> | null
+    include?: MonitoringPlanAssignmentInclude<ExtArgs> | null
     /**
-     * Filter which StudyAssignment to delete.
+     * Filter which MonitoringPlanAssignment to delete.
      */
-    where: StudyAssignmentWhereUniqueInput
+    where: MonitoringPlanAssignmentWhereUniqueInput
   }
 
   /**
-   * StudyAssignment deleteMany
+   * MonitoringPlanAssignment deleteMany
    */
-  export type StudyAssignmentDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlanAssignmentDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which StudyAssignments to delete
+     * Filter which MonitoringPlanAssignments to delete
      */
-    where?: StudyAssignmentWhereInput
+    where?: MonitoringPlanAssignmentWhereInput
     /**
-     * Limit how many StudyAssignments to delete.
+     * Limit how many MonitoringPlanAssignments to delete.
      */
     limit?: number
   }
 
   /**
-   * StudyAssignment without action
+   * MonitoringPlanAssignment without action
    */
-  export type StudyAssignmentDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlanAssignmentDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the StudyAssignment
+     * Select specific fields to fetch from the MonitoringPlanAssignment
      */
-    select?: StudyAssignmentSelect<ExtArgs> | null
+    select?: MonitoringPlanAssignmentSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the StudyAssignment
+     * Omit specific fields from the MonitoringPlanAssignment
      */
-    omit?: StudyAssignmentOmit<ExtArgs> | null
+    omit?: MonitoringPlanAssignmentOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StudyAssignmentInclude<ExtArgs> | null
+    include?: MonitoringPlanAssignmentInclude<ExtArgs> | null
   }
 
 
   /**
-   * Model StudyNote
+   * Model MonitoringPlanNote
    */
 
-  export type AggregateStudyNote = {
-    _count: StudyNoteCountAggregateOutputType | null
-    _min: StudyNoteMinAggregateOutputType | null
-    _max: StudyNoteMaxAggregateOutputType | null
+  export type AggregateMonitoringPlanNote = {
+    _count: MonitoringPlanNoteCountAggregateOutputType | null
+    _min: MonitoringPlanNoteMinAggregateOutputType | null
+    _max: MonitoringPlanNoteMaxAggregateOutputType | null
   }
 
-  export type StudyNoteMinAggregateOutputType = {
+  export type MonitoringPlanNoteMinAggregateOutputType = {
     id: string | null
-    studyId: string | null
+    monitoringPlanId: string | null
     content: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
 
-  export type StudyNoteMaxAggregateOutputType = {
+  export type MonitoringPlanNoteMaxAggregateOutputType = {
     id: string | null
-    studyId: string | null
+    monitoringPlanId: string | null
     content: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
 
-  export type StudyNoteCountAggregateOutputType = {
+  export type MonitoringPlanNoteCountAggregateOutputType = {
     id: number
-    studyId: number
+    monitoringPlanId: number
     content: number
     createdAt: number
     updatedAt: number
@@ -11559,315 +11572,315 @@ export namespace Prisma {
   }
 
 
-  export type StudyNoteMinAggregateInputType = {
+  export type MonitoringPlanNoteMinAggregateInputType = {
     id?: true
-    studyId?: true
+    monitoringPlanId?: true
     content?: true
     createdAt?: true
     updatedAt?: true
   }
 
-  export type StudyNoteMaxAggregateInputType = {
+  export type MonitoringPlanNoteMaxAggregateInputType = {
     id?: true
-    studyId?: true
+    monitoringPlanId?: true
     content?: true
     createdAt?: true
     updatedAt?: true
   }
 
-  export type StudyNoteCountAggregateInputType = {
+  export type MonitoringPlanNoteCountAggregateInputType = {
     id?: true
-    studyId?: true
+    monitoringPlanId?: true
     content?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
   }
 
-  export type StudyNoteAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlanNoteAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which StudyNote to aggregate.
+     * Filter which MonitoringPlanNote to aggregate.
      */
-    where?: StudyNoteWhereInput
+    where?: MonitoringPlanNoteWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of StudyNotes to fetch.
+     * Determine the order of MonitoringPlanNotes to fetch.
      */
-    orderBy?: StudyNoteOrderByWithRelationInput | StudyNoteOrderByWithRelationInput[]
+    orderBy?: MonitoringPlanNoteOrderByWithRelationInput | MonitoringPlanNoteOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: StudyNoteWhereUniqueInput
+    cursor?: MonitoringPlanNoteWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` StudyNotes from the position of the cursor.
+     * Take `±n` MonitoringPlanNotes from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` StudyNotes.
+     * Skip the first `n` MonitoringPlanNotes.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned StudyNotes
+     * Count returned MonitoringPlanNotes
     **/
-    _count?: true | StudyNoteCountAggregateInputType
+    _count?: true | MonitoringPlanNoteCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: StudyNoteMinAggregateInputType
+    _min?: MonitoringPlanNoteMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: StudyNoteMaxAggregateInputType
+    _max?: MonitoringPlanNoteMaxAggregateInputType
   }
 
-  export type GetStudyNoteAggregateType<T extends StudyNoteAggregateArgs> = {
-        [P in keyof T & keyof AggregateStudyNote]: P extends '_count' | 'count'
+  export type GetMonitoringPlanNoteAggregateType<T extends MonitoringPlanNoteAggregateArgs> = {
+        [P in keyof T & keyof AggregateMonitoringPlanNote]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateStudyNote[P]>
-      : GetScalarType<T[P], AggregateStudyNote[P]>
+        : GetScalarType<T[P], AggregateMonitoringPlanNote[P]>
+      : GetScalarType<T[P], AggregateMonitoringPlanNote[P]>
   }
 
 
 
 
-  export type StudyNoteGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: StudyNoteWhereInput
-    orderBy?: StudyNoteOrderByWithAggregationInput | StudyNoteOrderByWithAggregationInput[]
-    by: StudyNoteScalarFieldEnum[] | StudyNoteScalarFieldEnum
-    having?: StudyNoteScalarWhereWithAggregatesInput
+  export type MonitoringPlanNoteGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MonitoringPlanNoteWhereInput
+    orderBy?: MonitoringPlanNoteOrderByWithAggregationInput | MonitoringPlanNoteOrderByWithAggregationInput[]
+    by: MonitoringPlanNoteScalarFieldEnum[] | MonitoringPlanNoteScalarFieldEnum
+    having?: MonitoringPlanNoteScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: StudyNoteCountAggregateInputType | true
-    _min?: StudyNoteMinAggregateInputType
-    _max?: StudyNoteMaxAggregateInputType
+    _count?: MonitoringPlanNoteCountAggregateInputType | true
+    _min?: MonitoringPlanNoteMinAggregateInputType
+    _max?: MonitoringPlanNoteMaxAggregateInputType
   }
 
-  export type StudyNoteGroupByOutputType = {
+  export type MonitoringPlanNoteGroupByOutputType = {
     id: string
-    studyId: string
+    monitoringPlanId: string
     content: string
     createdAt: Date
     updatedAt: Date
-    _count: StudyNoteCountAggregateOutputType | null
-    _min: StudyNoteMinAggregateOutputType | null
-    _max: StudyNoteMaxAggregateOutputType | null
+    _count: MonitoringPlanNoteCountAggregateOutputType | null
+    _min: MonitoringPlanNoteMinAggregateOutputType | null
+    _max: MonitoringPlanNoteMaxAggregateOutputType | null
   }
 
-  type GetStudyNoteGroupByPayload<T extends StudyNoteGroupByArgs> = Prisma.PrismaPromise<
+  type GetMonitoringPlanNoteGroupByPayload<T extends MonitoringPlanNoteGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<StudyNoteGroupByOutputType, T['by']> &
+      PickEnumerable<MonitoringPlanNoteGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof StudyNoteGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof MonitoringPlanNoteGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], StudyNoteGroupByOutputType[P]>
-            : GetScalarType<T[P], StudyNoteGroupByOutputType[P]>
+              : GetScalarType<T[P], MonitoringPlanNoteGroupByOutputType[P]>
+            : GetScalarType<T[P], MonitoringPlanNoteGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type StudyNoteSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type MonitoringPlanNoteSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    studyId?: boolean
+    monitoringPlanId?: boolean
     content?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    study?: boolean | StudyDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["studyNote"]>
+    monitoringPlan?: boolean | MonitoringPlanDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["monitoringPlanNote"]>
 
-  export type StudyNoteSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type MonitoringPlanNoteSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    studyId?: boolean
+    monitoringPlanId?: boolean
     content?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    study?: boolean | StudyDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["studyNote"]>
+    monitoringPlan?: boolean | MonitoringPlanDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["monitoringPlanNote"]>
 
-  export type StudyNoteSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type MonitoringPlanNoteSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    studyId?: boolean
+    monitoringPlanId?: boolean
     content?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    study?: boolean | StudyDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["studyNote"]>
+    monitoringPlan?: boolean | MonitoringPlanDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["monitoringPlanNote"]>
 
-  export type StudyNoteSelectScalar = {
+  export type MonitoringPlanNoteSelectScalar = {
     id?: boolean
-    studyId?: boolean
+    monitoringPlanId?: boolean
     content?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type StudyNoteOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "studyId" | "content" | "createdAt" | "updatedAt", ExtArgs["result"]["studyNote"]>
-  export type StudyNoteInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    study?: boolean | StudyDefaultArgs<ExtArgs>
+  export type MonitoringPlanNoteOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "monitoringPlanId" | "content" | "createdAt" | "updatedAt", ExtArgs["result"]["monitoringPlanNote"]>
+  export type MonitoringPlanNoteInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    monitoringPlan?: boolean | MonitoringPlanDefaultArgs<ExtArgs>
   }
-  export type StudyNoteIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    study?: boolean | StudyDefaultArgs<ExtArgs>
+  export type MonitoringPlanNoteIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    monitoringPlan?: boolean | MonitoringPlanDefaultArgs<ExtArgs>
   }
-  export type StudyNoteIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    study?: boolean | StudyDefaultArgs<ExtArgs>
+  export type MonitoringPlanNoteIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    monitoringPlan?: boolean | MonitoringPlanDefaultArgs<ExtArgs>
   }
 
-  export type $StudyNotePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "StudyNote"
+  export type $MonitoringPlanNotePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "MonitoringPlanNote"
     objects: {
-      study: Prisma.$StudyPayload<ExtArgs>
+      monitoringPlan: Prisma.$MonitoringPlanPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      studyId: string
+      monitoringPlanId: string
       content: string
       createdAt: Date
       updatedAt: Date
-    }, ExtArgs["result"]["studyNote"]>
+    }, ExtArgs["result"]["monitoringPlanNote"]>
     composites: {}
   }
 
-  type StudyNoteGetPayload<S extends boolean | null | undefined | StudyNoteDefaultArgs> = $Result.GetResult<Prisma.$StudyNotePayload, S>
+  type MonitoringPlanNoteGetPayload<S extends boolean | null | undefined | MonitoringPlanNoteDefaultArgs> = $Result.GetResult<Prisma.$MonitoringPlanNotePayload, S>
 
-  type StudyNoteCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<StudyNoteFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: StudyNoteCountAggregateInputType | true
+  type MonitoringPlanNoteCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<MonitoringPlanNoteFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: MonitoringPlanNoteCountAggregateInputType | true
     }
 
-  export interface StudyNoteDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['StudyNote'], meta: { name: 'StudyNote' } }
+  export interface MonitoringPlanNoteDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['MonitoringPlanNote'], meta: { name: 'MonitoringPlanNote' } }
     /**
-     * Find zero or one StudyNote that matches the filter.
-     * @param {StudyNoteFindUniqueArgs} args - Arguments to find a StudyNote
+     * Find zero or one MonitoringPlanNote that matches the filter.
+     * @param {MonitoringPlanNoteFindUniqueArgs} args - Arguments to find a MonitoringPlanNote
      * @example
-     * // Get one StudyNote
-     * const studyNote = await prisma.studyNote.findUnique({
+     * // Get one MonitoringPlanNote
+     * const monitoringPlanNote = await prisma.monitoringPlanNote.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUnique<T extends StudyNoteFindUniqueArgs>(args: SelectSubset<T, StudyNoteFindUniqueArgs<ExtArgs>>): Prisma__StudyNoteClient<$Result.GetResult<Prisma.$StudyNotePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findUnique<T extends MonitoringPlanNoteFindUniqueArgs>(args: SelectSubset<T, MonitoringPlanNoteFindUniqueArgs<ExtArgs>>): Prisma__MonitoringPlanNoteClient<$Result.GetResult<Prisma.$MonitoringPlanNotePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find one StudyNote that matches the filter or throw an error with `error.code='P2025'`
+     * Find one MonitoringPlanNote that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
-     * @param {StudyNoteFindUniqueOrThrowArgs} args - Arguments to find a StudyNote
+     * @param {MonitoringPlanNoteFindUniqueOrThrowArgs} args - Arguments to find a MonitoringPlanNote
      * @example
-     * // Get one StudyNote
-     * const studyNote = await prisma.studyNote.findUniqueOrThrow({
+     * // Get one MonitoringPlanNote
+     * const monitoringPlanNote = await prisma.monitoringPlanNote.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUniqueOrThrow<T extends StudyNoteFindUniqueOrThrowArgs>(args: SelectSubset<T, StudyNoteFindUniqueOrThrowArgs<ExtArgs>>): Prisma__StudyNoteClient<$Result.GetResult<Prisma.$StudyNotePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findUniqueOrThrow<T extends MonitoringPlanNoteFindUniqueOrThrowArgs>(args: SelectSubset<T, MonitoringPlanNoteFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MonitoringPlanNoteClient<$Result.GetResult<Prisma.$MonitoringPlanNotePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first StudyNote that matches the filter.
+     * Find the first MonitoringPlanNote that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {StudyNoteFindFirstArgs} args - Arguments to find a StudyNote
+     * @param {MonitoringPlanNoteFindFirstArgs} args - Arguments to find a MonitoringPlanNote
      * @example
-     * // Get one StudyNote
-     * const studyNote = await prisma.studyNote.findFirst({
+     * // Get one MonitoringPlanNote
+     * const monitoringPlanNote = await prisma.monitoringPlanNote.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirst<T extends StudyNoteFindFirstArgs>(args?: SelectSubset<T, StudyNoteFindFirstArgs<ExtArgs>>): Prisma__StudyNoteClient<$Result.GetResult<Prisma.$StudyNotePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findFirst<T extends MonitoringPlanNoteFindFirstArgs>(args?: SelectSubset<T, MonitoringPlanNoteFindFirstArgs<ExtArgs>>): Prisma__MonitoringPlanNoteClient<$Result.GetResult<Prisma.$MonitoringPlanNotePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first StudyNote that matches the filter or
+     * Find the first MonitoringPlanNote that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {StudyNoteFindFirstOrThrowArgs} args - Arguments to find a StudyNote
+     * @param {MonitoringPlanNoteFindFirstOrThrowArgs} args - Arguments to find a MonitoringPlanNote
      * @example
-     * // Get one StudyNote
-     * const studyNote = await prisma.studyNote.findFirstOrThrow({
+     * // Get one MonitoringPlanNote
+     * const monitoringPlanNote = await prisma.monitoringPlanNote.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirstOrThrow<T extends StudyNoteFindFirstOrThrowArgs>(args?: SelectSubset<T, StudyNoteFindFirstOrThrowArgs<ExtArgs>>): Prisma__StudyNoteClient<$Result.GetResult<Prisma.$StudyNotePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findFirstOrThrow<T extends MonitoringPlanNoteFindFirstOrThrowArgs>(args?: SelectSubset<T, MonitoringPlanNoteFindFirstOrThrowArgs<ExtArgs>>): Prisma__MonitoringPlanNoteClient<$Result.GetResult<Prisma.$MonitoringPlanNotePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find zero or more StudyNotes that matches the filter.
+     * Find zero or more MonitoringPlanNotes that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {StudyNoteFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {MonitoringPlanNoteFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all StudyNotes
-     * const studyNotes = await prisma.studyNote.findMany()
+     * // Get all MonitoringPlanNotes
+     * const monitoringPlanNotes = await prisma.monitoringPlanNote.findMany()
      * 
-     * // Get first 10 StudyNotes
-     * const studyNotes = await prisma.studyNote.findMany({ take: 10 })
+     * // Get first 10 MonitoringPlanNotes
+     * const monitoringPlanNotes = await prisma.monitoringPlanNote.findMany({ take: 10 })
      * 
      * // Only select the `id`
-     * const studyNoteWithIdOnly = await prisma.studyNote.findMany({ select: { id: true } })
+     * const monitoringPlanNoteWithIdOnly = await prisma.monitoringPlanNote.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends StudyNoteFindManyArgs>(args?: SelectSubset<T, StudyNoteFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StudyNotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+    findMany<T extends MonitoringPlanNoteFindManyArgs>(args?: SelectSubset<T, MonitoringPlanNoteFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MonitoringPlanNotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
-     * Create a StudyNote.
-     * @param {StudyNoteCreateArgs} args - Arguments to create a StudyNote.
+     * Create a MonitoringPlanNote.
+     * @param {MonitoringPlanNoteCreateArgs} args - Arguments to create a MonitoringPlanNote.
      * @example
-     * // Create one StudyNote
-     * const StudyNote = await prisma.studyNote.create({
+     * // Create one MonitoringPlanNote
+     * const MonitoringPlanNote = await prisma.monitoringPlanNote.create({
      *   data: {
-     *     // ... data to create a StudyNote
+     *     // ... data to create a MonitoringPlanNote
      *   }
      * })
      * 
      */
-    create<T extends StudyNoteCreateArgs>(args: SelectSubset<T, StudyNoteCreateArgs<ExtArgs>>): Prisma__StudyNoteClient<$Result.GetResult<Prisma.$StudyNotePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    create<T extends MonitoringPlanNoteCreateArgs>(args: SelectSubset<T, MonitoringPlanNoteCreateArgs<ExtArgs>>): Prisma__MonitoringPlanNoteClient<$Result.GetResult<Prisma.$MonitoringPlanNotePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Create many StudyNotes.
-     * @param {StudyNoteCreateManyArgs} args - Arguments to create many StudyNotes.
+     * Create many MonitoringPlanNotes.
+     * @param {MonitoringPlanNoteCreateManyArgs} args - Arguments to create many MonitoringPlanNotes.
      * @example
-     * // Create many StudyNotes
-     * const studyNote = await prisma.studyNote.createMany({
+     * // Create many MonitoringPlanNotes
+     * const monitoringPlanNote = await prisma.monitoringPlanNote.createMany({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      *     
      */
-    createMany<T extends StudyNoteCreateManyArgs>(args?: SelectSubset<T, StudyNoteCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends MonitoringPlanNoteCreateManyArgs>(args?: SelectSubset<T, MonitoringPlanNoteCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create many StudyNotes and returns the data saved in the database.
-     * @param {StudyNoteCreateManyAndReturnArgs} args - Arguments to create many StudyNotes.
+     * Create many MonitoringPlanNotes and returns the data saved in the database.
+     * @param {MonitoringPlanNoteCreateManyAndReturnArgs} args - Arguments to create many MonitoringPlanNotes.
      * @example
-     * // Create many StudyNotes
-     * const studyNote = await prisma.studyNote.createManyAndReturn({
+     * // Create many MonitoringPlanNotes
+     * const monitoringPlanNote = await prisma.monitoringPlanNote.createManyAndReturn({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      * 
-     * // Create many StudyNotes and only return the `id`
-     * const studyNoteWithIdOnly = await prisma.studyNote.createManyAndReturn({
+     * // Create many MonitoringPlanNotes and only return the `id`
+     * const monitoringPlanNoteWithIdOnly = await prisma.monitoringPlanNote.createManyAndReturn({
      *   select: { id: true },
      *   data: [
      *     // ... provide data here
@@ -11877,28 +11890,28 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends StudyNoteCreateManyAndReturnArgs>(args?: SelectSubset<T, StudyNoteCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StudyNotePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+    createManyAndReturn<T extends MonitoringPlanNoteCreateManyAndReturnArgs>(args?: SelectSubset<T, MonitoringPlanNoteCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MonitoringPlanNotePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Delete a StudyNote.
-     * @param {StudyNoteDeleteArgs} args - Arguments to delete one StudyNote.
+     * Delete a MonitoringPlanNote.
+     * @param {MonitoringPlanNoteDeleteArgs} args - Arguments to delete one MonitoringPlanNote.
      * @example
-     * // Delete one StudyNote
-     * const StudyNote = await prisma.studyNote.delete({
+     * // Delete one MonitoringPlanNote
+     * const MonitoringPlanNote = await prisma.monitoringPlanNote.delete({
      *   where: {
-     *     // ... filter to delete one StudyNote
+     *     // ... filter to delete one MonitoringPlanNote
      *   }
      * })
      * 
      */
-    delete<T extends StudyNoteDeleteArgs>(args: SelectSubset<T, StudyNoteDeleteArgs<ExtArgs>>): Prisma__StudyNoteClient<$Result.GetResult<Prisma.$StudyNotePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    delete<T extends MonitoringPlanNoteDeleteArgs>(args: SelectSubset<T, MonitoringPlanNoteDeleteArgs<ExtArgs>>): Prisma__MonitoringPlanNoteClient<$Result.GetResult<Prisma.$MonitoringPlanNotePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Update one StudyNote.
-     * @param {StudyNoteUpdateArgs} args - Arguments to update one StudyNote.
+     * Update one MonitoringPlanNote.
+     * @param {MonitoringPlanNoteUpdateArgs} args - Arguments to update one MonitoringPlanNote.
      * @example
-     * // Update one StudyNote
-     * const studyNote = await prisma.studyNote.update({
+     * // Update one MonitoringPlanNote
+     * const monitoringPlanNote = await prisma.monitoringPlanNote.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -11908,30 +11921,30 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends StudyNoteUpdateArgs>(args: SelectSubset<T, StudyNoteUpdateArgs<ExtArgs>>): Prisma__StudyNoteClient<$Result.GetResult<Prisma.$StudyNotePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    update<T extends MonitoringPlanNoteUpdateArgs>(args: SelectSubset<T, MonitoringPlanNoteUpdateArgs<ExtArgs>>): Prisma__MonitoringPlanNoteClient<$Result.GetResult<Prisma.$MonitoringPlanNotePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Delete zero or more StudyNotes.
-     * @param {StudyNoteDeleteManyArgs} args - Arguments to filter StudyNotes to delete.
+     * Delete zero or more MonitoringPlanNotes.
+     * @param {MonitoringPlanNoteDeleteManyArgs} args - Arguments to filter MonitoringPlanNotes to delete.
      * @example
-     * // Delete a few StudyNotes
-     * const { count } = await prisma.studyNote.deleteMany({
+     * // Delete a few MonitoringPlanNotes
+     * const { count } = await prisma.monitoringPlanNote.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
      */
-    deleteMany<T extends StudyNoteDeleteManyArgs>(args?: SelectSubset<T, StudyNoteDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends MonitoringPlanNoteDeleteManyArgs>(args?: SelectSubset<T, MonitoringPlanNoteDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more StudyNotes.
+     * Update zero or more MonitoringPlanNotes.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {StudyNoteUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {MonitoringPlanNoteUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many StudyNotes
-     * const studyNote = await prisma.studyNote.updateMany({
+     * // Update many MonitoringPlanNotes
+     * const monitoringPlanNote = await prisma.monitoringPlanNote.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -11941,14 +11954,14 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends StudyNoteUpdateManyArgs>(args: SelectSubset<T, StudyNoteUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends MonitoringPlanNoteUpdateManyArgs>(args: SelectSubset<T, MonitoringPlanNoteUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more StudyNotes and returns the data updated in the database.
-     * @param {StudyNoteUpdateManyAndReturnArgs} args - Arguments to update many StudyNotes.
+     * Update zero or more MonitoringPlanNotes and returns the data updated in the database.
+     * @param {MonitoringPlanNoteUpdateManyAndReturnArgs} args - Arguments to update many MonitoringPlanNotes.
      * @example
-     * // Update many StudyNotes
-     * const studyNote = await prisma.studyNote.updateManyAndReturn({
+     * // Update many MonitoringPlanNotes
+     * const monitoringPlanNote = await prisma.monitoringPlanNote.updateManyAndReturn({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -11957,8 +11970,8 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more StudyNotes and only return the `id`
-     * const studyNoteWithIdOnly = await prisma.studyNote.updateManyAndReturn({
+     * // Update zero or more MonitoringPlanNotes and only return the `id`
+     * const monitoringPlanNoteWithIdOnly = await prisma.monitoringPlanNote.updateManyAndReturn({
      *   select: { id: true },
      *   where: {
      *     // ... provide filter here
@@ -11971,56 +11984,56 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends StudyNoteUpdateManyAndReturnArgs>(args: SelectSubset<T, StudyNoteUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StudyNotePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+    updateManyAndReturn<T extends MonitoringPlanNoteUpdateManyAndReturnArgs>(args: SelectSubset<T, MonitoringPlanNoteUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MonitoringPlanNotePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Create or update one StudyNote.
-     * @param {StudyNoteUpsertArgs} args - Arguments to update or create a StudyNote.
+     * Create or update one MonitoringPlanNote.
+     * @param {MonitoringPlanNoteUpsertArgs} args - Arguments to update or create a MonitoringPlanNote.
      * @example
-     * // Update or create a StudyNote
-     * const studyNote = await prisma.studyNote.upsert({
+     * // Update or create a MonitoringPlanNote
+     * const monitoringPlanNote = await prisma.monitoringPlanNote.upsert({
      *   create: {
-     *     // ... data to create a StudyNote
+     *     // ... data to create a MonitoringPlanNote
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the StudyNote we want to update
+     *     // ... the filter for the MonitoringPlanNote we want to update
      *   }
      * })
      */
-    upsert<T extends StudyNoteUpsertArgs>(args: SelectSubset<T, StudyNoteUpsertArgs<ExtArgs>>): Prisma__StudyNoteClient<$Result.GetResult<Prisma.$StudyNotePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    upsert<T extends MonitoringPlanNoteUpsertArgs>(args: SelectSubset<T, MonitoringPlanNoteUpsertArgs<ExtArgs>>): Prisma__MonitoringPlanNoteClient<$Result.GetResult<Prisma.$MonitoringPlanNotePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
-     * Count the number of StudyNotes.
+     * Count the number of MonitoringPlanNotes.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {StudyNoteCountArgs} args - Arguments to filter StudyNotes to count.
+     * @param {MonitoringPlanNoteCountArgs} args - Arguments to filter MonitoringPlanNotes to count.
      * @example
-     * // Count the number of StudyNotes
-     * const count = await prisma.studyNote.count({
+     * // Count the number of MonitoringPlanNotes
+     * const count = await prisma.monitoringPlanNote.count({
      *   where: {
-     *     // ... the filter for the StudyNotes we want to count
+     *     // ... the filter for the MonitoringPlanNotes we want to count
      *   }
      * })
     **/
-    count<T extends StudyNoteCountArgs>(
-      args?: Subset<T, StudyNoteCountArgs>,
+    count<T extends MonitoringPlanNoteCountArgs>(
+      args?: Subset<T, MonitoringPlanNoteCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], StudyNoteCountAggregateOutputType>
+          : GetScalarType<T['select'], MonitoringPlanNoteCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a StudyNote.
+     * Allows you to perform aggregations operations on a MonitoringPlanNote.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {StudyNoteAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {MonitoringPlanNoteAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -12040,13 +12053,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends StudyNoteAggregateArgs>(args: Subset<T, StudyNoteAggregateArgs>): Prisma.PrismaPromise<GetStudyNoteAggregateType<T>>
+    aggregate<T extends MonitoringPlanNoteAggregateArgs>(args: Subset<T, MonitoringPlanNoteAggregateArgs>): Prisma.PrismaPromise<GetMonitoringPlanNoteAggregateType<T>>
 
     /**
-     * Group by StudyNote.
+     * Group by MonitoringPlanNote.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {StudyNoteGroupByArgs} args - Group by arguments.
+     * @param {MonitoringPlanNoteGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -12061,14 +12074,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends StudyNoteGroupByArgs,
+      T extends MonitoringPlanNoteGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: StudyNoteGroupByArgs['orderBy'] }
-        : { orderBy?: StudyNoteGroupByArgs['orderBy'] },
+        ? { orderBy: MonitoringPlanNoteGroupByArgs['orderBy'] }
+        : { orderBy?: MonitoringPlanNoteGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -12117,22 +12130,22 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, StudyNoteGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetStudyNoteGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, MonitoringPlanNoteGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMonitoringPlanNoteGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the StudyNote model
+   * Fields of the MonitoringPlanNote model
    */
-  readonly fields: StudyNoteFieldRefs;
+  readonly fields: MonitoringPlanNoteFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for StudyNote.
+   * The delegate class that acts as a "Promise-like" for MonitoringPlanNote.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__StudyNoteClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__MonitoringPlanNoteClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    study<T extends StudyDefaultArgs<ExtArgs> = {}>(args?: Subset<T, StudyDefaultArgs<ExtArgs>>): Prisma__StudyClient<$Result.GetResult<Prisma.$StudyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    monitoringPlan<T extends MonitoringPlanDefaultArgs<ExtArgs> = {}>(args?: Subset<T, MonitoringPlanDefaultArgs<ExtArgs>>): Prisma__MonitoringPlanClient<$Result.GetResult<Prisma.$MonitoringPlanPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -12159,425 +12172,425 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the StudyNote model
+   * Fields of the MonitoringPlanNote model
    */
-  interface StudyNoteFieldRefs {
-    readonly id: FieldRef<"StudyNote", 'String'>
-    readonly studyId: FieldRef<"StudyNote", 'String'>
-    readonly content: FieldRef<"StudyNote", 'String'>
-    readonly createdAt: FieldRef<"StudyNote", 'DateTime'>
-    readonly updatedAt: FieldRef<"StudyNote", 'DateTime'>
+  interface MonitoringPlanNoteFieldRefs {
+    readonly id: FieldRef<"MonitoringPlanNote", 'String'>
+    readonly monitoringPlanId: FieldRef<"MonitoringPlanNote", 'String'>
+    readonly content: FieldRef<"MonitoringPlanNote", 'String'>
+    readonly createdAt: FieldRef<"MonitoringPlanNote", 'DateTime'>
+    readonly updatedAt: FieldRef<"MonitoringPlanNote", 'DateTime'>
   }
     
 
   // Custom InputTypes
   /**
-   * StudyNote findUnique
+   * MonitoringPlanNote findUnique
    */
-  export type StudyNoteFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlanNoteFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the StudyNote
+     * Select specific fields to fetch from the MonitoringPlanNote
      */
-    select?: StudyNoteSelect<ExtArgs> | null
+    select?: MonitoringPlanNoteSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the StudyNote
+     * Omit specific fields from the MonitoringPlanNote
      */
-    omit?: StudyNoteOmit<ExtArgs> | null
+    omit?: MonitoringPlanNoteOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StudyNoteInclude<ExtArgs> | null
+    include?: MonitoringPlanNoteInclude<ExtArgs> | null
     /**
-     * Filter, which StudyNote to fetch.
+     * Filter, which MonitoringPlanNote to fetch.
      */
-    where: StudyNoteWhereUniqueInput
+    where: MonitoringPlanNoteWhereUniqueInput
   }
 
   /**
-   * StudyNote findUniqueOrThrow
+   * MonitoringPlanNote findUniqueOrThrow
    */
-  export type StudyNoteFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlanNoteFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the StudyNote
+     * Select specific fields to fetch from the MonitoringPlanNote
      */
-    select?: StudyNoteSelect<ExtArgs> | null
+    select?: MonitoringPlanNoteSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the StudyNote
+     * Omit specific fields from the MonitoringPlanNote
      */
-    omit?: StudyNoteOmit<ExtArgs> | null
+    omit?: MonitoringPlanNoteOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StudyNoteInclude<ExtArgs> | null
+    include?: MonitoringPlanNoteInclude<ExtArgs> | null
     /**
-     * Filter, which StudyNote to fetch.
+     * Filter, which MonitoringPlanNote to fetch.
      */
-    where: StudyNoteWhereUniqueInput
+    where: MonitoringPlanNoteWhereUniqueInput
   }
 
   /**
-   * StudyNote findFirst
+   * MonitoringPlanNote findFirst
    */
-  export type StudyNoteFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlanNoteFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the StudyNote
+     * Select specific fields to fetch from the MonitoringPlanNote
      */
-    select?: StudyNoteSelect<ExtArgs> | null
+    select?: MonitoringPlanNoteSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the StudyNote
+     * Omit specific fields from the MonitoringPlanNote
      */
-    omit?: StudyNoteOmit<ExtArgs> | null
+    omit?: MonitoringPlanNoteOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StudyNoteInclude<ExtArgs> | null
+    include?: MonitoringPlanNoteInclude<ExtArgs> | null
     /**
-     * Filter, which StudyNote to fetch.
+     * Filter, which MonitoringPlanNote to fetch.
      */
-    where?: StudyNoteWhereInput
+    where?: MonitoringPlanNoteWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of StudyNotes to fetch.
+     * Determine the order of MonitoringPlanNotes to fetch.
      */
-    orderBy?: StudyNoteOrderByWithRelationInput | StudyNoteOrderByWithRelationInput[]
+    orderBy?: MonitoringPlanNoteOrderByWithRelationInput | MonitoringPlanNoteOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for StudyNotes.
+     * Sets the position for searching for MonitoringPlanNotes.
      */
-    cursor?: StudyNoteWhereUniqueInput
+    cursor?: MonitoringPlanNoteWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` StudyNotes from the position of the cursor.
+     * Take `±n` MonitoringPlanNotes from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` StudyNotes.
+     * Skip the first `n` MonitoringPlanNotes.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of StudyNotes.
+     * Filter by unique combinations of MonitoringPlanNotes.
      */
-    distinct?: StudyNoteScalarFieldEnum | StudyNoteScalarFieldEnum[]
+    distinct?: MonitoringPlanNoteScalarFieldEnum | MonitoringPlanNoteScalarFieldEnum[]
   }
 
   /**
-   * StudyNote findFirstOrThrow
+   * MonitoringPlanNote findFirstOrThrow
    */
-  export type StudyNoteFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlanNoteFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the StudyNote
+     * Select specific fields to fetch from the MonitoringPlanNote
      */
-    select?: StudyNoteSelect<ExtArgs> | null
+    select?: MonitoringPlanNoteSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the StudyNote
+     * Omit specific fields from the MonitoringPlanNote
      */
-    omit?: StudyNoteOmit<ExtArgs> | null
+    omit?: MonitoringPlanNoteOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StudyNoteInclude<ExtArgs> | null
+    include?: MonitoringPlanNoteInclude<ExtArgs> | null
     /**
-     * Filter, which StudyNote to fetch.
+     * Filter, which MonitoringPlanNote to fetch.
      */
-    where?: StudyNoteWhereInput
+    where?: MonitoringPlanNoteWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of StudyNotes to fetch.
+     * Determine the order of MonitoringPlanNotes to fetch.
      */
-    orderBy?: StudyNoteOrderByWithRelationInput | StudyNoteOrderByWithRelationInput[]
+    orderBy?: MonitoringPlanNoteOrderByWithRelationInput | MonitoringPlanNoteOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for StudyNotes.
+     * Sets the position for searching for MonitoringPlanNotes.
      */
-    cursor?: StudyNoteWhereUniqueInput
+    cursor?: MonitoringPlanNoteWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` StudyNotes from the position of the cursor.
+     * Take `±n` MonitoringPlanNotes from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` StudyNotes.
+     * Skip the first `n` MonitoringPlanNotes.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of StudyNotes.
+     * Filter by unique combinations of MonitoringPlanNotes.
      */
-    distinct?: StudyNoteScalarFieldEnum | StudyNoteScalarFieldEnum[]
+    distinct?: MonitoringPlanNoteScalarFieldEnum | MonitoringPlanNoteScalarFieldEnum[]
   }
 
   /**
-   * StudyNote findMany
+   * MonitoringPlanNote findMany
    */
-  export type StudyNoteFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlanNoteFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the StudyNote
+     * Select specific fields to fetch from the MonitoringPlanNote
      */
-    select?: StudyNoteSelect<ExtArgs> | null
+    select?: MonitoringPlanNoteSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the StudyNote
+     * Omit specific fields from the MonitoringPlanNote
      */
-    omit?: StudyNoteOmit<ExtArgs> | null
+    omit?: MonitoringPlanNoteOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StudyNoteInclude<ExtArgs> | null
+    include?: MonitoringPlanNoteInclude<ExtArgs> | null
     /**
-     * Filter, which StudyNotes to fetch.
+     * Filter, which MonitoringPlanNotes to fetch.
      */
-    where?: StudyNoteWhereInput
+    where?: MonitoringPlanNoteWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of StudyNotes to fetch.
+     * Determine the order of MonitoringPlanNotes to fetch.
      */
-    orderBy?: StudyNoteOrderByWithRelationInput | StudyNoteOrderByWithRelationInput[]
+    orderBy?: MonitoringPlanNoteOrderByWithRelationInput | MonitoringPlanNoteOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing StudyNotes.
+     * Sets the position for listing MonitoringPlanNotes.
      */
-    cursor?: StudyNoteWhereUniqueInput
+    cursor?: MonitoringPlanNoteWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` StudyNotes from the position of the cursor.
+     * Take `±n` MonitoringPlanNotes from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` StudyNotes.
+     * Skip the first `n` MonitoringPlanNotes.
      */
     skip?: number
-    distinct?: StudyNoteScalarFieldEnum | StudyNoteScalarFieldEnum[]
+    distinct?: MonitoringPlanNoteScalarFieldEnum | MonitoringPlanNoteScalarFieldEnum[]
   }
 
   /**
-   * StudyNote create
+   * MonitoringPlanNote create
    */
-  export type StudyNoteCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlanNoteCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the StudyNote
+     * Select specific fields to fetch from the MonitoringPlanNote
      */
-    select?: StudyNoteSelect<ExtArgs> | null
+    select?: MonitoringPlanNoteSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the StudyNote
+     * Omit specific fields from the MonitoringPlanNote
      */
-    omit?: StudyNoteOmit<ExtArgs> | null
+    omit?: MonitoringPlanNoteOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StudyNoteInclude<ExtArgs> | null
+    include?: MonitoringPlanNoteInclude<ExtArgs> | null
     /**
-     * The data needed to create a StudyNote.
+     * The data needed to create a MonitoringPlanNote.
      */
-    data: XOR<StudyNoteCreateInput, StudyNoteUncheckedCreateInput>
+    data: XOR<MonitoringPlanNoteCreateInput, MonitoringPlanNoteUncheckedCreateInput>
   }
 
   /**
-   * StudyNote createMany
+   * MonitoringPlanNote createMany
    */
-  export type StudyNoteCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlanNoteCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many StudyNotes.
+     * The data used to create many MonitoringPlanNotes.
      */
-    data: StudyNoteCreateManyInput | StudyNoteCreateManyInput[]
+    data: MonitoringPlanNoteCreateManyInput | MonitoringPlanNoteCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * StudyNote createManyAndReturn
+   * MonitoringPlanNote createManyAndReturn
    */
-  export type StudyNoteCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlanNoteCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the StudyNote
+     * Select specific fields to fetch from the MonitoringPlanNote
      */
-    select?: StudyNoteSelectCreateManyAndReturn<ExtArgs> | null
+    select?: MonitoringPlanNoteSelectCreateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the StudyNote
+     * Omit specific fields from the MonitoringPlanNote
      */
-    omit?: StudyNoteOmit<ExtArgs> | null
+    omit?: MonitoringPlanNoteOmit<ExtArgs> | null
     /**
-     * The data used to create many StudyNotes.
+     * The data used to create many MonitoringPlanNotes.
      */
-    data: StudyNoteCreateManyInput | StudyNoteCreateManyInput[]
+    data: MonitoringPlanNoteCreateManyInput | MonitoringPlanNoteCreateManyInput[]
     skipDuplicates?: boolean
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StudyNoteIncludeCreateManyAndReturn<ExtArgs> | null
+    include?: MonitoringPlanNoteIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * StudyNote update
+   * MonitoringPlanNote update
    */
-  export type StudyNoteUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlanNoteUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the StudyNote
+     * Select specific fields to fetch from the MonitoringPlanNote
      */
-    select?: StudyNoteSelect<ExtArgs> | null
+    select?: MonitoringPlanNoteSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the StudyNote
+     * Omit specific fields from the MonitoringPlanNote
      */
-    omit?: StudyNoteOmit<ExtArgs> | null
+    omit?: MonitoringPlanNoteOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StudyNoteInclude<ExtArgs> | null
+    include?: MonitoringPlanNoteInclude<ExtArgs> | null
     /**
-     * The data needed to update a StudyNote.
+     * The data needed to update a MonitoringPlanNote.
      */
-    data: XOR<StudyNoteUpdateInput, StudyNoteUncheckedUpdateInput>
+    data: XOR<MonitoringPlanNoteUpdateInput, MonitoringPlanNoteUncheckedUpdateInput>
     /**
-     * Choose, which StudyNote to update.
+     * Choose, which MonitoringPlanNote to update.
      */
-    where: StudyNoteWhereUniqueInput
+    where: MonitoringPlanNoteWhereUniqueInput
   }
 
   /**
-   * StudyNote updateMany
+   * MonitoringPlanNote updateMany
    */
-  export type StudyNoteUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlanNoteUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update StudyNotes.
+     * The data used to update MonitoringPlanNotes.
      */
-    data: XOR<StudyNoteUpdateManyMutationInput, StudyNoteUncheckedUpdateManyInput>
+    data: XOR<MonitoringPlanNoteUpdateManyMutationInput, MonitoringPlanNoteUncheckedUpdateManyInput>
     /**
-     * Filter which StudyNotes to update
+     * Filter which MonitoringPlanNotes to update
      */
-    where?: StudyNoteWhereInput
+    where?: MonitoringPlanNoteWhereInput
     /**
-     * Limit how many StudyNotes to update.
+     * Limit how many MonitoringPlanNotes to update.
      */
     limit?: number
   }
 
   /**
-   * StudyNote updateManyAndReturn
+   * MonitoringPlanNote updateManyAndReturn
    */
-  export type StudyNoteUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlanNoteUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the StudyNote
+     * Select specific fields to fetch from the MonitoringPlanNote
      */
-    select?: StudyNoteSelectUpdateManyAndReturn<ExtArgs> | null
+    select?: MonitoringPlanNoteSelectUpdateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the StudyNote
+     * Omit specific fields from the MonitoringPlanNote
      */
-    omit?: StudyNoteOmit<ExtArgs> | null
+    omit?: MonitoringPlanNoteOmit<ExtArgs> | null
     /**
-     * The data used to update StudyNotes.
+     * The data used to update MonitoringPlanNotes.
      */
-    data: XOR<StudyNoteUpdateManyMutationInput, StudyNoteUncheckedUpdateManyInput>
+    data: XOR<MonitoringPlanNoteUpdateManyMutationInput, MonitoringPlanNoteUncheckedUpdateManyInput>
     /**
-     * Filter which StudyNotes to update
+     * Filter which MonitoringPlanNotes to update
      */
-    where?: StudyNoteWhereInput
+    where?: MonitoringPlanNoteWhereInput
     /**
-     * Limit how many StudyNotes to update.
+     * Limit how many MonitoringPlanNotes to update.
      */
     limit?: number
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StudyNoteIncludeUpdateManyAndReturn<ExtArgs> | null
+    include?: MonitoringPlanNoteIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * StudyNote upsert
+   * MonitoringPlanNote upsert
    */
-  export type StudyNoteUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlanNoteUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the StudyNote
+     * Select specific fields to fetch from the MonitoringPlanNote
      */
-    select?: StudyNoteSelect<ExtArgs> | null
+    select?: MonitoringPlanNoteSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the StudyNote
+     * Omit specific fields from the MonitoringPlanNote
      */
-    omit?: StudyNoteOmit<ExtArgs> | null
+    omit?: MonitoringPlanNoteOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StudyNoteInclude<ExtArgs> | null
+    include?: MonitoringPlanNoteInclude<ExtArgs> | null
     /**
-     * The filter to search for the StudyNote to update in case it exists.
+     * The filter to search for the MonitoringPlanNote to update in case it exists.
      */
-    where: StudyNoteWhereUniqueInput
+    where: MonitoringPlanNoteWhereUniqueInput
     /**
-     * In case the StudyNote found by the `where` argument doesn't exist, create a new StudyNote with this data.
+     * In case the MonitoringPlanNote found by the `where` argument doesn't exist, create a new MonitoringPlanNote with this data.
      */
-    create: XOR<StudyNoteCreateInput, StudyNoteUncheckedCreateInput>
+    create: XOR<MonitoringPlanNoteCreateInput, MonitoringPlanNoteUncheckedCreateInput>
     /**
-     * In case the StudyNote was found with the provided `where` argument, update it with this data.
+     * In case the MonitoringPlanNote was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<StudyNoteUpdateInput, StudyNoteUncheckedUpdateInput>
+    update: XOR<MonitoringPlanNoteUpdateInput, MonitoringPlanNoteUncheckedUpdateInput>
   }
 
   /**
-   * StudyNote delete
+   * MonitoringPlanNote delete
    */
-  export type StudyNoteDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlanNoteDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the StudyNote
+     * Select specific fields to fetch from the MonitoringPlanNote
      */
-    select?: StudyNoteSelect<ExtArgs> | null
+    select?: MonitoringPlanNoteSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the StudyNote
+     * Omit specific fields from the MonitoringPlanNote
      */
-    omit?: StudyNoteOmit<ExtArgs> | null
+    omit?: MonitoringPlanNoteOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StudyNoteInclude<ExtArgs> | null
+    include?: MonitoringPlanNoteInclude<ExtArgs> | null
     /**
-     * Filter which StudyNote to delete.
+     * Filter which MonitoringPlanNote to delete.
      */
-    where: StudyNoteWhereUniqueInput
+    where: MonitoringPlanNoteWhereUniqueInput
   }
 
   /**
-   * StudyNote deleteMany
+   * MonitoringPlanNote deleteMany
    */
-  export type StudyNoteDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlanNoteDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which StudyNotes to delete
+     * Filter which MonitoringPlanNotes to delete
      */
-    where?: StudyNoteWhereInput
+    where?: MonitoringPlanNoteWhereInput
     /**
-     * Limit how many StudyNotes to delete.
+     * Limit how many MonitoringPlanNotes to delete.
      */
     limit?: number
   }
 
   /**
-   * StudyNote without action
+   * MonitoringPlanNote without action
    */
-  export type StudyNoteDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MonitoringPlanNoteDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the StudyNote
+     * Select specific fields to fetch from the MonitoringPlanNote
      */
-    select?: StudyNoteSelect<ExtArgs> | null
+    select?: MonitoringPlanNoteSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the StudyNote
+     * Omit specific fields from the MonitoringPlanNote
      */
-    omit?: StudyNoteOmit<ExtArgs> | null
+    omit?: MonitoringPlanNoteOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StudyNoteInclude<ExtArgs> | null
+    include?: MonitoringPlanNoteInclude<ExtArgs> | null
   }
 
 
@@ -12612,7 +12625,7 @@ export namespace Prisma {
     units: string | null
     minValue: number | null
     maxValue: number | null
-    studyId: string | null
+    monitoringPlanId: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -12626,7 +12639,7 @@ export namespace Prisma {
     units: string | null
     minValue: number | null
     maxValue: number | null
-    studyId: string | null
+    monitoringPlanId: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -12641,7 +12654,7 @@ export namespace Prisma {
     minValue: number
     maxValue: number
     options: number
-    studyId: number
+    monitoringPlanId: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -12667,7 +12680,7 @@ export namespace Prisma {
     units?: true
     minValue?: true
     maxValue?: true
-    studyId?: true
+    monitoringPlanId?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -12681,7 +12694,7 @@ export namespace Prisma {
     units?: true
     minValue?: true
     maxValue?: true
-    studyId?: true
+    monitoringPlanId?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -12696,7 +12709,7 @@ export namespace Prisma {
     minValue?: true
     maxValue?: true
     options?: true
-    studyId?: true
+    monitoringPlanId?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -12798,7 +12811,7 @@ export namespace Prisma {
     minValue: number | null
     maxValue: number | null
     options: JsonValue | null
-    studyId: string
+    monitoringPlanId: string
     createdAt: Date
     updatedAt: Date
     _count: SymptomTemplateCountAggregateOutputType | null
@@ -12832,10 +12845,10 @@ export namespace Prisma {
     minValue?: boolean
     maxValue?: boolean
     options?: boolean
-    studyId?: boolean
+    monitoringPlanId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    study?: boolean | StudyDefaultArgs<ExtArgs>
+    monitoringPlan?: boolean | MonitoringPlanDefaultArgs<ExtArgs>
     observations?: boolean | SymptomTemplate$observationsArgs<ExtArgs>
     alertThresholds?: boolean | SymptomTemplate$alertThresholdsArgs<ExtArgs>
     _count?: boolean | SymptomTemplateCountOutputTypeDefaultArgs<ExtArgs>
@@ -12851,10 +12864,10 @@ export namespace Prisma {
     minValue?: boolean
     maxValue?: boolean
     options?: boolean
-    studyId?: boolean
+    monitoringPlanId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    study?: boolean | StudyDefaultArgs<ExtArgs>
+    monitoringPlan?: boolean | MonitoringPlanDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["symptomTemplate"]>
 
   export type SymptomTemplateSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -12867,10 +12880,10 @@ export namespace Prisma {
     minValue?: boolean
     maxValue?: boolean
     options?: boolean
-    studyId?: boolean
+    monitoringPlanId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    study?: boolean | StudyDefaultArgs<ExtArgs>
+    monitoringPlan?: boolean | MonitoringPlanDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["symptomTemplate"]>
 
   export type SymptomTemplateSelectScalar = {
@@ -12883,29 +12896,29 @@ export namespace Prisma {
     minValue?: boolean
     maxValue?: boolean
     options?: boolean
-    studyId?: boolean
+    monitoringPlanId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type SymptomTemplateOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "category" | "dataType" | "units" | "minValue" | "maxValue" | "options" | "studyId" | "createdAt" | "updatedAt", ExtArgs["result"]["symptomTemplate"]>
+  export type SymptomTemplateOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "category" | "dataType" | "units" | "minValue" | "maxValue" | "options" | "monitoringPlanId" | "createdAt" | "updatedAt", ExtArgs["result"]["symptomTemplate"]>
   export type SymptomTemplateInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    study?: boolean | StudyDefaultArgs<ExtArgs>
+    monitoringPlan?: boolean | MonitoringPlanDefaultArgs<ExtArgs>
     observations?: boolean | SymptomTemplate$observationsArgs<ExtArgs>
     alertThresholds?: boolean | SymptomTemplate$alertThresholdsArgs<ExtArgs>
     _count?: boolean | SymptomTemplateCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type SymptomTemplateIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    study?: boolean | StudyDefaultArgs<ExtArgs>
+    monitoringPlan?: boolean | MonitoringPlanDefaultArgs<ExtArgs>
   }
   export type SymptomTemplateIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    study?: boolean | StudyDefaultArgs<ExtArgs>
+    monitoringPlan?: boolean | MonitoringPlanDefaultArgs<ExtArgs>
   }
 
   export type $SymptomTemplatePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "SymptomTemplate"
     objects: {
-      study: Prisma.$StudyPayload<ExtArgs>
+      monitoringPlan: Prisma.$MonitoringPlanPayload<ExtArgs>
       observations: Prisma.$ObservationPayload<ExtArgs>[]
       alertThresholds: Prisma.$AlertThresholdPayload<ExtArgs>[]
     }
@@ -12919,7 +12932,7 @@ export namespace Prisma {
       minValue: number | null
       maxValue: number | null
       options: Prisma.JsonValue | null
-      studyId: string
+      monitoringPlanId: string
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["symptomTemplate"]>
@@ -13316,7 +13329,7 @@ export namespace Prisma {
    */
   export interface Prisma__SymptomTemplateClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    study<T extends StudyDefaultArgs<ExtArgs> = {}>(args?: Subset<T, StudyDefaultArgs<ExtArgs>>): Prisma__StudyClient<$Result.GetResult<Prisma.$StudyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    monitoringPlan<T extends MonitoringPlanDefaultArgs<ExtArgs> = {}>(args?: Subset<T, MonitoringPlanDefaultArgs<ExtArgs>>): Prisma__MonitoringPlanClient<$Result.GetResult<Prisma.$MonitoringPlanPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     observations<T extends SymptomTemplate$observationsArgs<ExtArgs> = {}>(args?: Subset<T, SymptomTemplate$observationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ObservationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     alertThresholds<T extends SymptomTemplate$alertThresholdsArgs<ExtArgs> = {}>(args?: Subset<T, SymptomTemplate$alertThresholdsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AlertThresholdPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
@@ -13357,7 +13370,7 @@ export namespace Prisma {
     readonly minValue: FieldRef<"SymptomTemplate", 'Float'>
     readonly maxValue: FieldRef<"SymptomTemplate", 'Float'>
     readonly options: FieldRef<"SymptomTemplate", 'Json'>
-    readonly studyId: FieldRef<"SymptomTemplate", 'String'>
+    readonly monitoringPlanId: FieldRef<"SymptomTemplate", 'String'>
     readonly createdAt: FieldRef<"SymptomTemplate", 'DateTime'>
     readonly updatedAt: FieldRef<"SymptomTemplate", 'DateTime'>
   }
@@ -13836,7 +13849,7 @@ export namespace Prisma {
     id: string | null
     symptomTemplateId: string | null
     patientId: string | null
-    studyPatientId: string | null
+    monitoringPlanPatientId: string | null
     recordedById: string | null
     recordedAt: Date | null
     notes: string | null
@@ -13846,7 +13859,7 @@ export namespace Prisma {
     id: string | null
     symptomTemplateId: string | null
     patientId: string | null
-    studyPatientId: string | null
+    monitoringPlanPatientId: string | null
     recordedById: string | null
     recordedAt: Date | null
     notes: string | null
@@ -13856,7 +13869,7 @@ export namespace Prisma {
     id: number
     symptomTemplateId: number
     patientId: number
-    studyPatientId: number
+    monitoringPlanPatientId: number
     recordedById: number
     recordedAt: number
     value: number
@@ -13869,7 +13882,7 @@ export namespace Prisma {
     id?: true
     symptomTemplateId?: true
     patientId?: true
-    studyPatientId?: true
+    monitoringPlanPatientId?: true
     recordedById?: true
     recordedAt?: true
     notes?: true
@@ -13879,7 +13892,7 @@ export namespace Prisma {
     id?: true
     symptomTemplateId?: true
     patientId?: true
-    studyPatientId?: true
+    monitoringPlanPatientId?: true
     recordedById?: true
     recordedAt?: true
     notes?: true
@@ -13889,7 +13902,7 @@ export namespace Prisma {
     id?: true
     symptomTemplateId?: true
     patientId?: true
-    studyPatientId?: true
+    monitoringPlanPatientId?: true
     recordedById?: true
     recordedAt?: true
     value?: true
@@ -13973,7 +13986,7 @@ export namespace Prisma {
     id: string
     symptomTemplateId: string
     patientId: string
-    studyPatientId: string
+    monitoringPlanPatientId: string
     recordedById: string
     recordedAt: Date
     value: JsonValue
@@ -14001,14 +14014,14 @@ export namespace Prisma {
     id?: boolean
     symptomTemplateId?: boolean
     patientId?: boolean
-    studyPatientId?: boolean
+    monitoringPlanPatientId?: boolean
     recordedById?: boolean
     recordedAt?: boolean
     value?: boolean
     notes?: boolean
     symptomTemplate?: boolean | SymptomTemplateDefaultArgs<ExtArgs>
     patient?: boolean | PatientDefaultArgs<ExtArgs>
-    studyPatient?: boolean | StudyPatientDefaultArgs<ExtArgs>
+    monitoringPlanPatient?: boolean | MonitoringPlanPatientDefaultArgs<ExtArgs>
     recordedBy?: boolean | UserDefaultArgs<ExtArgs>
     files?: boolean | Observation$filesArgs<ExtArgs>
     alerts?: boolean | Observation$alertsArgs<ExtArgs>
@@ -14019,14 +14032,14 @@ export namespace Prisma {
     id?: boolean
     symptomTemplateId?: boolean
     patientId?: boolean
-    studyPatientId?: boolean
+    monitoringPlanPatientId?: boolean
     recordedById?: boolean
     recordedAt?: boolean
     value?: boolean
     notes?: boolean
     symptomTemplate?: boolean | SymptomTemplateDefaultArgs<ExtArgs>
     patient?: boolean | PatientDefaultArgs<ExtArgs>
-    studyPatient?: boolean | StudyPatientDefaultArgs<ExtArgs>
+    monitoringPlanPatient?: boolean | MonitoringPlanPatientDefaultArgs<ExtArgs>
     recordedBy?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["observation"]>
 
@@ -14034,14 +14047,14 @@ export namespace Prisma {
     id?: boolean
     symptomTemplateId?: boolean
     patientId?: boolean
-    studyPatientId?: boolean
+    monitoringPlanPatientId?: boolean
     recordedById?: boolean
     recordedAt?: boolean
     value?: boolean
     notes?: boolean
     symptomTemplate?: boolean | SymptomTemplateDefaultArgs<ExtArgs>
     patient?: boolean | PatientDefaultArgs<ExtArgs>
-    studyPatient?: boolean | StudyPatientDefaultArgs<ExtArgs>
+    monitoringPlanPatient?: boolean | MonitoringPlanPatientDefaultArgs<ExtArgs>
     recordedBy?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["observation"]>
 
@@ -14049,18 +14062,18 @@ export namespace Prisma {
     id?: boolean
     symptomTemplateId?: boolean
     patientId?: boolean
-    studyPatientId?: boolean
+    monitoringPlanPatientId?: boolean
     recordedById?: boolean
     recordedAt?: boolean
     value?: boolean
     notes?: boolean
   }
 
-  export type ObservationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "symptomTemplateId" | "patientId" | "studyPatientId" | "recordedById" | "recordedAt" | "value" | "notes", ExtArgs["result"]["observation"]>
+  export type ObservationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "symptomTemplateId" | "patientId" | "monitoringPlanPatientId" | "recordedById" | "recordedAt" | "value" | "notes", ExtArgs["result"]["observation"]>
   export type ObservationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     symptomTemplate?: boolean | SymptomTemplateDefaultArgs<ExtArgs>
     patient?: boolean | PatientDefaultArgs<ExtArgs>
-    studyPatient?: boolean | StudyPatientDefaultArgs<ExtArgs>
+    monitoringPlanPatient?: boolean | MonitoringPlanPatientDefaultArgs<ExtArgs>
     recordedBy?: boolean | UserDefaultArgs<ExtArgs>
     files?: boolean | Observation$filesArgs<ExtArgs>
     alerts?: boolean | Observation$alertsArgs<ExtArgs>
@@ -14069,13 +14082,13 @@ export namespace Prisma {
   export type ObservationIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     symptomTemplate?: boolean | SymptomTemplateDefaultArgs<ExtArgs>
     patient?: boolean | PatientDefaultArgs<ExtArgs>
-    studyPatient?: boolean | StudyPatientDefaultArgs<ExtArgs>
+    monitoringPlanPatient?: boolean | MonitoringPlanPatientDefaultArgs<ExtArgs>
     recordedBy?: boolean | UserDefaultArgs<ExtArgs>
   }
   export type ObservationIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     symptomTemplate?: boolean | SymptomTemplateDefaultArgs<ExtArgs>
     patient?: boolean | PatientDefaultArgs<ExtArgs>
-    studyPatient?: boolean | StudyPatientDefaultArgs<ExtArgs>
+    monitoringPlanPatient?: boolean | MonitoringPlanPatientDefaultArgs<ExtArgs>
     recordedBy?: boolean | UserDefaultArgs<ExtArgs>
   }
 
@@ -14084,7 +14097,7 @@ export namespace Prisma {
     objects: {
       symptomTemplate: Prisma.$SymptomTemplatePayload<ExtArgs>
       patient: Prisma.$PatientPayload<ExtArgs>
-      studyPatient: Prisma.$StudyPatientPayload<ExtArgs>
+      monitoringPlanPatient: Prisma.$MonitoringPlanPatientPayload<ExtArgs>
       recordedBy: Prisma.$UserPayload<ExtArgs>
       files: Prisma.$FilePayload<ExtArgs>[]
       alerts: Prisma.$AlertPayload<ExtArgs>[]
@@ -14093,7 +14106,7 @@ export namespace Prisma {
       id: string
       symptomTemplateId: string
       patientId: string
-      studyPatientId: string
+      monitoringPlanPatientId: string
       recordedById: string
       recordedAt: Date
       value: Prisma.JsonValue
@@ -14494,7 +14507,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     symptomTemplate<T extends SymptomTemplateDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SymptomTemplateDefaultArgs<ExtArgs>>): Prisma__SymptomTemplateClient<$Result.GetResult<Prisma.$SymptomTemplatePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     patient<T extends PatientDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PatientDefaultArgs<ExtArgs>>): Prisma__PatientClient<$Result.GetResult<Prisma.$PatientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    studyPatient<T extends StudyPatientDefaultArgs<ExtArgs> = {}>(args?: Subset<T, StudyPatientDefaultArgs<ExtArgs>>): Prisma__StudyPatientClient<$Result.GetResult<Prisma.$StudyPatientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    monitoringPlanPatient<T extends MonitoringPlanPatientDefaultArgs<ExtArgs> = {}>(args?: Subset<T, MonitoringPlanPatientDefaultArgs<ExtArgs>>): Prisma__MonitoringPlanPatientClient<$Result.GetResult<Prisma.$MonitoringPlanPatientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     recordedBy<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     files<T extends Observation$filesArgs<ExtArgs> = {}>(args?: Subset<T, Observation$filesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FilePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     alerts<T extends Observation$alertsArgs<ExtArgs> = {}>(args?: Subset<T, Observation$alertsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AlertPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -14530,7 +14543,7 @@ export namespace Prisma {
     readonly id: FieldRef<"Observation", 'String'>
     readonly symptomTemplateId: FieldRef<"Observation", 'String'>
     readonly patientId: FieldRef<"Observation", 'String'>
-    readonly studyPatientId: FieldRef<"Observation", 'String'>
+    readonly monitoringPlanPatientId: FieldRef<"Observation", 'String'>
     readonly recordedById: FieldRef<"Observation", 'String'>
     readonly recordedAt: FieldRef<"Observation", 'DateTime'>
     readonly value: FieldRef<"Observation", 'Json'>
@@ -15011,7 +15024,7 @@ export namespace Prisma {
     id: string | null
     name: string | null
     description: string | null
-    studyId: string | null
+    monitoringPlanId: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -15020,7 +15033,7 @@ export namespace Prisma {
     id: string | null
     name: string | null
     description: string | null
-    studyId: string | null
+    monitoringPlanId: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -15030,7 +15043,7 @@ export namespace Prisma {
     name: number
     description: number
     protocol: number
-    studyId: number
+    monitoringPlanId: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -15041,7 +15054,7 @@ export namespace Prisma {
     id?: true
     name?: true
     description?: true
-    studyId?: true
+    monitoringPlanId?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -15050,7 +15063,7 @@ export namespace Prisma {
     id?: true
     name?: true
     description?: true
-    studyId?: true
+    monitoringPlanId?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -15060,7 +15073,7 @@ export namespace Prisma {
     name?: true
     description?: true
     protocol?: true
-    studyId?: true
+    monitoringPlanId?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -15143,7 +15156,7 @@ export namespace Prisma {
     name: string
     description: string | null
     protocol: JsonValue | null
-    studyId: string
+    monitoringPlanId: string
     createdAt: Date
     updatedAt: Date
     _count: TreatmentTemplateCountAggregateOutputType | null
@@ -15170,10 +15183,10 @@ export namespace Prisma {
     name?: boolean
     description?: boolean
     protocol?: boolean
-    studyId?: boolean
+    monitoringPlanId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    study?: boolean | StudyDefaultArgs<ExtArgs>
+    monitoringPlan?: boolean | MonitoringPlanDefaultArgs<ExtArgs>
     treatments?: boolean | TreatmentTemplate$treatmentsArgs<ExtArgs>
     _count?: boolean | TreatmentTemplateCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["treatmentTemplate"]>
@@ -15183,10 +15196,10 @@ export namespace Prisma {
     name?: boolean
     description?: boolean
     protocol?: boolean
-    studyId?: boolean
+    monitoringPlanId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    study?: boolean | StudyDefaultArgs<ExtArgs>
+    monitoringPlan?: boolean | MonitoringPlanDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["treatmentTemplate"]>
 
   export type TreatmentTemplateSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -15194,10 +15207,10 @@ export namespace Prisma {
     name?: boolean
     description?: boolean
     protocol?: boolean
-    studyId?: boolean
+    monitoringPlanId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    study?: boolean | StudyDefaultArgs<ExtArgs>
+    monitoringPlan?: boolean | MonitoringPlanDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["treatmentTemplate"]>
 
   export type TreatmentTemplateSelectScalar = {
@@ -15205,28 +15218,28 @@ export namespace Prisma {
     name?: boolean
     description?: boolean
     protocol?: boolean
-    studyId?: boolean
+    monitoringPlanId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type TreatmentTemplateOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "protocol" | "studyId" | "createdAt" | "updatedAt", ExtArgs["result"]["treatmentTemplate"]>
+  export type TreatmentTemplateOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "protocol" | "monitoringPlanId" | "createdAt" | "updatedAt", ExtArgs["result"]["treatmentTemplate"]>
   export type TreatmentTemplateInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    study?: boolean | StudyDefaultArgs<ExtArgs>
+    monitoringPlan?: boolean | MonitoringPlanDefaultArgs<ExtArgs>
     treatments?: boolean | TreatmentTemplate$treatmentsArgs<ExtArgs>
     _count?: boolean | TreatmentTemplateCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type TreatmentTemplateIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    study?: boolean | StudyDefaultArgs<ExtArgs>
+    monitoringPlan?: boolean | MonitoringPlanDefaultArgs<ExtArgs>
   }
   export type TreatmentTemplateIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    study?: boolean | StudyDefaultArgs<ExtArgs>
+    monitoringPlan?: boolean | MonitoringPlanDefaultArgs<ExtArgs>
   }
 
   export type $TreatmentTemplatePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "TreatmentTemplate"
     objects: {
-      study: Prisma.$StudyPayload<ExtArgs>
+      monitoringPlan: Prisma.$MonitoringPlanPayload<ExtArgs>
       treatments: Prisma.$TreatmentPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -15234,7 +15247,7 @@ export namespace Prisma {
       name: string
       description: string | null
       protocol: Prisma.JsonValue | null
-      studyId: string
+      monitoringPlanId: string
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["treatmentTemplate"]>
@@ -15631,7 +15644,7 @@ export namespace Prisma {
    */
   export interface Prisma__TreatmentTemplateClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    study<T extends StudyDefaultArgs<ExtArgs> = {}>(args?: Subset<T, StudyDefaultArgs<ExtArgs>>): Prisma__StudyClient<$Result.GetResult<Prisma.$StudyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    monitoringPlan<T extends MonitoringPlanDefaultArgs<ExtArgs> = {}>(args?: Subset<T, MonitoringPlanDefaultArgs<ExtArgs>>): Prisma__MonitoringPlanClient<$Result.GetResult<Prisma.$MonitoringPlanPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     treatments<T extends TreatmentTemplate$treatmentsArgs<ExtArgs> = {}>(args?: Subset<T, TreatmentTemplate$treatmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TreatmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -15666,7 +15679,7 @@ export namespace Prisma {
     readonly name: FieldRef<"TreatmentTemplate", 'String'>
     readonly description: FieldRef<"TreatmentTemplate", 'String'>
     readonly protocol: FieldRef<"TreatmentTemplate", 'Json'>
-    readonly studyId: FieldRef<"TreatmentTemplate", 'String'>
+    readonly monitoringPlanId: FieldRef<"TreatmentTemplate", 'String'>
     readonly createdAt: FieldRef<"TreatmentTemplate", 'DateTime'>
     readonly updatedAt: FieldRef<"TreatmentTemplate", 'DateTime'>
   }
@@ -16121,7 +16134,7 @@ export namespace Prisma {
     id: string | null
     templateId: string | null
     patientId: string | null
-    studyPatientId: string | null
+    monitoringPlanPatientId: string | null
     createdById: string | null
     createdAt: Date | null
     administeredAt: Date | null
@@ -16135,7 +16148,7 @@ export namespace Prisma {
     id: string | null
     templateId: string | null
     patientId: string | null
-    studyPatientId: string | null
+    monitoringPlanPatientId: string | null
     createdById: string | null
     createdAt: Date | null
     administeredAt: Date | null
@@ -16149,7 +16162,7 @@ export namespace Prisma {
     id: number
     templateId: number
     patientId: number
-    studyPatientId: number
+    monitoringPlanPatientId: number
     createdById: number
     createdAt: number
     administeredAt: number
@@ -16165,7 +16178,7 @@ export namespace Prisma {
     id?: true
     templateId?: true
     patientId?: true
-    studyPatientId?: true
+    monitoringPlanPatientId?: true
     createdById?: true
     createdAt?: true
     administeredAt?: true
@@ -16179,7 +16192,7 @@ export namespace Prisma {
     id?: true
     templateId?: true
     patientId?: true
-    studyPatientId?: true
+    monitoringPlanPatientId?: true
     createdById?: true
     createdAt?: true
     administeredAt?: true
@@ -16193,7 +16206,7 @@ export namespace Prisma {
     id?: true
     templateId?: true
     patientId?: true
-    studyPatientId?: true
+    monitoringPlanPatientId?: true
     createdById?: true
     createdAt?: true
     administeredAt?: true
@@ -16280,7 +16293,7 @@ export namespace Prisma {
     id: string
     templateId: string | null
     patientId: string
-    studyPatientId: string
+    monitoringPlanPatientId: string
     createdById: string
     createdAt: Date
     administeredAt: Date
@@ -16311,7 +16324,7 @@ export namespace Prisma {
     id?: boolean
     templateId?: boolean
     patientId?: boolean
-    studyPatientId?: boolean
+    monitoringPlanPatientId?: boolean
     createdById?: boolean
     createdAt?: boolean
     administeredAt?: boolean
@@ -16321,7 +16334,7 @@ export namespace Prisma {
     notes?: boolean
     template?: boolean | Treatment$templateArgs<ExtArgs>
     patient?: boolean | PatientDefaultArgs<ExtArgs>
-    studyPatient?: boolean | StudyPatientDefaultArgs<ExtArgs>
+    monitoringPlanPatient?: boolean | MonitoringPlanPatientDefaultArgs<ExtArgs>
     createdBy?: boolean | UserDefaultArgs<ExtArgs>
     files?: boolean | Treatment$filesArgs<ExtArgs>
     _count?: boolean | TreatmentCountOutputTypeDefaultArgs<ExtArgs>
@@ -16331,7 +16344,7 @@ export namespace Prisma {
     id?: boolean
     templateId?: boolean
     patientId?: boolean
-    studyPatientId?: boolean
+    monitoringPlanPatientId?: boolean
     createdById?: boolean
     createdAt?: boolean
     administeredAt?: boolean
@@ -16341,7 +16354,7 @@ export namespace Prisma {
     notes?: boolean
     template?: boolean | Treatment$templateArgs<ExtArgs>
     patient?: boolean | PatientDefaultArgs<ExtArgs>
-    studyPatient?: boolean | StudyPatientDefaultArgs<ExtArgs>
+    monitoringPlanPatient?: boolean | MonitoringPlanPatientDefaultArgs<ExtArgs>
     createdBy?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["treatment"]>
 
@@ -16349,7 +16362,7 @@ export namespace Prisma {
     id?: boolean
     templateId?: boolean
     patientId?: boolean
-    studyPatientId?: boolean
+    monitoringPlanPatientId?: boolean
     createdById?: boolean
     createdAt?: boolean
     administeredAt?: boolean
@@ -16359,7 +16372,7 @@ export namespace Prisma {
     notes?: boolean
     template?: boolean | Treatment$templateArgs<ExtArgs>
     patient?: boolean | PatientDefaultArgs<ExtArgs>
-    studyPatient?: boolean | StudyPatientDefaultArgs<ExtArgs>
+    monitoringPlanPatient?: boolean | MonitoringPlanPatientDefaultArgs<ExtArgs>
     createdBy?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["treatment"]>
 
@@ -16367,7 +16380,7 @@ export namespace Prisma {
     id?: boolean
     templateId?: boolean
     patientId?: boolean
-    studyPatientId?: boolean
+    monitoringPlanPatientId?: boolean
     createdById?: boolean
     createdAt?: boolean
     administeredAt?: boolean
@@ -16377,11 +16390,11 @@ export namespace Prisma {
     notes?: boolean
   }
 
-  export type TreatmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "templateId" | "patientId" | "studyPatientId" | "createdById" | "createdAt" | "administeredAt" | "name" | "description" | "dosage" | "notes", ExtArgs["result"]["treatment"]>
+  export type TreatmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "templateId" | "patientId" | "monitoringPlanPatientId" | "createdById" | "createdAt" | "administeredAt" | "name" | "description" | "dosage" | "notes", ExtArgs["result"]["treatment"]>
   export type TreatmentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     template?: boolean | Treatment$templateArgs<ExtArgs>
     patient?: boolean | PatientDefaultArgs<ExtArgs>
-    studyPatient?: boolean | StudyPatientDefaultArgs<ExtArgs>
+    monitoringPlanPatient?: boolean | MonitoringPlanPatientDefaultArgs<ExtArgs>
     createdBy?: boolean | UserDefaultArgs<ExtArgs>
     files?: boolean | Treatment$filesArgs<ExtArgs>
     _count?: boolean | TreatmentCountOutputTypeDefaultArgs<ExtArgs>
@@ -16389,13 +16402,13 @@ export namespace Prisma {
   export type TreatmentIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     template?: boolean | Treatment$templateArgs<ExtArgs>
     patient?: boolean | PatientDefaultArgs<ExtArgs>
-    studyPatient?: boolean | StudyPatientDefaultArgs<ExtArgs>
+    monitoringPlanPatient?: boolean | MonitoringPlanPatientDefaultArgs<ExtArgs>
     createdBy?: boolean | UserDefaultArgs<ExtArgs>
   }
   export type TreatmentIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     template?: boolean | Treatment$templateArgs<ExtArgs>
     patient?: boolean | PatientDefaultArgs<ExtArgs>
-    studyPatient?: boolean | StudyPatientDefaultArgs<ExtArgs>
+    monitoringPlanPatient?: boolean | MonitoringPlanPatientDefaultArgs<ExtArgs>
     createdBy?: boolean | UserDefaultArgs<ExtArgs>
   }
 
@@ -16404,7 +16417,7 @@ export namespace Prisma {
     objects: {
       template: Prisma.$TreatmentTemplatePayload<ExtArgs> | null
       patient: Prisma.$PatientPayload<ExtArgs>
-      studyPatient: Prisma.$StudyPatientPayload<ExtArgs>
+      monitoringPlanPatient: Prisma.$MonitoringPlanPatientPayload<ExtArgs>
       createdBy: Prisma.$UserPayload<ExtArgs>
       files: Prisma.$FilePayload<ExtArgs>[]
     }
@@ -16412,7 +16425,7 @@ export namespace Prisma {
       id: string
       templateId: string | null
       patientId: string
-      studyPatientId: string
+      monitoringPlanPatientId: string
       createdById: string
       createdAt: Date
       administeredAt: Date
@@ -16816,7 +16829,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     template<T extends Treatment$templateArgs<ExtArgs> = {}>(args?: Subset<T, Treatment$templateArgs<ExtArgs>>): Prisma__TreatmentTemplateClient<$Result.GetResult<Prisma.$TreatmentTemplatePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     patient<T extends PatientDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PatientDefaultArgs<ExtArgs>>): Prisma__PatientClient<$Result.GetResult<Prisma.$PatientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    studyPatient<T extends StudyPatientDefaultArgs<ExtArgs> = {}>(args?: Subset<T, StudyPatientDefaultArgs<ExtArgs>>): Prisma__StudyPatientClient<$Result.GetResult<Prisma.$StudyPatientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    monitoringPlanPatient<T extends MonitoringPlanPatientDefaultArgs<ExtArgs> = {}>(args?: Subset<T, MonitoringPlanPatientDefaultArgs<ExtArgs>>): Prisma__MonitoringPlanPatientClient<$Result.GetResult<Prisma.$MonitoringPlanPatientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     createdBy<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     files<T extends Treatment$filesArgs<ExtArgs> = {}>(args?: Subset<T, Treatment$filesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FilePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
@@ -16851,7 +16864,7 @@ export namespace Prisma {
     readonly id: FieldRef<"Treatment", 'String'>
     readonly templateId: FieldRef<"Treatment", 'String'>
     readonly patientId: FieldRef<"Treatment", 'String'>
-    readonly studyPatientId: FieldRef<"Treatment", 'String'>
+    readonly monitoringPlanPatientId: FieldRef<"Treatment", 'String'>
     readonly createdById: FieldRef<"Treatment", 'String'>
     readonly createdAt: FieldRef<"Treatment", 'DateTime'>
     readonly administeredAt: FieldRef<"Treatment", 'DateTime'>
@@ -21958,7 +21971,7 @@ export namespace Prisma {
   export type PatientScalarFieldEnum = (typeof PatientScalarFieldEnum)[keyof typeof PatientScalarFieldEnum]
 
 
-  export const StudyScalarFieldEnum: {
+  export const MonitoringPlanScalarFieldEnum: {
     id: 'id',
     title: 'title',
     description: 'description',
@@ -21970,44 +21983,45 @@ export namespace Prisma {
     startDate: 'startDate',
     endDate: 'endDate',
     status: 'status',
-    isTemplate: 'isTemplate'
+    isTemplate: 'isTemplate',
+    shareToken: 'shareToken'
   };
 
-  export type StudyScalarFieldEnum = (typeof StudyScalarFieldEnum)[keyof typeof StudyScalarFieldEnum]
+  export type MonitoringPlanScalarFieldEnum = (typeof MonitoringPlanScalarFieldEnum)[keyof typeof MonitoringPlanScalarFieldEnum]
 
 
-  export const StudyPatientScalarFieldEnum: {
+  export const MonitoringPlanPatientScalarFieldEnum: {
     id: 'id',
-    studyId: 'studyId',
+    monitoringPlanId: 'monitoringPlanId',
     patientId: 'patientId',
     enrollmentDate: 'enrollmentDate',
     exitDate: 'exitDate',
     isActive: 'isActive'
   };
 
-  export type StudyPatientScalarFieldEnum = (typeof StudyPatientScalarFieldEnum)[keyof typeof StudyPatientScalarFieldEnum]
+  export type MonitoringPlanPatientScalarFieldEnum = (typeof MonitoringPlanPatientScalarFieldEnum)[keyof typeof MonitoringPlanPatientScalarFieldEnum]
 
 
-  export const StudyAssignmentScalarFieldEnum: {
+  export const MonitoringPlanAssignmentScalarFieldEnum: {
     id: 'id',
-    studyId: 'studyId',
+    monitoringPlanId: 'monitoringPlanId',
     userId: 'userId',
     assignedAt: 'assignedAt',
     role: 'role'
   };
 
-  export type StudyAssignmentScalarFieldEnum = (typeof StudyAssignmentScalarFieldEnum)[keyof typeof StudyAssignmentScalarFieldEnum]
+  export type MonitoringPlanAssignmentScalarFieldEnum = (typeof MonitoringPlanAssignmentScalarFieldEnum)[keyof typeof MonitoringPlanAssignmentScalarFieldEnum]
 
 
-  export const StudyNoteScalarFieldEnum: {
+  export const MonitoringPlanNoteScalarFieldEnum: {
     id: 'id',
-    studyId: 'studyId',
+    monitoringPlanId: 'monitoringPlanId',
     content: 'content',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
 
-  export type StudyNoteScalarFieldEnum = (typeof StudyNoteScalarFieldEnum)[keyof typeof StudyNoteScalarFieldEnum]
+  export type MonitoringPlanNoteScalarFieldEnum = (typeof MonitoringPlanNoteScalarFieldEnum)[keyof typeof MonitoringPlanNoteScalarFieldEnum]
 
 
   export const SymptomTemplateScalarFieldEnum: {
@@ -22020,7 +22034,7 @@ export namespace Prisma {
     minValue: 'minValue',
     maxValue: 'maxValue',
     options: 'options',
-    studyId: 'studyId',
+    monitoringPlanId: 'monitoringPlanId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -22032,7 +22046,7 @@ export namespace Prisma {
     id: 'id',
     symptomTemplateId: 'symptomTemplateId',
     patientId: 'patientId',
-    studyPatientId: 'studyPatientId',
+    monitoringPlanPatientId: 'monitoringPlanPatientId',
     recordedById: 'recordedById',
     recordedAt: 'recordedAt',
     value: 'value',
@@ -22047,7 +22061,7 @@ export namespace Prisma {
     name: 'name',
     description: 'description',
     protocol: 'protocol',
-    studyId: 'studyId',
+    monitoringPlanId: 'monitoringPlanId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -22059,7 +22073,7 @@ export namespace Prisma {
     id: 'id',
     templateId: 'templateId',
     patientId: 'patientId',
-    studyPatientId: 'studyPatientId',
+    monitoringPlanPatientId: 'monitoringPlanPatientId',
     createdById: 'createdById',
     createdAt: 'createdAt',
     administeredAt: 'administeredAt',
@@ -22312,30 +22326,30 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'StudyStatus'
+   * Reference to a field of type 'MonitoringPlanStatus'
    */
-  export type EnumStudyStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StudyStatus'>
+  export type EnumMonitoringPlanStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MonitoringPlanStatus'>
     
 
 
   /**
-   * Reference to a field of type 'StudyStatus[]'
+   * Reference to a field of type 'MonitoringPlanStatus[]'
    */
-  export type ListEnumStudyStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StudyStatus[]'>
+  export type ListEnumMonitoringPlanStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MonitoringPlanStatus[]'>
     
 
 
   /**
-   * Reference to a field of type 'StudyRole'
+   * Reference to a field of type 'MonitoringPlanRole'
    */
-  export type EnumStudyRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StudyRole'>
+  export type EnumMonitoringPlanRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MonitoringPlanRole'>
     
 
 
   /**
-   * Reference to a field of type 'StudyRole[]'
+   * Reference to a field of type 'MonitoringPlanRole[]'
    */
-  export type ListEnumStudyRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StudyRole[]'>
+  export type ListEnumMonitoringPlanRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MonitoringPlanRole[]'>
     
 
 
@@ -22387,8 +22401,8 @@ export namespace Prisma {
     resetToken?: StringNullableFilter<"User"> | string | null
     resetTokenExpiry?: DateTimeNullableFilter<"User"> | Date | string | null
     practice?: XOR<PracticeNullableScalarRelationFilter, PracticeWhereInput> | null
-    createdStudies?: StudyListRelationFilter
-    assignedStudies?: StudyAssignmentListRelationFilter
+    createdMonitoringPlans?: MonitoringPlanListRelationFilter
+    assignedMonitoringPlans?: MonitoringPlanAssignmentListRelationFilter
     createdTreatments?: TreatmentListRelationFilter
     observations?: ObservationListRelationFilter
     createdPatients?: PatientListRelationFilter
@@ -22409,8 +22423,8 @@ export namespace Prisma {
     resetToken?: SortOrderInput | SortOrder
     resetTokenExpiry?: SortOrderInput | SortOrder
     practice?: PracticeOrderByWithRelationInput
-    createdStudies?: StudyOrderByRelationAggregateInput
-    assignedStudies?: StudyAssignmentOrderByRelationAggregateInput
+    createdMonitoringPlans?: MonitoringPlanOrderByRelationAggregateInput
+    assignedMonitoringPlans?: MonitoringPlanAssignmentOrderByRelationAggregateInput
     createdTreatments?: TreatmentOrderByRelationAggregateInput
     observations?: ObservationOrderByRelationAggregateInput
     createdPatients?: PatientOrderByRelationAggregateInput
@@ -22434,8 +22448,8 @@ export namespace Prisma {
     resetToken?: StringNullableFilter<"User"> | string | null
     resetTokenExpiry?: DateTimeNullableFilter<"User"> | Date | string | null
     practice?: XOR<PracticeNullableScalarRelationFilter, PracticeWhereInput> | null
-    createdStudies?: StudyListRelationFilter
-    assignedStudies?: StudyAssignmentListRelationFilter
+    createdMonitoringPlans?: MonitoringPlanListRelationFilter
+    assignedMonitoringPlans?: MonitoringPlanAssignmentListRelationFilter
     createdTreatments?: TreatmentListRelationFilter
     observations?: ObservationListRelationFilter
     createdPatients?: PatientListRelationFilter
@@ -22500,7 +22514,7 @@ export namespace Prisma {
     currentStorage?: IntFilter<"Practice"> | number
     users?: UserListRelationFilter
     patients?: PatientListRelationFilter
-    studies?: StudyListRelationFilter
+    monitoringPlans?: MonitoringPlanListRelationFilter
     subscriptionHistory?: SubscriptionHistoryListRelationFilter
   }
 
@@ -22523,7 +22537,7 @@ export namespace Prisma {
     currentStorage?: SortOrder
     users?: UserOrderByRelationAggregateInput
     patients?: PatientOrderByRelationAggregateInput
-    studies?: StudyOrderByRelationAggregateInput
+    monitoringPlans?: MonitoringPlanOrderByRelationAggregateInput
     subscriptionHistory?: SubscriptionHistoryOrderByRelationAggregateInput
   }
 
@@ -22549,7 +22563,7 @@ export namespace Prisma {
     currentStorage?: IntFilter<"Practice"> | number
     users?: UserListRelationFilter
     patients?: PatientListRelationFilter
-    studies?: StudyListRelationFilter
+    monitoringPlans?: MonitoringPlanListRelationFilter
     subscriptionHistory?: SubscriptionHistoryListRelationFilter
   }, "id">
 
@@ -22694,7 +22708,7 @@ export namespace Prisma {
     medicalHistory?: JsonNullableFilter<"Patient">
     practice?: XOR<PracticeScalarRelationFilter, PracticeWhereInput>
     createdBy?: XOR<UserScalarRelationFilter, UserWhereInput>
-    studies?: StudyPatientListRelationFilter
+    monitoringPlans?: MonitoringPlanPatientListRelationFilter
     observations?: ObservationListRelationFilter
     treatments?: TreatmentListRelationFilter
     files?: FileListRelationFilter
@@ -22720,7 +22734,7 @@ export namespace Prisma {
     medicalHistory?: SortOrderInput | SortOrder
     practice?: PracticeOrderByWithRelationInput
     createdBy?: UserOrderByWithRelationInput
-    studies?: StudyPatientOrderByRelationAggregateInput
+    monitoringPlans?: MonitoringPlanPatientOrderByRelationAggregateInput
     observations?: ObservationOrderByRelationAggregateInput
     treatments?: TreatmentOrderByRelationAggregateInput
     files?: FileOrderByRelationAggregateInput
@@ -22749,7 +22763,7 @@ export namespace Prisma {
     medicalHistory?: JsonNullableFilter<"Patient">
     practice?: XOR<PracticeScalarRelationFilter, PracticeWhereInput>
     createdBy?: XOR<UserScalarRelationFilter, UserWhereInput>
-    studies?: StudyPatientListRelationFilter
+    monitoringPlans?: MonitoringPlanPatientListRelationFilter
     observations?: ObservationListRelationFilter
     treatments?: TreatmentListRelationFilter
     files?: FileListRelationFilter
@@ -22803,32 +22817,33 @@ export namespace Prisma {
     medicalHistory?: JsonNullableWithAggregatesFilter<"Patient">
   }
 
-  export type StudyWhereInput = {
-    AND?: StudyWhereInput | StudyWhereInput[]
-    OR?: StudyWhereInput[]
-    NOT?: StudyWhereInput | StudyWhereInput[]
-    id?: StringFilter<"Study"> | string
-    title?: StringFilter<"Study"> | string
-    description?: StringNullableFilter<"Study"> | string | null
-    protocol?: JsonNullableFilter<"Study">
-    practiceId?: StringFilter<"Study"> | string
-    createdById?: StringFilter<"Study"> | string
-    createdAt?: DateTimeFilter<"Study"> | Date | string
-    updatedAt?: DateTimeFilter<"Study"> | Date | string
-    startDate?: DateTimeNullableFilter<"Study"> | Date | string | null
-    endDate?: DateTimeNullableFilter<"Study"> | Date | string | null
-    status?: EnumStudyStatusFilter<"Study"> | $Enums.StudyStatus
-    isTemplate?: BoolFilter<"Study"> | boolean
+  export type MonitoringPlanWhereInput = {
+    AND?: MonitoringPlanWhereInput | MonitoringPlanWhereInput[]
+    OR?: MonitoringPlanWhereInput[]
+    NOT?: MonitoringPlanWhereInput | MonitoringPlanWhereInput[]
+    id?: StringFilter<"MonitoringPlan"> | string
+    title?: StringFilter<"MonitoringPlan"> | string
+    description?: StringNullableFilter<"MonitoringPlan"> | string | null
+    protocol?: JsonNullableFilter<"MonitoringPlan">
+    practiceId?: StringFilter<"MonitoringPlan"> | string
+    createdById?: StringFilter<"MonitoringPlan"> | string
+    createdAt?: DateTimeFilter<"MonitoringPlan"> | Date | string
+    updatedAt?: DateTimeFilter<"MonitoringPlan"> | Date | string
+    startDate?: DateTimeNullableFilter<"MonitoringPlan"> | Date | string | null
+    endDate?: DateTimeNullableFilter<"MonitoringPlan"> | Date | string | null
+    status?: EnumMonitoringPlanStatusFilter<"MonitoringPlan"> | $Enums.MonitoringPlanStatus
+    isTemplate?: BoolFilter<"MonitoringPlan"> | boolean
+    shareToken?: StringNullableFilter<"MonitoringPlan"> | string | null
     practice?: XOR<PracticeScalarRelationFilter, PracticeWhereInput>
     createdBy?: XOR<UserScalarRelationFilter, UserWhereInput>
-    patients?: StudyPatientListRelationFilter
-    assignedUsers?: StudyAssignmentListRelationFilter
+    patients?: MonitoringPlanPatientListRelationFilter
+    assignedUsers?: MonitoringPlanAssignmentListRelationFilter
     symptomTemplates?: SymptomTemplateListRelationFilter
     treatmentTemplates?: TreatmentTemplateListRelationFilter
-    notes?: StudyNoteListRelationFilter
+    notes?: MonitoringPlanNoteListRelationFilter
   }
 
-  export type StudyOrderByWithRelationInput = {
+  export type MonitoringPlanOrderByWithRelationInput = {
     id?: SortOrder
     title?: SortOrder
     description?: SortOrderInput | SortOrder
@@ -22841,41 +22856,43 @@ export namespace Prisma {
     endDate?: SortOrderInput | SortOrder
     status?: SortOrder
     isTemplate?: SortOrder
+    shareToken?: SortOrderInput | SortOrder
     practice?: PracticeOrderByWithRelationInput
     createdBy?: UserOrderByWithRelationInput
-    patients?: StudyPatientOrderByRelationAggregateInput
-    assignedUsers?: StudyAssignmentOrderByRelationAggregateInput
+    patients?: MonitoringPlanPatientOrderByRelationAggregateInput
+    assignedUsers?: MonitoringPlanAssignmentOrderByRelationAggregateInput
     symptomTemplates?: SymptomTemplateOrderByRelationAggregateInput
     treatmentTemplates?: TreatmentTemplateOrderByRelationAggregateInput
-    notes?: StudyNoteOrderByRelationAggregateInput
+    notes?: MonitoringPlanNoteOrderByRelationAggregateInput
   }
 
-  export type StudyWhereUniqueInput = Prisma.AtLeast<{
+  export type MonitoringPlanWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    AND?: StudyWhereInput | StudyWhereInput[]
-    OR?: StudyWhereInput[]
-    NOT?: StudyWhereInput | StudyWhereInput[]
-    title?: StringFilter<"Study"> | string
-    description?: StringNullableFilter<"Study"> | string | null
-    protocol?: JsonNullableFilter<"Study">
-    practiceId?: StringFilter<"Study"> | string
-    createdById?: StringFilter<"Study"> | string
-    createdAt?: DateTimeFilter<"Study"> | Date | string
-    updatedAt?: DateTimeFilter<"Study"> | Date | string
-    startDate?: DateTimeNullableFilter<"Study"> | Date | string | null
-    endDate?: DateTimeNullableFilter<"Study"> | Date | string | null
-    status?: EnumStudyStatusFilter<"Study"> | $Enums.StudyStatus
-    isTemplate?: BoolFilter<"Study"> | boolean
+    shareToken?: string
+    AND?: MonitoringPlanWhereInput | MonitoringPlanWhereInput[]
+    OR?: MonitoringPlanWhereInput[]
+    NOT?: MonitoringPlanWhereInput | MonitoringPlanWhereInput[]
+    title?: StringFilter<"MonitoringPlan"> | string
+    description?: StringNullableFilter<"MonitoringPlan"> | string | null
+    protocol?: JsonNullableFilter<"MonitoringPlan">
+    practiceId?: StringFilter<"MonitoringPlan"> | string
+    createdById?: StringFilter<"MonitoringPlan"> | string
+    createdAt?: DateTimeFilter<"MonitoringPlan"> | Date | string
+    updatedAt?: DateTimeFilter<"MonitoringPlan"> | Date | string
+    startDate?: DateTimeNullableFilter<"MonitoringPlan"> | Date | string | null
+    endDate?: DateTimeNullableFilter<"MonitoringPlan"> | Date | string | null
+    status?: EnumMonitoringPlanStatusFilter<"MonitoringPlan"> | $Enums.MonitoringPlanStatus
+    isTemplate?: BoolFilter<"MonitoringPlan"> | boolean
     practice?: XOR<PracticeScalarRelationFilter, PracticeWhereInput>
     createdBy?: XOR<UserScalarRelationFilter, UserWhereInput>
-    patients?: StudyPatientListRelationFilter
-    assignedUsers?: StudyAssignmentListRelationFilter
+    patients?: MonitoringPlanPatientListRelationFilter
+    assignedUsers?: MonitoringPlanAssignmentListRelationFilter
     symptomTemplates?: SymptomTemplateListRelationFilter
     treatmentTemplates?: TreatmentTemplateListRelationFilter
-    notes?: StudyNoteListRelationFilter
-  }, "id">
+    notes?: MonitoringPlanNoteListRelationFilter
+  }, "id" | "shareToken">
 
-  export type StudyOrderByWithAggregationInput = {
+  export type MonitoringPlanOrderByWithAggregationInput = {
     id?: SortOrder
     title?: SortOrder
     description?: SortOrderInput | SortOrder
@@ -22888,211 +22905,213 @@ export namespace Prisma {
     endDate?: SortOrderInput | SortOrder
     status?: SortOrder
     isTemplate?: SortOrder
-    _count?: StudyCountOrderByAggregateInput
-    _max?: StudyMaxOrderByAggregateInput
-    _min?: StudyMinOrderByAggregateInput
+    shareToken?: SortOrderInput | SortOrder
+    _count?: MonitoringPlanCountOrderByAggregateInput
+    _max?: MonitoringPlanMaxOrderByAggregateInput
+    _min?: MonitoringPlanMinOrderByAggregateInput
   }
 
-  export type StudyScalarWhereWithAggregatesInput = {
-    AND?: StudyScalarWhereWithAggregatesInput | StudyScalarWhereWithAggregatesInput[]
-    OR?: StudyScalarWhereWithAggregatesInput[]
-    NOT?: StudyScalarWhereWithAggregatesInput | StudyScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"Study"> | string
-    title?: StringWithAggregatesFilter<"Study"> | string
-    description?: StringNullableWithAggregatesFilter<"Study"> | string | null
-    protocol?: JsonNullableWithAggregatesFilter<"Study">
-    practiceId?: StringWithAggregatesFilter<"Study"> | string
-    createdById?: StringWithAggregatesFilter<"Study"> | string
-    createdAt?: DateTimeWithAggregatesFilter<"Study"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"Study"> | Date | string
-    startDate?: DateTimeNullableWithAggregatesFilter<"Study"> | Date | string | null
-    endDate?: DateTimeNullableWithAggregatesFilter<"Study"> | Date | string | null
-    status?: EnumStudyStatusWithAggregatesFilter<"Study"> | $Enums.StudyStatus
-    isTemplate?: BoolWithAggregatesFilter<"Study"> | boolean
+  export type MonitoringPlanScalarWhereWithAggregatesInput = {
+    AND?: MonitoringPlanScalarWhereWithAggregatesInput | MonitoringPlanScalarWhereWithAggregatesInput[]
+    OR?: MonitoringPlanScalarWhereWithAggregatesInput[]
+    NOT?: MonitoringPlanScalarWhereWithAggregatesInput | MonitoringPlanScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"MonitoringPlan"> | string
+    title?: StringWithAggregatesFilter<"MonitoringPlan"> | string
+    description?: StringNullableWithAggregatesFilter<"MonitoringPlan"> | string | null
+    protocol?: JsonNullableWithAggregatesFilter<"MonitoringPlan">
+    practiceId?: StringWithAggregatesFilter<"MonitoringPlan"> | string
+    createdById?: StringWithAggregatesFilter<"MonitoringPlan"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"MonitoringPlan"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"MonitoringPlan"> | Date | string
+    startDate?: DateTimeNullableWithAggregatesFilter<"MonitoringPlan"> | Date | string | null
+    endDate?: DateTimeNullableWithAggregatesFilter<"MonitoringPlan"> | Date | string | null
+    status?: EnumMonitoringPlanStatusWithAggregatesFilter<"MonitoringPlan"> | $Enums.MonitoringPlanStatus
+    isTemplate?: BoolWithAggregatesFilter<"MonitoringPlan"> | boolean
+    shareToken?: StringNullableWithAggregatesFilter<"MonitoringPlan"> | string | null
   }
 
-  export type StudyPatientWhereInput = {
-    AND?: StudyPatientWhereInput | StudyPatientWhereInput[]
-    OR?: StudyPatientWhereInput[]
-    NOT?: StudyPatientWhereInput | StudyPatientWhereInput[]
-    id?: StringFilter<"StudyPatient"> | string
-    studyId?: StringFilter<"StudyPatient"> | string
-    patientId?: StringFilter<"StudyPatient"> | string
-    enrollmentDate?: DateTimeFilter<"StudyPatient"> | Date | string
-    exitDate?: DateTimeNullableFilter<"StudyPatient"> | Date | string | null
-    isActive?: BoolFilter<"StudyPatient"> | boolean
-    study?: XOR<StudyScalarRelationFilter, StudyWhereInput>
+  export type MonitoringPlanPatientWhereInput = {
+    AND?: MonitoringPlanPatientWhereInput | MonitoringPlanPatientWhereInput[]
+    OR?: MonitoringPlanPatientWhereInput[]
+    NOT?: MonitoringPlanPatientWhereInput | MonitoringPlanPatientWhereInput[]
+    id?: StringFilter<"MonitoringPlanPatient"> | string
+    monitoringPlanId?: StringFilter<"MonitoringPlanPatient"> | string
+    patientId?: StringFilter<"MonitoringPlanPatient"> | string
+    enrollmentDate?: DateTimeFilter<"MonitoringPlanPatient"> | Date | string
+    exitDate?: DateTimeNullableFilter<"MonitoringPlanPatient"> | Date | string | null
+    isActive?: BoolFilter<"MonitoringPlanPatient"> | boolean
+    monitoringPlan?: XOR<MonitoringPlanScalarRelationFilter, MonitoringPlanWhereInput>
     patient?: XOR<PatientScalarRelationFilter, PatientWhereInput>
     observations?: ObservationListRelationFilter
     treatments?: TreatmentListRelationFilter
   }
 
-  export type StudyPatientOrderByWithRelationInput = {
+  export type MonitoringPlanPatientOrderByWithRelationInput = {
     id?: SortOrder
-    studyId?: SortOrder
+    monitoringPlanId?: SortOrder
     patientId?: SortOrder
     enrollmentDate?: SortOrder
     exitDate?: SortOrderInput | SortOrder
     isActive?: SortOrder
-    study?: StudyOrderByWithRelationInput
+    monitoringPlan?: MonitoringPlanOrderByWithRelationInput
     patient?: PatientOrderByWithRelationInput
     observations?: ObservationOrderByRelationAggregateInput
     treatments?: TreatmentOrderByRelationAggregateInput
   }
 
-  export type StudyPatientWhereUniqueInput = Prisma.AtLeast<{
+  export type MonitoringPlanPatientWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    studyId_patientId?: StudyPatientStudyIdPatientIdCompoundUniqueInput
-    AND?: StudyPatientWhereInput | StudyPatientWhereInput[]
-    OR?: StudyPatientWhereInput[]
-    NOT?: StudyPatientWhereInput | StudyPatientWhereInput[]
-    studyId?: StringFilter<"StudyPatient"> | string
-    patientId?: StringFilter<"StudyPatient"> | string
-    enrollmentDate?: DateTimeFilter<"StudyPatient"> | Date | string
-    exitDate?: DateTimeNullableFilter<"StudyPatient"> | Date | string | null
-    isActive?: BoolFilter<"StudyPatient"> | boolean
-    study?: XOR<StudyScalarRelationFilter, StudyWhereInput>
+    monitoringPlanId_patientId?: MonitoringPlanPatientMonitoringPlanIdPatientIdCompoundUniqueInput
+    AND?: MonitoringPlanPatientWhereInput | MonitoringPlanPatientWhereInput[]
+    OR?: MonitoringPlanPatientWhereInput[]
+    NOT?: MonitoringPlanPatientWhereInput | MonitoringPlanPatientWhereInput[]
+    monitoringPlanId?: StringFilter<"MonitoringPlanPatient"> | string
+    patientId?: StringFilter<"MonitoringPlanPatient"> | string
+    enrollmentDate?: DateTimeFilter<"MonitoringPlanPatient"> | Date | string
+    exitDate?: DateTimeNullableFilter<"MonitoringPlanPatient"> | Date | string | null
+    isActive?: BoolFilter<"MonitoringPlanPatient"> | boolean
+    monitoringPlan?: XOR<MonitoringPlanScalarRelationFilter, MonitoringPlanWhereInput>
     patient?: XOR<PatientScalarRelationFilter, PatientWhereInput>
     observations?: ObservationListRelationFilter
     treatments?: TreatmentListRelationFilter
-  }, "id" | "studyId_patientId">
+  }, "id" | "monitoringPlanId_patientId">
 
-  export type StudyPatientOrderByWithAggregationInput = {
+  export type MonitoringPlanPatientOrderByWithAggregationInput = {
     id?: SortOrder
-    studyId?: SortOrder
+    monitoringPlanId?: SortOrder
     patientId?: SortOrder
     enrollmentDate?: SortOrder
     exitDate?: SortOrderInput | SortOrder
     isActive?: SortOrder
-    _count?: StudyPatientCountOrderByAggregateInput
-    _max?: StudyPatientMaxOrderByAggregateInput
-    _min?: StudyPatientMinOrderByAggregateInput
+    _count?: MonitoringPlanPatientCountOrderByAggregateInput
+    _max?: MonitoringPlanPatientMaxOrderByAggregateInput
+    _min?: MonitoringPlanPatientMinOrderByAggregateInput
   }
 
-  export type StudyPatientScalarWhereWithAggregatesInput = {
-    AND?: StudyPatientScalarWhereWithAggregatesInput | StudyPatientScalarWhereWithAggregatesInput[]
-    OR?: StudyPatientScalarWhereWithAggregatesInput[]
-    NOT?: StudyPatientScalarWhereWithAggregatesInput | StudyPatientScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"StudyPatient"> | string
-    studyId?: StringWithAggregatesFilter<"StudyPatient"> | string
-    patientId?: StringWithAggregatesFilter<"StudyPatient"> | string
-    enrollmentDate?: DateTimeWithAggregatesFilter<"StudyPatient"> | Date | string
-    exitDate?: DateTimeNullableWithAggregatesFilter<"StudyPatient"> | Date | string | null
-    isActive?: BoolWithAggregatesFilter<"StudyPatient"> | boolean
+  export type MonitoringPlanPatientScalarWhereWithAggregatesInput = {
+    AND?: MonitoringPlanPatientScalarWhereWithAggregatesInput | MonitoringPlanPatientScalarWhereWithAggregatesInput[]
+    OR?: MonitoringPlanPatientScalarWhereWithAggregatesInput[]
+    NOT?: MonitoringPlanPatientScalarWhereWithAggregatesInput | MonitoringPlanPatientScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"MonitoringPlanPatient"> | string
+    monitoringPlanId?: StringWithAggregatesFilter<"MonitoringPlanPatient"> | string
+    patientId?: StringWithAggregatesFilter<"MonitoringPlanPatient"> | string
+    enrollmentDate?: DateTimeWithAggregatesFilter<"MonitoringPlanPatient"> | Date | string
+    exitDate?: DateTimeNullableWithAggregatesFilter<"MonitoringPlanPatient"> | Date | string | null
+    isActive?: BoolWithAggregatesFilter<"MonitoringPlanPatient"> | boolean
   }
 
-  export type StudyAssignmentWhereInput = {
-    AND?: StudyAssignmentWhereInput | StudyAssignmentWhereInput[]
-    OR?: StudyAssignmentWhereInput[]
-    NOT?: StudyAssignmentWhereInput | StudyAssignmentWhereInput[]
-    id?: StringFilter<"StudyAssignment"> | string
-    studyId?: StringFilter<"StudyAssignment"> | string
-    userId?: StringFilter<"StudyAssignment"> | string
-    assignedAt?: DateTimeFilter<"StudyAssignment"> | Date | string
-    role?: EnumStudyRoleFilter<"StudyAssignment"> | $Enums.StudyRole
-    study?: XOR<StudyScalarRelationFilter, StudyWhereInput>
+  export type MonitoringPlanAssignmentWhereInput = {
+    AND?: MonitoringPlanAssignmentWhereInput | MonitoringPlanAssignmentWhereInput[]
+    OR?: MonitoringPlanAssignmentWhereInput[]
+    NOT?: MonitoringPlanAssignmentWhereInput | MonitoringPlanAssignmentWhereInput[]
+    id?: StringFilter<"MonitoringPlanAssignment"> | string
+    monitoringPlanId?: StringFilter<"MonitoringPlanAssignment"> | string
+    userId?: StringFilter<"MonitoringPlanAssignment"> | string
+    assignedAt?: DateTimeFilter<"MonitoringPlanAssignment"> | Date | string
+    role?: EnumMonitoringPlanRoleFilter<"MonitoringPlanAssignment"> | $Enums.MonitoringPlanRole
+    monitoringPlan?: XOR<MonitoringPlanScalarRelationFilter, MonitoringPlanWhereInput>
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
-  export type StudyAssignmentOrderByWithRelationInput = {
+  export type MonitoringPlanAssignmentOrderByWithRelationInput = {
     id?: SortOrder
-    studyId?: SortOrder
+    monitoringPlanId?: SortOrder
     userId?: SortOrder
     assignedAt?: SortOrder
     role?: SortOrder
-    study?: StudyOrderByWithRelationInput
+    monitoringPlan?: MonitoringPlanOrderByWithRelationInput
     user?: UserOrderByWithRelationInput
   }
 
-  export type StudyAssignmentWhereUniqueInput = Prisma.AtLeast<{
+  export type MonitoringPlanAssignmentWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    studyId_userId?: StudyAssignmentStudyIdUserIdCompoundUniqueInput
-    AND?: StudyAssignmentWhereInput | StudyAssignmentWhereInput[]
-    OR?: StudyAssignmentWhereInput[]
-    NOT?: StudyAssignmentWhereInput | StudyAssignmentWhereInput[]
-    studyId?: StringFilter<"StudyAssignment"> | string
-    userId?: StringFilter<"StudyAssignment"> | string
-    assignedAt?: DateTimeFilter<"StudyAssignment"> | Date | string
-    role?: EnumStudyRoleFilter<"StudyAssignment"> | $Enums.StudyRole
-    study?: XOR<StudyScalarRelationFilter, StudyWhereInput>
+    monitoringPlanId_userId?: MonitoringPlanAssignmentMonitoringPlanIdUserIdCompoundUniqueInput
+    AND?: MonitoringPlanAssignmentWhereInput | MonitoringPlanAssignmentWhereInput[]
+    OR?: MonitoringPlanAssignmentWhereInput[]
+    NOT?: MonitoringPlanAssignmentWhereInput | MonitoringPlanAssignmentWhereInput[]
+    monitoringPlanId?: StringFilter<"MonitoringPlanAssignment"> | string
+    userId?: StringFilter<"MonitoringPlanAssignment"> | string
+    assignedAt?: DateTimeFilter<"MonitoringPlanAssignment"> | Date | string
+    role?: EnumMonitoringPlanRoleFilter<"MonitoringPlanAssignment"> | $Enums.MonitoringPlanRole
+    monitoringPlan?: XOR<MonitoringPlanScalarRelationFilter, MonitoringPlanWhereInput>
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
-  }, "id" | "studyId_userId">
+  }, "id" | "monitoringPlanId_userId">
 
-  export type StudyAssignmentOrderByWithAggregationInput = {
+  export type MonitoringPlanAssignmentOrderByWithAggregationInput = {
     id?: SortOrder
-    studyId?: SortOrder
+    monitoringPlanId?: SortOrder
     userId?: SortOrder
     assignedAt?: SortOrder
     role?: SortOrder
-    _count?: StudyAssignmentCountOrderByAggregateInput
-    _max?: StudyAssignmentMaxOrderByAggregateInput
-    _min?: StudyAssignmentMinOrderByAggregateInput
+    _count?: MonitoringPlanAssignmentCountOrderByAggregateInput
+    _max?: MonitoringPlanAssignmentMaxOrderByAggregateInput
+    _min?: MonitoringPlanAssignmentMinOrderByAggregateInput
   }
 
-  export type StudyAssignmentScalarWhereWithAggregatesInput = {
-    AND?: StudyAssignmentScalarWhereWithAggregatesInput | StudyAssignmentScalarWhereWithAggregatesInput[]
-    OR?: StudyAssignmentScalarWhereWithAggregatesInput[]
-    NOT?: StudyAssignmentScalarWhereWithAggregatesInput | StudyAssignmentScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"StudyAssignment"> | string
-    studyId?: StringWithAggregatesFilter<"StudyAssignment"> | string
-    userId?: StringWithAggregatesFilter<"StudyAssignment"> | string
-    assignedAt?: DateTimeWithAggregatesFilter<"StudyAssignment"> | Date | string
-    role?: EnumStudyRoleWithAggregatesFilter<"StudyAssignment"> | $Enums.StudyRole
+  export type MonitoringPlanAssignmentScalarWhereWithAggregatesInput = {
+    AND?: MonitoringPlanAssignmentScalarWhereWithAggregatesInput | MonitoringPlanAssignmentScalarWhereWithAggregatesInput[]
+    OR?: MonitoringPlanAssignmentScalarWhereWithAggregatesInput[]
+    NOT?: MonitoringPlanAssignmentScalarWhereWithAggregatesInput | MonitoringPlanAssignmentScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"MonitoringPlanAssignment"> | string
+    monitoringPlanId?: StringWithAggregatesFilter<"MonitoringPlanAssignment"> | string
+    userId?: StringWithAggregatesFilter<"MonitoringPlanAssignment"> | string
+    assignedAt?: DateTimeWithAggregatesFilter<"MonitoringPlanAssignment"> | Date | string
+    role?: EnumMonitoringPlanRoleWithAggregatesFilter<"MonitoringPlanAssignment"> | $Enums.MonitoringPlanRole
   }
 
-  export type StudyNoteWhereInput = {
-    AND?: StudyNoteWhereInput | StudyNoteWhereInput[]
-    OR?: StudyNoteWhereInput[]
-    NOT?: StudyNoteWhereInput | StudyNoteWhereInput[]
-    id?: StringFilter<"StudyNote"> | string
-    studyId?: StringFilter<"StudyNote"> | string
-    content?: StringFilter<"StudyNote"> | string
-    createdAt?: DateTimeFilter<"StudyNote"> | Date | string
-    updatedAt?: DateTimeFilter<"StudyNote"> | Date | string
-    study?: XOR<StudyScalarRelationFilter, StudyWhereInput>
+  export type MonitoringPlanNoteWhereInput = {
+    AND?: MonitoringPlanNoteWhereInput | MonitoringPlanNoteWhereInput[]
+    OR?: MonitoringPlanNoteWhereInput[]
+    NOT?: MonitoringPlanNoteWhereInput | MonitoringPlanNoteWhereInput[]
+    id?: StringFilter<"MonitoringPlanNote"> | string
+    monitoringPlanId?: StringFilter<"MonitoringPlanNote"> | string
+    content?: StringFilter<"MonitoringPlanNote"> | string
+    createdAt?: DateTimeFilter<"MonitoringPlanNote"> | Date | string
+    updatedAt?: DateTimeFilter<"MonitoringPlanNote"> | Date | string
+    monitoringPlan?: XOR<MonitoringPlanScalarRelationFilter, MonitoringPlanWhereInput>
   }
 
-  export type StudyNoteOrderByWithRelationInput = {
+  export type MonitoringPlanNoteOrderByWithRelationInput = {
     id?: SortOrder
-    studyId?: SortOrder
+    monitoringPlanId?: SortOrder
     content?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    study?: StudyOrderByWithRelationInput
+    monitoringPlan?: MonitoringPlanOrderByWithRelationInput
   }
 
-  export type StudyNoteWhereUniqueInput = Prisma.AtLeast<{
+  export type MonitoringPlanNoteWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    AND?: StudyNoteWhereInput | StudyNoteWhereInput[]
-    OR?: StudyNoteWhereInput[]
-    NOT?: StudyNoteWhereInput | StudyNoteWhereInput[]
-    studyId?: StringFilter<"StudyNote"> | string
-    content?: StringFilter<"StudyNote"> | string
-    createdAt?: DateTimeFilter<"StudyNote"> | Date | string
-    updatedAt?: DateTimeFilter<"StudyNote"> | Date | string
-    study?: XOR<StudyScalarRelationFilter, StudyWhereInput>
+    AND?: MonitoringPlanNoteWhereInput | MonitoringPlanNoteWhereInput[]
+    OR?: MonitoringPlanNoteWhereInput[]
+    NOT?: MonitoringPlanNoteWhereInput | MonitoringPlanNoteWhereInput[]
+    monitoringPlanId?: StringFilter<"MonitoringPlanNote"> | string
+    content?: StringFilter<"MonitoringPlanNote"> | string
+    createdAt?: DateTimeFilter<"MonitoringPlanNote"> | Date | string
+    updatedAt?: DateTimeFilter<"MonitoringPlanNote"> | Date | string
+    monitoringPlan?: XOR<MonitoringPlanScalarRelationFilter, MonitoringPlanWhereInput>
   }, "id">
 
-  export type StudyNoteOrderByWithAggregationInput = {
+  export type MonitoringPlanNoteOrderByWithAggregationInput = {
     id?: SortOrder
-    studyId?: SortOrder
+    monitoringPlanId?: SortOrder
     content?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    _count?: StudyNoteCountOrderByAggregateInput
-    _max?: StudyNoteMaxOrderByAggregateInput
-    _min?: StudyNoteMinOrderByAggregateInput
+    _count?: MonitoringPlanNoteCountOrderByAggregateInput
+    _max?: MonitoringPlanNoteMaxOrderByAggregateInput
+    _min?: MonitoringPlanNoteMinOrderByAggregateInput
   }
 
-  export type StudyNoteScalarWhereWithAggregatesInput = {
-    AND?: StudyNoteScalarWhereWithAggregatesInput | StudyNoteScalarWhereWithAggregatesInput[]
-    OR?: StudyNoteScalarWhereWithAggregatesInput[]
-    NOT?: StudyNoteScalarWhereWithAggregatesInput | StudyNoteScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"StudyNote"> | string
-    studyId?: StringWithAggregatesFilter<"StudyNote"> | string
-    content?: StringWithAggregatesFilter<"StudyNote"> | string
-    createdAt?: DateTimeWithAggregatesFilter<"StudyNote"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"StudyNote"> | Date | string
+  export type MonitoringPlanNoteScalarWhereWithAggregatesInput = {
+    AND?: MonitoringPlanNoteScalarWhereWithAggregatesInput | MonitoringPlanNoteScalarWhereWithAggregatesInput[]
+    OR?: MonitoringPlanNoteScalarWhereWithAggregatesInput[]
+    NOT?: MonitoringPlanNoteScalarWhereWithAggregatesInput | MonitoringPlanNoteScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"MonitoringPlanNote"> | string
+    monitoringPlanId?: StringWithAggregatesFilter<"MonitoringPlanNote"> | string
+    content?: StringWithAggregatesFilter<"MonitoringPlanNote"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"MonitoringPlanNote"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"MonitoringPlanNote"> | Date | string
   }
 
   export type SymptomTemplateWhereInput = {
@@ -23108,10 +23127,10 @@ export namespace Prisma {
     minValue?: FloatNullableFilter<"SymptomTemplate"> | number | null
     maxValue?: FloatNullableFilter<"SymptomTemplate"> | number | null
     options?: JsonNullableFilter<"SymptomTemplate">
-    studyId?: StringFilter<"SymptomTemplate"> | string
+    monitoringPlanId?: StringFilter<"SymptomTemplate"> | string
     createdAt?: DateTimeFilter<"SymptomTemplate"> | Date | string
     updatedAt?: DateTimeFilter<"SymptomTemplate"> | Date | string
-    study?: XOR<StudyScalarRelationFilter, StudyWhereInput>
+    monitoringPlan?: XOR<MonitoringPlanScalarRelationFilter, MonitoringPlanWhereInput>
     observations?: ObservationListRelationFilter
     alertThresholds?: AlertThresholdListRelationFilter
   }
@@ -23126,10 +23145,10 @@ export namespace Prisma {
     minValue?: SortOrderInput | SortOrder
     maxValue?: SortOrderInput | SortOrder
     options?: SortOrderInput | SortOrder
-    studyId?: SortOrder
+    monitoringPlanId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    study?: StudyOrderByWithRelationInput
+    monitoringPlan?: MonitoringPlanOrderByWithRelationInput
     observations?: ObservationOrderByRelationAggregateInput
     alertThresholds?: AlertThresholdOrderByRelationAggregateInput
   }
@@ -23147,10 +23166,10 @@ export namespace Prisma {
     minValue?: FloatNullableFilter<"SymptomTemplate"> | number | null
     maxValue?: FloatNullableFilter<"SymptomTemplate"> | number | null
     options?: JsonNullableFilter<"SymptomTemplate">
-    studyId?: StringFilter<"SymptomTemplate"> | string
+    monitoringPlanId?: StringFilter<"SymptomTemplate"> | string
     createdAt?: DateTimeFilter<"SymptomTemplate"> | Date | string
     updatedAt?: DateTimeFilter<"SymptomTemplate"> | Date | string
-    study?: XOR<StudyScalarRelationFilter, StudyWhereInput>
+    monitoringPlan?: XOR<MonitoringPlanScalarRelationFilter, MonitoringPlanWhereInput>
     observations?: ObservationListRelationFilter
     alertThresholds?: AlertThresholdListRelationFilter
   }, "id">
@@ -23165,7 +23184,7 @@ export namespace Prisma {
     minValue?: SortOrderInput | SortOrder
     maxValue?: SortOrderInput | SortOrder
     options?: SortOrderInput | SortOrder
-    studyId?: SortOrder
+    monitoringPlanId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: SymptomTemplateCountOrderByAggregateInput
@@ -23188,7 +23207,7 @@ export namespace Prisma {
     minValue?: FloatNullableWithAggregatesFilter<"SymptomTemplate"> | number | null
     maxValue?: FloatNullableWithAggregatesFilter<"SymptomTemplate"> | number | null
     options?: JsonNullableWithAggregatesFilter<"SymptomTemplate">
-    studyId?: StringWithAggregatesFilter<"SymptomTemplate"> | string
+    monitoringPlanId?: StringWithAggregatesFilter<"SymptomTemplate"> | string
     createdAt?: DateTimeWithAggregatesFilter<"SymptomTemplate"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"SymptomTemplate"> | Date | string
   }
@@ -23200,14 +23219,14 @@ export namespace Prisma {
     id?: StringFilter<"Observation"> | string
     symptomTemplateId?: StringFilter<"Observation"> | string
     patientId?: StringFilter<"Observation"> | string
-    studyPatientId?: StringFilter<"Observation"> | string
+    monitoringPlanPatientId?: StringFilter<"Observation"> | string
     recordedById?: StringFilter<"Observation"> | string
     recordedAt?: DateTimeFilter<"Observation"> | Date | string
     value?: JsonFilter<"Observation">
     notes?: StringNullableFilter<"Observation"> | string | null
     symptomTemplate?: XOR<SymptomTemplateScalarRelationFilter, SymptomTemplateWhereInput>
     patient?: XOR<PatientScalarRelationFilter, PatientWhereInput>
-    studyPatient?: XOR<StudyPatientScalarRelationFilter, StudyPatientWhereInput>
+    monitoringPlanPatient?: XOR<MonitoringPlanPatientScalarRelationFilter, MonitoringPlanPatientWhereInput>
     recordedBy?: XOR<UserScalarRelationFilter, UserWhereInput>
     files?: FileListRelationFilter
     alerts?: AlertListRelationFilter
@@ -23217,14 +23236,14 @@ export namespace Prisma {
     id?: SortOrder
     symptomTemplateId?: SortOrder
     patientId?: SortOrder
-    studyPatientId?: SortOrder
+    monitoringPlanPatientId?: SortOrder
     recordedById?: SortOrder
     recordedAt?: SortOrder
     value?: SortOrder
     notes?: SortOrderInput | SortOrder
     symptomTemplate?: SymptomTemplateOrderByWithRelationInput
     patient?: PatientOrderByWithRelationInput
-    studyPatient?: StudyPatientOrderByWithRelationInput
+    monitoringPlanPatient?: MonitoringPlanPatientOrderByWithRelationInput
     recordedBy?: UserOrderByWithRelationInput
     files?: FileOrderByRelationAggregateInput
     alerts?: AlertOrderByRelationAggregateInput
@@ -23237,14 +23256,14 @@ export namespace Prisma {
     NOT?: ObservationWhereInput | ObservationWhereInput[]
     symptomTemplateId?: StringFilter<"Observation"> | string
     patientId?: StringFilter<"Observation"> | string
-    studyPatientId?: StringFilter<"Observation"> | string
+    monitoringPlanPatientId?: StringFilter<"Observation"> | string
     recordedById?: StringFilter<"Observation"> | string
     recordedAt?: DateTimeFilter<"Observation"> | Date | string
     value?: JsonFilter<"Observation">
     notes?: StringNullableFilter<"Observation"> | string | null
     symptomTemplate?: XOR<SymptomTemplateScalarRelationFilter, SymptomTemplateWhereInput>
     patient?: XOR<PatientScalarRelationFilter, PatientWhereInput>
-    studyPatient?: XOR<StudyPatientScalarRelationFilter, StudyPatientWhereInput>
+    monitoringPlanPatient?: XOR<MonitoringPlanPatientScalarRelationFilter, MonitoringPlanPatientWhereInput>
     recordedBy?: XOR<UserScalarRelationFilter, UserWhereInput>
     files?: FileListRelationFilter
     alerts?: AlertListRelationFilter
@@ -23254,7 +23273,7 @@ export namespace Prisma {
     id?: SortOrder
     symptomTemplateId?: SortOrder
     patientId?: SortOrder
-    studyPatientId?: SortOrder
+    monitoringPlanPatientId?: SortOrder
     recordedById?: SortOrder
     recordedAt?: SortOrder
     value?: SortOrder
@@ -23271,7 +23290,7 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Observation"> | string
     symptomTemplateId?: StringWithAggregatesFilter<"Observation"> | string
     patientId?: StringWithAggregatesFilter<"Observation"> | string
-    studyPatientId?: StringWithAggregatesFilter<"Observation"> | string
+    monitoringPlanPatientId?: StringWithAggregatesFilter<"Observation"> | string
     recordedById?: StringWithAggregatesFilter<"Observation"> | string
     recordedAt?: DateTimeWithAggregatesFilter<"Observation"> | Date | string
     value?: JsonWithAggregatesFilter<"Observation">
@@ -23286,10 +23305,10 @@ export namespace Prisma {
     name?: StringFilter<"TreatmentTemplate"> | string
     description?: StringNullableFilter<"TreatmentTemplate"> | string | null
     protocol?: JsonNullableFilter<"TreatmentTemplate">
-    studyId?: StringFilter<"TreatmentTemplate"> | string
+    monitoringPlanId?: StringFilter<"TreatmentTemplate"> | string
     createdAt?: DateTimeFilter<"TreatmentTemplate"> | Date | string
     updatedAt?: DateTimeFilter<"TreatmentTemplate"> | Date | string
-    study?: XOR<StudyScalarRelationFilter, StudyWhereInput>
+    monitoringPlan?: XOR<MonitoringPlanScalarRelationFilter, MonitoringPlanWhereInput>
     treatments?: TreatmentListRelationFilter
   }
 
@@ -23298,10 +23317,10 @@ export namespace Prisma {
     name?: SortOrder
     description?: SortOrderInput | SortOrder
     protocol?: SortOrderInput | SortOrder
-    studyId?: SortOrder
+    monitoringPlanId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    study?: StudyOrderByWithRelationInput
+    monitoringPlan?: MonitoringPlanOrderByWithRelationInput
     treatments?: TreatmentOrderByRelationAggregateInput
   }
 
@@ -23313,10 +23332,10 @@ export namespace Prisma {
     name?: StringFilter<"TreatmentTemplate"> | string
     description?: StringNullableFilter<"TreatmentTemplate"> | string | null
     protocol?: JsonNullableFilter<"TreatmentTemplate">
-    studyId?: StringFilter<"TreatmentTemplate"> | string
+    monitoringPlanId?: StringFilter<"TreatmentTemplate"> | string
     createdAt?: DateTimeFilter<"TreatmentTemplate"> | Date | string
     updatedAt?: DateTimeFilter<"TreatmentTemplate"> | Date | string
-    study?: XOR<StudyScalarRelationFilter, StudyWhereInput>
+    monitoringPlan?: XOR<MonitoringPlanScalarRelationFilter, MonitoringPlanWhereInput>
     treatments?: TreatmentListRelationFilter
   }, "id">
 
@@ -23325,7 +23344,7 @@ export namespace Prisma {
     name?: SortOrder
     description?: SortOrderInput | SortOrder
     protocol?: SortOrderInput | SortOrder
-    studyId?: SortOrder
+    monitoringPlanId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: TreatmentTemplateCountOrderByAggregateInput
@@ -23341,7 +23360,7 @@ export namespace Prisma {
     name?: StringWithAggregatesFilter<"TreatmentTemplate"> | string
     description?: StringNullableWithAggregatesFilter<"TreatmentTemplate"> | string | null
     protocol?: JsonNullableWithAggregatesFilter<"TreatmentTemplate">
-    studyId?: StringWithAggregatesFilter<"TreatmentTemplate"> | string
+    monitoringPlanId?: StringWithAggregatesFilter<"TreatmentTemplate"> | string
     createdAt?: DateTimeWithAggregatesFilter<"TreatmentTemplate"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"TreatmentTemplate"> | Date | string
   }
@@ -23353,7 +23372,7 @@ export namespace Prisma {
     id?: StringFilter<"Treatment"> | string
     templateId?: StringNullableFilter<"Treatment"> | string | null
     patientId?: StringFilter<"Treatment"> | string
-    studyPatientId?: StringFilter<"Treatment"> | string
+    monitoringPlanPatientId?: StringFilter<"Treatment"> | string
     createdById?: StringFilter<"Treatment"> | string
     createdAt?: DateTimeFilter<"Treatment"> | Date | string
     administeredAt?: DateTimeFilter<"Treatment"> | Date | string
@@ -23363,7 +23382,7 @@ export namespace Prisma {
     notes?: StringNullableFilter<"Treatment"> | string | null
     template?: XOR<TreatmentTemplateNullableScalarRelationFilter, TreatmentTemplateWhereInput> | null
     patient?: XOR<PatientScalarRelationFilter, PatientWhereInput>
-    studyPatient?: XOR<StudyPatientScalarRelationFilter, StudyPatientWhereInput>
+    monitoringPlanPatient?: XOR<MonitoringPlanPatientScalarRelationFilter, MonitoringPlanPatientWhereInput>
     createdBy?: XOR<UserScalarRelationFilter, UserWhereInput>
     files?: FileListRelationFilter
   }
@@ -23372,7 +23391,7 @@ export namespace Prisma {
     id?: SortOrder
     templateId?: SortOrderInput | SortOrder
     patientId?: SortOrder
-    studyPatientId?: SortOrder
+    monitoringPlanPatientId?: SortOrder
     createdById?: SortOrder
     createdAt?: SortOrder
     administeredAt?: SortOrder
@@ -23382,7 +23401,7 @@ export namespace Prisma {
     notes?: SortOrderInput | SortOrder
     template?: TreatmentTemplateOrderByWithRelationInput
     patient?: PatientOrderByWithRelationInput
-    studyPatient?: StudyPatientOrderByWithRelationInput
+    monitoringPlanPatient?: MonitoringPlanPatientOrderByWithRelationInput
     createdBy?: UserOrderByWithRelationInput
     files?: FileOrderByRelationAggregateInput
   }
@@ -23394,7 +23413,7 @@ export namespace Prisma {
     NOT?: TreatmentWhereInput | TreatmentWhereInput[]
     templateId?: StringNullableFilter<"Treatment"> | string | null
     patientId?: StringFilter<"Treatment"> | string
-    studyPatientId?: StringFilter<"Treatment"> | string
+    monitoringPlanPatientId?: StringFilter<"Treatment"> | string
     createdById?: StringFilter<"Treatment"> | string
     createdAt?: DateTimeFilter<"Treatment"> | Date | string
     administeredAt?: DateTimeFilter<"Treatment"> | Date | string
@@ -23404,7 +23423,7 @@ export namespace Prisma {
     notes?: StringNullableFilter<"Treatment"> | string | null
     template?: XOR<TreatmentTemplateNullableScalarRelationFilter, TreatmentTemplateWhereInput> | null
     patient?: XOR<PatientScalarRelationFilter, PatientWhereInput>
-    studyPatient?: XOR<StudyPatientScalarRelationFilter, StudyPatientWhereInput>
+    monitoringPlanPatient?: XOR<MonitoringPlanPatientScalarRelationFilter, MonitoringPlanPatientWhereInput>
     createdBy?: XOR<UserScalarRelationFilter, UserWhereInput>
     files?: FileListRelationFilter
   }, "id">
@@ -23413,7 +23432,7 @@ export namespace Prisma {
     id?: SortOrder
     templateId?: SortOrderInput | SortOrder
     patientId?: SortOrder
-    studyPatientId?: SortOrder
+    monitoringPlanPatientId?: SortOrder
     createdById?: SortOrder
     createdAt?: SortOrder
     administeredAt?: SortOrder
@@ -23433,7 +23452,7 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Treatment"> | string
     templateId?: StringNullableWithAggregatesFilter<"Treatment"> | string | null
     patientId?: StringWithAggregatesFilter<"Treatment"> | string
-    studyPatientId?: StringWithAggregatesFilter<"Treatment"> | string
+    monitoringPlanPatientId?: StringWithAggregatesFilter<"Treatment"> | string
     createdById?: StringWithAggregatesFilter<"Treatment"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Treatment"> | Date | string
     administeredAt?: DateTimeWithAggregatesFilter<"Treatment"> | Date | string
@@ -23741,8 +23760,8 @@ export namespace Prisma {
     resetToken?: string | null
     resetTokenExpiry?: Date | string | null
     practice?: PracticeCreateNestedOneWithoutUsersInput
-    createdStudies?: StudyCreateNestedManyWithoutCreatedByInput
-    assignedStudies?: StudyAssignmentCreateNestedManyWithoutUserInput
+    createdMonitoringPlans?: MonitoringPlanCreateNestedManyWithoutCreatedByInput
+    assignedMonitoringPlans?: MonitoringPlanAssignmentCreateNestedManyWithoutUserInput
     createdTreatments?: TreatmentCreateNestedManyWithoutCreatedByInput
     observations?: ObservationCreateNestedManyWithoutRecordedByInput
     createdPatients?: PatientCreateNestedManyWithoutCreatedByInput
@@ -23762,8 +23781,8 @@ export namespace Prisma {
     practiceId?: string | null
     resetToken?: string | null
     resetTokenExpiry?: Date | string | null
-    createdStudies?: StudyUncheckedCreateNestedManyWithoutCreatedByInput
-    assignedStudies?: StudyAssignmentUncheckedCreateNestedManyWithoutUserInput
+    createdMonitoringPlans?: MonitoringPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    assignedMonitoringPlans?: MonitoringPlanAssignmentUncheckedCreateNestedManyWithoutUserInput
     createdTreatments?: TreatmentUncheckedCreateNestedManyWithoutCreatedByInput
     observations?: ObservationUncheckedCreateNestedManyWithoutRecordedByInput
     createdPatients?: PatientUncheckedCreateNestedManyWithoutCreatedByInput
@@ -23783,8 +23802,8 @@ export namespace Prisma {
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     practice?: PracticeUpdateOneWithoutUsersNestedInput
-    createdStudies?: StudyUpdateManyWithoutCreatedByNestedInput
-    assignedStudies?: StudyAssignmentUpdateManyWithoutUserNestedInput
+    createdMonitoringPlans?: MonitoringPlanUpdateManyWithoutCreatedByNestedInput
+    assignedMonitoringPlans?: MonitoringPlanAssignmentUpdateManyWithoutUserNestedInput
     createdTreatments?: TreatmentUpdateManyWithoutCreatedByNestedInput
     observations?: ObservationUpdateManyWithoutRecordedByNestedInput
     createdPatients?: PatientUpdateManyWithoutCreatedByNestedInput
@@ -23804,8 +23823,8 @@ export namespace Prisma {
     practiceId?: NullableStringFieldUpdateOperationsInput | string | null
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdStudies?: StudyUncheckedUpdateManyWithoutCreatedByNestedInput
-    assignedStudies?: StudyAssignmentUncheckedUpdateManyWithoutUserNestedInput
+    createdMonitoringPlans?: MonitoringPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    assignedMonitoringPlans?: MonitoringPlanAssignmentUncheckedUpdateManyWithoutUserNestedInput
     createdTreatments?: TreatmentUncheckedUpdateManyWithoutCreatedByNestedInput
     observations?: ObservationUncheckedUpdateManyWithoutRecordedByNestedInput
     createdPatients?: PatientUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -23875,7 +23894,7 @@ export namespace Prisma {
     currentStorage?: number
     users?: UserCreateNestedManyWithoutPracticeInput
     patients?: PatientCreateNestedManyWithoutPracticeInput
-    studies?: StudyCreateNestedManyWithoutPracticeInput
+    monitoringPlans?: MonitoringPlanCreateNestedManyWithoutPracticeInput
     subscriptionHistory?: SubscriptionHistoryCreateNestedManyWithoutPracticeInput
   }
 
@@ -23898,7 +23917,7 @@ export namespace Prisma {
     currentStorage?: number
     users?: UserUncheckedCreateNestedManyWithoutPracticeInput
     patients?: PatientUncheckedCreateNestedManyWithoutPracticeInput
-    studies?: StudyUncheckedCreateNestedManyWithoutPracticeInput
+    monitoringPlans?: MonitoringPlanUncheckedCreateNestedManyWithoutPracticeInput
     subscriptionHistory?: SubscriptionHistoryUncheckedCreateNestedManyWithoutPracticeInput
   }
 
@@ -23921,7 +23940,7 @@ export namespace Prisma {
     currentStorage?: IntFieldUpdateOperationsInput | number
     users?: UserUpdateManyWithoutPracticeNestedInput
     patients?: PatientUpdateManyWithoutPracticeNestedInput
-    studies?: StudyUpdateManyWithoutPracticeNestedInput
+    monitoringPlans?: MonitoringPlanUpdateManyWithoutPracticeNestedInput
     subscriptionHistory?: SubscriptionHistoryUpdateManyWithoutPracticeNestedInput
   }
 
@@ -23944,7 +23963,7 @@ export namespace Prisma {
     currentStorage?: IntFieldUpdateOperationsInput | number
     users?: UserUncheckedUpdateManyWithoutPracticeNestedInput
     patients?: PatientUncheckedUpdateManyWithoutPracticeNestedInput
-    studies?: StudyUncheckedUpdateManyWithoutPracticeNestedInput
+    monitoringPlans?: MonitoringPlanUncheckedUpdateManyWithoutPracticeNestedInput
     subscriptionHistory?: SubscriptionHistoryUncheckedUpdateManyWithoutPracticeNestedInput
   }
 
@@ -24099,7 +24118,7 @@ export namespace Prisma {
     medicalHistory?: NullableJsonNullValueInput | InputJsonValue
     practice: PracticeCreateNestedOneWithoutPatientsInput
     createdBy: UserCreateNestedOneWithoutCreatedPatientsInput
-    studies?: StudyPatientCreateNestedManyWithoutPatientInput
+    monitoringPlans?: MonitoringPlanPatientCreateNestedManyWithoutPatientInput
     observations?: ObservationCreateNestedManyWithoutPatientInput
     treatments?: TreatmentCreateNestedManyWithoutPatientInput
     files?: FileCreateNestedManyWithoutPatientInput
@@ -24123,7 +24142,7 @@ export namespace Prisma {
     ownerEmail?: string | null
     ownerPhone?: string | null
     medicalHistory?: NullableJsonNullValueInput | InputJsonValue
-    studies?: StudyPatientUncheckedCreateNestedManyWithoutPatientInput
+    monitoringPlans?: MonitoringPlanPatientUncheckedCreateNestedManyWithoutPatientInput
     observations?: ObservationUncheckedCreateNestedManyWithoutPatientInput
     treatments?: TreatmentUncheckedCreateNestedManyWithoutPatientInput
     files?: FileUncheckedCreateNestedManyWithoutPatientInput
@@ -24147,7 +24166,7 @@ export namespace Prisma {
     medicalHistory?: NullableJsonNullValueInput | InputJsonValue
     practice?: PracticeUpdateOneRequiredWithoutPatientsNestedInput
     createdBy?: UserUpdateOneRequiredWithoutCreatedPatientsNestedInput
-    studies?: StudyPatientUpdateManyWithoutPatientNestedInput
+    monitoringPlans?: MonitoringPlanPatientUpdateManyWithoutPatientNestedInput
     observations?: ObservationUpdateManyWithoutPatientNestedInput
     treatments?: TreatmentUpdateManyWithoutPatientNestedInput
     files?: FileUpdateManyWithoutPatientNestedInput
@@ -24171,7 +24190,7 @@ export namespace Prisma {
     ownerEmail?: NullableStringFieldUpdateOperationsInput | string | null
     ownerPhone?: NullableStringFieldUpdateOperationsInput | string | null
     medicalHistory?: NullableJsonNullValueInput | InputJsonValue
-    studies?: StudyPatientUncheckedUpdateManyWithoutPatientNestedInput
+    monitoringPlans?: MonitoringPlanPatientUncheckedUpdateManyWithoutPatientNestedInput
     observations?: ObservationUncheckedUpdateManyWithoutPatientNestedInput
     treatments?: TreatmentUncheckedUpdateManyWithoutPatientNestedInput
     files?: FileUncheckedUpdateManyWithoutPatientNestedInput
@@ -24235,7 +24254,7 @@ export namespace Prisma {
     medicalHistory?: NullableJsonNullValueInput | InputJsonValue
   }
 
-  export type StudyCreateInput = {
+  export type MonitoringPlanCreateInput = {
     id?: string
     title: string
     description?: string | null
@@ -24244,78 +24263,19 @@ export namespace Prisma {
     updatedAt?: Date | string
     startDate?: Date | string | null
     endDate?: Date | string | null
-    status?: $Enums.StudyStatus
+    status?: $Enums.MonitoringPlanStatus
     isTemplate?: boolean
-    practice: PracticeCreateNestedOneWithoutStudiesInput
-    createdBy: UserCreateNestedOneWithoutCreatedStudiesInput
-    patients?: StudyPatientCreateNestedManyWithoutStudyInput
-    assignedUsers?: StudyAssignmentCreateNestedManyWithoutStudyInput
-    symptomTemplates?: SymptomTemplateCreateNestedManyWithoutStudyInput
-    treatmentTemplates?: TreatmentTemplateCreateNestedManyWithoutStudyInput
-    notes?: StudyNoteCreateNestedManyWithoutStudyInput
+    shareToken?: string | null
+    practice: PracticeCreateNestedOneWithoutMonitoringPlansInput
+    createdBy: UserCreateNestedOneWithoutCreatedMonitoringPlansInput
+    patients?: MonitoringPlanPatientCreateNestedManyWithoutMonitoringPlanInput
+    assignedUsers?: MonitoringPlanAssignmentCreateNestedManyWithoutMonitoringPlanInput
+    symptomTemplates?: SymptomTemplateCreateNestedManyWithoutMonitoringPlanInput
+    treatmentTemplates?: TreatmentTemplateCreateNestedManyWithoutMonitoringPlanInput
+    notes?: MonitoringPlanNoteCreateNestedManyWithoutMonitoringPlanInput
   }
 
-  export type StudyUncheckedCreateInput = {
-    id?: string
-    title: string
-    description?: string | null
-    protocol?: NullableJsonNullValueInput | InputJsonValue
-    practiceId: string
-    createdById: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    startDate?: Date | string | null
-    endDate?: Date | string | null
-    status?: $Enums.StudyStatus
-    isTemplate?: boolean
-    patients?: StudyPatientUncheckedCreateNestedManyWithoutStudyInput
-    assignedUsers?: StudyAssignmentUncheckedCreateNestedManyWithoutStudyInput
-    symptomTemplates?: SymptomTemplateUncheckedCreateNestedManyWithoutStudyInput
-    treatmentTemplates?: TreatmentTemplateUncheckedCreateNestedManyWithoutStudyInput
-    notes?: StudyNoteUncheckedCreateNestedManyWithoutStudyInput
-  }
-
-  export type StudyUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    protocol?: NullableJsonNullValueInput | InputJsonValue
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    status?: EnumStudyStatusFieldUpdateOperationsInput | $Enums.StudyStatus
-    isTemplate?: BoolFieldUpdateOperationsInput | boolean
-    practice?: PracticeUpdateOneRequiredWithoutStudiesNestedInput
-    createdBy?: UserUpdateOneRequiredWithoutCreatedStudiesNestedInput
-    patients?: StudyPatientUpdateManyWithoutStudyNestedInput
-    assignedUsers?: StudyAssignmentUpdateManyWithoutStudyNestedInput
-    symptomTemplates?: SymptomTemplateUpdateManyWithoutStudyNestedInput
-    treatmentTemplates?: TreatmentTemplateUpdateManyWithoutStudyNestedInput
-    notes?: StudyNoteUpdateManyWithoutStudyNestedInput
-  }
-
-  export type StudyUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    protocol?: NullableJsonNullValueInput | InputJsonValue
-    practiceId?: StringFieldUpdateOperationsInput | string
-    createdById?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    status?: EnumStudyStatusFieldUpdateOperationsInput | $Enums.StudyStatus
-    isTemplate?: BoolFieldUpdateOperationsInput | boolean
-    patients?: StudyPatientUncheckedUpdateManyWithoutStudyNestedInput
-    assignedUsers?: StudyAssignmentUncheckedUpdateManyWithoutStudyNestedInput
-    symptomTemplates?: SymptomTemplateUncheckedUpdateManyWithoutStudyNestedInput
-    treatmentTemplates?: TreatmentTemplateUncheckedUpdateManyWithoutStudyNestedInput
-    notes?: StudyNoteUncheckedUpdateManyWithoutStudyNestedInput
-  }
-
-  export type StudyCreateManyInput = {
+  export type MonitoringPlanUncheckedCreateInput = {
     id?: string
     title: string
     description?: string | null
@@ -24326,11 +24286,17 @@ export namespace Prisma {
     updatedAt?: Date | string
     startDate?: Date | string | null
     endDate?: Date | string | null
-    status?: $Enums.StudyStatus
+    status?: $Enums.MonitoringPlanStatus
     isTemplate?: boolean
+    shareToken?: string | null
+    patients?: MonitoringPlanPatientUncheckedCreateNestedManyWithoutMonitoringPlanInput
+    assignedUsers?: MonitoringPlanAssignmentUncheckedCreateNestedManyWithoutMonitoringPlanInput
+    symptomTemplates?: SymptomTemplateUncheckedCreateNestedManyWithoutMonitoringPlanInput
+    treatmentTemplates?: TreatmentTemplateUncheckedCreateNestedManyWithoutMonitoringPlanInput
+    notes?: MonitoringPlanNoteUncheckedCreateNestedManyWithoutMonitoringPlanInput
   }
 
-  export type StudyUpdateManyMutationInput = {
+  export type MonitoringPlanUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -24339,11 +24305,19 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    status?: EnumStudyStatusFieldUpdateOperationsInput | $Enums.StudyStatus
+    status?: EnumMonitoringPlanStatusFieldUpdateOperationsInput | $Enums.MonitoringPlanStatus
     isTemplate?: BoolFieldUpdateOperationsInput | boolean
+    shareToken?: NullableStringFieldUpdateOperationsInput | string | null
+    practice?: PracticeUpdateOneRequiredWithoutMonitoringPlansNestedInput
+    createdBy?: UserUpdateOneRequiredWithoutCreatedMonitoringPlansNestedInput
+    patients?: MonitoringPlanPatientUpdateManyWithoutMonitoringPlanNestedInput
+    assignedUsers?: MonitoringPlanAssignmentUpdateManyWithoutMonitoringPlanNestedInput
+    symptomTemplates?: SymptomTemplateUpdateManyWithoutMonitoringPlanNestedInput
+    treatmentTemplates?: TreatmentTemplateUpdateManyWithoutMonitoringPlanNestedInput
+    notes?: MonitoringPlanNoteUpdateManyWithoutMonitoringPlanNestedInput
   }
 
-  export type StudyUncheckedUpdateManyInput = {
+  export type MonitoringPlanUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -24354,183 +24328,235 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    status?: EnumStudyStatusFieldUpdateOperationsInput | $Enums.StudyStatus
+    status?: EnumMonitoringPlanStatusFieldUpdateOperationsInput | $Enums.MonitoringPlanStatus
     isTemplate?: BoolFieldUpdateOperationsInput | boolean
+    shareToken?: NullableStringFieldUpdateOperationsInput | string | null
+    patients?: MonitoringPlanPatientUncheckedUpdateManyWithoutMonitoringPlanNestedInput
+    assignedUsers?: MonitoringPlanAssignmentUncheckedUpdateManyWithoutMonitoringPlanNestedInput
+    symptomTemplates?: SymptomTemplateUncheckedUpdateManyWithoutMonitoringPlanNestedInput
+    treatmentTemplates?: TreatmentTemplateUncheckedUpdateManyWithoutMonitoringPlanNestedInput
+    notes?: MonitoringPlanNoteUncheckedUpdateManyWithoutMonitoringPlanNestedInput
   }
 
-  export type StudyPatientCreateInput = {
+  export type MonitoringPlanCreateManyInput = {
+    id?: string
+    title: string
+    description?: string | null
+    protocol?: NullableJsonNullValueInput | InputJsonValue
+    practiceId: string
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    status?: $Enums.MonitoringPlanStatus
+    isTemplate?: boolean
+    shareToken?: string | null
+  }
+
+  export type MonitoringPlanUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    protocol?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumMonitoringPlanStatusFieldUpdateOperationsInput | $Enums.MonitoringPlanStatus
+    isTemplate?: BoolFieldUpdateOperationsInput | boolean
+    shareToken?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type MonitoringPlanUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    protocol?: NullableJsonNullValueInput | InputJsonValue
+    practiceId?: StringFieldUpdateOperationsInput | string
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumMonitoringPlanStatusFieldUpdateOperationsInput | $Enums.MonitoringPlanStatus
+    isTemplate?: BoolFieldUpdateOperationsInput | boolean
+    shareToken?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type MonitoringPlanPatientCreateInput = {
     id?: string
     enrollmentDate?: Date | string
     exitDate?: Date | string | null
     isActive?: boolean
-    study: StudyCreateNestedOneWithoutPatientsInput
-    patient: PatientCreateNestedOneWithoutStudiesInput
-    observations?: ObservationCreateNestedManyWithoutStudyPatientInput
-    treatments?: TreatmentCreateNestedManyWithoutStudyPatientInput
+    monitoringPlan: MonitoringPlanCreateNestedOneWithoutPatientsInput
+    patient: PatientCreateNestedOneWithoutMonitoringPlansInput
+    observations?: ObservationCreateNestedManyWithoutMonitoringPlanPatientInput
+    treatments?: TreatmentCreateNestedManyWithoutMonitoringPlanPatientInput
   }
 
-  export type StudyPatientUncheckedCreateInput = {
+  export type MonitoringPlanPatientUncheckedCreateInput = {
     id?: string
-    studyId: string
+    monitoringPlanId: string
     patientId: string
     enrollmentDate?: Date | string
     exitDate?: Date | string | null
     isActive?: boolean
-    observations?: ObservationUncheckedCreateNestedManyWithoutStudyPatientInput
-    treatments?: TreatmentUncheckedCreateNestedManyWithoutStudyPatientInput
+    observations?: ObservationUncheckedCreateNestedManyWithoutMonitoringPlanPatientInput
+    treatments?: TreatmentUncheckedCreateNestedManyWithoutMonitoringPlanPatientInput
   }
 
-  export type StudyPatientUpdateInput = {
+  export type MonitoringPlanPatientUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     enrollmentDate?: DateTimeFieldUpdateOperationsInput | Date | string
     exitDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
-    study?: StudyUpdateOneRequiredWithoutPatientsNestedInput
-    patient?: PatientUpdateOneRequiredWithoutStudiesNestedInput
-    observations?: ObservationUpdateManyWithoutStudyPatientNestedInput
-    treatments?: TreatmentUpdateManyWithoutStudyPatientNestedInput
+    monitoringPlan?: MonitoringPlanUpdateOneRequiredWithoutPatientsNestedInput
+    patient?: PatientUpdateOneRequiredWithoutMonitoringPlansNestedInput
+    observations?: ObservationUpdateManyWithoutMonitoringPlanPatientNestedInput
+    treatments?: TreatmentUpdateManyWithoutMonitoringPlanPatientNestedInput
   }
 
-  export type StudyPatientUncheckedUpdateInput = {
+  export type MonitoringPlanPatientUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    studyId?: StringFieldUpdateOperationsInput | string
+    monitoringPlanId?: StringFieldUpdateOperationsInput | string
     patientId?: StringFieldUpdateOperationsInput | string
     enrollmentDate?: DateTimeFieldUpdateOperationsInput | Date | string
     exitDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
-    observations?: ObservationUncheckedUpdateManyWithoutStudyPatientNestedInput
-    treatments?: TreatmentUncheckedUpdateManyWithoutStudyPatientNestedInput
+    observations?: ObservationUncheckedUpdateManyWithoutMonitoringPlanPatientNestedInput
+    treatments?: TreatmentUncheckedUpdateManyWithoutMonitoringPlanPatientNestedInput
   }
 
-  export type StudyPatientCreateManyInput = {
+  export type MonitoringPlanPatientCreateManyInput = {
     id?: string
-    studyId: string
+    monitoringPlanId: string
     patientId: string
     enrollmentDate?: Date | string
     exitDate?: Date | string | null
     isActive?: boolean
   }
 
-  export type StudyPatientUpdateManyMutationInput = {
+  export type MonitoringPlanPatientUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     enrollmentDate?: DateTimeFieldUpdateOperationsInput | Date | string
     exitDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
   }
 
-  export type StudyPatientUncheckedUpdateManyInput = {
+  export type MonitoringPlanPatientUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    studyId?: StringFieldUpdateOperationsInput | string
+    monitoringPlanId?: StringFieldUpdateOperationsInput | string
     patientId?: StringFieldUpdateOperationsInput | string
     enrollmentDate?: DateTimeFieldUpdateOperationsInput | Date | string
     exitDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
   }
 
-  export type StudyAssignmentCreateInput = {
+  export type MonitoringPlanAssignmentCreateInput = {
     id?: string
     assignedAt?: Date | string
-    role: $Enums.StudyRole
-    study: StudyCreateNestedOneWithoutAssignedUsersInput
-    user: UserCreateNestedOneWithoutAssignedStudiesInput
+    role: $Enums.MonitoringPlanRole
+    monitoringPlan: MonitoringPlanCreateNestedOneWithoutAssignedUsersInput
+    user: UserCreateNestedOneWithoutAssignedMonitoringPlansInput
   }
 
-  export type StudyAssignmentUncheckedCreateInput = {
+  export type MonitoringPlanAssignmentUncheckedCreateInput = {
     id?: string
-    studyId: string
+    monitoringPlanId: string
     userId: string
     assignedAt?: Date | string
-    role: $Enums.StudyRole
+    role: $Enums.MonitoringPlanRole
   }
 
-  export type StudyAssignmentUpdateInput = {
+  export type MonitoringPlanAssignmentUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    role?: EnumStudyRoleFieldUpdateOperationsInput | $Enums.StudyRole
-    study?: StudyUpdateOneRequiredWithoutAssignedUsersNestedInput
-    user?: UserUpdateOneRequiredWithoutAssignedStudiesNestedInput
+    role?: EnumMonitoringPlanRoleFieldUpdateOperationsInput | $Enums.MonitoringPlanRole
+    monitoringPlan?: MonitoringPlanUpdateOneRequiredWithoutAssignedUsersNestedInput
+    user?: UserUpdateOneRequiredWithoutAssignedMonitoringPlansNestedInput
   }
 
-  export type StudyAssignmentUncheckedUpdateInput = {
+  export type MonitoringPlanAssignmentUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    studyId?: StringFieldUpdateOperationsInput | string
+    monitoringPlanId?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    role?: EnumStudyRoleFieldUpdateOperationsInput | $Enums.StudyRole
+    role?: EnumMonitoringPlanRoleFieldUpdateOperationsInput | $Enums.MonitoringPlanRole
   }
 
-  export type StudyAssignmentCreateManyInput = {
+  export type MonitoringPlanAssignmentCreateManyInput = {
     id?: string
-    studyId: string
+    monitoringPlanId: string
     userId: string
     assignedAt?: Date | string
-    role: $Enums.StudyRole
+    role: $Enums.MonitoringPlanRole
   }
 
-  export type StudyAssignmentUpdateManyMutationInput = {
+  export type MonitoringPlanAssignmentUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    role?: EnumStudyRoleFieldUpdateOperationsInput | $Enums.StudyRole
+    role?: EnumMonitoringPlanRoleFieldUpdateOperationsInput | $Enums.MonitoringPlanRole
   }
 
-  export type StudyAssignmentUncheckedUpdateManyInput = {
+  export type MonitoringPlanAssignmentUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    studyId?: StringFieldUpdateOperationsInput | string
+    monitoringPlanId?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    role?: EnumStudyRoleFieldUpdateOperationsInput | $Enums.StudyRole
+    role?: EnumMonitoringPlanRoleFieldUpdateOperationsInput | $Enums.MonitoringPlanRole
   }
 
-  export type StudyNoteCreateInput = {
+  export type MonitoringPlanNoteCreateInput = {
     id?: string
     content: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    study: StudyCreateNestedOneWithoutNotesInput
+    monitoringPlan: MonitoringPlanCreateNestedOneWithoutNotesInput
   }
 
-  export type StudyNoteUncheckedCreateInput = {
+  export type MonitoringPlanNoteUncheckedCreateInput = {
     id?: string
-    studyId: string
-    content: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type StudyNoteUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    study?: StudyUpdateOneRequiredWithoutNotesNestedInput
-  }
-
-  export type StudyNoteUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    studyId?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type StudyNoteCreateManyInput = {
-    id?: string
-    studyId: string
+    monitoringPlanId: string
     content: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
-  export type StudyNoteUpdateManyMutationInput = {
+  export type MonitoringPlanNoteUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    monitoringPlan?: MonitoringPlanUpdateOneRequiredWithoutNotesNestedInput
+  }
+
+  export type MonitoringPlanNoteUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    monitoringPlanId?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MonitoringPlanNoteCreateManyInput = {
+    id?: string
+    monitoringPlanId: string
+    content: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type MonitoringPlanNoteUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type StudyNoteUncheckedUpdateManyInput = {
+  export type MonitoringPlanNoteUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    studyId?: StringFieldUpdateOperationsInput | string
+    monitoringPlanId?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -24548,7 +24574,7 @@ export namespace Prisma {
     options?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
-    study: StudyCreateNestedOneWithoutSymptomTemplatesInput
+    monitoringPlan: MonitoringPlanCreateNestedOneWithoutSymptomTemplatesInput
     observations?: ObservationCreateNestedManyWithoutSymptomTemplateInput
     alertThresholds?: AlertThresholdCreateNestedManyWithoutSymptomTemplateInput
   }
@@ -24563,7 +24589,7 @@ export namespace Prisma {
     minValue?: number | null
     maxValue?: number | null
     options?: NullableJsonNullValueInput | InputJsonValue
-    studyId: string
+    monitoringPlanId: string
     createdAt?: Date | string
     updatedAt?: Date | string
     observations?: ObservationUncheckedCreateNestedManyWithoutSymptomTemplateInput
@@ -24582,7 +24608,7 @@ export namespace Prisma {
     options?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    study?: StudyUpdateOneRequiredWithoutSymptomTemplatesNestedInput
+    monitoringPlan?: MonitoringPlanUpdateOneRequiredWithoutSymptomTemplatesNestedInput
     observations?: ObservationUpdateManyWithoutSymptomTemplateNestedInput
     alertThresholds?: AlertThresholdUpdateManyWithoutSymptomTemplateNestedInput
   }
@@ -24597,7 +24623,7 @@ export namespace Prisma {
     minValue?: NullableFloatFieldUpdateOperationsInput | number | null
     maxValue?: NullableFloatFieldUpdateOperationsInput | number | null
     options?: NullableJsonNullValueInput | InputJsonValue
-    studyId?: StringFieldUpdateOperationsInput | string
+    monitoringPlanId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     observations?: ObservationUncheckedUpdateManyWithoutSymptomTemplateNestedInput
@@ -24614,7 +24640,7 @@ export namespace Prisma {
     minValue?: number | null
     maxValue?: number | null
     options?: NullableJsonNullValueInput | InputJsonValue
-    studyId: string
+    monitoringPlanId: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -24643,7 +24669,7 @@ export namespace Prisma {
     minValue?: NullableFloatFieldUpdateOperationsInput | number | null
     maxValue?: NullableFloatFieldUpdateOperationsInput | number | null
     options?: NullableJsonNullValueInput | InputJsonValue
-    studyId?: StringFieldUpdateOperationsInput | string
+    monitoringPlanId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -24655,7 +24681,7 @@ export namespace Prisma {
     notes?: string | null
     symptomTemplate: SymptomTemplateCreateNestedOneWithoutObservationsInput
     patient: PatientCreateNestedOneWithoutObservationsInput
-    studyPatient: StudyPatientCreateNestedOneWithoutObservationsInput
+    monitoringPlanPatient: MonitoringPlanPatientCreateNestedOneWithoutObservationsInput
     recordedBy: UserCreateNestedOneWithoutObservationsInput
     files?: FileCreateNestedManyWithoutObservationInput
     alerts?: AlertCreateNestedManyWithoutObservationInput
@@ -24665,7 +24691,7 @@ export namespace Prisma {
     id?: string
     symptomTemplateId: string
     patientId: string
-    studyPatientId: string
+    monitoringPlanPatientId: string
     recordedById: string
     recordedAt?: Date | string
     value: JsonNullValueInput | InputJsonValue
@@ -24681,7 +24707,7 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     symptomTemplate?: SymptomTemplateUpdateOneRequiredWithoutObservationsNestedInput
     patient?: PatientUpdateOneRequiredWithoutObservationsNestedInput
-    studyPatient?: StudyPatientUpdateOneRequiredWithoutObservationsNestedInput
+    monitoringPlanPatient?: MonitoringPlanPatientUpdateOneRequiredWithoutObservationsNestedInput
     recordedBy?: UserUpdateOneRequiredWithoutObservationsNestedInput
     files?: FileUpdateManyWithoutObservationNestedInput
     alerts?: AlertUpdateManyWithoutObservationNestedInput
@@ -24691,7 +24717,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     symptomTemplateId?: StringFieldUpdateOperationsInput | string
     patientId?: StringFieldUpdateOperationsInput | string
-    studyPatientId?: StringFieldUpdateOperationsInput | string
+    monitoringPlanPatientId?: StringFieldUpdateOperationsInput | string
     recordedById?: StringFieldUpdateOperationsInput | string
     recordedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     value?: JsonNullValueInput | InputJsonValue
@@ -24704,7 +24730,7 @@ export namespace Prisma {
     id?: string
     symptomTemplateId: string
     patientId: string
-    studyPatientId: string
+    monitoringPlanPatientId: string
     recordedById: string
     recordedAt?: Date | string
     value: JsonNullValueInput | InputJsonValue
@@ -24722,7 +24748,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     symptomTemplateId?: StringFieldUpdateOperationsInput | string
     patientId?: StringFieldUpdateOperationsInput | string
-    studyPatientId?: StringFieldUpdateOperationsInput | string
+    monitoringPlanPatientId?: StringFieldUpdateOperationsInput | string
     recordedById?: StringFieldUpdateOperationsInput | string
     recordedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     value?: JsonNullValueInput | InputJsonValue
@@ -24736,7 +24762,7 @@ export namespace Prisma {
     protocol?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
-    study: StudyCreateNestedOneWithoutTreatmentTemplatesInput
+    monitoringPlan: MonitoringPlanCreateNestedOneWithoutTreatmentTemplatesInput
     treatments?: TreatmentCreateNestedManyWithoutTemplateInput
   }
 
@@ -24745,7 +24771,7 @@ export namespace Prisma {
     name: string
     description?: string | null
     protocol?: NullableJsonNullValueInput | InputJsonValue
-    studyId: string
+    monitoringPlanId: string
     createdAt?: Date | string
     updatedAt?: Date | string
     treatments?: TreatmentUncheckedCreateNestedManyWithoutTemplateInput
@@ -24758,7 +24784,7 @@ export namespace Prisma {
     protocol?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    study?: StudyUpdateOneRequiredWithoutTreatmentTemplatesNestedInput
+    monitoringPlan?: MonitoringPlanUpdateOneRequiredWithoutTreatmentTemplatesNestedInput
     treatments?: TreatmentUpdateManyWithoutTemplateNestedInput
   }
 
@@ -24767,7 +24793,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     protocol?: NullableJsonNullValueInput | InputJsonValue
-    studyId?: StringFieldUpdateOperationsInput | string
+    monitoringPlanId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     treatments?: TreatmentUncheckedUpdateManyWithoutTemplateNestedInput
@@ -24778,7 +24804,7 @@ export namespace Prisma {
     name: string
     description?: string | null
     protocol?: NullableJsonNullValueInput | InputJsonValue
-    studyId: string
+    monitoringPlanId: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -24797,7 +24823,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     protocol?: NullableJsonNullValueInput | InputJsonValue
-    studyId?: StringFieldUpdateOperationsInput | string
+    monitoringPlanId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -24812,7 +24838,7 @@ export namespace Prisma {
     notes?: string | null
     template?: TreatmentTemplateCreateNestedOneWithoutTreatmentsInput
     patient: PatientCreateNestedOneWithoutTreatmentsInput
-    studyPatient: StudyPatientCreateNestedOneWithoutTreatmentsInput
+    monitoringPlanPatient: MonitoringPlanPatientCreateNestedOneWithoutTreatmentsInput
     createdBy: UserCreateNestedOneWithoutCreatedTreatmentsInput
     files?: FileCreateNestedManyWithoutTreatmentInput
   }
@@ -24821,7 +24847,7 @@ export namespace Prisma {
     id?: string
     templateId?: string | null
     patientId: string
-    studyPatientId: string
+    monitoringPlanPatientId: string
     createdById: string
     createdAt?: Date | string
     administeredAt: Date | string
@@ -24842,7 +24868,7 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     template?: TreatmentTemplateUpdateOneWithoutTreatmentsNestedInput
     patient?: PatientUpdateOneRequiredWithoutTreatmentsNestedInput
-    studyPatient?: StudyPatientUpdateOneRequiredWithoutTreatmentsNestedInput
+    monitoringPlanPatient?: MonitoringPlanPatientUpdateOneRequiredWithoutTreatmentsNestedInput
     createdBy?: UserUpdateOneRequiredWithoutCreatedTreatmentsNestedInput
     files?: FileUpdateManyWithoutTreatmentNestedInput
   }
@@ -24851,7 +24877,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     templateId?: NullableStringFieldUpdateOperationsInput | string | null
     patientId?: StringFieldUpdateOperationsInput | string
-    studyPatientId?: StringFieldUpdateOperationsInput | string
+    monitoringPlanPatientId?: StringFieldUpdateOperationsInput | string
     createdById?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     administeredAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -24866,7 +24892,7 @@ export namespace Prisma {
     id?: string
     templateId?: string | null
     patientId: string
-    studyPatientId: string
+    monitoringPlanPatientId: string
     createdById: string
     createdAt?: Date | string
     administeredAt: Date | string
@@ -24890,7 +24916,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     templateId?: NullableStringFieldUpdateOperationsInput | string | null
     patientId?: StringFieldUpdateOperationsInput | string
-    studyPatientId?: StringFieldUpdateOperationsInput | string
+    monitoringPlanPatientId?: StringFieldUpdateOperationsInput | string
     createdById?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     administeredAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -25256,16 +25282,16 @@ export namespace Prisma {
     isNot?: PracticeWhereInput | null
   }
 
-  export type StudyListRelationFilter = {
-    every?: StudyWhereInput
-    some?: StudyWhereInput
-    none?: StudyWhereInput
+  export type MonitoringPlanListRelationFilter = {
+    every?: MonitoringPlanWhereInput
+    some?: MonitoringPlanWhereInput
+    none?: MonitoringPlanWhereInput
   }
 
-  export type StudyAssignmentListRelationFilter = {
-    every?: StudyAssignmentWhereInput
-    some?: StudyAssignmentWhereInput
-    none?: StudyAssignmentWhereInput
+  export type MonitoringPlanAssignmentListRelationFilter = {
+    every?: MonitoringPlanAssignmentWhereInput
+    some?: MonitoringPlanAssignmentWhereInput
+    none?: MonitoringPlanAssignmentWhereInput
   }
 
   export type TreatmentListRelationFilter = {
@@ -25297,11 +25323,11 @@ export namespace Prisma {
     nulls?: NullsOrder
   }
 
-  export type StudyOrderByRelationAggregateInput = {
+  export type MonitoringPlanOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
-  export type StudyAssignmentOrderByRelationAggregateInput = {
+  export type MonitoringPlanAssignmentOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -25739,10 +25765,10 @@ export namespace Prisma {
     isNot?: UserWhereInput
   }
 
-  export type StudyPatientListRelationFilter = {
-    every?: StudyPatientWhereInput
-    some?: StudyPatientWhereInput
-    none?: StudyPatientWhereInput
+  export type MonitoringPlanPatientListRelationFilter = {
+    every?: MonitoringPlanPatientWhereInput
+    some?: MonitoringPlanPatientWhereInput
+    none?: MonitoringPlanPatientWhereInput
   }
 
   export type FileListRelationFilter = {
@@ -25751,7 +25777,7 @@ export namespace Prisma {
     none?: FileWhereInput
   }
 
-  export type StudyPatientOrderByRelationAggregateInput = {
+  export type MonitoringPlanPatientOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -25853,11 +25879,11 @@ export namespace Prisma {
     _max?: NestedEnumSexNullableFilter<$PrismaModel>
   }
 
-  export type EnumStudyStatusFilter<$PrismaModel = never> = {
-    equals?: $Enums.StudyStatus | EnumStudyStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.StudyStatus[] | ListEnumStudyStatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.StudyStatus[] | ListEnumStudyStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumStudyStatusFilter<$PrismaModel> | $Enums.StudyStatus
+  export type EnumMonitoringPlanStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.MonitoringPlanStatus | EnumMonitoringPlanStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.MonitoringPlanStatus[] | ListEnumMonitoringPlanStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MonitoringPlanStatus[] | ListEnumMonitoringPlanStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumMonitoringPlanStatusFilter<$PrismaModel> | $Enums.MonitoringPlanStatus
   }
 
   export type SymptomTemplateListRelationFilter = {
@@ -25872,10 +25898,10 @@ export namespace Prisma {
     none?: TreatmentTemplateWhereInput
   }
 
-  export type StudyNoteListRelationFilter = {
-    every?: StudyNoteWhereInput
-    some?: StudyNoteWhereInput
-    none?: StudyNoteWhereInput
+  export type MonitoringPlanNoteListRelationFilter = {
+    every?: MonitoringPlanNoteWhereInput
+    some?: MonitoringPlanNoteWhereInput
+    none?: MonitoringPlanNoteWhereInput
   }
 
   export type SymptomTemplateOrderByRelationAggregateInput = {
@@ -25886,11 +25912,11 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
-  export type StudyNoteOrderByRelationAggregateInput = {
+  export type MonitoringPlanNoteOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
-  export type StudyCountOrderByAggregateInput = {
+  export type MonitoringPlanCountOrderByAggregateInput = {
     id?: SortOrder
     title?: SortOrder
     description?: SortOrder
@@ -25903,9 +25929,10 @@ export namespace Prisma {
     endDate?: SortOrder
     status?: SortOrder
     isTemplate?: SortOrder
+    shareToken?: SortOrder
   }
 
-  export type StudyMaxOrderByAggregateInput = {
+  export type MonitoringPlanMaxOrderByAggregateInput = {
     id?: SortOrder
     title?: SortOrder
     description?: SortOrder
@@ -25917,9 +25944,10 @@ export namespace Prisma {
     endDate?: SortOrder
     status?: SortOrder
     isTemplate?: SortOrder
+    shareToken?: SortOrder
   }
 
-  export type StudyMinOrderByAggregateInput = {
+  export type MonitoringPlanMinOrderByAggregateInput = {
     id?: SortOrder
     title?: SortOrder
     description?: SortOrder
@@ -25931,21 +25959,22 @@ export namespace Prisma {
     endDate?: SortOrder
     status?: SortOrder
     isTemplate?: SortOrder
+    shareToken?: SortOrder
   }
 
-  export type EnumStudyStatusWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.StudyStatus | EnumStudyStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.StudyStatus[] | ListEnumStudyStatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.StudyStatus[] | ListEnumStudyStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumStudyStatusWithAggregatesFilter<$PrismaModel> | $Enums.StudyStatus
+  export type EnumMonitoringPlanStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.MonitoringPlanStatus | EnumMonitoringPlanStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.MonitoringPlanStatus[] | ListEnumMonitoringPlanStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MonitoringPlanStatus[] | ListEnumMonitoringPlanStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumMonitoringPlanStatusWithAggregatesFilter<$PrismaModel> | $Enums.MonitoringPlanStatus
     _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumStudyStatusFilter<$PrismaModel>
-    _max?: NestedEnumStudyStatusFilter<$PrismaModel>
+    _min?: NestedEnumMonitoringPlanStatusFilter<$PrismaModel>
+    _max?: NestedEnumMonitoringPlanStatusFilter<$PrismaModel>
   }
 
-  export type StudyScalarRelationFilter = {
-    is?: StudyWhereInput
-    isNot?: StudyWhereInput
+  export type MonitoringPlanScalarRelationFilter = {
+    is?: MonitoringPlanWhereInput
+    isNot?: MonitoringPlanWhereInput
   }
 
   export type PatientScalarRelationFilter = {
@@ -25953,103 +25982,103 @@ export namespace Prisma {
     isNot?: PatientWhereInput
   }
 
-  export type StudyPatientStudyIdPatientIdCompoundUniqueInput = {
-    studyId: string
+  export type MonitoringPlanPatientMonitoringPlanIdPatientIdCompoundUniqueInput = {
+    monitoringPlanId: string
     patientId: string
   }
 
-  export type StudyPatientCountOrderByAggregateInput = {
+  export type MonitoringPlanPatientCountOrderByAggregateInput = {
     id?: SortOrder
-    studyId?: SortOrder
+    monitoringPlanId?: SortOrder
     patientId?: SortOrder
     enrollmentDate?: SortOrder
     exitDate?: SortOrder
     isActive?: SortOrder
   }
 
-  export type StudyPatientMaxOrderByAggregateInput = {
+  export type MonitoringPlanPatientMaxOrderByAggregateInput = {
     id?: SortOrder
-    studyId?: SortOrder
+    monitoringPlanId?: SortOrder
     patientId?: SortOrder
     enrollmentDate?: SortOrder
     exitDate?: SortOrder
     isActive?: SortOrder
   }
 
-  export type StudyPatientMinOrderByAggregateInput = {
+  export type MonitoringPlanPatientMinOrderByAggregateInput = {
     id?: SortOrder
-    studyId?: SortOrder
+    monitoringPlanId?: SortOrder
     patientId?: SortOrder
     enrollmentDate?: SortOrder
     exitDate?: SortOrder
     isActive?: SortOrder
   }
 
-  export type EnumStudyRoleFilter<$PrismaModel = never> = {
-    equals?: $Enums.StudyRole | EnumStudyRoleFieldRefInput<$PrismaModel>
-    in?: $Enums.StudyRole[] | ListEnumStudyRoleFieldRefInput<$PrismaModel>
-    notIn?: $Enums.StudyRole[] | ListEnumStudyRoleFieldRefInput<$PrismaModel>
-    not?: NestedEnumStudyRoleFilter<$PrismaModel> | $Enums.StudyRole
+  export type EnumMonitoringPlanRoleFilter<$PrismaModel = never> = {
+    equals?: $Enums.MonitoringPlanRole | EnumMonitoringPlanRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.MonitoringPlanRole[] | ListEnumMonitoringPlanRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MonitoringPlanRole[] | ListEnumMonitoringPlanRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumMonitoringPlanRoleFilter<$PrismaModel> | $Enums.MonitoringPlanRole
   }
 
-  export type StudyAssignmentStudyIdUserIdCompoundUniqueInput = {
-    studyId: string
+  export type MonitoringPlanAssignmentMonitoringPlanIdUserIdCompoundUniqueInput = {
+    monitoringPlanId: string
     userId: string
   }
 
-  export type StudyAssignmentCountOrderByAggregateInput = {
+  export type MonitoringPlanAssignmentCountOrderByAggregateInput = {
     id?: SortOrder
-    studyId?: SortOrder
+    monitoringPlanId?: SortOrder
     userId?: SortOrder
     assignedAt?: SortOrder
     role?: SortOrder
   }
 
-  export type StudyAssignmentMaxOrderByAggregateInput = {
+  export type MonitoringPlanAssignmentMaxOrderByAggregateInput = {
     id?: SortOrder
-    studyId?: SortOrder
+    monitoringPlanId?: SortOrder
     userId?: SortOrder
     assignedAt?: SortOrder
     role?: SortOrder
   }
 
-  export type StudyAssignmentMinOrderByAggregateInput = {
+  export type MonitoringPlanAssignmentMinOrderByAggregateInput = {
     id?: SortOrder
-    studyId?: SortOrder
+    monitoringPlanId?: SortOrder
     userId?: SortOrder
     assignedAt?: SortOrder
     role?: SortOrder
   }
 
-  export type EnumStudyRoleWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.StudyRole | EnumStudyRoleFieldRefInput<$PrismaModel>
-    in?: $Enums.StudyRole[] | ListEnumStudyRoleFieldRefInput<$PrismaModel>
-    notIn?: $Enums.StudyRole[] | ListEnumStudyRoleFieldRefInput<$PrismaModel>
-    not?: NestedEnumStudyRoleWithAggregatesFilter<$PrismaModel> | $Enums.StudyRole
+  export type EnumMonitoringPlanRoleWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.MonitoringPlanRole | EnumMonitoringPlanRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.MonitoringPlanRole[] | ListEnumMonitoringPlanRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MonitoringPlanRole[] | ListEnumMonitoringPlanRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumMonitoringPlanRoleWithAggregatesFilter<$PrismaModel> | $Enums.MonitoringPlanRole
     _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumStudyRoleFilter<$PrismaModel>
-    _max?: NestedEnumStudyRoleFilter<$PrismaModel>
+    _min?: NestedEnumMonitoringPlanRoleFilter<$PrismaModel>
+    _max?: NestedEnumMonitoringPlanRoleFilter<$PrismaModel>
   }
 
-  export type StudyNoteCountOrderByAggregateInput = {
+  export type MonitoringPlanNoteCountOrderByAggregateInput = {
     id?: SortOrder
-    studyId?: SortOrder
+    monitoringPlanId?: SortOrder
     content?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
-  export type StudyNoteMaxOrderByAggregateInput = {
+  export type MonitoringPlanNoteMaxOrderByAggregateInput = {
     id?: SortOrder
-    studyId?: SortOrder
+    monitoringPlanId?: SortOrder
     content?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
-  export type StudyNoteMinOrderByAggregateInput = {
+  export type MonitoringPlanNoteMinOrderByAggregateInput = {
     id?: SortOrder
-    studyId?: SortOrder
+    monitoringPlanId?: SortOrder
     content?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -26082,7 +26111,7 @@ export namespace Prisma {
     minValue?: SortOrder
     maxValue?: SortOrder
     options?: SortOrder
-    studyId?: SortOrder
+    monitoringPlanId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -26101,7 +26130,7 @@ export namespace Prisma {
     units?: SortOrder
     minValue?: SortOrder
     maxValue?: SortOrder
-    studyId?: SortOrder
+    monitoringPlanId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -26115,7 +26144,7 @@ export namespace Prisma {
     units?: SortOrder
     minValue?: SortOrder
     maxValue?: SortOrder
-    studyId?: SortOrder
+    monitoringPlanId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -26163,9 +26192,9 @@ export namespace Prisma {
     isNot?: SymptomTemplateWhereInput
   }
 
-  export type StudyPatientScalarRelationFilter = {
-    is?: StudyPatientWhereInput
-    isNot?: StudyPatientWhereInput
+  export type MonitoringPlanPatientScalarRelationFilter = {
+    is?: MonitoringPlanPatientWhereInput
+    isNot?: MonitoringPlanPatientWhereInput
   }
 
   export type AlertListRelationFilter = {
@@ -26182,7 +26211,7 @@ export namespace Prisma {
     id?: SortOrder
     symptomTemplateId?: SortOrder
     patientId?: SortOrder
-    studyPatientId?: SortOrder
+    monitoringPlanPatientId?: SortOrder
     recordedById?: SortOrder
     recordedAt?: SortOrder
     value?: SortOrder
@@ -26193,7 +26222,7 @@ export namespace Prisma {
     id?: SortOrder
     symptomTemplateId?: SortOrder
     patientId?: SortOrder
-    studyPatientId?: SortOrder
+    monitoringPlanPatientId?: SortOrder
     recordedById?: SortOrder
     recordedAt?: SortOrder
     notes?: SortOrder
@@ -26203,7 +26232,7 @@ export namespace Prisma {
     id?: SortOrder
     symptomTemplateId?: SortOrder
     patientId?: SortOrder
-    studyPatientId?: SortOrder
+    monitoringPlanPatientId?: SortOrder
     recordedById?: SortOrder
     recordedAt?: SortOrder
     notes?: SortOrder
@@ -26240,7 +26269,7 @@ export namespace Prisma {
     name?: SortOrder
     description?: SortOrder
     protocol?: SortOrder
-    studyId?: SortOrder
+    monitoringPlanId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -26249,7 +26278,7 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     description?: SortOrder
-    studyId?: SortOrder
+    monitoringPlanId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -26258,7 +26287,7 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     description?: SortOrder
-    studyId?: SortOrder
+    monitoringPlanId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -26272,7 +26301,7 @@ export namespace Prisma {
     id?: SortOrder
     templateId?: SortOrder
     patientId?: SortOrder
-    studyPatientId?: SortOrder
+    monitoringPlanPatientId?: SortOrder
     createdById?: SortOrder
     createdAt?: SortOrder
     administeredAt?: SortOrder
@@ -26286,7 +26315,7 @@ export namespace Prisma {
     id?: SortOrder
     templateId?: SortOrder
     patientId?: SortOrder
-    studyPatientId?: SortOrder
+    monitoringPlanPatientId?: SortOrder
     createdById?: SortOrder
     createdAt?: SortOrder
     administeredAt?: SortOrder
@@ -26300,7 +26329,7 @@ export namespace Prisma {
     id?: SortOrder
     templateId?: SortOrder
     patientId?: SortOrder
-    studyPatientId?: SortOrder
+    monitoringPlanPatientId?: SortOrder
     createdById?: SortOrder
     createdAt?: SortOrder
     administeredAt?: SortOrder
@@ -26494,18 +26523,18 @@ export namespace Prisma {
     connect?: PracticeWhereUniqueInput
   }
 
-  export type StudyCreateNestedManyWithoutCreatedByInput = {
-    create?: XOR<StudyCreateWithoutCreatedByInput, StudyUncheckedCreateWithoutCreatedByInput> | StudyCreateWithoutCreatedByInput[] | StudyUncheckedCreateWithoutCreatedByInput[]
-    connectOrCreate?: StudyCreateOrConnectWithoutCreatedByInput | StudyCreateOrConnectWithoutCreatedByInput[]
-    createMany?: StudyCreateManyCreatedByInputEnvelope
-    connect?: StudyWhereUniqueInput | StudyWhereUniqueInput[]
+  export type MonitoringPlanCreateNestedManyWithoutCreatedByInput = {
+    create?: XOR<MonitoringPlanCreateWithoutCreatedByInput, MonitoringPlanUncheckedCreateWithoutCreatedByInput> | MonitoringPlanCreateWithoutCreatedByInput[] | MonitoringPlanUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: MonitoringPlanCreateOrConnectWithoutCreatedByInput | MonitoringPlanCreateOrConnectWithoutCreatedByInput[]
+    createMany?: MonitoringPlanCreateManyCreatedByInputEnvelope
+    connect?: MonitoringPlanWhereUniqueInput | MonitoringPlanWhereUniqueInput[]
   }
 
-  export type StudyAssignmentCreateNestedManyWithoutUserInput = {
-    create?: XOR<StudyAssignmentCreateWithoutUserInput, StudyAssignmentUncheckedCreateWithoutUserInput> | StudyAssignmentCreateWithoutUserInput[] | StudyAssignmentUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: StudyAssignmentCreateOrConnectWithoutUserInput | StudyAssignmentCreateOrConnectWithoutUserInput[]
-    createMany?: StudyAssignmentCreateManyUserInputEnvelope
-    connect?: StudyAssignmentWhereUniqueInput | StudyAssignmentWhereUniqueInput[]
+  export type MonitoringPlanAssignmentCreateNestedManyWithoutUserInput = {
+    create?: XOR<MonitoringPlanAssignmentCreateWithoutUserInput, MonitoringPlanAssignmentUncheckedCreateWithoutUserInput> | MonitoringPlanAssignmentCreateWithoutUserInput[] | MonitoringPlanAssignmentUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: MonitoringPlanAssignmentCreateOrConnectWithoutUserInput | MonitoringPlanAssignmentCreateOrConnectWithoutUserInput[]
+    createMany?: MonitoringPlanAssignmentCreateManyUserInputEnvelope
+    connect?: MonitoringPlanAssignmentWhereUniqueInput | MonitoringPlanAssignmentWhereUniqueInput[]
   }
 
   export type TreatmentCreateNestedManyWithoutCreatedByInput = {
@@ -26536,18 +26565,18 @@ export namespace Prisma {
     connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
   }
 
-  export type StudyUncheckedCreateNestedManyWithoutCreatedByInput = {
-    create?: XOR<StudyCreateWithoutCreatedByInput, StudyUncheckedCreateWithoutCreatedByInput> | StudyCreateWithoutCreatedByInput[] | StudyUncheckedCreateWithoutCreatedByInput[]
-    connectOrCreate?: StudyCreateOrConnectWithoutCreatedByInput | StudyCreateOrConnectWithoutCreatedByInput[]
-    createMany?: StudyCreateManyCreatedByInputEnvelope
-    connect?: StudyWhereUniqueInput | StudyWhereUniqueInput[]
+  export type MonitoringPlanUncheckedCreateNestedManyWithoutCreatedByInput = {
+    create?: XOR<MonitoringPlanCreateWithoutCreatedByInput, MonitoringPlanUncheckedCreateWithoutCreatedByInput> | MonitoringPlanCreateWithoutCreatedByInput[] | MonitoringPlanUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: MonitoringPlanCreateOrConnectWithoutCreatedByInput | MonitoringPlanCreateOrConnectWithoutCreatedByInput[]
+    createMany?: MonitoringPlanCreateManyCreatedByInputEnvelope
+    connect?: MonitoringPlanWhereUniqueInput | MonitoringPlanWhereUniqueInput[]
   }
 
-  export type StudyAssignmentUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<StudyAssignmentCreateWithoutUserInput, StudyAssignmentUncheckedCreateWithoutUserInput> | StudyAssignmentCreateWithoutUserInput[] | StudyAssignmentUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: StudyAssignmentCreateOrConnectWithoutUserInput | StudyAssignmentCreateOrConnectWithoutUserInput[]
-    createMany?: StudyAssignmentCreateManyUserInputEnvelope
-    connect?: StudyAssignmentWhereUniqueInput | StudyAssignmentWhereUniqueInput[]
+  export type MonitoringPlanAssignmentUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<MonitoringPlanAssignmentCreateWithoutUserInput, MonitoringPlanAssignmentUncheckedCreateWithoutUserInput> | MonitoringPlanAssignmentCreateWithoutUserInput[] | MonitoringPlanAssignmentUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: MonitoringPlanAssignmentCreateOrConnectWithoutUserInput | MonitoringPlanAssignmentCreateOrConnectWithoutUserInput[]
+    createMany?: MonitoringPlanAssignmentCreateManyUserInputEnvelope
+    connect?: MonitoringPlanAssignmentWhereUniqueInput | MonitoringPlanAssignmentWhereUniqueInput[]
   }
 
   export type TreatmentUncheckedCreateNestedManyWithoutCreatedByInput = {
@@ -26612,32 +26641,32 @@ export namespace Prisma {
     update?: XOR<XOR<PracticeUpdateToOneWithWhereWithoutUsersInput, PracticeUpdateWithoutUsersInput>, PracticeUncheckedUpdateWithoutUsersInput>
   }
 
-  export type StudyUpdateManyWithoutCreatedByNestedInput = {
-    create?: XOR<StudyCreateWithoutCreatedByInput, StudyUncheckedCreateWithoutCreatedByInput> | StudyCreateWithoutCreatedByInput[] | StudyUncheckedCreateWithoutCreatedByInput[]
-    connectOrCreate?: StudyCreateOrConnectWithoutCreatedByInput | StudyCreateOrConnectWithoutCreatedByInput[]
-    upsert?: StudyUpsertWithWhereUniqueWithoutCreatedByInput | StudyUpsertWithWhereUniqueWithoutCreatedByInput[]
-    createMany?: StudyCreateManyCreatedByInputEnvelope
-    set?: StudyWhereUniqueInput | StudyWhereUniqueInput[]
-    disconnect?: StudyWhereUniqueInput | StudyWhereUniqueInput[]
-    delete?: StudyWhereUniqueInput | StudyWhereUniqueInput[]
-    connect?: StudyWhereUniqueInput | StudyWhereUniqueInput[]
-    update?: StudyUpdateWithWhereUniqueWithoutCreatedByInput | StudyUpdateWithWhereUniqueWithoutCreatedByInput[]
-    updateMany?: StudyUpdateManyWithWhereWithoutCreatedByInput | StudyUpdateManyWithWhereWithoutCreatedByInput[]
-    deleteMany?: StudyScalarWhereInput | StudyScalarWhereInput[]
+  export type MonitoringPlanUpdateManyWithoutCreatedByNestedInput = {
+    create?: XOR<MonitoringPlanCreateWithoutCreatedByInput, MonitoringPlanUncheckedCreateWithoutCreatedByInput> | MonitoringPlanCreateWithoutCreatedByInput[] | MonitoringPlanUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: MonitoringPlanCreateOrConnectWithoutCreatedByInput | MonitoringPlanCreateOrConnectWithoutCreatedByInput[]
+    upsert?: MonitoringPlanUpsertWithWhereUniqueWithoutCreatedByInput | MonitoringPlanUpsertWithWhereUniqueWithoutCreatedByInput[]
+    createMany?: MonitoringPlanCreateManyCreatedByInputEnvelope
+    set?: MonitoringPlanWhereUniqueInput | MonitoringPlanWhereUniqueInput[]
+    disconnect?: MonitoringPlanWhereUniqueInput | MonitoringPlanWhereUniqueInput[]
+    delete?: MonitoringPlanWhereUniqueInput | MonitoringPlanWhereUniqueInput[]
+    connect?: MonitoringPlanWhereUniqueInput | MonitoringPlanWhereUniqueInput[]
+    update?: MonitoringPlanUpdateWithWhereUniqueWithoutCreatedByInput | MonitoringPlanUpdateWithWhereUniqueWithoutCreatedByInput[]
+    updateMany?: MonitoringPlanUpdateManyWithWhereWithoutCreatedByInput | MonitoringPlanUpdateManyWithWhereWithoutCreatedByInput[]
+    deleteMany?: MonitoringPlanScalarWhereInput | MonitoringPlanScalarWhereInput[]
   }
 
-  export type StudyAssignmentUpdateManyWithoutUserNestedInput = {
-    create?: XOR<StudyAssignmentCreateWithoutUserInput, StudyAssignmentUncheckedCreateWithoutUserInput> | StudyAssignmentCreateWithoutUserInput[] | StudyAssignmentUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: StudyAssignmentCreateOrConnectWithoutUserInput | StudyAssignmentCreateOrConnectWithoutUserInput[]
-    upsert?: StudyAssignmentUpsertWithWhereUniqueWithoutUserInput | StudyAssignmentUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: StudyAssignmentCreateManyUserInputEnvelope
-    set?: StudyAssignmentWhereUniqueInput | StudyAssignmentWhereUniqueInput[]
-    disconnect?: StudyAssignmentWhereUniqueInput | StudyAssignmentWhereUniqueInput[]
-    delete?: StudyAssignmentWhereUniqueInput | StudyAssignmentWhereUniqueInput[]
-    connect?: StudyAssignmentWhereUniqueInput | StudyAssignmentWhereUniqueInput[]
-    update?: StudyAssignmentUpdateWithWhereUniqueWithoutUserInput | StudyAssignmentUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: StudyAssignmentUpdateManyWithWhereWithoutUserInput | StudyAssignmentUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: StudyAssignmentScalarWhereInput | StudyAssignmentScalarWhereInput[]
+  export type MonitoringPlanAssignmentUpdateManyWithoutUserNestedInput = {
+    create?: XOR<MonitoringPlanAssignmentCreateWithoutUserInput, MonitoringPlanAssignmentUncheckedCreateWithoutUserInput> | MonitoringPlanAssignmentCreateWithoutUserInput[] | MonitoringPlanAssignmentUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: MonitoringPlanAssignmentCreateOrConnectWithoutUserInput | MonitoringPlanAssignmentCreateOrConnectWithoutUserInput[]
+    upsert?: MonitoringPlanAssignmentUpsertWithWhereUniqueWithoutUserInput | MonitoringPlanAssignmentUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: MonitoringPlanAssignmentCreateManyUserInputEnvelope
+    set?: MonitoringPlanAssignmentWhereUniqueInput | MonitoringPlanAssignmentWhereUniqueInput[]
+    disconnect?: MonitoringPlanAssignmentWhereUniqueInput | MonitoringPlanAssignmentWhereUniqueInput[]
+    delete?: MonitoringPlanAssignmentWhereUniqueInput | MonitoringPlanAssignmentWhereUniqueInput[]
+    connect?: MonitoringPlanAssignmentWhereUniqueInput | MonitoringPlanAssignmentWhereUniqueInput[]
+    update?: MonitoringPlanAssignmentUpdateWithWhereUniqueWithoutUserInput | MonitoringPlanAssignmentUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: MonitoringPlanAssignmentUpdateManyWithWhereWithoutUserInput | MonitoringPlanAssignmentUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: MonitoringPlanAssignmentScalarWhereInput | MonitoringPlanAssignmentScalarWhereInput[]
   }
 
   export type TreatmentUpdateManyWithoutCreatedByNestedInput = {
@@ -26696,32 +26725,32 @@ export namespace Prisma {
     deleteMany?: NotificationScalarWhereInput | NotificationScalarWhereInput[]
   }
 
-  export type StudyUncheckedUpdateManyWithoutCreatedByNestedInput = {
-    create?: XOR<StudyCreateWithoutCreatedByInput, StudyUncheckedCreateWithoutCreatedByInput> | StudyCreateWithoutCreatedByInput[] | StudyUncheckedCreateWithoutCreatedByInput[]
-    connectOrCreate?: StudyCreateOrConnectWithoutCreatedByInput | StudyCreateOrConnectWithoutCreatedByInput[]
-    upsert?: StudyUpsertWithWhereUniqueWithoutCreatedByInput | StudyUpsertWithWhereUniqueWithoutCreatedByInput[]
-    createMany?: StudyCreateManyCreatedByInputEnvelope
-    set?: StudyWhereUniqueInput | StudyWhereUniqueInput[]
-    disconnect?: StudyWhereUniqueInput | StudyWhereUniqueInput[]
-    delete?: StudyWhereUniqueInput | StudyWhereUniqueInput[]
-    connect?: StudyWhereUniqueInput | StudyWhereUniqueInput[]
-    update?: StudyUpdateWithWhereUniqueWithoutCreatedByInput | StudyUpdateWithWhereUniqueWithoutCreatedByInput[]
-    updateMany?: StudyUpdateManyWithWhereWithoutCreatedByInput | StudyUpdateManyWithWhereWithoutCreatedByInput[]
-    deleteMany?: StudyScalarWhereInput | StudyScalarWhereInput[]
+  export type MonitoringPlanUncheckedUpdateManyWithoutCreatedByNestedInput = {
+    create?: XOR<MonitoringPlanCreateWithoutCreatedByInput, MonitoringPlanUncheckedCreateWithoutCreatedByInput> | MonitoringPlanCreateWithoutCreatedByInput[] | MonitoringPlanUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: MonitoringPlanCreateOrConnectWithoutCreatedByInput | MonitoringPlanCreateOrConnectWithoutCreatedByInput[]
+    upsert?: MonitoringPlanUpsertWithWhereUniqueWithoutCreatedByInput | MonitoringPlanUpsertWithWhereUniqueWithoutCreatedByInput[]
+    createMany?: MonitoringPlanCreateManyCreatedByInputEnvelope
+    set?: MonitoringPlanWhereUniqueInput | MonitoringPlanWhereUniqueInput[]
+    disconnect?: MonitoringPlanWhereUniqueInput | MonitoringPlanWhereUniqueInput[]
+    delete?: MonitoringPlanWhereUniqueInput | MonitoringPlanWhereUniqueInput[]
+    connect?: MonitoringPlanWhereUniqueInput | MonitoringPlanWhereUniqueInput[]
+    update?: MonitoringPlanUpdateWithWhereUniqueWithoutCreatedByInput | MonitoringPlanUpdateWithWhereUniqueWithoutCreatedByInput[]
+    updateMany?: MonitoringPlanUpdateManyWithWhereWithoutCreatedByInput | MonitoringPlanUpdateManyWithWhereWithoutCreatedByInput[]
+    deleteMany?: MonitoringPlanScalarWhereInput | MonitoringPlanScalarWhereInput[]
   }
 
-  export type StudyAssignmentUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<StudyAssignmentCreateWithoutUserInput, StudyAssignmentUncheckedCreateWithoutUserInput> | StudyAssignmentCreateWithoutUserInput[] | StudyAssignmentUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: StudyAssignmentCreateOrConnectWithoutUserInput | StudyAssignmentCreateOrConnectWithoutUserInput[]
-    upsert?: StudyAssignmentUpsertWithWhereUniqueWithoutUserInput | StudyAssignmentUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: StudyAssignmentCreateManyUserInputEnvelope
-    set?: StudyAssignmentWhereUniqueInput | StudyAssignmentWhereUniqueInput[]
-    disconnect?: StudyAssignmentWhereUniqueInput | StudyAssignmentWhereUniqueInput[]
-    delete?: StudyAssignmentWhereUniqueInput | StudyAssignmentWhereUniqueInput[]
-    connect?: StudyAssignmentWhereUniqueInput | StudyAssignmentWhereUniqueInput[]
-    update?: StudyAssignmentUpdateWithWhereUniqueWithoutUserInput | StudyAssignmentUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: StudyAssignmentUpdateManyWithWhereWithoutUserInput | StudyAssignmentUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: StudyAssignmentScalarWhereInput | StudyAssignmentScalarWhereInput[]
+  export type MonitoringPlanAssignmentUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<MonitoringPlanAssignmentCreateWithoutUserInput, MonitoringPlanAssignmentUncheckedCreateWithoutUserInput> | MonitoringPlanAssignmentCreateWithoutUserInput[] | MonitoringPlanAssignmentUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: MonitoringPlanAssignmentCreateOrConnectWithoutUserInput | MonitoringPlanAssignmentCreateOrConnectWithoutUserInput[]
+    upsert?: MonitoringPlanAssignmentUpsertWithWhereUniqueWithoutUserInput | MonitoringPlanAssignmentUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: MonitoringPlanAssignmentCreateManyUserInputEnvelope
+    set?: MonitoringPlanAssignmentWhereUniqueInput | MonitoringPlanAssignmentWhereUniqueInput[]
+    disconnect?: MonitoringPlanAssignmentWhereUniqueInput | MonitoringPlanAssignmentWhereUniqueInput[]
+    delete?: MonitoringPlanAssignmentWhereUniqueInput | MonitoringPlanAssignmentWhereUniqueInput[]
+    connect?: MonitoringPlanAssignmentWhereUniqueInput | MonitoringPlanAssignmentWhereUniqueInput[]
+    update?: MonitoringPlanAssignmentUpdateWithWhereUniqueWithoutUserInput | MonitoringPlanAssignmentUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: MonitoringPlanAssignmentUpdateManyWithWhereWithoutUserInput | MonitoringPlanAssignmentUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: MonitoringPlanAssignmentScalarWhereInput | MonitoringPlanAssignmentScalarWhereInput[]
   }
 
   export type TreatmentUncheckedUpdateManyWithoutCreatedByNestedInput = {
@@ -26794,11 +26823,11 @@ export namespace Prisma {
     connect?: PatientWhereUniqueInput | PatientWhereUniqueInput[]
   }
 
-  export type StudyCreateNestedManyWithoutPracticeInput = {
-    create?: XOR<StudyCreateWithoutPracticeInput, StudyUncheckedCreateWithoutPracticeInput> | StudyCreateWithoutPracticeInput[] | StudyUncheckedCreateWithoutPracticeInput[]
-    connectOrCreate?: StudyCreateOrConnectWithoutPracticeInput | StudyCreateOrConnectWithoutPracticeInput[]
-    createMany?: StudyCreateManyPracticeInputEnvelope
-    connect?: StudyWhereUniqueInput | StudyWhereUniqueInput[]
+  export type MonitoringPlanCreateNestedManyWithoutPracticeInput = {
+    create?: XOR<MonitoringPlanCreateWithoutPracticeInput, MonitoringPlanUncheckedCreateWithoutPracticeInput> | MonitoringPlanCreateWithoutPracticeInput[] | MonitoringPlanUncheckedCreateWithoutPracticeInput[]
+    connectOrCreate?: MonitoringPlanCreateOrConnectWithoutPracticeInput | MonitoringPlanCreateOrConnectWithoutPracticeInput[]
+    createMany?: MonitoringPlanCreateManyPracticeInputEnvelope
+    connect?: MonitoringPlanWhereUniqueInput | MonitoringPlanWhereUniqueInput[]
   }
 
   export type SubscriptionHistoryCreateNestedManyWithoutPracticeInput = {
@@ -26822,11 +26851,11 @@ export namespace Prisma {
     connect?: PatientWhereUniqueInput | PatientWhereUniqueInput[]
   }
 
-  export type StudyUncheckedCreateNestedManyWithoutPracticeInput = {
-    create?: XOR<StudyCreateWithoutPracticeInput, StudyUncheckedCreateWithoutPracticeInput> | StudyCreateWithoutPracticeInput[] | StudyUncheckedCreateWithoutPracticeInput[]
-    connectOrCreate?: StudyCreateOrConnectWithoutPracticeInput | StudyCreateOrConnectWithoutPracticeInput[]
-    createMany?: StudyCreateManyPracticeInputEnvelope
-    connect?: StudyWhereUniqueInput | StudyWhereUniqueInput[]
+  export type MonitoringPlanUncheckedCreateNestedManyWithoutPracticeInput = {
+    create?: XOR<MonitoringPlanCreateWithoutPracticeInput, MonitoringPlanUncheckedCreateWithoutPracticeInput> | MonitoringPlanCreateWithoutPracticeInput[] | MonitoringPlanUncheckedCreateWithoutPracticeInput[]
+    connectOrCreate?: MonitoringPlanCreateOrConnectWithoutPracticeInput | MonitoringPlanCreateOrConnectWithoutPracticeInput[]
+    createMany?: MonitoringPlanCreateManyPracticeInputEnvelope
+    connect?: MonitoringPlanWhereUniqueInput | MonitoringPlanWhereUniqueInput[]
   }
 
   export type SubscriptionHistoryUncheckedCreateNestedManyWithoutPracticeInput = {
@@ -26880,18 +26909,18 @@ export namespace Prisma {
     deleteMany?: PatientScalarWhereInput | PatientScalarWhereInput[]
   }
 
-  export type StudyUpdateManyWithoutPracticeNestedInput = {
-    create?: XOR<StudyCreateWithoutPracticeInput, StudyUncheckedCreateWithoutPracticeInput> | StudyCreateWithoutPracticeInput[] | StudyUncheckedCreateWithoutPracticeInput[]
-    connectOrCreate?: StudyCreateOrConnectWithoutPracticeInput | StudyCreateOrConnectWithoutPracticeInput[]
-    upsert?: StudyUpsertWithWhereUniqueWithoutPracticeInput | StudyUpsertWithWhereUniqueWithoutPracticeInput[]
-    createMany?: StudyCreateManyPracticeInputEnvelope
-    set?: StudyWhereUniqueInput | StudyWhereUniqueInput[]
-    disconnect?: StudyWhereUniqueInput | StudyWhereUniqueInput[]
-    delete?: StudyWhereUniqueInput | StudyWhereUniqueInput[]
-    connect?: StudyWhereUniqueInput | StudyWhereUniqueInput[]
-    update?: StudyUpdateWithWhereUniqueWithoutPracticeInput | StudyUpdateWithWhereUniqueWithoutPracticeInput[]
-    updateMany?: StudyUpdateManyWithWhereWithoutPracticeInput | StudyUpdateManyWithWhereWithoutPracticeInput[]
-    deleteMany?: StudyScalarWhereInput | StudyScalarWhereInput[]
+  export type MonitoringPlanUpdateManyWithoutPracticeNestedInput = {
+    create?: XOR<MonitoringPlanCreateWithoutPracticeInput, MonitoringPlanUncheckedCreateWithoutPracticeInput> | MonitoringPlanCreateWithoutPracticeInput[] | MonitoringPlanUncheckedCreateWithoutPracticeInput[]
+    connectOrCreate?: MonitoringPlanCreateOrConnectWithoutPracticeInput | MonitoringPlanCreateOrConnectWithoutPracticeInput[]
+    upsert?: MonitoringPlanUpsertWithWhereUniqueWithoutPracticeInput | MonitoringPlanUpsertWithWhereUniqueWithoutPracticeInput[]
+    createMany?: MonitoringPlanCreateManyPracticeInputEnvelope
+    set?: MonitoringPlanWhereUniqueInput | MonitoringPlanWhereUniqueInput[]
+    disconnect?: MonitoringPlanWhereUniqueInput | MonitoringPlanWhereUniqueInput[]
+    delete?: MonitoringPlanWhereUniqueInput | MonitoringPlanWhereUniqueInput[]
+    connect?: MonitoringPlanWhereUniqueInput | MonitoringPlanWhereUniqueInput[]
+    update?: MonitoringPlanUpdateWithWhereUniqueWithoutPracticeInput | MonitoringPlanUpdateWithWhereUniqueWithoutPracticeInput[]
+    updateMany?: MonitoringPlanUpdateManyWithWhereWithoutPracticeInput | MonitoringPlanUpdateManyWithWhereWithoutPracticeInput[]
+    deleteMany?: MonitoringPlanScalarWhereInput | MonitoringPlanScalarWhereInput[]
   }
 
   export type SubscriptionHistoryUpdateManyWithoutPracticeNestedInput = {
@@ -26936,18 +26965,18 @@ export namespace Prisma {
     deleteMany?: PatientScalarWhereInput | PatientScalarWhereInput[]
   }
 
-  export type StudyUncheckedUpdateManyWithoutPracticeNestedInput = {
-    create?: XOR<StudyCreateWithoutPracticeInput, StudyUncheckedCreateWithoutPracticeInput> | StudyCreateWithoutPracticeInput[] | StudyUncheckedCreateWithoutPracticeInput[]
-    connectOrCreate?: StudyCreateOrConnectWithoutPracticeInput | StudyCreateOrConnectWithoutPracticeInput[]
-    upsert?: StudyUpsertWithWhereUniqueWithoutPracticeInput | StudyUpsertWithWhereUniqueWithoutPracticeInput[]
-    createMany?: StudyCreateManyPracticeInputEnvelope
-    set?: StudyWhereUniqueInput | StudyWhereUniqueInput[]
-    disconnect?: StudyWhereUniqueInput | StudyWhereUniqueInput[]
-    delete?: StudyWhereUniqueInput | StudyWhereUniqueInput[]
-    connect?: StudyWhereUniqueInput | StudyWhereUniqueInput[]
-    update?: StudyUpdateWithWhereUniqueWithoutPracticeInput | StudyUpdateWithWhereUniqueWithoutPracticeInput[]
-    updateMany?: StudyUpdateManyWithWhereWithoutPracticeInput | StudyUpdateManyWithWhereWithoutPracticeInput[]
-    deleteMany?: StudyScalarWhereInput | StudyScalarWhereInput[]
+  export type MonitoringPlanUncheckedUpdateManyWithoutPracticeNestedInput = {
+    create?: XOR<MonitoringPlanCreateWithoutPracticeInput, MonitoringPlanUncheckedCreateWithoutPracticeInput> | MonitoringPlanCreateWithoutPracticeInput[] | MonitoringPlanUncheckedCreateWithoutPracticeInput[]
+    connectOrCreate?: MonitoringPlanCreateOrConnectWithoutPracticeInput | MonitoringPlanCreateOrConnectWithoutPracticeInput[]
+    upsert?: MonitoringPlanUpsertWithWhereUniqueWithoutPracticeInput | MonitoringPlanUpsertWithWhereUniqueWithoutPracticeInput[]
+    createMany?: MonitoringPlanCreateManyPracticeInputEnvelope
+    set?: MonitoringPlanWhereUniqueInput | MonitoringPlanWhereUniqueInput[]
+    disconnect?: MonitoringPlanWhereUniqueInput | MonitoringPlanWhereUniqueInput[]
+    delete?: MonitoringPlanWhereUniqueInput | MonitoringPlanWhereUniqueInput[]
+    connect?: MonitoringPlanWhereUniqueInput | MonitoringPlanWhereUniqueInput[]
+    update?: MonitoringPlanUpdateWithWhereUniqueWithoutPracticeInput | MonitoringPlanUpdateWithWhereUniqueWithoutPracticeInput[]
+    updateMany?: MonitoringPlanUpdateManyWithWhereWithoutPracticeInput | MonitoringPlanUpdateManyWithWhereWithoutPracticeInput[]
+    deleteMany?: MonitoringPlanScalarWhereInput | MonitoringPlanScalarWhereInput[]
   }
 
   export type SubscriptionHistoryUncheckedUpdateManyWithoutPracticeNestedInput = {
@@ -26998,11 +27027,11 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
-  export type StudyPatientCreateNestedManyWithoutPatientInput = {
-    create?: XOR<StudyPatientCreateWithoutPatientInput, StudyPatientUncheckedCreateWithoutPatientInput> | StudyPatientCreateWithoutPatientInput[] | StudyPatientUncheckedCreateWithoutPatientInput[]
-    connectOrCreate?: StudyPatientCreateOrConnectWithoutPatientInput | StudyPatientCreateOrConnectWithoutPatientInput[]
-    createMany?: StudyPatientCreateManyPatientInputEnvelope
-    connect?: StudyPatientWhereUniqueInput | StudyPatientWhereUniqueInput[]
+  export type MonitoringPlanPatientCreateNestedManyWithoutPatientInput = {
+    create?: XOR<MonitoringPlanPatientCreateWithoutPatientInput, MonitoringPlanPatientUncheckedCreateWithoutPatientInput> | MonitoringPlanPatientCreateWithoutPatientInput[] | MonitoringPlanPatientUncheckedCreateWithoutPatientInput[]
+    connectOrCreate?: MonitoringPlanPatientCreateOrConnectWithoutPatientInput | MonitoringPlanPatientCreateOrConnectWithoutPatientInput[]
+    createMany?: MonitoringPlanPatientCreateManyPatientInputEnvelope
+    connect?: MonitoringPlanPatientWhereUniqueInput | MonitoringPlanPatientWhereUniqueInput[]
   }
 
   export type ObservationCreateNestedManyWithoutPatientInput = {
@@ -27026,11 +27055,11 @@ export namespace Prisma {
     connect?: FileWhereUniqueInput | FileWhereUniqueInput[]
   }
 
-  export type StudyPatientUncheckedCreateNestedManyWithoutPatientInput = {
-    create?: XOR<StudyPatientCreateWithoutPatientInput, StudyPatientUncheckedCreateWithoutPatientInput> | StudyPatientCreateWithoutPatientInput[] | StudyPatientUncheckedCreateWithoutPatientInput[]
-    connectOrCreate?: StudyPatientCreateOrConnectWithoutPatientInput | StudyPatientCreateOrConnectWithoutPatientInput[]
-    createMany?: StudyPatientCreateManyPatientInputEnvelope
-    connect?: StudyPatientWhereUniqueInput | StudyPatientWhereUniqueInput[]
+  export type MonitoringPlanPatientUncheckedCreateNestedManyWithoutPatientInput = {
+    create?: XOR<MonitoringPlanPatientCreateWithoutPatientInput, MonitoringPlanPatientUncheckedCreateWithoutPatientInput> | MonitoringPlanPatientCreateWithoutPatientInput[] | MonitoringPlanPatientUncheckedCreateWithoutPatientInput[]
+    connectOrCreate?: MonitoringPlanPatientCreateOrConnectWithoutPatientInput | MonitoringPlanPatientCreateOrConnectWithoutPatientInput[]
+    createMany?: MonitoringPlanPatientCreateManyPatientInputEnvelope
+    connect?: MonitoringPlanPatientWhereUniqueInput | MonitoringPlanPatientWhereUniqueInput[]
   }
 
   export type ObservationUncheckedCreateNestedManyWithoutPatientInput = {
@@ -27082,18 +27111,18 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCreatedPatientsInput, UserUpdateWithoutCreatedPatientsInput>, UserUncheckedUpdateWithoutCreatedPatientsInput>
   }
 
-  export type StudyPatientUpdateManyWithoutPatientNestedInput = {
-    create?: XOR<StudyPatientCreateWithoutPatientInput, StudyPatientUncheckedCreateWithoutPatientInput> | StudyPatientCreateWithoutPatientInput[] | StudyPatientUncheckedCreateWithoutPatientInput[]
-    connectOrCreate?: StudyPatientCreateOrConnectWithoutPatientInput | StudyPatientCreateOrConnectWithoutPatientInput[]
-    upsert?: StudyPatientUpsertWithWhereUniqueWithoutPatientInput | StudyPatientUpsertWithWhereUniqueWithoutPatientInput[]
-    createMany?: StudyPatientCreateManyPatientInputEnvelope
-    set?: StudyPatientWhereUniqueInput | StudyPatientWhereUniqueInput[]
-    disconnect?: StudyPatientWhereUniqueInput | StudyPatientWhereUniqueInput[]
-    delete?: StudyPatientWhereUniqueInput | StudyPatientWhereUniqueInput[]
-    connect?: StudyPatientWhereUniqueInput | StudyPatientWhereUniqueInput[]
-    update?: StudyPatientUpdateWithWhereUniqueWithoutPatientInput | StudyPatientUpdateWithWhereUniqueWithoutPatientInput[]
-    updateMany?: StudyPatientUpdateManyWithWhereWithoutPatientInput | StudyPatientUpdateManyWithWhereWithoutPatientInput[]
-    deleteMany?: StudyPatientScalarWhereInput | StudyPatientScalarWhereInput[]
+  export type MonitoringPlanPatientUpdateManyWithoutPatientNestedInput = {
+    create?: XOR<MonitoringPlanPatientCreateWithoutPatientInput, MonitoringPlanPatientUncheckedCreateWithoutPatientInput> | MonitoringPlanPatientCreateWithoutPatientInput[] | MonitoringPlanPatientUncheckedCreateWithoutPatientInput[]
+    connectOrCreate?: MonitoringPlanPatientCreateOrConnectWithoutPatientInput | MonitoringPlanPatientCreateOrConnectWithoutPatientInput[]
+    upsert?: MonitoringPlanPatientUpsertWithWhereUniqueWithoutPatientInput | MonitoringPlanPatientUpsertWithWhereUniqueWithoutPatientInput[]
+    createMany?: MonitoringPlanPatientCreateManyPatientInputEnvelope
+    set?: MonitoringPlanPatientWhereUniqueInput | MonitoringPlanPatientWhereUniqueInput[]
+    disconnect?: MonitoringPlanPatientWhereUniqueInput | MonitoringPlanPatientWhereUniqueInput[]
+    delete?: MonitoringPlanPatientWhereUniqueInput | MonitoringPlanPatientWhereUniqueInput[]
+    connect?: MonitoringPlanPatientWhereUniqueInput | MonitoringPlanPatientWhereUniqueInput[]
+    update?: MonitoringPlanPatientUpdateWithWhereUniqueWithoutPatientInput | MonitoringPlanPatientUpdateWithWhereUniqueWithoutPatientInput[]
+    updateMany?: MonitoringPlanPatientUpdateManyWithWhereWithoutPatientInput | MonitoringPlanPatientUpdateManyWithWhereWithoutPatientInput[]
+    deleteMany?: MonitoringPlanPatientScalarWhereInput | MonitoringPlanPatientScalarWhereInput[]
   }
 
   export type ObservationUpdateManyWithoutPatientNestedInput = {
@@ -27138,18 +27167,18 @@ export namespace Prisma {
     deleteMany?: FileScalarWhereInput | FileScalarWhereInput[]
   }
 
-  export type StudyPatientUncheckedUpdateManyWithoutPatientNestedInput = {
-    create?: XOR<StudyPatientCreateWithoutPatientInput, StudyPatientUncheckedCreateWithoutPatientInput> | StudyPatientCreateWithoutPatientInput[] | StudyPatientUncheckedCreateWithoutPatientInput[]
-    connectOrCreate?: StudyPatientCreateOrConnectWithoutPatientInput | StudyPatientCreateOrConnectWithoutPatientInput[]
-    upsert?: StudyPatientUpsertWithWhereUniqueWithoutPatientInput | StudyPatientUpsertWithWhereUniqueWithoutPatientInput[]
-    createMany?: StudyPatientCreateManyPatientInputEnvelope
-    set?: StudyPatientWhereUniqueInput | StudyPatientWhereUniqueInput[]
-    disconnect?: StudyPatientWhereUniqueInput | StudyPatientWhereUniqueInput[]
-    delete?: StudyPatientWhereUniqueInput | StudyPatientWhereUniqueInput[]
-    connect?: StudyPatientWhereUniqueInput | StudyPatientWhereUniqueInput[]
-    update?: StudyPatientUpdateWithWhereUniqueWithoutPatientInput | StudyPatientUpdateWithWhereUniqueWithoutPatientInput[]
-    updateMany?: StudyPatientUpdateManyWithWhereWithoutPatientInput | StudyPatientUpdateManyWithWhereWithoutPatientInput[]
-    deleteMany?: StudyPatientScalarWhereInput | StudyPatientScalarWhereInput[]
+  export type MonitoringPlanPatientUncheckedUpdateManyWithoutPatientNestedInput = {
+    create?: XOR<MonitoringPlanPatientCreateWithoutPatientInput, MonitoringPlanPatientUncheckedCreateWithoutPatientInput> | MonitoringPlanPatientCreateWithoutPatientInput[] | MonitoringPlanPatientUncheckedCreateWithoutPatientInput[]
+    connectOrCreate?: MonitoringPlanPatientCreateOrConnectWithoutPatientInput | MonitoringPlanPatientCreateOrConnectWithoutPatientInput[]
+    upsert?: MonitoringPlanPatientUpsertWithWhereUniqueWithoutPatientInput | MonitoringPlanPatientUpsertWithWhereUniqueWithoutPatientInput[]
+    createMany?: MonitoringPlanPatientCreateManyPatientInputEnvelope
+    set?: MonitoringPlanPatientWhereUniqueInput | MonitoringPlanPatientWhereUniqueInput[]
+    disconnect?: MonitoringPlanPatientWhereUniqueInput | MonitoringPlanPatientWhereUniqueInput[]
+    delete?: MonitoringPlanPatientWhereUniqueInput | MonitoringPlanPatientWhereUniqueInput[]
+    connect?: MonitoringPlanPatientWhereUniqueInput | MonitoringPlanPatientWhereUniqueInput[]
+    update?: MonitoringPlanPatientUpdateWithWhereUniqueWithoutPatientInput | MonitoringPlanPatientUpdateWithWhereUniqueWithoutPatientInput[]
+    updateMany?: MonitoringPlanPatientUpdateManyWithWhereWithoutPatientInput | MonitoringPlanPatientUpdateManyWithWhereWithoutPatientInput[]
+    deleteMany?: MonitoringPlanPatientScalarWhereInput | MonitoringPlanPatientScalarWhereInput[]
   }
 
   export type ObservationUncheckedUpdateManyWithoutPatientNestedInput = {
@@ -27194,410 +27223,410 @@ export namespace Prisma {
     deleteMany?: FileScalarWhereInput | FileScalarWhereInput[]
   }
 
-  export type PracticeCreateNestedOneWithoutStudiesInput = {
-    create?: XOR<PracticeCreateWithoutStudiesInput, PracticeUncheckedCreateWithoutStudiesInput>
-    connectOrCreate?: PracticeCreateOrConnectWithoutStudiesInput
+  export type PracticeCreateNestedOneWithoutMonitoringPlansInput = {
+    create?: XOR<PracticeCreateWithoutMonitoringPlansInput, PracticeUncheckedCreateWithoutMonitoringPlansInput>
+    connectOrCreate?: PracticeCreateOrConnectWithoutMonitoringPlansInput
     connect?: PracticeWhereUniqueInput
   }
 
-  export type UserCreateNestedOneWithoutCreatedStudiesInput = {
-    create?: XOR<UserCreateWithoutCreatedStudiesInput, UserUncheckedCreateWithoutCreatedStudiesInput>
-    connectOrCreate?: UserCreateOrConnectWithoutCreatedStudiesInput
+  export type UserCreateNestedOneWithoutCreatedMonitoringPlansInput = {
+    create?: XOR<UserCreateWithoutCreatedMonitoringPlansInput, UserUncheckedCreateWithoutCreatedMonitoringPlansInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCreatedMonitoringPlansInput
     connect?: UserWhereUniqueInput
   }
 
-  export type StudyPatientCreateNestedManyWithoutStudyInput = {
-    create?: XOR<StudyPatientCreateWithoutStudyInput, StudyPatientUncheckedCreateWithoutStudyInput> | StudyPatientCreateWithoutStudyInput[] | StudyPatientUncheckedCreateWithoutStudyInput[]
-    connectOrCreate?: StudyPatientCreateOrConnectWithoutStudyInput | StudyPatientCreateOrConnectWithoutStudyInput[]
-    createMany?: StudyPatientCreateManyStudyInputEnvelope
-    connect?: StudyPatientWhereUniqueInput | StudyPatientWhereUniqueInput[]
+  export type MonitoringPlanPatientCreateNestedManyWithoutMonitoringPlanInput = {
+    create?: XOR<MonitoringPlanPatientCreateWithoutMonitoringPlanInput, MonitoringPlanPatientUncheckedCreateWithoutMonitoringPlanInput> | MonitoringPlanPatientCreateWithoutMonitoringPlanInput[] | MonitoringPlanPatientUncheckedCreateWithoutMonitoringPlanInput[]
+    connectOrCreate?: MonitoringPlanPatientCreateOrConnectWithoutMonitoringPlanInput | MonitoringPlanPatientCreateOrConnectWithoutMonitoringPlanInput[]
+    createMany?: MonitoringPlanPatientCreateManyMonitoringPlanInputEnvelope
+    connect?: MonitoringPlanPatientWhereUniqueInput | MonitoringPlanPatientWhereUniqueInput[]
   }
 
-  export type StudyAssignmentCreateNestedManyWithoutStudyInput = {
-    create?: XOR<StudyAssignmentCreateWithoutStudyInput, StudyAssignmentUncheckedCreateWithoutStudyInput> | StudyAssignmentCreateWithoutStudyInput[] | StudyAssignmentUncheckedCreateWithoutStudyInput[]
-    connectOrCreate?: StudyAssignmentCreateOrConnectWithoutStudyInput | StudyAssignmentCreateOrConnectWithoutStudyInput[]
-    createMany?: StudyAssignmentCreateManyStudyInputEnvelope
-    connect?: StudyAssignmentWhereUniqueInput | StudyAssignmentWhereUniqueInput[]
+  export type MonitoringPlanAssignmentCreateNestedManyWithoutMonitoringPlanInput = {
+    create?: XOR<MonitoringPlanAssignmentCreateWithoutMonitoringPlanInput, MonitoringPlanAssignmentUncheckedCreateWithoutMonitoringPlanInput> | MonitoringPlanAssignmentCreateWithoutMonitoringPlanInput[] | MonitoringPlanAssignmentUncheckedCreateWithoutMonitoringPlanInput[]
+    connectOrCreate?: MonitoringPlanAssignmentCreateOrConnectWithoutMonitoringPlanInput | MonitoringPlanAssignmentCreateOrConnectWithoutMonitoringPlanInput[]
+    createMany?: MonitoringPlanAssignmentCreateManyMonitoringPlanInputEnvelope
+    connect?: MonitoringPlanAssignmentWhereUniqueInput | MonitoringPlanAssignmentWhereUniqueInput[]
   }
 
-  export type SymptomTemplateCreateNestedManyWithoutStudyInput = {
-    create?: XOR<SymptomTemplateCreateWithoutStudyInput, SymptomTemplateUncheckedCreateWithoutStudyInput> | SymptomTemplateCreateWithoutStudyInput[] | SymptomTemplateUncheckedCreateWithoutStudyInput[]
-    connectOrCreate?: SymptomTemplateCreateOrConnectWithoutStudyInput | SymptomTemplateCreateOrConnectWithoutStudyInput[]
-    createMany?: SymptomTemplateCreateManyStudyInputEnvelope
+  export type SymptomTemplateCreateNestedManyWithoutMonitoringPlanInput = {
+    create?: XOR<SymptomTemplateCreateWithoutMonitoringPlanInput, SymptomTemplateUncheckedCreateWithoutMonitoringPlanInput> | SymptomTemplateCreateWithoutMonitoringPlanInput[] | SymptomTemplateUncheckedCreateWithoutMonitoringPlanInput[]
+    connectOrCreate?: SymptomTemplateCreateOrConnectWithoutMonitoringPlanInput | SymptomTemplateCreateOrConnectWithoutMonitoringPlanInput[]
+    createMany?: SymptomTemplateCreateManyMonitoringPlanInputEnvelope
     connect?: SymptomTemplateWhereUniqueInput | SymptomTemplateWhereUniqueInput[]
   }
 
-  export type TreatmentTemplateCreateNestedManyWithoutStudyInput = {
-    create?: XOR<TreatmentTemplateCreateWithoutStudyInput, TreatmentTemplateUncheckedCreateWithoutStudyInput> | TreatmentTemplateCreateWithoutStudyInput[] | TreatmentTemplateUncheckedCreateWithoutStudyInput[]
-    connectOrCreate?: TreatmentTemplateCreateOrConnectWithoutStudyInput | TreatmentTemplateCreateOrConnectWithoutStudyInput[]
-    createMany?: TreatmentTemplateCreateManyStudyInputEnvelope
+  export type TreatmentTemplateCreateNestedManyWithoutMonitoringPlanInput = {
+    create?: XOR<TreatmentTemplateCreateWithoutMonitoringPlanInput, TreatmentTemplateUncheckedCreateWithoutMonitoringPlanInput> | TreatmentTemplateCreateWithoutMonitoringPlanInput[] | TreatmentTemplateUncheckedCreateWithoutMonitoringPlanInput[]
+    connectOrCreate?: TreatmentTemplateCreateOrConnectWithoutMonitoringPlanInput | TreatmentTemplateCreateOrConnectWithoutMonitoringPlanInput[]
+    createMany?: TreatmentTemplateCreateManyMonitoringPlanInputEnvelope
     connect?: TreatmentTemplateWhereUniqueInput | TreatmentTemplateWhereUniqueInput[]
   }
 
-  export type StudyNoteCreateNestedManyWithoutStudyInput = {
-    create?: XOR<StudyNoteCreateWithoutStudyInput, StudyNoteUncheckedCreateWithoutStudyInput> | StudyNoteCreateWithoutStudyInput[] | StudyNoteUncheckedCreateWithoutStudyInput[]
-    connectOrCreate?: StudyNoteCreateOrConnectWithoutStudyInput | StudyNoteCreateOrConnectWithoutStudyInput[]
-    createMany?: StudyNoteCreateManyStudyInputEnvelope
-    connect?: StudyNoteWhereUniqueInput | StudyNoteWhereUniqueInput[]
+  export type MonitoringPlanNoteCreateNestedManyWithoutMonitoringPlanInput = {
+    create?: XOR<MonitoringPlanNoteCreateWithoutMonitoringPlanInput, MonitoringPlanNoteUncheckedCreateWithoutMonitoringPlanInput> | MonitoringPlanNoteCreateWithoutMonitoringPlanInput[] | MonitoringPlanNoteUncheckedCreateWithoutMonitoringPlanInput[]
+    connectOrCreate?: MonitoringPlanNoteCreateOrConnectWithoutMonitoringPlanInput | MonitoringPlanNoteCreateOrConnectWithoutMonitoringPlanInput[]
+    createMany?: MonitoringPlanNoteCreateManyMonitoringPlanInputEnvelope
+    connect?: MonitoringPlanNoteWhereUniqueInput | MonitoringPlanNoteWhereUniqueInput[]
   }
 
-  export type StudyPatientUncheckedCreateNestedManyWithoutStudyInput = {
-    create?: XOR<StudyPatientCreateWithoutStudyInput, StudyPatientUncheckedCreateWithoutStudyInput> | StudyPatientCreateWithoutStudyInput[] | StudyPatientUncheckedCreateWithoutStudyInput[]
-    connectOrCreate?: StudyPatientCreateOrConnectWithoutStudyInput | StudyPatientCreateOrConnectWithoutStudyInput[]
-    createMany?: StudyPatientCreateManyStudyInputEnvelope
-    connect?: StudyPatientWhereUniqueInput | StudyPatientWhereUniqueInput[]
+  export type MonitoringPlanPatientUncheckedCreateNestedManyWithoutMonitoringPlanInput = {
+    create?: XOR<MonitoringPlanPatientCreateWithoutMonitoringPlanInput, MonitoringPlanPatientUncheckedCreateWithoutMonitoringPlanInput> | MonitoringPlanPatientCreateWithoutMonitoringPlanInput[] | MonitoringPlanPatientUncheckedCreateWithoutMonitoringPlanInput[]
+    connectOrCreate?: MonitoringPlanPatientCreateOrConnectWithoutMonitoringPlanInput | MonitoringPlanPatientCreateOrConnectWithoutMonitoringPlanInput[]
+    createMany?: MonitoringPlanPatientCreateManyMonitoringPlanInputEnvelope
+    connect?: MonitoringPlanPatientWhereUniqueInput | MonitoringPlanPatientWhereUniqueInput[]
   }
 
-  export type StudyAssignmentUncheckedCreateNestedManyWithoutStudyInput = {
-    create?: XOR<StudyAssignmentCreateWithoutStudyInput, StudyAssignmentUncheckedCreateWithoutStudyInput> | StudyAssignmentCreateWithoutStudyInput[] | StudyAssignmentUncheckedCreateWithoutStudyInput[]
-    connectOrCreate?: StudyAssignmentCreateOrConnectWithoutStudyInput | StudyAssignmentCreateOrConnectWithoutStudyInput[]
-    createMany?: StudyAssignmentCreateManyStudyInputEnvelope
-    connect?: StudyAssignmentWhereUniqueInput | StudyAssignmentWhereUniqueInput[]
+  export type MonitoringPlanAssignmentUncheckedCreateNestedManyWithoutMonitoringPlanInput = {
+    create?: XOR<MonitoringPlanAssignmentCreateWithoutMonitoringPlanInput, MonitoringPlanAssignmentUncheckedCreateWithoutMonitoringPlanInput> | MonitoringPlanAssignmentCreateWithoutMonitoringPlanInput[] | MonitoringPlanAssignmentUncheckedCreateWithoutMonitoringPlanInput[]
+    connectOrCreate?: MonitoringPlanAssignmentCreateOrConnectWithoutMonitoringPlanInput | MonitoringPlanAssignmentCreateOrConnectWithoutMonitoringPlanInput[]
+    createMany?: MonitoringPlanAssignmentCreateManyMonitoringPlanInputEnvelope
+    connect?: MonitoringPlanAssignmentWhereUniqueInput | MonitoringPlanAssignmentWhereUniqueInput[]
   }
 
-  export type SymptomTemplateUncheckedCreateNestedManyWithoutStudyInput = {
-    create?: XOR<SymptomTemplateCreateWithoutStudyInput, SymptomTemplateUncheckedCreateWithoutStudyInput> | SymptomTemplateCreateWithoutStudyInput[] | SymptomTemplateUncheckedCreateWithoutStudyInput[]
-    connectOrCreate?: SymptomTemplateCreateOrConnectWithoutStudyInput | SymptomTemplateCreateOrConnectWithoutStudyInput[]
-    createMany?: SymptomTemplateCreateManyStudyInputEnvelope
+  export type SymptomTemplateUncheckedCreateNestedManyWithoutMonitoringPlanInput = {
+    create?: XOR<SymptomTemplateCreateWithoutMonitoringPlanInput, SymptomTemplateUncheckedCreateWithoutMonitoringPlanInput> | SymptomTemplateCreateWithoutMonitoringPlanInput[] | SymptomTemplateUncheckedCreateWithoutMonitoringPlanInput[]
+    connectOrCreate?: SymptomTemplateCreateOrConnectWithoutMonitoringPlanInput | SymptomTemplateCreateOrConnectWithoutMonitoringPlanInput[]
+    createMany?: SymptomTemplateCreateManyMonitoringPlanInputEnvelope
     connect?: SymptomTemplateWhereUniqueInput | SymptomTemplateWhereUniqueInput[]
   }
 
-  export type TreatmentTemplateUncheckedCreateNestedManyWithoutStudyInput = {
-    create?: XOR<TreatmentTemplateCreateWithoutStudyInput, TreatmentTemplateUncheckedCreateWithoutStudyInput> | TreatmentTemplateCreateWithoutStudyInput[] | TreatmentTemplateUncheckedCreateWithoutStudyInput[]
-    connectOrCreate?: TreatmentTemplateCreateOrConnectWithoutStudyInput | TreatmentTemplateCreateOrConnectWithoutStudyInput[]
-    createMany?: TreatmentTemplateCreateManyStudyInputEnvelope
+  export type TreatmentTemplateUncheckedCreateNestedManyWithoutMonitoringPlanInput = {
+    create?: XOR<TreatmentTemplateCreateWithoutMonitoringPlanInput, TreatmentTemplateUncheckedCreateWithoutMonitoringPlanInput> | TreatmentTemplateCreateWithoutMonitoringPlanInput[] | TreatmentTemplateUncheckedCreateWithoutMonitoringPlanInput[]
+    connectOrCreate?: TreatmentTemplateCreateOrConnectWithoutMonitoringPlanInput | TreatmentTemplateCreateOrConnectWithoutMonitoringPlanInput[]
+    createMany?: TreatmentTemplateCreateManyMonitoringPlanInputEnvelope
     connect?: TreatmentTemplateWhereUniqueInput | TreatmentTemplateWhereUniqueInput[]
   }
 
-  export type StudyNoteUncheckedCreateNestedManyWithoutStudyInput = {
-    create?: XOR<StudyNoteCreateWithoutStudyInput, StudyNoteUncheckedCreateWithoutStudyInput> | StudyNoteCreateWithoutStudyInput[] | StudyNoteUncheckedCreateWithoutStudyInput[]
-    connectOrCreate?: StudyNoteCreateOrConnectWithoutStudyInput | StudyNoteCreateOrConnectWithoutStudyInput[]
-    createMany?: StudyNoteCreateManyStudyInputEnvelope
-    connect?: StudyNoteWhereUniqueInput | StudyNoteWhereUniqueInput[]
+  export type MonitoringPlanNoteUncheckedCreateNestedManyWithoutMonitoringPlanInput = {
+    create?: XOR<MonitoringPlanNoteCreateWithoutMonitoringPlanInput, MonitoringPlanNoteUncheckedCreateWithoutMonitoringPlanInput> | MonitoringPlanNoteCreateWithoutMonitoringPlanInput[] | MonitoringPlanNoteUncheckedCreateWithoutMonitoringPlanInput[]
+    connectOrCreate?: MonitoringPlanNoteCreateOrConnectWithoutMonitoringPlanInput | MonitoringPlanNoteCreateOrConnectWithoutMonitoringPlanInput[]
+    createMany?: MonitoringPlanNoteCreateManyMonitoringPlanInputEnvelope
+    connect?: MonitoringPlanNoteWhereUniqueInput | MonitoringPlanNoteWhereUniqueInput[]
   }
 
-  export type EnumStudyStatusFieldUpdateOperationsInput = {
-    set?: $Enums.StudyStatus
+  export type EnumMonitoringPlanStatusFieldUpdateOperationsInput = {
+    set?: $Enums.MonitoringPlanStatus
   }
 
-  export type PracticeUpdateOneRequiredWithoutStudiesNestedInput = {
-    create?: XOR<PracticeCreateWithoutStudiesInput, PracticeUncheckedCreateWithoutStudiesInput>
-    connectOrCreate?: PracticeCreateOrConnectWithoutStudiesInput
-    upsert?: PracticeUpsertWithoutStudiesInput
+  export type PracticeUpdateOneRequiredWithoutMonitoringPlansNestedInput = {
+    create?: XOR<PracticeCreateWithoutMonitoringPlansInput, PracticeUncheckedCreateWithoutMonitoringPlansInput>
+    connectOrCreate?: PracticeCreateOrConnectWithoutMonitoringPlansInput
+    upsert?: PracticeUpsertWithoutMonitoringPlansInput
     connect?: PracticeWhereUniqueInput
-    update?: XOR<XOR<PracticeUpdateToOneWithWhereWithoutStudiesInput, PracticeUpdateWithoutStudiesInput>, PracticeUncheckedUpdateWithoutStudiesInput>
+    update?: XOR<XOR<PracticeUpdateToOneWithWhereWithoutMonitoringPlansInput, PracticeUpdateWithoutMonitoringPlansInput>, PracticeUncheckedUpdateWithoutMonitoringPlansInput>
   }
 
-  export type UserUpdateOneRequiredWithoutCreatedStudiesNestedInput = {
-    create?: XOR<UserCreateWithoutCreatedStudiesInput, UserUncheckedCreateWithoutCreatedStudiesInput>
-    connectOrCreate?: UserCreateOrConnectWithoutCreatedStudiesInput
-    upsert?: UserUpsertWithoutCreatedStudiesInput
+  export type UserUpdateOneRequiredWithoutCreatedMonitoringPlansNestedInput = {
+    create?: XOR<UserCreateWithoutCreatedMonitoringPlansInput, UserUncheckedCreateWithoutCreatedMonitoringPlansInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCreatedMonitoringPlansInput
+    upsert?: UserUpsertWithoutCreatedMonitoringPlansInput
     connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCreatedStudiesInput, UserUpdateWithoutCreatedStudiesInput>, UserUncheckedUpdateWithoutCreatedStudiesInput>
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCreatedMonitoringPlansInput, UserUpdateWithoutCreatedMonitoringPlansInput>, UserUncheckedUpdateWithoutCreatedMonitoringPlansInput>
   }
 
-  export type StudyPatientUpdateManyWithoutStudyNestedInput = {
-    create?: XOR<StudyPatientCreateWithoutStudyInput, StudyPatientUncheckedCreateWithoutStudyInput> | StudyPatientCreateWithoutStudyInput[] | StudyPatientUncheckedCreateWithoutStudyInput[]
-    connectOrCreate?: StudyPatientCreateOrConnectWithoutStudyInput | StudyPatientCreateOrConnectWithoutStudyInput[]
-    upsert?: StudyPatientUpsertWithWhereUniqueWithoutStudyInput | StudyPatientUpsertWithWhereUniqueWithoutStudyInput[]
-    createMany?: StudyPatientCreateManyStudyInputEnvelope
-    set?: StudyPatientWhereUniqueInput | StudyPatientWhereUniqueInput[]
-    disconnect?: StudyPatientWhereUniqueInput | StudyPatientWhereUniqueInput[]
-    delete?: StudyPatientWhereUniqueInput | StudyPatientWhereUniqueInput[]
-    connect?: StudyPatientWhereUniqueInput | StudyPatientWhereUniqueInput[]
-    update?: StudyPatientUpdateWithWhereUniqueWithoutStudyInput | StudyPatientUpdateWithWhereUniqueWithoutStudyInput[]
-    updateMany?: StudyPatientUpdateManyWithWhereWithoutStudyInput | StudyPatientUpdateManyWithWhereWithoutStudyInput[]
-    deleteMany?: StudyPatientScalarWhereInput | StudyPatientScalarWhereInput[]
+  export type MonitoringPlanPatientUpdateManyWithoutMonitoringPlanNestedInput = {
+    create?: XOR<MonitoringPlanPatientCreateWithoutMonitoringPlanInput, MonitoringPlanPatientUncheckedCreateWithoutMonitoringPlanInput> | MonitoringPlanPatientCreateWithoutMonitoringPlanInput[] | MonitoringPlanPatientUncheckedCreateWithoutMonitoringPlanInput[]
+    connectOrCreate?: MonitoringPlanPatientCreateOrConnectWithoutMonitoringPlanInput | MonitoringPlanPatientCreateOrConnectWithoutMonitoringPlanInput[]
+    upsert?: MonitoringPlanPatientUpsertWithWhereUniqueWithoutMonitoringPlanInput | MonitoringPlanPatientUpsertWithWhereUniqueWithoutMonitoringPlanInput[]
+    createMany?: MonitoringPlanPatientCreateManyMonitoringPlanInputEnvelope
+    set?: MonitoringPlanPatientWhereUniqueInput | MonitoringPlanPatientWhereUniqueInput[]
+    disconnect?: MonitoringPlanPatientWhereUniqueInput | MonitoringPlanPatientWhereUniqueInput[]
+    delete?: MonitoringPlanPatientWhereUniqueInput | MonitoringPlanPatientWhereUniqueInput[]
+    connect?: MonitoringPlanPatientWhereUniqueInput | MonitoringPlanPatientWhereUniqueInput[]
+    update?: MonitoringPlanPatientUpdateWithWhereUniqueWithoutMonitoringPlanInput | MonitoringPlanPatientUpdateWithWhereUniqueWithoutMonitoringPlanInput[]
+    updateMany?: MonitoringPlanPatientUpdateManyWithWhereWithoutMonitoringPlanInput | MonitoringPlanPatientUpdateManyWithWhereWithoutMonitoringPlanInput[]
+    deleteMany?: MonitoringPlanPatientScalarWhereInput | MonitoringPlanPatientScalarWhereInput[]
   }
 
-  export type StudyAssignmentUpdateManyWithoutStudyNestedInput = {
-    create?: XOR<StudyAssignmentCreateWithoutStudyInput, StudyAssignmentUncheckedCreateWithoutStudyInput> | StudyAssignmentCreateWithoutStudyInput[] | StudyAssignmentUncheckedCreateWithoutStudyInput[]
-    connectOrCreate?: StudyAssignmentCreateOrConnectWithoutStudyInput | StudyAssignmentCreateOrConnectWithoutStudyInput[]
-    upsert?: StudyAssignmentUpsertWithWhereUniqueWithoutStudyInput | StudyAssignmentUpsertWithWhereUniqueWithoutStudyInput[]
-    createMany?: StudyAssignmentCreateManyStudyInputEnvelope
-    set?: StudyAssignmentWhereUniqueInput | StudyAssignmentWhereUniqueInput[]
-    disconnect?: StudyAssignmentWhereUniqueInput | StudyAssignmentWhereUniqueInput[]
-    delete?: StudyAssignmentWhereUniqueInput | StudyAssignmentWhereUniqueInput[]
-    connect?: StudyAssignmentWhereUniqueInput | StudyAssignmentWhereUniqueInput[]
-    update?: StudyAssignmentUpdateWithWhereUniqueWithoutStudyInput | StudyAssignmentUpdateWithWhereUniqueWithoutStudyInput[]
-    updateMany?: StudyAssignmentUpdateManyWithWhereWithoutStudyInput | StudyAssignmentUpdateManyWithWhereWithoutStudyInput[]
-    deleteMany?: StudyAssignmentScalarWhereInput | StudyAssignmentScalarWhereInput[]
+  export type MonitoringPlanAssignmentUpdateManyWithoutMonitoringPlanNestedInput = {
+    create?: XOR<MonitoringPlanAssignmentCreateWithoutMonitoringPlanInput, MonitoringPlanAssignmentUncheckedCreateWithoutMonitoringPlanInput> | MonitoringPlanAssignmentCreateWithoutMonitoringPlanInput[] | MonitoringPlanAssignmentUncheckedCreateWithoutMonitoringPlanInput[]
+    connectOrCreate?: MonitoringPlanAssignmentCreateOrConnectWithoutMonitoringPlanInput | MonitoringPlanAssignmentCreateOrConnectWithoutMonitoringPlanInput[]
+    upsert?: MonitoringPlanAssignmentUpsertWithWhereUniqueWithoutMonitoringPlanInput | MonitoringPlanAssignmentUpsertWithWhereUniqueWithoutMonitoringPlanInput[]
+    createMany?: MonitoringPlanAssignmentCreateManyMonitoringPlanInputEnvelope
+    set?: MonitoringPlanAssignmentWhereUniqueInput | MonitoringPlanAssignmentWhereUniqueInput[]
+    disconnect?: MonitoringPlanAssignmentWhereUniqueInput | MonitoringPlanAssignmentWhereUniqueInput[]
+    delete?: MonitoringPlanAssignmentWhereUniqueInput | MonitoringPlanAssignmentWhereUniqueInput[]
+    connect?: MonitoringPlanAssignmentWhereUniqueInput | MonitoringPlanAssignmentWhereUniqueInput[]
+    update?: MonitoringPlanAssignmentUpdateWithWhereUniqueWithoutMonitoringPlanInput | MonitoringPlanAssignmentUpdateWithWhereUniqueWithoutMonitoringPlanInput[]
+    updateMany?: MonitoringPlanAssignmentUpdateManyWithWhereWithoutMonitoringPlanInput | MonitoringPlanAssignmentUpdateManyWithWhereWithoutMonitoringPlanInput[]
+    deleteMany?: MonitoringPlanAssignmentScalarWhereInput | MonitoringPlanAssignmentScalarWhereInput[]
   }
 
-  export type SymptomTemplateUpdateManyWithoutStudyNestedInput = {
-    create?: XOR<SymptomTemplateCreateWithoutStudyInput, SymptomTemplateUncheckedCreateWithoutStudyInput> | SymptomTemplateCreateWithoutStudyInput[] | SymptomTemplateUncheckedCreateWithoutStudyInput[]
-    connectOrCreate?: SymptomTemplateCreateOrConnectWithoutStudyInput | SymptomTemplateCreateOrConnectWithoutStudyInput[]
-    upsert?: SymptomTemplateUpsertWithWhereUniqueWithoutStudyInput | SymptomTemplateUpsertWithWhereUniqueWithoutStudyInput[]
-    createMany?: SymptomTemplateCreateManyStudyInputEnvelope
+  export type SymptomTemplateUpdateManyWithoutMonitoringPlanNestedInput = {
+    create?: XOR<SymptomTemplateCreateWithoutMonitoringPlanInput, SymptomTemplateUncheckedCreateWithoutMonitoringPlanInput> | SymptomTemplateCreateWithoutMonitoringPlanInput[] | SymptomTemplateUncheckedCreateWithoutMonitoringPlanInput[]
+    connectOrCreate?: SymptomTemplateCreateOrConnectWithoutMonitoringPlanInput | SymptomTemplateCreateOrConnectWithoutMonitoringPlanInput[]
+    upsert?: SymptomTemplateUpsertWithWhereUniqueWithoutMonitoringPlanInput | SymptomTemplateUpsertWithWhereUniqueWithoutMonitoringPlanInput[]
+    createMany?: SymptomTemplateCreateManyMonitoringPlanInputEnvelope
     set?: SymptomTemplateWhereUniqueInput | SymptomTemplateWhereUniqueInput[]
     disconnect?: SymptomTemplateWhereUniqueInput | SymptomTemplateWhereUniqueInput[]
     delete?: SymptomTemplateWhereUniqueInput | SymptomTemplateWhereUniqueInput[]
     connect?: SymptomTemplateWhereUniqueInput | SymptomTemplateWhereUniqueInput[]
-    update?: SymptomTemplateUpdateWithWhereUniqueWithoutStudyInput | SymptomTemplateUpdateWithWhereUniqueWithoutStudyInput[]
-    updateMany?: SymptomTemplateUpdateManyWithWhereWithoutStudyInput | SymptomTemplateUpdateManyWithWhereWithoutStudyInput[]
+    update?: SymptomTemplateUpdateWithWhereUniqueWithoutMonitoringPlanInput | SymptomTemplateUpdateWithWhereUniqueWithoutMonitoringPlanInput[]
+    updateMany?: SymptomTemplateUpdateManyWithWhereWithoutMonitoringPlanInput | SymptomTemplateUpdateManyWithWhereWithoutMonitoringPlanInput[]
     deleteMany?: SymptomTemplateScalarWhereInput | SymptomTemplateScalarWhereInput[]
   }
 
-  export type TreatmentTemplateUpdateManyWithoutStudyNestedInput = {
-    create?: XOR<TreatmentTemplateCreateWithoutStudyInput, TreatmentTemplateUncheckedCreateWithoutStudyInput> | TreatmentTemplateCreateWithoutStudyInput[] | TreatmentTemplateUncheckedCreateWithoutStudyInput[]
-    connectOrCreate?: TreatmentTemplateCreateOrConnectWithoutStudyInput | TreatmentTemplateCreateOrConnectWithoutStudyInput[]
-    upsert?: TreatmentTemplateUpsertWithWhereUniqueWithoutStudyInput | TreatmentTemplateUpsertWithWhereUniqueWithoutStudyInput[]
-    createMany?: TreatmentTemplateCreateManyStudyInputEnvelope
+  export type TreatmentTemplateUpdateManyWithoutMonitoringPlanNestedInput = {
+    create?: XOR<TreatmentTemplateCreateWithoutMonitoringPlanInput, TreatmentTemplateUncheckedCreateWithoutMonitoringPlanInput> | TreatmentTemplateCreateWithoutMonitoringPlanInput[] | TreatmentTemplateUncheckedCreateWithoutMonitoringPlanInput[]
+    connectOrCreate?: TreatmentTemplateCreateOrConnectWithoutMonitoringPlanInput | TreatmentTemplateCreateOrConnectWithoutMonitoringPlanInput[]
+    upsert?: TreatmentTemplateUpsertWithWhereUniqueWithoutMonitoringPlanInput | TreatmentTemplateUpsertWithWhereUniqueWithoutMonitoringPlanInput[]
+    createMany?: TreatmentTemplateCreateManyMonitoringPlanInputEnvelope
     set?: TreatmentTemplateWhereUniqueInput | TreatmentTemplateWhereUniqueInput[]
     disconnect?: TreatmentTemplateWhereUniqueInput | TreatmentTemplateWhereUniqueInput[]
     delete?: TreatmentTemplateWhereUniqueInput | TreatmentTemplateWhereUniqueInput[]
     connect?: TreatmentTemplateWhereUniqueInput | TreatmentTemplateWhereUniqueInput[]
-    update?: TreatmentTemplateUpdateWithWhereUniqueWithoutStudyInput | TreatmentTemplateUpdateWithWhereUniqueWithoutStudyInput[]
-    updateMany?: TreatmentTemplateUpdateManyWithWhereWithoutStudyInput | TreatmentTemplateUpdateManyWithWhereWithoutStudyInput[]
+    update?: TreatmentTemplateUpdateWithWhereUniqueWithoutMonitoringPlanInput | TreatmentTemplateUpdateWithWhereUniqueWithoutMonitoringPlanInput[]
+    updateMany?: TreatmentTemplateUpdateManyWithWhereWithoutMonitoringPlanInput | TreatmentTemplateUpdateManyWithWhereWithoutMonitoringPlanInput[]
     deleteMany?: TreatmentTemplateScalarWhereInput | TreatmentTemplateScalarWhereInput[]
   }
 
-  export type StudyNoteUpdateManyWithoutStudyNestedInput = {
-    create?: XOR<StudyNoteCreateWithoutStudyInput, StudyNoteUncheckedCreateWithoutStudyInput> | StudyNoteCreateWithoutStudyInput[] | StudyNoteUncheckedCreateWithoutStudyInput[]
-    connectOrCreate?: StudyNoteCreateOrConnectWithoutStudyInput | StudyNoteCreateOrConnectWithoutStudyInput[]
-    upsert?: StudyNoteUpsertWithWhereUniqueWithoutStudyInput | StudyNoteUpsertWithWhereUniqueWithoutStudyInput[]
-    createMany?: StudyNoteCreateManyStudyInputEnvelope
-    set?: StudyNoteWhereUniqueInput | StudyNoteWhereUniqueInput[]
-    disconnect?: StudyNoteWhereUniqueInput | StudyNoteWhereUniqueInput[]
-    delete?: StudyNoteWhereUniqueInput | StudyNoteWhereUniqueInput[]
-    connect?: StudyNoteWhereUniqueInput | StudyNoteWhereUniqueInput[]
-    update?: StudyNoteUpdateWithWhereUniqueWithoutStudyInput | StudyNoteUpdateWithWhereUniqueWithoutStudyInput[]
-    updateMany?: StudyNoteUpdateManyWithWhereWithoutStudyInput | StudyNoteUpdateManyWithWhereWithoutStudyInput[]
-    deleteMany?: StudyNoteScalarWhereInput | StudyNoteScalarWhereInput[]
+  export type MonitoringPlanNoteUpdateManyWithoutMonitoringPlanNestedInput = {
+    create?: XOR<MonitoringPlanNoteCreateWithoutMonitoringPlanInput, MonitoringPlanNoteUncheckedCreateWithoutMonitoringPlanInput> | MonitoringPlanNoteCreateWithoutMonitoringPlanInput[] | MonitoringPlanNoteUncheckedCreateWithoutMonitoringPlanInput[]
+    connectOrCreate?: MonitoringPlanNoteCreateOrConnectWithoutMonitoringPlanInput | MonitoringPlanNoteCreateOrConnectWithoutMonitoringPlanInput[]
+    upsert?: MonitoringPlanNoteUpsertWithWhereUniqueWithoutMonitoringPlanInput | MonitoringPlanNoteUpsertWithWhereUniqueWithoutMonitoringPlanInput[]
+    createMany?: MonitoringPlanNoteCreateManyMonitoringPlanInputEnvelope
+    set?: MonitoringPlanNoteWhereUniqueInput | MonitoringPlanNoteWhereUniqueInput[]
+    disconnect?: MonitoringPlanNoteWhereUniqueInput | MonitoringPlanNoteWhereUniqueInput[]
+    delete?: MonitoringPlanNoteWhereUniqueInput | MonitoringPlanNoteWhereUniqueInput[]
+    connect?: MonitoringPlanNoteWhereUniqueInput | MonitoringPlanNoteWhereUniqueInput[]
+    update?: MonitoringPlanNoteUpdateWithWhereUniqueWithoutMonitoringPlanInput | MonitoringPlanNoteUpdateWithWhereUniqueWithoutMonitoringPlanInput[]
+    updateMany?: MonitoringPlanNoteUpdateManyWithWhereWithoutMonitoringPlanInput | MonitoringPlanNoteUpdateManyWithWhereWithoutMonitoringPlanInput[]
+    deleteMany?: MonitoringPlanNoteScalarWhereInput | MonitoringPlanNoteScalarWhereInput[]
   }
 
-  export type StudyPatientUncheckedUpdateManyWithoutStudyNestedInput = {
-    create?: XOR<StudyPatientCreateWithoutStudyInput, StudyPatientUncheckedCreateWithoutStudyInput> | StudyPatientCreateWithoutStudyInput[] | StudyPatientUncheckedCreateWithoutStudyInput[]
-    connectOrCreate?: StudyPatientCreateOrConnectWithoutStudyInput | StudyPatientCreateOrConnectWithoutStudyInput[]
-    upsert?: StudyPatientUpsertWithWhereUniqueWithoutStudyInput | StudyPatientUpsertWithWhereUniqueWithoutStudyInput[]
-    createMany?: StudyPatientCreateManyStudyInputEnvelope
-    set?: StudyPatientWhereUniqueInput | StudyPatientWhereUniqueInput[]
-    disconnect?: StudyPatientWhereUniqueInput | StudyPatientWhereUniqueInput[]
-    delete?: StudyPatientWhereUniqueInput | StudyPatientWhereUniqueInput[]
-    connect?: StudyPatientWhereUniqueInput | StudyPatientWhereUniqueInput[]
-    update?: StudyPatientUpdateWithWhereUniqueWithoutStudyInput | StudyPatientUpdateWithWhereUniqueWithoutStudyInput[]
-    updateMany?: StudyPatientUpdateManyWithWhereWithoutStudyInput | StudyPatientUpdateManyWithWhereWithoutStudyInput[]
-    deleteMany?: StudyPatientScalarWhereInput | StudyPatientScalarWhereInput[]
+  export type MonitoringPlanPatientUncheckedUpdateManyWithoutMonitoringPlanNestedInput = {
+    create?: XOR<MonitoringPlanPatientCreateWithoutMonitoringPlanInput, MonitoringPlanPatientUncheckedCreateWithoutMonitoringPlanInput> | MonitoringPlanPatientCreateWithoutMonitoringPlanInput[] | MonitoringPlanPatientUncheckedCreateWithoutMonitoringPlanInput[]
+    connectOrCreate?: MonitoringPlanPatientCreateOrConnectWithoutMonitoringPlanInput | MonitoringPlanPatientCreateOrConnectWithoutMonitoringPlanInput[]
+    upsert?: MonitoringPlanPatientUpsertWithWhereUniqueWithoutMonitoringPlanInput | MonitoringPlanPatientUpsertWithWhereUniqueWithoutMonitoringPlanInput[]
+    createMany?: MonitoringPlanPatientCreateManyMonitoringPlanInputEnvelope
+    set?: MonitoringPlanPatientWhereUniqueInput | MonitoringPlanPatientWhereUniqueInput[]
+    disconnect?: MonitoringPlanPatientWhereUniqueInput | MonitoringPlanPatientWhereUniqueInput[]
+    delete?: MonitoringPlanPatientWhereUniqueInput | MonitoringPlanPatientWhereUniqueInput[]
+    connect?: MonitoringPlanPatientWhereUniqueInput | MonitoringPlanPatientWhereUniqueInput[]
+    update?: MonitoringPlanPatientUpdateWithWhereUniqueWithoutMonitoringPlanInput | MonitoringPlanPatientUpdateWithWhereUniqueWithoutMonitoringPlanInput[]
+    updateMany?: MonitoringPlanPatientUpdateManyWithWhereWithoutMonitoringPlanInput | MonitoringPlanPatientUpdateManyWithWhereWithoutMonitoringPlanInput[]
+    deleteMany?: MonitoringPlanPatientScalarWhereInput | MonitoringPlanPatientScalarWhereInput[]
   }
 
-  export type StudyAssignmentUncheckedUpdateManyWithoutStudyNestedInput = {
-    create?: XOR<StudyAssignmentCreateWithoutStudyInput, StudyAssignmentUncheckedCreateWithoutStudyInput> | StudyAssignmentCreateWithoutStudyInput[] | StudyAssignmentUncheckedCreateWithoutStudyInput[]
-    connectOrCreate?: StudyAssignmentCreateOrConnectWithoutStudyInput | StudyAssignmentCreateOrConnectWithoutStudyInput[]
-    upsert?: StudyAssignmentUpsertWithWhereUniqueWithoutStudyInput | StudyAssignmentUpsertWithWhereUniqueWithoutStudyInput[]
-    createMany?: StudyAssignmentCreateManyStudyInputEnvelope
-    set?: StudyAssignmentWhereUniqueInput | StudyAssignmentWhereUniqueInput[]
-    disconnect?: StudyAssignmentWhereUniqueInput | StudyAssignmentWhereUniqueInput[]
-    delete?: StudyAssignmentWhereUniqueInput | StudyAssignmentWhereUniqueInput[]
-    connect?: StudyAssignmentWhereUniqueInput | StudyAssignmentWhereUniqueInput[]
-    update?: StudyAssignmentUpdateWithWhereUniqueWithoutStudyInput | StudyAssignmentUpdateWithWhereUniqueWithoutStudyInput[]
-    updateMany?: StudyAssignmentUpdateManyWithWhereWithoutStudyInput | StudyAssignmentUpdateManyWithWhereWithoutStudyInput[]
-    deleteMany?: StudyAssignmentScalarWhereInput | StudyAssignmentScalarWhereInput[]
+  export type MonitoringPlanAssignmentUncheckedUpdateManyWithoutMonitoringPlanNestedInput = {
+    create?: XOR<MonitoringPlanAssignmentCreateWithoutMonitoringPlanInput, MonitoringPlanAssignmentUncheckedCreateWithoutMonitoringPlanInput> | MonitoringPlanAssignmentCreateWithoutMonitoringPlanInput[] | MonitoringPlanAssignmentUncheckedCreateWithoutMonitoringPlanInput[]
+    connectOrCreate?: MonitoringPlanAssignmentCreateOrConnectWithoutMonitoringPlanInput | MonitoringPlanAssignmentCreateOrConnectWithoutMonitoringPlanInput[]
+    upsert?: MonitoringPlanAssignmentUpsertWithWhereUniqueWithoutMonitoringPlanInput | MonitoringPlanAssignmentUpsertWithWhereUniqueWithoutMonitoringPlanInput[]
+    createMany?: MonitoringPlanAssignmentCreateManyMonitoringPlanInputEnvelope
+    set?: MonitoringPlanAssignmentWhereUniqueInput | MonitoringPlanAssignmentWhereUniqueInput[]
+    disconnect?: MonitoringPlanAssignmentWhereUniqueInput | MonitoringPlanAssignmentWhereUniqueInput[]
+    delete?: MonitoringPlanAssignmentWhereUniqueInput | MonitoringPlanAssignmentWhereUniqueInput[]
+    connect?: MonitoringPlanAssignmentWhereUniqueInput | MonitoringPlanAssignmentWhereUniqueInput[]
+    update?: MonitoringPlanAssignmentUpdateWithWhereUniqueWithoutMonitoringPlanInput | MonitoringPlanAssignmentUpdateWithWhereUniqueWithoutMonitoringPlanInput[]
+    updateMany?: MonitoringPlanAssignmentUpdateManyWithWhereWithoutMonitoringPlanInput | MonitoringPlanAssignmentUpdateManyWithWhereWithoutMonitoringPlanInput[]
+    deleteMany?: MonitoringPlanAssignmentScalarWhereInput | MonitoringPlanAssignmentScalarWhereInput[]
   }
 
-  export type SymptomTemplateUncheckedUpdateManyWithoutStudyNestedInput = {
-    create?: XOR<SymptomTemplateCreateWithoutStudyInput, SymptomTemplateUncheckedCreateWithoutStudyInput> | SymptomTemplateCreateWithoutStudyInput[] | SymptomTemplateUncheckedCreateWithoutStudyInput[]
-    connectOrCreate?: SymptomTemplateCreateOrConnectWithoutStudyInput | SymptomTemplateCreateOrConnectWithoutStudyInput[]
-    upsert?: SymptomTemplateUpsertWithWhereUniqueWithoutStudyInput | SymptomTemplateUpsertWithWhereUniqueWithoutStudyInput[]
-    createMany?: SymptomTemplateCreateManyStudyInputEnvelope
+  export type SymptomTemplateUncheckedUpdateManyWithoutMonitoringPlanNestedInput = {
+    create?: XOR<SymptomTemplateCreateWithoutMonitoringPlanInput, SymptomTemplateUncheckedCreateWithoutMonitoringPlanInput> | SymptomTemplateCreateWithoutMonitoringPlanInput[] | SymptomTemplateUncheckedCreateWithoutMonitoringPlanInput[]
+    connectOrCreate?: SymptomTemplateCreateOrConnectWithoutMonitoringPlanInput | SymptomTemplateCreateOrConnectWithoutMonitoringPlanInput[]
+    upsert?: SymptomTemplateUpsertWithWhereUniqueWithoutMonitoringPlanInput | SymptomTemplateUpsertWithWhereUniqueWithoutMonitoringPlanInput[]
+    createMany?: SymptomTemplateCreateManyMonitoringPlanInputEnvelope
     set?: SymptomTemplateWhereUniqueInput | SymptomTemplateWhereUniqueInput[]
     disconnect?: SymptomTemplateWhereUniqueInput | SymptomTemplateWhereUniqueInput[]
     delete?: SymptomTemplateWhereUniqueInput | SymptomTemplateWhereUniqueInput[]
     connect?: SymptomTemplateWhereUniqueInput | SymptomTemplateWhereUniqueInput[]
-    update?: SymptomTemplateUpdateWithWhereUniqueWithoutStudyInput | SymptomTemplateUpdateWithWhereUniqueWithoutStudyInput[]
-    updateMany?: SymptomTemplateUpdateManyWithWhereWithoutStudyInput | SymptomTemplateUpdateManyWithWhereWithoutStudyInput[]
+    update?: SymptomTemplateUpdateWithWhereUniqueWithoutMonitoringPlanInput | SymptomTemplateUpdateWithWhereUniqueWithoutMonitoringPlanInput[]
+    updateMany?: SymptomTemplateUpdateManyWithWhereWithoutMonitoringPlanInput | SymptomTemplateUpdateManyWithWhereWithoutMonitoringPlanInput[]
     deleteMany?: SymptomTemplateScalarWhereInput | SymptomTemplateScalarWhereInput[]
   }
 
-  export type TreatmentTemplateUncheckedUpdateManyWithoutStudyNestedInput = {
-    create?: XOR<TreatmentTemplateCreateWithoutStudyInput, TreatmentTemplateUncheckedCreateWithoutStudyInput> | TreatmentTemplateCreateWithoutStudyInput[] | TreatmentTemplateUncheckedCreateWithoutStudyInput[]
-    connectOrCreate?: TreatmentTemplateCreateOrConnectWithoutStudyInput | TreatmentTemplateCreateOrConnectWithoutStudyInput[]
-    upsert?: TreatmentTemplateUpsertWithWhereUniqueWithoutStudyInput | TreatmentTemplateUpsertWithWhereUniqueWithoutStudyInput[]
-    createMany?: TreatmentTemplateCreateManyStudyInputEnvelope
+  export type TreatmentTemplateUncheckedUpdateManyWithoutMonitoringPlanNestedInput = {
+    create?: XOR<TreatmentTemplateCreateWithoutMonitoringPlanInput, TreatmentTemplateUncheckedCreateWithoutMonitoringPlanInput> | TreatmentTemplateCreateWithoutMonitoringPlanInput[] | TreatmentTemplateUncheckedCreateWithoutMonitoringPlanInput[]
+    connectOrCreate?: TreatmentTemplateCreateOrConnectWithoutMonitoringPlanInput | TreatmentTemplateCreateOrConnectWithoutMonitoringPlanInput[]
+    upsert?: TreatmentTemplateUpsertWithWhereUniqueWithoutMonitoringPlanInput | TreatmentTemplateUpsertWithWhereUniqueWithoutMonitoringPlanInput[]
+    createMany?: TreatmentTemplateCreateManyMonitoringPlanInputEnvelope
     set?: TreatmentTemplateWhereUniqueInput | TreatmentTemplateWhereUniqueInput[]
     disconnect?: TreatmentTemplateWhereUniqueInput | TreatmentTemplateWhereUniqueInput[]
     delete?: TreatmentTemplateWhereUniqueInput | TreatmentTemplateWhereUniqueInput[]
     connect?: TreatmentTemplateWhereUniqueInput | TreatmentTemplateWhereUniqueInput[]
-    update?: TreatmentTemplateUpdateWithWhereUniqueWithoutStudyInput | TreatmentTemplateUpdateWithWhereUniqueWithoutStudyInput[]
-    updateMany?: TreatmentTemplateUpdateManyWithWhereWithoutStudyInput | TreatmentTemplateUpdateManyWithWhereWithoutStudyInput[]
+    update?: TreatmentTemplateUpdateWithWhereUniqueWithoutMonitoringPlanInput | TreatmentTemplateUpdateWithWhereUniqueWithoutMonitoringPlanInput[]
+    updateMany?: TreatmentTemplateUpdateManyWithWhereWithoutMonitoringPlanInput | TreatmentTemplateUpdateManyWithWhereWithoutMonitoringPlanInput[]
     deleteMany?: TreatmentTemplateScalarWhereInput | TreatmentTemplateScalarWhereInput[]
   }
 
-  export type StudyNoteUncheckedUpdateManyWithoutStudyNestedInput = {
-    create?: XOR<StudyNoteCreateWithoutStudyInput, StudyNoteUncheckedCreateWithoutStudyInput> | StudyNoteCreateWithoutStudyInput[] | StudyNoteUncheckedCreateWithoutStudyInput[]
-    connectOrCreate?: StudyNoteCreateOrConnectWithoutStudyInput | StudyNoteCreateOrConnectWithoutStudyInput[]
-    upsert?: StudyNoteUpsertWithWhereUniqueWithoutStudyInput | StudyNoteUpsertWithWhereUniqueWithoutStudyInput[]
-    createMany?: StudyNoteCreateManyStudyInputEnvelope
-    set?: StudyNoteWhereUniqueInput | StudyNoteWhereUniqueInput[]
-    disconnect?: StudyNoteWhereUniqueInput | StudyNoteWhereUniqueInput[]
-    delete?: StudyNoteWhereUniqueInput | StudyNoteWhereUniqueInput[]
-    connect?: StudyNoteWhereUniqueInput | StudyNoteWhereUniqueInput[]
-    update?: StudyNoteUpdateWithWhereUniqueWithoutStudyInput | StudyNoteUpdateWithWhereUniqueWithoutStudyInput[]
-    updateMany?: StudyNoteUpdateManyWithWhereWithoutStudyInput | StudyNoteUpdateManyWithWhereWithoutStudyInput[]
-    deleteMany?: StudyNoteScalarWhereInput | StudyNoteScalarWhereInput[]
+  export type MonitoringPlanNoteUncheckedUpdateManyWithoutMonitoringPlanNestedInput = {
+    create?: XOR<MonitoringPlanNoteCreateWithoutMonitoringPlanInput, MonitoringPlanNoteUncheckedCreateWithoutMonitoringPlanInput> | MonitoringPlanNoteCreateWithoutMonitoringPlanInput[] | MonitoringPlanNoteUncheckedCreateWithoutMonitoringPlanInput[]
+    connectOrCreate?: MonitoringPlanNoteCreateOrConnectWithoutMonitoringPlanInput | MonitoringPlanNoteCreateOrConnectWithoutMonitoringPlanInput[]
+    upsert?: MonitoringPlanNoteUpsertWithWhereUniqueWithoutMonitoringPlanInput | MonitoringPlanNoteUpsertWithWhereUniqueWithoutMonitoringPlanInput[]
+    createMany?: MonitoringPlanNoteCreateManyMonitoringPlanInputEnvelope
+    set?: MonitoringPlanNoteWhereUniqueInput | MonitoringPlanNoteWhereUniqueInput[]
+    disconnect?: MonitoringPlanNoteWhereUniqueInput | MonitoringPlanNoteWhereUniqueInput[]
+    delete?: MonitoringPlanNoteWhereUniqueInput | MonitoringPlanNoteWhereUniqueInput[]
+    connect?: MonitoringPlanNoteWhereUniqueInput | MonitoringPlanNoteWhereUniqueInput[]
+    update?: MonitoringPlanNoteUpdateWithWhereUniqueWithoutMonitoringPlanInput | MonitoringPlanNoteUpdateWithWhereUniqueWithoutMonitoringPlanInput[]
+    updateMany?: MonitoringPlanNoteUpdateManyWithWhereWithoutMonitoringPlanInput | MonitoringPlanNoteUpdateManyWithWhereWithoutMonitoringPlanInput[]
+    deleteMany?: MonitoringPlanNoteScalarWhereInput | MonitoringPlanNoteScalarWhereInput[]
   }
 
-  export type StudyCreateNestedOneWithoutPatientsInput = {
-    create?: XOR<StudyCreateWithoutPatientsInput, StudyUncheckedCreateWithoutPatientsInput>
-    connectOrCreate?: StudyCreateOrConnectWithoutPatientsInput
-    connect?: StudyWhereUniqueInput
+  export type MonitoringPlanCreateNestedOneWithoutPatientsInput = {
+    create?: XOR<MonitoringPlanCreateWithoutPatientsInput, MonitoringPlanUncheckedCreateWithoutPatientsInput>
+    connectOrCreate?: MonitoringPlanCreateOrConnectWithoutPatientsInput
+    connect?: MonitoringPlanWhereUniqueInput
   }
 
-  export type PatientCreateNestedOneWithoutStudiesInput = {
-    create?: XOR<PatientCreateWithoutStudiesInput, PatientUncheckedCreateWithoutStudiesInput>
-    connectOrCreate?: PatientCreateOrConnectWithoutStudiesInput
+  export type PatientCreateNestedOneWithoutMonitoringPlansInput = {
+    create?: XOR<PatientCreateWithoutMonitoringPlansInput, PatientUncheckedCreateWithoutMonitoringPlansInput>
+    connectOrCreate?: PatientCreateOrConnectWithoutMonitoringPlansInput
     connect?: PatientWhereUniqueInput
   }
 
-  export type ObservationCreateNestedManyWithoutStudyPatientInput = {
-    create?: XOR<ObservationCreateWithoutStudyPatientInput, ObservationUncheckedCreateWithoutStudyPatientInput> | ObservationCreateWithoutStudyPatientInput[] | ObservationUncheckedCreateWithoutStudyPatientInput[]
-    connectOrCreate?: ObservationCreateOrConnectWithoutStudyPatientInput | ObservationCreateOrConnectWithoutStudyPatientInput[]
-    createMany?: ObservationCreateManyStudyPatientInputEnvelope
+  export type ObservationCreateNestedManyWithoutMonitoringPlanPatientInput = {
+    create?: XOR<ObservationCreateWithoutMonitoringPlanPatientInput, ObservationUncheckedCreateWithoutMonitoringPlanPatientInput> | ObservationCreateWithoutMonitoringPlanPatientInput[] | ObservationUncheckedCreateWithoutMonitoringPlanPatientInput[]
+    connectOrCreate?: ObservationCreateOrConnectWithoutMonitoringPlanPatientInput | ObservationCreateOrConnectWithoutMonitoringPlanPatientInput[]
+    createMany?: ObservationCreateManyMonitoringPlanPatientInputEnvelope
     connect?: ObservationWhereUniqueInput | ObservationWhereUniqueInput[]
   }
 
-  export type TreatmentCreateNestedManyWithoutStudyPatientInput = {
-    create?: XOR<TreatmentCreateWithoutStudyPatientInput, TreatmentUncheckedCreateWithoutStudyPatientInput> | TreatmentCreateWithoutStudyPatientInput[] | TreatmentUncheckedCreateWithoutStudyPatientInput[]
-    connectOrCreate?: TreatmentCreateOrConnectWithoutStudyPatientInput | TreatmentCreateOrConnectWithoutStudyPatientInput[]
-    createMany?: TreatmentCreateManyStudyPatientInputEnvelope
+  export type TreatmentCreateNestedManyWithoutMonitoringPlanPatientInput = {
+    create?: XOR<TreatmentCreateWithoutMonitoringPlanPatientInput, TreatmentUncheckedCreateWithoutMonitoringPlanPatientInput> | TreatmentCreateWithoutMonitoringPlanPatientInput[] | TreatmentUncheckedCreateWithoutMonitoringPlanPatientInput[]
+    connectOrCreate?: TreatmentCreateOrConnectWithoutMonitoringPlanPatientInput | TreatmentCreateOrConnectWithoutMonitoringPlanPatientInput[]
+    createMany?: TreatmentCreateManyMonitoringPlanPatientInputEnvelope
     connect?: TreatmentWhereUniqueInput | TreatmentWhereUniqueInput[]
   }
 
-  export type ObservationUncheckedCreateNestedManyWithoutStudyPatientInput = {
-    create?: XOR<ObservationCreateWithoutStudyPatientInput, ObservationUncheckedCreateWithoutStudyPatientInput> | ObservationCreateWithoutStudyPatientInput[] | ObservationUncheckedCreateWithoutStudyPatientInput[]
-    connectOrCreate?: ObservationCreateOrConnectWithoutStudyPatientInput | ObservationCreateOrConnectWithoutStudyPatientInput[]
-    createMany?: ObservationCreateManyStudyPatientInputEnvelope
+  export type ObservationUncheckedCreateNestedManyWithoutMonitoringPlanPatientInput = {
+    create?: XOR<ObservationCreateWithoutMonitoringPlanPatientInput, ObservationUncheckedCreateWithoutMonitoringPlanPatientInput> | ObservationCreateWithoutMonitoringPlanPatientInput[] | ObservationUncheckedCreateWithoutMonitoringPlanPatientInput[]
+    connectOrCreate?: ObservationCreateOrConnectWithoutMonitoringPlanPatientInput | ObservationCreateOrConnectWithoutMonitoringPlanPatientInput[]
+    createMany?: ObservationCreateManyMonitoringPlanPatientInputEnvelope
     connect?: ObservationWhereUniqueInput | ObservationWhereUniqueInput[]
   }
 
-  export type TreatmentUncheckedCreateNestedManyWithoutStudyPatientInput = {
-    create?: XOR<TreatmentCreateWithoutStudyPatientInput, TreatmentUncheckedCreateWithoutStudyPatientInput> | TreatmentCreateWithoutStudyPatientInput[] | TreatmentUncheckedCreateWithoutStudyPatientInput[]
-    connectOrCreate?: TreatmentCreateOrConnectWithoutStudyPatientInput | TreatmentCreateOrConnectWithoutStudyPatientInput[]
-    createMany?: TreatmentCreateManyStudyPatientInputEnvelope
+  export type TreatmentUncheckedCreateNestedManyWithoutMonitoringPlanPatientInput = {
+    create?: XOR<TreatmentCreateWithoutMonitoringPlanPatientInput, TreatmentUncheckedCreateWithoutMonitoringPlanPatientInput> | TreatmentCreateWithoutMonitoringPlanPatientInput[] | TreatmentUncheckedCreateWithoutMonitoringPlanPatientInput[]
+    connectOrCreate?: TreatmentCreateOrConnectWithoutMonitoringPlanPatientInput | TreatmentCreateOrConnectWithoutMonitoringPlanPatientInput[]
+    createMany?: TreatmentCreateManyMonitoringPlanPatientInputEnvelope
     connect?: TreatmentWhereUniqueInput | TreatmentWhereUniqueInput[]
   }
 
-  export type StudyUpdateOneRequiredWithoutPatientsNestedInput = {
-    create?: XOR<StudyCreateWithoutPatientsInput, StudyUncheckedCreateWithoutPatientsInput>
-    connectOrCreate?: StudyCreateOrConnectWithoutPatientsInput
-    upsert?: StudyUpsertWithoutPatientsInput
-    connect?: StudyWhereUniqueInput
-    update?: XOR<XOR<StudyUpdateToOneWithWhereWithoutPatientsInput, StudyUpdateWithoutPatientsInput>, StudyUncheckedUpdateWithoutPatientsInput>
+  export type MonitoringPlanUpdateOneRequiredWithoutPatientsNestedInput = {
+    create?: XOR<MonitoringPlanCreateWithoutPatientsInput, MonitoringPlanUncheckedCreateWithoutPatientsInput>
+    connectOrCreate?: MonitoringPlanCreateOrConnectWithoutPatientsInput
+    upsert?: MonitoringPlanUpsertWithoutPatientsInput
+    connect?: MonitoringPlanWhereUniqueInput
+    update?: XOR<XOR<MonitoringPlanUpdateToOneWithWhereWithoutPatientsInput, MonitoringPlanUpdateWithoutPatientsInput>, MonitoringPlanUncheckedUpdateWithoutPatientsInput>
   }
 
-  export type PatientUpdateOneRequiredWithoutStudiesNestedInput = {
-    create?: XOR<PatientCreateWithoutStudiesInput, PatientUncheckedCreateWithoutStudiesInput>
-    connectOrCreate?: PatientCreateOrConnectWithoutStudiesInput
-    upsert?: PatientUpsertWithoutStudiesInput
+  export type PatientUpdateOneRequiredWithoutMonitoringPlansNestedInput = {
+    create?: XOR<PatientCreateWithoutMonitoringPlansInput, PatientUncheckedCreateWithoutMonitoringPlansInput>
+    connectOrCreate?: PatientCreateOrConnectWithoutMonitoringPlansInput
+    upsert?: PatientUpsertWithoutMonitoringPlansInput
     connect?: PatientWhereUniqueInput
-    update?: XOR<XOR<PatientUpdateToOneWithWhereWithoutStudiesInput, PatientUpdateWithoutStudiesInput>, PatientUncheckedUpdateWithoutStudiesInput>
+    update?: XOR<XOR<PatientUpdateToOneWithWhereWithoutMonitoringPlansInput, PatientUpdateWithoutMonitoringPlansInput>, PatientUncheckedUpdateWithoutMonitoringPlansInput>
   }
 
-  export type ObservationUpdateManyWithoutStudyPatientNestedInput = {
-    create?: XOR<ObservationCreateWithoutStudyPatientInput, ObservationUncheckedCreateWithoutStudyPatientInput> | ObservationCreateWithoutStudyPatientInput[] | ObservationUncheckedCreateWithoutStudyPatientInput[]
-    connectOrCreate?: ObservationCreateOrConnectWithoutStudyPatientInput | ObservationCreateOrConnectWithoutStudyPatientInput[]
-    upsert?: ObservationUpsertWithWhereUniqueWithoutStudyPatientInput | ObservationUpsertWithWhereUniqueWithoutStudyPatientInput[]
-    createMany?: ObservationCreateManyStudyPatientInputEnvelope
+  export type ObservationUpdateManyWithoutMonitoringPlanPatientNestedInput = {
+    create?: XOR<ObservationCreateWithoutMonitoringPlanPatientInput, ObservationUncheckedCreateWithoutMonitoringPlanPatientInput> | ObservationCreateWithoutMonitoringPlanPatientInput[] | ObservationUncheckedCreateWithoutMonitoringPlanPatientInput[]
+    connectOrCreate?: ObservationCreateOrConnectWithoutMonitoringPlanPatientInput | ObservationCreateOrConnectWithoutMonitoringPlanPatientInput[]
+    upsert?: ObservationUpsertWithWhereUniqueWithoutMonitoringPlanPatientInput | ObservationUpsertWithWhereUniqueWithoutMonitoringPlanPatientInput[]
+    createMany?: ObservationCreateManyMonitoringPlanPatientInputEnvelope
     set?: ObservationWhereUniqueInput | ObservationWhereUniqueInput[]
     disconnect?: ObservationWhereUniqueInput | ObservationWhereUniqueInput[]
     delete?: ObservationWhereUniqueInput | ObservationWhereUniqueInput[]
     connect?: ObservationWhereUniqueInput | ObservationWhereUniqueInput[]
-    update?: ObservationUpdateWithWhereUniqueWithoutStudyPatientInput | ObservationUpdateWithWhereUniqueWithoutStudyPatientInput[]
-    updateMany?: ObservationUpdateManyWithWhereWithoutStudyPatientInput | ObservationUpdateManyWithWhereWithoutStudyPatientInput[]
+    update?: ObservationUpdateWithWhereUniqueWithoutMonitoringPlanPatientInput | ObservationUpdateWithWhereUniqueWithoutMonitoringPlanPatientInput[]
+    updateMany?: ObservationUpdateManyWithWhereWithoutMonitoringPlanPatientInput | ObservationUpdateManyWithWhereWithoutMonitoringPlanPatientInput[]
     deleteMany?: ObservationScalarWhereInput | ObservationScalarWhereInput[]
   }
 
-  export type TreatmentUpdateManyWithoutStudyPatientNestedInput = {
-    create?: XOR<TreatmentCreateWithoutStudyPatientInput, TreatmentUncheckedCreateWithoutStudyPatientInput> | TreatmentCreateWithoutStudyPatientInput[] | TreatmentUncheckedCreateWithoutStudyPatientInput[]
-    connectOrCreate?: TreatmentCreateOrConnectWithoutStudyPatientInput | TreatmentCreateOrConnectWithoutStudyPatientInput[]
-    upsert?: TreatmentUpsertWithWhereUniqueWithoutStudyPatientInput | TreatmentUpsertWithWhereUniqueWithoutStudyPatientInput[]
-    createMany?: TreatmentCreateManyStudyPatientInputEnvelope
+  export type TreatmentUpdateManyWithoutMonitoringPlanPatientNestedInput = {
+    create?: XOR<TreatmentCreateWithoutMonitoringPlanPatientInput, TreatmentUncheckedCreateWithoutMonitoringPlanPatientInput> | TreatmentCreateWithoutMonitoringPlanPatientInput[] | TreatmentUncheckedCreateWithoutMonitoringPlanPatientInput[]
+    connectOrCreate?: TreatmentCreateOrConnectWithoutMonitoringPlanPatientInput | TreatmentCreateOrConnectWithoutMonitoringPlanPatientInput[]
+    upsert?: TreatmentUpsertWithWhereUniqueWithoutMonitoringPlanPatientInput | TreatmentUpsertWithWhereUniqueWithoutMonitoringPlanPatientInput[]
+    createMany?: TreatmentCreateManyMonitoringPlanPatientInputEnvelope
     set?: TreatmentWhereUniqueInput | TreatmentWhereUniqueInput[]
     disconnect?: TreatmentWhereUniqueInput | TreatmentWhereUniqueInput[]
     delete?: TreatmentWhereUniqueInput | TreatmentWhereUniqueInput[]
     connect?: TreatmentWhereUniqueInput | TreatmentWhereUniqueInput[]
-    update?: TreatmentUpdateWithWhereUniqueWithoutStudyPatientInput | TreatmentUpdateWithWhereUniqueWithoutStudyPatientInput[]
-    updateMany?: TreatmentUpdateManyWithWhereWithoutStudyPatientInput | TreatmentUpdateManyWithWhereWithoutStudyPatientInput[]
+    update?: TreatmentUpdateWithWhereUniqueWithoutMonitoringPlanPatientInput | TreatmentUpdateWithWhereUniqueWithoutMonitoringPlanPatientInput[]
+    updateMany?: TreatmentUpdateManyWithWhereWithoutMonitoringPlanPatientInput | TreatmentUpdateManyWithWhereWithoutMonitoringPlanPatientInput[]
     deleteMany?: TreatmentScalarWhereInput | TreatmentScalarWhereInput[]
   }
 
-  export type ObservationUncheckedUpdateManyWithoutStudyPatientNestedInput = {
-    create?: XOR<ObservationCreateWithoutStudyPatientInput, ObservationUncheckedCreateWithoutStudyPatientInput> | ObservationCreateWithoutStudyPatientInput[] | ObservationUncheckedCreateWithoutStudyPatientInput[]
-    connectOrCreate?: ObservationCreateOrConnectWithoutStudyPatientInput | ObservationCreateOrConnectWithoutStudyPatientInput[]
-    upsert?: ObservationUpsertWithWhereUniqueWithoutStudyPatientInput | ObservationUpsertWithWhereUniqueWithoutStudyPatientInput[]
-    createMany?: ObservationCreateManyStudyPatientInputEnvelope
+  export type ObservationUncheckedUpdateManyWithoutMonitoringPlanPatientNestedInput = {
+    create?: XOR<ObservationCreateWithoutMonitoringPlanPatientInput, ObservationUncheckedCreateWithoutMonitoringPlanPatientInput> | ObservationCreateWithoutMonitoringPlanPatientInput[] | ObservationUncheckedCreateWithoutMonitoringPlanPatientInput[]
+    connectOrCreate?: ObservationCreateOrConnectWithoutMonitoringPlanPatientInput | ObservationCreateOrConnectWithoutMonitoringPlanPatientInput[]
+    upsert?: ObservationUpsertWithWhereUniqueWithoutMonitoringPlanPatientInput | ObservationUpsertWithWhereUniqueWithoutMonitoringPlanPatientInput[]
+    createMany?: ObservationCreateManyMonitoringPlanPatientInputEnvelope
     set?: ObservationWhereUniqueInput | ObservationWhereUniqueInput[]
     disconnect?: ObservationWhereUniqueInput | ObservationWhereUniqueInput[]
     delete?: ObservationWhereUniqueInput | ObservationWhereUniqueInput[]
     connect?: ObservationWhereUniqueInput | ObservationWhereUniqueInput[]
-    update?: ObservationUpdateWithWhereUniqueWithoutStudyPatientInput | ObservationUpdateWithWhereUniqueWithoutStudyPatientInput[]
-    updateMany?: ObservationUpdateManyWithWhereWithoutStudyPatientInput | ObservationUpdateManyWithWhereWithoutStudyPatientInput[]
+    update?: ObservationUpdateWithWhereUniqueWithoutMonitoringPlanPatientInput | ObservationUpdateWithWhereUniqueWithoutMonitoringPlanPatientInput[]
+    updateMany?: ObservationUpdateManyWithWhereWithoutMonitoringPlanPatientInput | ObservationUpdateManyWithWhereWithoutMonitoringPlanPatientInput[]
     deleteMany?: ObservationScalarWhereInput | ObservationScalarWhereInput[]
   }
 
-  export type TreatmentUncheckedUpdateManyWithoutStudyPatientNestedInput = {
-    create?: XOR<TreatmentCreateWithoutStudyPatientInput, TreatmentUncheckedCreateWithoutStudyPatientInput> | TreatmentCreateWithoutStudyPatientInput[] | TreatmentUncheckedCreateWithoutStudyPatientInput[]
-    connectOrCreate?: TreatmentCreateOrConnectWithoutStudyPatientInput | TreatmentCreateOrConnectWithoutStudyPatientInput[]
-    upsert?: TreatmentUpsertWithWhereUniqueWithoutStudyPatientInput | TreatmentUpsertWithWhereUniqueWithoutStudyPatientInput[]
-    createMany?: TreatmentCreateManyStudyPatientInputEnvelope
+  export type TreatmentUncheckedUpdateManyWithoutMonitoringPlanPatientNestedInput = {
+    create?: XOR<TreatmentCreateWithoutMonitoringPlanPatientInput, TreatmentUncheckedCreateWithoutMonitoringPlanPatientInput> | TreatmentCreateWithoutMonitoringPlanPatientInput[] | TreatmentUncheckedCreateWithoutMonitoringPlanPatientInput[]
+    connectOrCreate?: TreatmentCreateOrConnectWithoutMonitoringPlanPatientInput | TreatmentCreateOrConnectWithoutMonitoringPlanPatientInput[]
+    upsert?: TreatmentUpsertWithWhereUniqueWithoutMonitoringPlanPatientInput | TreatmentUpsertWithWhereUniqueWithoutMonitoringPlanPatientInput[]
+    createMany?: TreatmentCreateManyMonitoringPlanPatientInputEnvelope
     set?: TreatmentWhereUniqueInput | TreatmentWhereUniqueInput[]
     disconnect?: TreatmentWhereUniqueInput | TreatmentWhereUniqueInput[]
     delete?: TreatmentWhereUniqueInput | TreatmentWhereUniqueInput[]
     connect?: TreatmentWhereUniqueInput | TreatmentWhereUniqueInput[]
-    update?: TreatmentUpdateWithWhereUniqueWithoutStudyPatientInput | TreatmentUpdateWithWhereUniqueWithoutStudyPatientInput[]
-    updateMany?: TreatmentUpdateManyWithWhereWithoutStudyPatientInput | TreatmentUpdateManyWithWhereWithoutStudyPatientInput[]
+    update?: TreatmentUpdateWithWhereUniqueWithoutMonitoringPlanPatientInput | TreatmentUpdateWithWhereUniqueWithoutMonitoringPlanPatientInput[]
+    updateMany?: TreatmentUpdateManyWithWhereWithoutMonitoringPlanPatientInput | TreatmentUpdateManyWithWhereWithoutMonitoringPlanPatientInput[]
     deleteMany?: TreatmentScalarWhereInput | TreatmentScalarWhereInput[]
   }
 
-  export type StudyCreateNestedOneWithoutAssignedUsersInput = {
-    create?: XOR<StudyCreateWithoutAssignedUsersInput, StudyUncheckedCreateWithoutAssignedUsersInput>
-    connectOrCreate?: StudyCreateOrConnectWithoutAssignedUsersInput
-    connect?: StudyWhereUniqueInput
+  export type MonitoringPlanCreateNestedOneWithoutAssignedUsersInput = {
+    create?: XOR<MonitoringPlanCreateWithoutAssignedUsersInput, MonitoringPlanUncheckedCreateWithoutAssignedUsersInput>
+    connectOrCreate?: MonitoringPlanCreateOrConnectWithoutAssignedUsersInput
+    connect?: MonitoringPlanWhereUniqueInput
   }
 
-  export type UserCreateNestedOneWithoutAssignedStudiesInput = {
-    create?: XOR<UserCreateWithoutAssignedStudiesInput, UserUncheckedCreateWithoutAssignedStudiesInput>
-    connectOrCreate?: UserCreateOrConnectWithoutAssignedStudiesInput
+  export type UserCreateNestedOneWithoutAssignedMonitoringPlansInput = {
+    create?: XOR<UserCreateWithoutAssignedMonitoringPlansInput, UserUncheckedCreateWithoutAssignedMonitoringPlansInput>
+    connectOrCreate?: UserCreateOrConnectWithoutAssignedMonitoringPlansInput
     connect?: UserWhereUniqueInput
   }
 
-  export type EnumStudyRoleFieldUpdateOperationsInput = {
-    set?: $Enums.StudyRole
+  export type EnumMonitoringPlanRoleFieldUpdateOperationsInput = {
+    set?: $Enums.MonitoringPlanRole
   }
 
-  export type StudyUpdateOneRequiredWithoutAssignedUsersNestedInput = {
-    create?: XOR<StudyCreateWithoutAssignedUsersInput, StudyUncheckedCreateWithoutAssignedUsersInput>
-    connectOrCreate?: StudyCreateOrConnectWithoutAssignedUsersInput
-    upsert?: StudyUpsertWithoutAssignedUsersInput
-    connect?: StudyWhereUniqueInput
-    update?: XOR<XOR<StudyUpdateToOneWithWhereWithoutAssignedUsersInput, StudyUpdateWithoutAssignedUsersInput>, StudyUncheckedUpdateWithoutAssignedUsersInput>
+  export type MonitoringPlanUpdateOneRequiredWithoutAssignedUsersNestedInput = {
+    create?: XOR<MonitoringPlanCreateWithoutAssignedUsersInput, MonitoringPlanUncheckedCreateWithoutAssignedUsersInput>
+    connectOrCreate?: MonitoringPlanCreateOrConnectWithoutAssignedUsersInput
+    upsert?: MonitoringPlanUpsertWithoutAssignedUsersInput
+    connect?: MonitoringPlanWhereUniqueInput
+    update?: XOR<XOR<MonitoringPlanUpdateToOneWithWhereWithoutAssignedUsersInput, MonitoringPlanUpdateWithoutAssignedUsersInput>, MonitoringPlanUncheckedUpdateWithoutAssignedUsersInput>
   }
 
-  export type UserUpdateOneRequiredWithoutAssignedStudiesNestedInput = {
-    create?: XOR<UserCreateWithoutAssignedStudiesInput, UserUncheckedCreateWithoutAssignedStudiesInput>
-    connectOrCreate?: UserCreateOrConnectWithoutAssignedStudiesInput
-    upsert?: UserUpsertWithoutAssignedStudiesInput
+  export type UserUpdateOneRequiredWithoutAssignedMonitoringPlansNestedInput = {
+    create?: XOR<UserCreateWithoutAssignedMonitoringPlansInput, UserUncheckedCreateWithoutAssignedMonitoringPlansInput>
+    connectOrCreate?: UserCreateOrConnectWithoutAssignedMonitoringPlansInput
+    upsert?: UserUpsertWithoutAssignedMonitoringPlansInput
     connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAssignedStudiesInput, UserUpdateWithoutAssignedStudiesInput>, UserUncheckedUpdateWithoutAssignedStudiesInput>
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAssignedMonitoringPlansInput, UserUpdateWithoutAssignedMonitoringPlansInput>, UserUncheckedUpdateWithoutAssignedMonitoringPlansInput>
   }
 
-  export type StudyCreateNestedOneWithoutNotesInput = {
-    create?: XOR<StudyCreateWithoutNotesInput, StudyUncheckedCreateWithoutNotesInput>
-    connectOrCreate?: StudyCreateOrConnectWithoutNotesInput
-    connect?: StudyWhereUniqueInput
+  export type MonitoringPlanCreateNestedOneWithoutNotesInput = {
+    create?: XOR<MonitoringPlanCreateWithoutNotesInput, MonitoringPlanUncheckedCreateWithoutNotesInput>
+    connectOrCreate?: MonitoringPlanCreateOrConnectWithoutNotesInput
+    connect?: MonitoringPlanWhereUniqueInput
   }
 
-  export type StudyUpdateOneRequiredWithoutNotesNestedInput = {
-    create?: XOR<StudyCreateWithoutNotesInput, StudyUncheckedCreateWithoutNotesInput>
-    connectOrCreate?: StudyCreateOrConnectWithoutNotesInput
-    upsert?: StudyUpsertWithoutNotesInput
-    connect?: StudyWhereUniqueInput
-    update?: XOR<XOR<StudyUpdateToOneWithWhereWithoutNotesInput, StudyUpdateWithoutNotesInput>, StudyUncheckedUpdateWithoutNotesInput>
+  export type MonitoringPlanUpdateOneRequiredWithoutNotesNestedInput = {
+    create?: XOR<MonitoringPlanCreateWithoutNotesInput, MonitoringPlanUncheckedCreateWithoutNotesInput>
+    connectOrCreate?: MonitoringPlanCreateOrConnectWithoutNotesInput
+    upsert?: MonitoringPlanUpsertWithoutNotesInput
+    connect?: MonitoringPlanWhereUniqueInput
+    update?: XOR<XOR<MonitoringPlanUpdateToOneWithWhereWithoutNotesInput, MonitoringPlanUpdateWithoutNotesInput>, MonitoringPlanUncheckedUpdateWithoutNotesInput>
   }
 
-  export type StudyCreateNestedOneWithoutSymptomTemplatesInput = {
-    create?: XOR<StudyCreateWithoutSymptomTemplatesInput, StudyUncheckedCreateWithoutSymptomTemplatesInput>
-    connectOrCreate?: StudyCreateOrConnectWithoutSymptomTemplatesInput
-    connect?: StudyWhereUniqueInput
+  export type MonitoringPlanCreateNestedOneWithoutSymptomTemplatesInput = {
+    create?: XOR<MonitoringPlanCreateWithoutSymptomTemplatesInput, MonitoringPlanUncheckedCreateWithoutSymptomTemplatesInput>
+    connectOrCreate?: MonitoringPlanCreateOrConnectWithoutSymptomTemplatesInput
+    connect?: MonitoringPlanWhereUniqueInput
   }
 
   export type ObservationCreateNestedManyWithoutSymptomTemplateInput = {
@@ -27632,12 +27661,12 @@ export namespace Prisma {
     set?: $Enums.SymptomDataType
   }
 
-  export type StudyUpdateOneRequiredWithoutSymptomTemplatesNestedInput = {
-    create?: XOR<StudyCreateWithoutSymptomTemplatesInput, StudyUncheckedCreateWithoutSymptomTemplatesInput>
-    connectOrCreate?: StudyCreateOrConnectWithoutSymptomTemplatesInput
-    upsert?: StudyUpsertWithoutSymptomTemplatesInput
-    connect?: StudyWhereUniqueInput
-    update?: XOR<XOR<StudyUpdateToOneWithWhereWithoutSymptomTemplatesInput, StudyUpdateWithoutSymptomTemplatesInput>, StudyUncheckedUpdateWithoutSymptomTemplatesInput>
+  export type MonitoringPlanUpdateOneRequiredWithoutSymptomTemplatesNestedInput = {
+    create?: XOR<MonitoringPlanCreateWithoutSymptomTemplatesInput, MonitoringPlanUncheckedCreateWithoutSymptomTemplatesInput>
+    connectOrCreate?: MonitoringPlanCreateOrConnectWithoutSymptomTemplatesInput
+    upsert?: MonitoringPlanUpsertWithoutSymptomTemplatesInput
+    connect?: MonitoringPlanWhereUniqueInput
+    update?: XOR<XOR<MonitoringPlanUpdateToOneWithWhereWithoutSymptomTemplatesInput, MonitoringPlanUpdateWithoutSymptomTemplatesInput>, MonitoringPlanUncheckedUpdateWithoutSymptomTemplatesInput>
   }
 
   export type ObservationUpdateManyWithoutSymptomTemplateNestedInput = {
@@ -27708,10 +27737,10 @@ export namespace Prisma {
     connect?: PatientWhereUniqueInput
   }
 
-  export type StudyPatientCreateNestedOneWithoutObservationsInput = {
-    create?: XOR<StudyPatientCreateWithoutObservationsInput, StudyPatientUncheckedCreateWithoutObservationsInput>
-    connectOrCreate?: StudyPatientCreateOrConnectWithoutObservationsInput
-    connect?: StudyPatientWhereUniqueInput
+  export type MonitoringPlanPatientCreateNestedOneWithoutObservationsInput = {
+    create?: XOR<MonitoringPlanPatientCreateWithoutObservationsInput, MonitoringPlanPatientUncheckedCreateWithoutObservationsInput>
+    connectOrCreate?: MonitoringPlanPatientCreateOrConnectWithoutObservationsInput
+    connect?: MonitoringPlanPatientWhereUniqueInput
   }
 
   export type UserCreateNestedOneWithoutObservationsInput = {
@@ -27764,12 +27793,12 @@ export namespace Prisma {
     update?: XOR<XOR<PatientUpdateToOneWithWhereWithoutObservationsInput, PatientUpdateWithoutObservationsInput>, PatientUncheckedUpdateWithoutObservationsInput>
   }
 
-  export type StudyPatientUpdateOneRequiredWithoutObservationsNestedInput = {
-    create?: XOR<StudyPatientCreateWithoutObservationsInput, StudyPatientUncheckedCreateWithoutObservationsInput>
-    connectOrCreate?: StudyPatientCreateOrConnectWithoutObservationsInput
-    upsert?: StudyPatientUpsertWithoutObservationsInput
-    connect?: StudyPatientWhereUniqueInput
-    update?: XOR<XOR<StudyPatientUpdateToOneWithWhereWithoutObservationsInput, StudyPatientUpdateWithoutObservationsInput>, StudyPatientUncheckedUpdateWithoutObservationsInput>
+  export type MonitoringPlanPatientUpdateOneRequiredWithoutObservationsNestedInput = {
+    create?: XOR<MonitoringPlanPatientCreateWithoutObservationsInput, MonitoringPlanPatientUncheckedCreateWithoutObservationsInput>
+    connectOrCreate?: MonitoringPlanPatientCreateOrConnectWithoutObservationsInput
+    upsert?: MonitoringPlanPatientUpsertWithoutObservationsInput
+    connect?: MonitoringPlanPatientWhereUniqueInput
+    update?: XOR<XOR<MonitoringPlanPatientUpdateToOneWithWhereWithoutObservationsInput, MonitoringPlanPatientUpdateWithoutObservationsInput>, MonitoringPlanPatientUncheckedUpdateWithoutObservationsInput>
   }
 
   export type UserUpdateOneRequiredWithoutObservationsNestedInput = {
@@ -27836,10 +27865,10 @@ export namespace Prisma {
     deleteMany?: AlertScalarWhereInput | AlertScalarWhereInput[]
   }
 
-  export type StudyCreateNestedOneWithoutTreatmentTemplatesInput = {
-    create?: XOR<StudyCreateWithoutTreatmentTemplatesInput, StudyUncheckedCreateWithoutTreatmentTemplatesInput>
-    connectOrCreate?: StudyCreateOrConnectWithoutTreatmentTemplatesInput
-    connect?: StudyWhereUniqueInput
+  export type MonitoringPlanCreateNestedOneWithoutTreatmentTemplatesInput = {
+    create?: XOR<MonitoringPlanCreateWithoutTreatmentTemplatesInput, MonitoringPlanUncheckedCreateWithoutTreatmentTemplatesInput>
+    connectOrCreate?: MonitoringPlanCreateOrConnectWithoutTreatmentTemplatesInput
+    connect?: MonitoringPlanWhereUniqueInput
   }
 
   export type TreatmentCreateNestedManyWithoutTemplateInput = {
@@ -27856,12 +27885,12 @@ export namespace Prisma {
     connect?: TreatmentWhereUniqueInput | TreatmentWhereUniqueInput[]
   }
 
-  export type StudyUpdateOneRequiredWithoutTreatmentTemplatesNestedInput = {
-    create?: XOR<StudyCreateWithoutTreatmentTemplatesInput, StudyUncheckedCreateWithoutTreatmentTemplatesInput>
-    connectOrCreate?: StudyCreateOrConnectWithoutTreatmentTemplatesInput
-    upsert?: StudyUpsertWithoutTreatmentTemplatesInput
-    connect?: StudyWhereUniqueInput
-    update?: XOR<XOR<StudyUpdateToOneWithWhereWithoutTreatmentTemplatesInput, StudyUpdateWithoutTreatmentTemplatesInput>, StudyUncheckedUpdateWithoutTreatmentTemplatesInput>
+  export type MonitoringPlanUpdateOneRequiredWithoutTreatmentTemplatesNestedInput = {
+    create?: XOR<MonitoringPlanCreateWithoutTreatmentTemplatesInput, MonitoringPlanUncheckedCreateWithoutTreatmentTemplatesInput>
+    connectOrCreate?: MonitoringPlanCreateOrConnectWithoutTreatmentTemplatesInput
+    upsert?: MonitoringPlanUpsertWithoutTreatmentTemplatesInput
+    connect?: MonitoringPlanWhereUniqueInput
+    update?: XOR<XOR<MonitoringPlanUpdateToOneWithWhereWithoutTreatmentTemplatesInput, MonitoringPlanUpdateWithoutTreatmentTemplatesInput>, MonitoringPlanUncheckedUpdateWithoutTreatmentTemplatesInput>
   }
 
   export type TreatmentUpdateManyWithoutTemplateNestedInput = {
@@ -27904,10 +27933,10 @@ export namespace Prisma {
     connect?: PatientWhereUniqueInput
   }
 
-  export type StudyPatientCreateNestedOneWithoutTreatmentsInput = {
-    create?: XOR<StudyPatientCreateWithoutTreatmentsInput, StudyPatientUncheckedCreateWithoutTreatmentsInput>
-    connectOrCreate?: StudyPatientCreateOrConnectWithoutTreatmentsInput
-    connect?: StudyPatientWhereUniqueInput
+  export type MonitoringPlanPatientCreateNestedOneWithoutTreatmentsInput = {
+    create?: XOR<MonitoringPlanPatientCreateWithoutTreatmentsInput, MonitoringPlanPatientUncheckedCreateWithoutTreatmentsInput>
+    connectOrCreate?: MonitoringPlanPatientCreateOrConnectWithoutTreatmentsInput
+    connect?: MonitoringPlanPatientWhereUniqueInput
   }
 
   export type UserCreateNestedOneWithoutCreatedTreatmentsInput = {
@@ -27948,12 +27977,12 @@ export namespace Prisma {
     update?: XOR<XOR<PatientUpdateToOneWithWhereWithoutTreatmentsInput, PatientUpdateWithoutTreatmentsInput>, PatientUncheckedUpdateWithoutTreatmentsInput>
   }
 
-  export type StudyPatientUpdateOneRequiredWithoutTreatmentsNestedInput = {
-    create?: XOR<StudyPatientCreateWithoutTreatmentsInput, StudyPatientUncheckedCreateWithoutTreatmentsInput>
-    connectOrCreate?: StudyPatientCreateOrConnectWithoutTreatmentsInput
-    upsert?: StudyPatientUpsertWithoutTreatmentsInput
-    connect?: StudyPatientWhereUniqueInput
-    update?: XOR<XOR<StudyPatientUpdateToOneWithWhereWithoutTreatmentsInput, StudyPatientUpdateWithoutTreatmentsInput>, StudyPatientUncheckedUpdateWithoutTreatmentsInput>
+  export type MonitoringPlanPatientUpdateOneRequiredWithoutTreatmentsNestedInput = {
+    create?: XOR<MonitoringPlanPatientCreateWithoutTreatmentsInput, MonitoringPlanPatientUncheckedCreateWithoutTreatmentsInput>
+    connectOrCreate?: MonitoringPlanPatientCreateOrConnectWithoutTreatmentsInput
+    upsert?: MonitoringPlanPatientUpsertWithoutTreatmentsInput
+    connect?: MonitoringPlanPatientWhereUniqueInput
+    update?: XOR<XOR<MonitoringPlanPatientUpdateToOneWithWhereWithoutTreatmentsInput, MonitoringPlanPatientUpdateWithoutTreatmentsInput>, MonitoringPlanPatientUncheckedUpdateWithoutTreatmentsInput>
   }
 
   export type UserUpdateOneRequiredWithoutCreatedTreatmentsNestedInput = {
@@ -28508,38 +28537,38 @@ export namespace Prisma {
     _max?: NestedEnumSexNullableFilter<$PrismaModel>
   }
 
-  export type NestedEnumStudyStatusFilter<$PrismaModel = never> = {
-    equals?: $Enums.StudyStatus | EnumStudyStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.StudyStatus[] | ListEnumStudyStatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.StudyStatus[] | ListEnumStudyStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumStudyStatusFilter<$PrismaModel> | $Enums.StudyStatus
+  export type NestedEnumMonitoringPlanStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.MonitoringPlanStatus | EnumMonitoringPlanStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.MonitoringPlanStatus[] | ListEnumMonitoringPlanStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MonitoringPlanStatus[] | ListEnumMonitoringPlanStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumMonitoringPlanStatusFilter<$PrismaModel> | $Enums.MonitoringPlanStatus
   }
 
-  export type NestedEnumStudyStatusWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.StudyStatus | EnumStudyStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.StudyStatus[] | ListEnumStudyStatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.StudyStatus[] | ListEnumStudyStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumStudyStatusWithAggregatesFilter<$PrismaModel> | $Enums.StudyStatus
+  export type NestedEnumMonitoringPlanStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.MonitoringPlanStatus | EnumMonitoringPlanStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.MonitoringPlanStatus[] | ListEnumMonitoringPlanStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MonitoringPlanStatus[] | ListEnumMonitoringPlanStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumMonitoringPlanStatusWithAggregatesFilter<$PrismaModel> | $Enums.MonitoringPlanStatus
     _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumStudyStatusFilter<$PrismaModel>
-    _max?: NestedEnumStudyStatusFilter<$PrismaModel>
+    _min?: NestedEnumMonitoringPlanStatusFilter<$PrismaModel>
+    _max?: NestedEnumMonitoringPlanStatusFilter<$PrismaModel>
   }
 
-  export type NestedEnumStudyRoleFilter<$PrismaModel = never> = {
-    equals?: $Enums.StudyRole | EnumStudyRoleFieldRefInput<$PrismaModel>
-    in?: $Enums.StudyRole[] | ListEnumStudyRoleFieldRefInput<$PrismaModel>
-    notIn?: $Enums.StudyRole[] | ListEnumStudyRoleFieldRefInput<$PrismaModel>
-    not?: NestedEnumStudyRoleFilter<$PrismaModel> | $Enums.StudyRole
+  export type NestedEnumMonitoringPlanRoleFilter<$PrismaModel = never> = {
+    equals?: $Enums.MonitoringPlanRole | EnumMonitoringPlanRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.MonitoringPlanRole[] | ListEnumMonitoringPlanRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MonitoringPlanRole[] | ListEnumMonitoringPlanRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumMonitoringPlanRoleFilter<$PrismaModel> | $Enums.MonitoringPlanRole
   }
 
-  export type NestedEnumStudyRoleWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.StudyRole | EnumStudyRoleFieldRefInput<$PrismaModel>
-    in?: $Enums.StudyRole[] | ListEnumStudyRoleFieldRefInput<$PrismaModel>
-    notIn?: $Enums.StudyRole[] | ListEnumStudyRoleFieldRefInput<$PrismaModel>
-    not?: NestedEnumStudyRoleWithAggregatesFilter<$PrismaModel> | $Enums.StudyRole
+  export type NestedEnumMonitoringPlanRoleWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.MonitoringPlanRole | EnumMonitoringPlanRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.MonitoringPlanRole[] | ListEnumMonitoringPlanRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MonitoringPlanRole[] | ListEnumMonitoringPlanRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumMonitoringPlanRoleWithAggregatesFilter<$PrismaModel> | $Enums.MonitoringPlanRole
     _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumStudyRoleFilter<$PrismaModel>
-    _max?: NestedEnumStudyRoleFilter<$PrismaModel>
+    _min?: NestedEnumMonitoringPlanRoleFilter<$PrismaModel>
+    _max?: NestedEnumMonitoringPlanRoleFilter<$PrismaModel>
   }
 
   export type NestedEnumSymptomDataTypeFilter<$PrismaModel = never> = {
@@ -28617,7 +28646,7 @@ export namespace Prisma {
     maxStorage?: number
     currentStorage?: number
     patients?: PatientCreateNestedManyWithoutPracticeInput
-    studies?: StudyCreateNestedManyWithoutPracticeInput
+    monitoringPlans?: MonitoringPlanCreateNestedManyWithoutPracticeInput
     subscriptionHistory?: SubscriptionHistoryCreateNestedManyWithoutPracticeInput
   }
 
@@ -28639,7 +28668,7 @@ export namespace Prisma {
     maxStorage?: number
     currentStorage?: number
     patients?: PatientUncheckedCreateNestedManyWithoutPracticeInput
-    studies?: StudyUncheckedCreateNestedManyWithoutPracticeInput
+    monitoringPlans?: MonitoringPlanUncheckedCreateNestedManyWithoutPracticeInput
     subscriptionHistory?: SubscriptionHistoryUncheckedCreateNestedManyWithoutPracticeInput
   }
 
@@ -28648,7 +28677,7 @@ export namespace Prisma {
     create: XOR<PracticeCreateWithoutUsersInput, PracticeUncheckedCreateWithoutUsersInput>
   }
 
-  export type StudyCreateWithoutCreatedByInput = {
+  export type MonitoringPlanCreateWithoutCreatedByInput = {
     id?: string
     title: string
     description?: string | null
@@ -28657,17 +28686,18 @@ export namespace Prisma {
     updatedAt?: Date | string
     startDate?: Date | string | null
     endDate?: Date | string | null
-    status?: $Enums.StudyStatus
+    status?: $Enums.MonitoringPlanStatus
     isTemplate?: boolean
-    practice: PracticeCreateNestedOneWithoutStudiesInput
-    patients?: StudyPatientCreateNestedManyWithoutStudyInput
-    assignedUsers?: StudyAssignmentCreateNestedManyWithoutStudyInput
-    symptomTemplates?: SymptomTemplateCreateNestedManyWithoutStudyInput
-    treatmentTemplates?: TreatmentTemplateCreateNestedManyWithoutStudyInput
-    notes?: StudyNoteCreateNestedManyWithoutStudyInput
+    shareToken?: string | null
+    practice: PracticeCreateNestedOneWithoutMonitoringPlansInput
+    patients?: MonitoringPlanPatientCreateNestedManyWithoutMonitoringPlanInput
+    assignedUsers?: MonitoringPlanAssignmentCreateNestedManyWithoutMonitoringPlanInput
+    symptomTemplates?: SymptomTemplateCreateNestedManyWithoutMonitoringPlanInput
+    treatmentTemplates?: TreatmentTemplateCreateNestedManyWithoutMonitoringPlanInput
+    notes?: MonitoringPlanNoteCreateNestedManyWithoutMonitoringPlanInput
   }
 
-  export type StudyUncheckedCreateWithoutCreatedByInput = {
+  export type MonitoringPlanUncheckedCreateWithoutCreatedByInput = {
     id?: string
     title: string
     description?: string | null
@@ -28677,46 +28707,47 @@ export namespace Prisma {
     updatedAt?: Date | string
     startDate?: Date | string | null
     endDate?: Date | string | null
-    status?: $Enums.StudyStatus
+    status?: $Enums.MonitoringPlanStatus
     isTemplate?: boolean
-    patients?: StudyPatientUncheckedCreateNestedManyWithoutStudyInput
-    assignedUsers?: StudyAssignmentUncheckedCreateNestedManyWithoutStudyInput
-    symptomTemplates?: SymptomTemplateUncheckedCreateNestedManyWithoutStudyInput
-    treatmentTemplates?: TreatmentTemplateUncheckedCreateNestedManyWithoutStudyInput
-    notes?: StudyNoteUncheckedCreateNestedManyWithoutStudyInput
+    shareToken?: string | null
+    patients?: MonitoringPlanPatientUncheckedCreateNestedManyWithoutMonitoringPlanInput
+    assignedUsers?: MonitoringPlanAssignmentUncheckedCreateNestedManyWithoutMonitoringPlanInput
+    symptomTemplates?: SymptomTemplateUncheckedCreateNestedManyWithoutMonitoringPlanInput
+    treatmentTemplates?: TreatmentTemplateUncheckedCreateNestedManyWithoutMonitoringPlanInput
+    notes?: MonitoringPlanNoteUncheckedCreateNestedManyWithoutMonitoringPlanInput
   }
 
-  export type StudyCreateOrConnectWithoutCreatedByInput = {
-    where: StudyWhereUniqueInput
-    create: XOR<StudyCreateWithoutCreatedByInput, StudyUncheckedCreateWithoutCreatedByInput>
+  export type MonitoringPlanCreateOrConnectWithoutCreatedByInput = {
+    where: MonitoringPlanWhereUniqueInput
+    create: XOR<MonitoringPlanCreateWithoutCreatedByInput, MonitoringPlanUncheckedCreateWithoutCreatedByInput>
   }
 
-  export type StudyCreateManyCreatedByInputEnvelope = {
-    data: StudyCreateManyCreatedByInput | StudyCreateManyCreatedByInput[]
+  export type MonitoringPlanCreateManyCreatedByInputEnvelope = {
+    data: MonitoringPlanCreateManyCreatedByInput | MonitoringPlanCreateManyCreatedByInput[]
     skipDuplicates?: boolean
   }
 
-  export type StudyAssignmentCreateWithoutUserInput = {
+  export type MonitoringPlanAssignmentCreateWithoutUserInput = {
     id?: string
     assignedAt?: Date | string
-    role: $Enums.StudyRole
-    study: StudyCreateNestedOneWithoutAssignedUsersInput
+    role: $Enums.MonitoringPlanRole
+    monitoringPlan: MonitoringPlanCreateNestedOneWithoutAssignedUsersInput
   }
 
-  export type StudyAssignmentUncheckedCreateWithoutUserInput = {
+  export type MonitoringPlanAssignmentUncheckedCreateWithoutUserInput = {
     id?: string
-    studyId: string
+    monitoringPlanId: string
     assignedAt?: Date | string
-    role: $Enums.StudyRole
+    role: $Enums.MonitoringPlanRole
   }
 
-  export type StudyAssignmentCreateOrConnectWithoutUserInput = {
-    where: StudyAssignmentWhereUniqueInput
-    create: XOR<StudyAssignmentCreateWithoutUserInput, StudyAssignmentUncheckedCreateWithoutUserInput>
+  export type MonitoringPlanAssignmentCreateOrConnectWithoutUserInput = {
+    where: MonitoringPlanAssignmentWhereUniqueInput
+    create: XOR<MonitoringPlanAssignmentCreateWithoutUserInput, MonitoringPlanAssignmentUncheckedCreateWithoutUserInput>
   }
 
-  export type StudyAssignmentCreateManyUserInputEnvelope = {
-    data: StudyAssignmentCreateManyUserInput | StudyAssignmentCreateManyUserInput[]
+  export type MonitoringPlanAssignmentCreateManyUserInputEnvelope = {
+    data: MonitoringPlanAssignmentCreateManyUserInput | MonitoringPlanAssignmentCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -28730,7 +28761,7 @@ export namespace Prisma {
     notes?: string | null
     template?: TreatmentTemplateCreateNestedOneWithoutTreatmentsInput
     patient: PatientCreateNestedOneWithoutTreatmentsInput
-    studyPatient: StudyPatientCreateNestedOneWithoutTreatmentsInput
+    monitoringPlanPatient: MonitoringPlanPatientCreateNestedOneWithoutTreatmentsInput
     files?: FileCreateNestedManyWithoutTreatmentInput
   }
 
@@ -28738,7 +28769,7 @@ export namespace Prisma {
     id?: string
     templateId?: string | null
     patientId: string
-    studyPatientId: string
+    monitoringPlanPatientId: string
     createdAt?: Date | string
     administeredAt: Date | string
     name: string
@@ -28765,7 +28796,7 @@ export namespace Prisma {
     notes?: string | null
     symptomTemplate: SymptomTemplateCreateNestedOneWithoutObservationsInput
     patient: PatientCreateNestedOneWithoutObservationsInput
-    studyPatient: StudyPatientCreateNestedOneWithoutObservationsInput
+    monitoringPlanPatient: MonitoringPlanPatientCreateNestedOneWithoutObservationsInput
     files?: FileCreateNestedManyWithoutObservationInput
     alerts?: AlertCreateNestedManyWithoutObservationInput
   }
@@ -28774,7 +28805,7 @@ export namespace Prisma {
     id?: string
     symptomTemplateId: string
     patientId: string
-    studyPatientId: string
+    monitoringPlanPatientId: string
     recordedAt?: Date | string
     value: JsonNullValueInput | InputJsonValue
     notes?: string | null
@@ -28809,7 +28840,7 @@ export namespace Prisma {
     ownerPhone?: string | null
     medicalHistory?: NullableJsonNullValueInput | InputJsonValue
     practice: PracticeCreateNestedOneWithoutPatientsInput
-    studies?: StudyPatientCreateNestedManyWithoutPatientInput
+    monitoringPlans?: MonitoringPlanPatientCreateNestedManyWithoutPatientInput
     observations?: ObservationCreateNestedManyWithoutPatientInput
     treatments?: TreatmentCreateNestedManyWithoutPatientInput
     files?: FileCreateNestedManyWithoutPatientInput
@@ -28832,7 +28863,7 @@ export namespace Prisma {
     ownerEmail?: string | null
     ownerPhone?: string | null
     medicalHistory?: NullableJsonNullValueInput | InputJsonValue
-    studies?: StudyPatientUncheckedCreateNestedManyWithoutPatientInput
+    monitoringPlans?: MonitoringPlanPatientUncheckedCreateNestedManyWithoutPatientInput
     observations?: ObservationUncheckedCreateNestedManyWithoutPatientInput
     treatments?: TreatmentUncheckedCreateNestedManyWithoutPatientInput
     files?: FileUncheckedCreateNestedManyWithoutPatientInput
@@ -28907,7 +28938,7 @@ export namespace Prisma {
     maxStorage?: IntFieldUpdateOperationsInput | number
     currentStorage?: IntFieldUpdateOperationsInput | number
     patients?: PatientUpdateManyWithoutPracticeNestedInput
-    studies?: StudyUpdateManyWithoutPracticeNestedInput
+    monitoringPlans?: MonitoringPlanUpdateManyWithoutPracticeNestedInput
     subscriptionHistory?: SubscriptionHistoryUpdateManyWithoutPracticeNestedInput
   }
 
@@ -28929,69 +28960,70 @@ export namespace Prisma {
     maxStorage?: IntFieldUpdateOperationsInput | number
     currentStorage?: IntFieldUpdateOperationsInput | number
     patients?: PatientUncheckedUpdateManyWithoutPracticeNestedInput
-    studies?: StudyUncheckedUpdateManyWithoutPracticeNestedInput
+    monitoringPlans?: MonitoringPlanUncheckedUpdateManyWithoutPracticeNestedInput
     subscriptionHistory?: SubscriptionHistoryUncheckedUpdateManyWithoutPracticeNestedInput
   }
 
-  export type StudyUpsertWithWhereUniqueWithoutCreatedByInput = {
-    where: StudyWhereUniqueInput
-    update: XOR<StudyUpdateWithoutCreatedByInput, StudyUncheckedUpdateWithoutCreatedByInput>
-    create: XOR<StudyCreateWithoutCreatedByInput, StudyUncheckedCreateWithoutCreatedByInput>
+  export type MonitoringPlanUpsertWithWhereUniqueWithoutCreatedByInput = {
+    where: MonitoringPlanWhereUniqueInput
+    update: XOR<MonitoringPlanUpdateWithoutCreatedByInput, MonitoringPlanUncheckedUpdateWithoutCreatedByInput>
+    create: XOR<MonitoringPlanCreateWithoutCreatedByInput, MonitoringPlanUncheckedCreateWithoutCreatedByInput>
   }
 
-  export type StudyUpdateWithWhereUniqueWithoutCreatedByInput = {
-    where: StudyWhereUniqueInput
-    data: XOR<StudyUpdateWithoutCreatedByInput, StudyUncheckedUpdateWithoutCreatedByInput>
+  export type MonitoringPlanUpdateWithWhereUniqueWithoutCreatedByInput = {
+    where: MonitoringPlanWhereUniqueInput
+    data: XOR<MonitoringPlanUpdateWithoutCreatedByInput, MonitoringPlanUncheckedUpdateWithoutCreatedByInput>
   }
 
-  export type StudyUpdateManyWithWhereWithoutCreatedByInput = {
-    where: StudyScalarWhereInput
-    data: XOR<StudyUpdateManyMutationInput, StudyUncheckedUpdateManyWithoutCreatedByInput>
+  export type MonitoringPlanUpdateManyWithWhereWithoutCreatedByInput = {
+    where: MonitoringPlanScalarWhereInput
+    data: XOR<MonitoringPlanUpdateManyMutationInput, MonitoringPlanUncheckedUpdateManyWithoutCreatedByInput>
   }
 
-  export type StudyScalarWhereInput = {
-    AND?: StudyScalarWhereInput | StudyScalarWhereInput[]
-    OR?: StudyScalarWhereInput[]
-    NOT?: StudyScalarWhereInput | StudyScalarWhereInput[]
-    id?: StringFilter<"Study"> | string
-    title?: StringFilter<"Study"> | string
-    description?: StringNullableFilter<"Study"> | string | null
-    protocol?: JsonNullableFilter<"Study">
-    practiceId?: StringFilter<"Study"> | string
-    createdById?: StringFilter<"Study"> | string
-    createdAt?: DateTimeFilter<"Study"> | Date | string
-    updatedAt?: DateTimeFilter<"Study"> | Date | string
-    startDate?: DateTimeNullableFilter<"Study"> | Date | string | null
-    endDate?: DateTimeNullableFilter<"Study"> | Date | string | null
-    status?: EnumStudyStatusFilter<"Study"> | $Enums.StudyStatus
-    isTemplate?: BoolFilter<"Study"> | boolean
+  export type MonitoringPlanScalarWhereInput = {
+    AND?: MonitoringPlanScalarWhereInput | MonitoringPlanScalarWhereInput[]
+    OR?: MonitoringPlanScalarWhereInput[]
+    NOT?: MonitoringPlanScalarWhereInput | MonitoringPlanScalarWhereInput[]
+    id?: StringFilter<"MonitoringPlan"> | string
+    title?: StringFilter<"MonitoringPlan"> | string
+    description?: StringNullableFilter<"MonitoringPlan"> | string | null
+    protocol?: JsonNullableFilter<"MonitoringPlan">
+    practiceId?: StringFilter<"MonitoringPlan"> | string
+    createdById?: StringFilter<"MonitoringPlan"> | string
+    createdAt?: DateTimeFilter<"MonitoringPlan"> | Date | string
+    updatedAt?: DateTimeFilter<"MonitoringPlan"> | Date | string
+    startDate?: DateTimeNullableFilter<"MonitoringPlan"> | Date | string | null
+    endDate?: DateTimeNullableFilter<"MonitoringPlan"> | Date | string | null
+    status?: EnumMonitoringPlanStatusFilter<"MonitoringPlan"> | $Enums.MonitoringPlanStatus
+    isTemplate?: BoolFilter<"MonitoringPlan"> | boolean
+    shareToken?: StringNullableFilter<"MonitoringPlan"> | string | null
   }
 
-  export type StudyAssignmentUpsertWithWhereUniqueWithoutUserInput = {
-    where: StudyAssignmentWhereUniqueInput
-    update: XOR<StudyAssignmentUpdateWithoutUserInput, StudyAssignmentUncheckedUpdateWithoutUserInput>
-    create: XOR<StudyAssignmentCreateWithoutUserInput, StudyAssignmentUncheckedCreateWithoutUserInput>
+  export type MonitoringPlanAssignmentUpsertWithWhereUniqueWithoutUserInput = {
+    where: MonitoringPlanAssignmentWhereUniqueInput
+    update: XOR<MonitoringPlanAssignmentUpdateWithoutUserInput, MonitoringPlanAssignmentUncheckedUpdateWithoutUserInput>
+    create: XOR<MonitoringPlanAssignmentCreateWithoutUserInput, MonitoringPlanAssignmentUncheckedCreateWithoutUserInput>
   }
 
-  export type StudyAssignmentUpdateWithWhereUniqueWithoutUserInput = {
-    where: StudyAssignmentWhereUniqueInput
-    data: XOR<StudyAssignmentUpdateWithoutUserInput, StudyAssignmentUncheckedUpdateWithoutUserInput>
+  export type MonitoringPlanAssignmentUpdateWithWhereUniqueWithoutUserInput = {
+    where: MonitoringPlanAssignmentWhereUniqueInput
+    data: XOR<MonitoringPlanAssignmentUpdateWithoutUserInput, MonitoringPlanAssignmentUncheckedUpdateWithoutUserInput>
   }
 
-  export type StudyAssignmentUpdateManyWithWhereWithoutUserInput = {
-    where: StudyAssignmentScalarWhereInput
-    data: XOR<StudyAssignmentUpdateManyMutationInput, StudyAssignmentUncheckedUpdateManyWithoutUserInput>
+  export type MonitoringPlanAssignmentUpdateManyWithWhereWithoutUserInput = {
+    where: MonitoringPlanAssignmentScalarWhereInput
+    data: XOR<MonitoringPlanAssignmentUpdateManyMutationInput, MonitoringPlanAssignmentUncheckedUpdateManyWithoutUserInput>
   }
 
-  export type StudyAssignmentScalarWhereInput = {
-    AND?: StudyAssignmentScalarWhereInput | StudyAssignmentScalarWhereInput[]
-    OR?: StudyAssignmentScalarWhereInput[]
-    NOT?: StudyAssignmentScalarWhereInput | StudyAssignmentScalarWhereInput[]
-    id?: StringFilter<"StudyAssignment"> | string
-    studyId?: StringFilter<"StudyAssignment"> | string
-    userId?: StringFilter<"StudyAssignment"> | string
-    assignedAt?: DateTimeFilter<"StudyAssignment"> | Date | string
-    role?: EnumStudyRoleFilter<"StudyAssignment"> | $Enums.StudyRole
+  export type MonitoringPlanAssignmentScalarWhereInput = {
+    AND?: MonitoringPlanAssignmentScalarWhereInput | MonitoringPlanAssignmentScalarWhereInput[]
+    OR?: MonitoringPlanAssignmentScalarWhereInput[]
+    NOT?: MonitoringPlanAssignmentScalarWhereInput | MonitoringPlanAssignmentScalarWhereInput[]
+    id?: StringFilter<"MonitoringPlanAssignment"> | string
+    monitoringPlanId?: StringFilter<"MonitoringPlanAssignment"> | string
+    userId?: StringFilter<"MonitoringPlanAssignment"> | string
+    assignedAt?: DateTimeFilter<"MonitoringPlanAssignment"> | Date | string
+    role?: EnumMonitoringPlanRoleFilter<"MonitoringPlanAssignment"> | $Enums.MonitoringPlanRole
   }
 
   export type TreatmentUpsertWithWhereUniqueWithoutCreatedByInput = {
@@ -29017,7 +29049,7 @@ export namespace Prisma {
     id?: StringFilter<"Treatment"> | string
     templateId?: StringNullableFilter<"Treatment"> | string | null
     patientId?: StringFilter<"Treatment"> | string
-    studyPatientId?: StringFilter<"Treatment"> | string
+    monitoringPlanPatientId?: StringFilter<"Treatment"> | string
     createdById?: StringFilter<"Treatment"> | string
     createdAt?: DateTimeFilter<"Treatment"> | Date | string
     administeredAt?: DateTimeFilter<"Treatment"> | Date | string
@@ -29050,7 +29082,7 @@ export namespace Prisma {
     id?: StringFilter<"Observation"> | string
     symptomTemplateId?: StringFilter<"Observation"> | string
     patientId?: StringFilter<"Observation"> | string
-    studyPatientId?: StringFilter<"Observation"> | string
+    monitoringPlanPatientId?: StringFilter<"Observation"> | string
     recordedById?: StringFilter<"Observation"> | string
     recordedAt?: DateTimeFilter<"Observation"> | Date | string
     value?: JsonFilter<"Observation">
@@ -29138,8 +29170,8 @@ export namespace Prisma {
     isActive?: boolean
     resetToken?: string | null
     resetTokenExpiry?: Date | string | null
-    createdStudies?: StudyCreateNestedManyWithoutCreatedByInput
-    assignedStudies?: StudyAssignmentCreateNestedManyWithoutUserInput
+    createdMonitoringPlans?: MonitoringPlanCreateNestedManyWithoutCreatedByInput
+    assignedMonitoringPlans?: MonitoringPlanAssignmentCreateNestedManyWithoutUserInput
     createdTreatments?: TreatmentCreateNestedManyWithoutCreatedByInput
     observations?: ObservationCreateNestedManyWithoutRecordedByInput
     createdPatients?: PatientCreateNestedManyWithoutCreatedByInput
@@ -29158,8 +29190,8 @@ export namespace Prisma {
     isActive?: boolean
     resetToken?: string | null
     resetTokenExpiry?: Date | string | null
-    createdStudies?: StudyUncheckedCreateNestedManyWithoutCreatedByInput
-    assignedStudies?: StudyAssignmentUncheckedCreateNestedManyWithoutUserInput
+    createdMonitoringPlans?: MonitoringPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    assignedMonitoringPlans?: MonitoringPlanAssignmentUncheckedCreateNestedManyWithoutUserInput
     createdTreatments?: TreatmentUncheckedCreateNestedManyWithoutCreatedByInput
     observations?: ObservationUncheckedCreateNestedManyWithoutRecordedByInput
     createdPatients?: PatientUncheckedCreateNestedManyWithoutCreatedByInput
@@ -29193,7 +29225,7 @@ export namespace Prisma {
     ownerPhone?: string | null
     medicalHistory?: NullableJsonNullValueInput | InputJsonValue
     createdBy: UserCreateNestedOneWithoutCreatedPatientsInput
-    studies?: StudyPatientCreateNestedManyWithoutPatientInput
+    monitoringPlans?: MonitoringPlanPatientCreateNestedManyWithoutPatientInput
     observations?: ObservationCreateNestedManyWithoutPatientInput
     treatments?: TreatmentCreateNestedManyWithoutPatientInput
     files?: FileCreateNestedManyWithoutPatientInput
@@ -29216,7 +29248,7 @@ export namespace Prisma {
     ownerEmail?: string | null
     ownerPhone?: string | null
     medicalHistory?: NullableJsonNullValueInput | InputJsonValue
-    studies?: StudyPatientUncheckedCreateNestedManyWithoutPatientInput
+    monitoringPlans?: MonitoringPlanPatientUncheckedCreateNestedManyWithoutPatientInput
     observations?: ObservationUncheckedCreateNestedManyWithoutPatientInput
     treatments?: TreatmentUncheckedCreateNestedManyWithoutPatientInput
     files?: FileUncheckedCreateNestedManyWithoutPatientInput
@@ -29232,7 +29264,7 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type StudyCreateWithoutPracticeInput = {
+  export type MonitoringPlanCreateWithoutPracticeInput = {
     id?: string
     title: string
     description?: string | null
@@ -29241,17 +29273,18 @@ export namespace Prisma {
     updatedAt?: Date | string
     startDate?: Date | string | null
     endDate?: Date | string | null
-    status?: $Enums.StudyStatus
+    status?: $Enums.MonitoringPlanStatus
     isTemplate?: boolean
-    createdBy: UserCreateNestedOneWithoutCreatedStudiesInput
-    patients?: StudyPatientCreateNestedManyWithoutStudyInput
-    assignedUsers?: StudyAssignmentCreateNestedManyWithoutStudyInput
-    symptomTemplates?: SymptomTemplateCreateNestedManyWithoutStudyInput
-    treatmentTemplates?: TreatmentTemplateCreateNestedManyWithoutStudyInput
-    notes?: StudyNoteCreateNestedManyWithoutStudyInput
+    shareToken?: string | null
+    createdBy: UserCreateNestedOneWithoutCreatedMonitoringPlansInput
+    patients?: MonitoringPlanPatientCreateNestedManyWithoutMonitoringPlanInput
+    assignedUsers?: MonitoringPlanAssignmentCreateNestedManyWithoutMonitoringPlanInput
+    symptomTemplates?: SymptomTemplateCreateNestedManyWithoutMonitoringPlanInput
+    treatmentTemplates?: TreatmentTemplateCreateNestedManyWithoutMonitoringPlanInput
+    notes?: MonitoringPlanNoteCreateNestedManyWithoutMonitoringPlanInput
   }
 
-  export type StudyUncheckedCreateWithoutPracticeInput = {
+  export type MonitoringPlanUncheckedCreateWithoutPracticeInput = {
     id?: string
     title: string
     description?: string | null
@@ -29261,22 +29294,23 @@ export namespace Prisma {
     updatedAt?: Date | string
     startDate?: Date | string | null
     endDate?: Date | string | null
-    status?: $Enums.StudyStatus
+    status?: $Enums.MonitoringPlanStatus
     isTemplate?: boolean
-    patients?: StudyPatientUncheckedCreateNestedManyWithoutStudyInput
-    assignedUsers?: StudyAssignmentUncheckedCreateNestedManyWithoutStudyInput
-    symptomTemplates?: SymptomTemplateUncheckedCreateNestedManyWithoutStudyInput
-    treatmentTemplates?: TreatmentTemplateUncheckedCreateNestedManyWithoutStudyInput
-    notes?: StudyNoteUncheckedCreateNestedManyWithoutStudyInput
+    shareToken?: string | null
+    patients?: MonitoringPlanPatientUncheckedCreateNestedManyWithoutMonitoringPlanInput
+    assignedUsers?: MonitoringPlanAssignmentUncheckedCreateNestedManyWithoutMonitoringPlanInput
+    symptomTemplates?: SymptomTemplateUncheckedCreateNestedManyWithoutMonitoringPlanInput
+    treatmentTemplates?: TreatmentTemplateUncheckedCreateNestedManyWithoutMonitoringPlanInput
+    notes?: MonitoringPlanNoteUncheckedCreateNestedManyWithoutMonitoringPlanInput
   }
 
-  export type StudyCreateOrConnectWithoutPracticeInput = {
-    where: StudyWhereUniqueInput
-    create: XOR<StudyCreateWithoutPracticeInput, StudyUncheckedCreateWithoutPracticeInput>
+  export type MonitoringPlanCreateOrConnectWithoutPracticeInput = {
+    where: MonitoringPlanWhereUniqueInput
+    create: XOR<MonitoringPlanCreateWithoutPracticeInput, MonitoringPlanUncheckedCreateWithoutPracticeInput>
   }
 
-  export type StudyCreateManyPracticeInputEnvelope = {
-    data: StudyCreateManyPracticeInput | StudyCreateManyPracticeInput[]
+  export type MonitoringPlanCreateManyPracticeInputEnvelope = {
+    data: MonitoringPlanCreateManyPracticeInput | MonitoringPlanCreateManyPracticeInput[]
     skipDuplicates?: boolean
   }
 
@@ -29360,20 +29394,20 @@ export namespace Prisma {
     data: XOR<PatientUpdateManyMutationInput, PatientUncheckedUpdateManyWithoutPracticeInput>
   }
 
-  export type StudyUpsertWithWhereUniqueWithoutPracticeInput = {
-    where: StudyWhereUniqueInput
-    update: XOR<StudyUpdateWithoutPracticeInput, StudyUncheckedUpdateWithoutPracticeInput>
-    create: XOR<StudyCreateWithoutPracticeInput, StudyUncheckedCreateWithoutPracticeInput>
+  export type MonitoringPlanUpsertWithWhereUniqueWithoutPracticeInput = {
+    where: MonitoringPlanWhereUniqueInput
+    update: XOR<MonitoringPlanUpdateWithoutPracticeInput, MonitoringPlanUncheckedUpdateWithoutPracticeInput>
+    create: XOR<MonitoringPlanCreateWithoutPracticeInput, MonitoringPlanUncheckedCreateWithoutPracticeInput>
   }
 
-  export type StudyUpdateWithWhereUniqueWithoutPracticeInput = {
-    where: StudyWhereUniqueInput
-    data: XOR<StudyUpdateWithoutPracticeInput, StudyUncheckedUpdateWithoutPracticeInput>
+  export type MonitoringPlanUpdateWithWhereUniqueWithoutPracticeInput = {
+    where: MonitoringPlanWhereUniqueInput
+    data: XOR<MonitoringPlanUpdateWithoutPracticeInput, MonitoringPlanUncheckedUpdateWithoutPracticeInput>
   }
 
-  export type StudyUpdateManyWithWhereWithoutPracticeInput = {
-    where: StudyScalarWhereInput
-    data: XOR<StudyUpdateManyMutationInput, StudyUncheckedUpdateManyWithoutPracticeInput>
+  export type MonitoringPlanUpdateManyWithWhereWithoutPracticeInput = {
+    where: MonitoringPlanScalarWhereInput
+    data: XOR<MonitoringPlanUpdateManyMutationInput, MonitoringPlanUncheckedUpdateManyWithoutPracticeInput>
   }
 
   export type SubscriptionHistoryUpsertWithWhereUniqueWithoutPracticeInput = {
@@ -29425,7 +29459,7 @@ export namespace Prisma {
     currentStorage?: number
     users?: UserCreateNestedManyWithoutPracticeInput
     patients?: PatientCreateNestedManyWithoutPracticeInput
-    studies?: StudyCreateNestedManyWithoutPracticeInput
+    monitoringPlans?: MonitoringPlanCreateNestedManyWithoutPracticeInput
   }
 
   export type PracticeUncheckedCreateWithoutSubscriptionHistoryInput = {
@@ -29447,7 +29481,7 @@ export namespace Prisma {
     currentStorage?: number
     users?: UserUncheckedCreateNestedManyWithoutPracticeInput
     patients?: PatientUncheckedCreateNestedManyWithoutPracticeInput
-    studies?: StudyUncheckedCreateNestedManyWithoutPracticeInput
+    monitoringPlans?: MonitoringPlanUncheckedCreateNestedManyWithoutPracticeInput
   }
 
   export type PracticeCreateOrConnectWithoutSubscriptionHistoryInput = {
@@ -29485,7 +29519,7 @@ export namespace Prisma {
     currentStorage?: IntFieldUpdateOperationsInput | number
     users?: UserUpdateManyWithoutPracticeNestedInput
     patients?: PatientUpdateManyWithoutPracticeNestedInput
-    studies?: StudyUpdateManyWithoutPracticeNestedInput
+    monitoringPlans?: MonitoringPlanUpdateManyWithoutPracticeNestedInput
   }
 
   export type PracticeUncheckedUpdateWithoutSubscriptionHistoryInput = {
@@ -29507,7 +29541,7 @@ export namespace Prisma {
     currentStorage?: IntFieldUpdateOperationsInput | number
     users?: UserUncheckedUpdateManyWithoutPracticeNestedInput
     patients?: PatientUncheckedUpdateManyWithoutPracticeNestedInput
-    studies?: StudyUncheckedUpdateManyWithoutPracticeNestedInput
+    monitoringPlans?: MonitoringPlanUncheckedUpdateManyWithoutPracticeNestedInput
   }
 
   export type PracticeCreateWithoutPatientsInput = {
@@ -29528,7 +29562,7 @@ export namespace Prisma {
     maxStorage?: number
     currentStorage?: number
     users?: UserCreateNestedManyWithoutPracticeInput
-    studies?: StudyCreateNestedManyWithoutPracticeInput
+    monitoringPlans?: MonitoringPlanCreateNestedManyWithoutPracticeInput
     subscriptionHistory?: SubscriptionHistoryCreateNestedManyWithoutPracticeInput
   }
 
@@ -29550,7 +29584,7 @@ export namespace Prisma {
     maxStorage?: number
     currentStorage?: number
     users?: UserUncheckedCreateNestedManyWithoutPracticeInput
-    studies?: StudyUncheckedCreateNestedManyWithoutPracticeInput
+    monitoringPlans?: MonitoringPlanUncheckedCreateNestedManyWithoutPracticeInput
     subscriptionHistory?: SubscriptionHistoryUncheckedCreateNestedManyWithoutPracticeInput
   }
 
@@ -29572,8 +29606,8 @@ export namespace Prisma {
     resetToken?: string | null
     resetTokenExpiry?: Date | string | null
     practice?: PracticeCreateNestedOneWithoutUsersInput
-    createdStudies?: StudyCreateNestedManyWithoutCreatedByInput
-    assignedStudies?: StudyAssignmentCreateNestedManyWithoutUserInput
+    createdMonitoringPlans?: MonitoringPlanCreateNestedManyWithoutCreatedByInput
+    assignedMonitoringPlans?: MonitoringPlanAssignmentCreateNestedManyWithoutUserInput
     createdTreatments?: TreatmentCreateNestedManyWithoutCreatedByInput
     observations?: ObservationCreateNestedManyWithoutRecordedByInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
@@ -29592,8 +29626,8 @@ export namespace Prisma {
     practiceId?: string | null
     resetToken?: string | null
     resetTokenExpiry?: Date | string | null
-    createdStudies?: StudyUncheckedCreateNestedManyWithoutCreatedByInput
-    assignedStudies?: StudyAssignmentUncheckedCreateNestedManyWithoutUserInput
+    createdMonitoringPlans?: MonitoringPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    assignedMonitoringPlans?: MonitoringPlanAssignmentUncheckedCreateNestedManyWithoutUserInput
     createdTreatments?: TreatmentUncheckedCreateNestedManyWithoutCreatedByInput
     observations?: ObservationUncheckedCreateNestedManyWithoutRecordedByInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
@@ -29604,33 +29638,33 @@ export namespace Prisma {
     create: XOR<UserCreateWithoutCreatedPatientsInput, UserUncheckedCreateWithoutCreatedPatientsInput>
   }
 
-  export type StudyPatientCreateWithoutPatientInput = {
+  export type MonitoringPlanPatientCreateWithoutPatientInput = {
     id?: string
     enrollmentDate?: Date | string
     exitDate?: Date | string | null
     isActive?: boolean
-    study: StudyCreateNestedOneWithoutPatientsInput
-    observations?: ObservationCreateNestedManyWithoutStudyPatientInput
-    treatments?: TreatmentCreateNestedManyWithoutStudyPatientInput
+    monitoringPlan: MonitoringPlanCreateNestedOneWithoutPatientsInput
+    observations?: ObservationCreateNestedManyWithoutMonitoringPlanPatientInput
+    treatments?: TreatmentCreateNestedManyWithoutMonitoringPlanPatientInput
   }
 
-  export type StudyPatientUncheckedCreateWithoutPatientInput = {
+  export type MonitoringPlanPatientUncheckedCreateWithoutPatientInput = {
     id?: string
-    studyId: string
+    monitoringPlanId: string
     enrollmentDate?: Date | string
     exitDate?: Date | string | null
     isActive?: boolean
-    observations?: ObservationUncheckedCreateNestedManyWithoutStudyPatientInput
-    treatments?: TreatmentUncheckedCreateNestedManyWithoutStudyPatientInput
+    observations?: ObservationUncheckedCreateNestedManyWithoutMonitoringPlanPatientInput
+    treatments?: TreatmentUncheckedCreateNestedManyWithoutMonitoringPlanPatientInput
   }
 
-  export type StudyPatientCreateOrConnectWithoutPatientInput = {
-    where: StudyPatientWhereUniqueInput
-    create: XOR<StudyPatientCreateWithoutPatientInput, StudyPatientUncheckedCreateWithoutPatientInput>
+  export type MonitoringPlanPatientCreateOrConnectWithoutPatientInput = {
+    where: MonitoringPlanPatientWhereUniqueInput
+    create: XOR<MonitoringPlanPatientCreateWithoutPatientInput, MonitoringPlanPatientUncheckedCreateWithoutPatientInput>
   }
 
-  export type StudyPatientCreateManyPatientInputEnvelope = {
-    data: StudyPatientCreateManyPatientInput | StudyPatientCreateManyPatientInput[]
+  export type MonitoringPlanPatientCreateManyPatientInputEnvelope = {
+    data: MonitoringPlanPatientCreateManyPatientInput | MonitoringPlanPatientCreateManyPatientInput[]
     skipDuplicates?: boolean
   }
 
@@ -29640,7 +29674,7 @@ export namespace Prisma {
     value: JsonNullValueInput | InputJsonValue
     notes?: string | null
     symptomTemplate: SymptomTemplateCreateNestedOneWithoutObservationsInput
-    studyPatient: StudyPatientCreateNestedOneWithoutObservationsInput
+    monitoringPlanPatient: MonitoringPlanPatientCreateNestedOneWithoutObservationsInput
     recordedBy: UserCreateNestedOneWithoutObservationsInput
     files?: FileCreateNestedManyWithoutObservationInput
     alerts?: AlertCreateNestedManyWithoutObservationInput
@@ -29649,7 +29683,7 @@ export namespace Prisma {
   export type ObservationUncheckedCreateWithoutPatientInput = {
     id?: string
     symptomTemplateId: string
-    studyPatientId: string
+    monitoringPlanPatientId: string
     recordedById: string
     recordedAt?: Date | string
     value: JsonNullValueInput | InputJsonValue
@@ -29677,7 +29711,7 @@ export namespace Prisma {
     dosage?: string | null
     notes?: string | null
     template?: TreatmentTemplateCreateNestedOneWithoutTreatmentsInput
-    studyPatient: StudyPatientCreateNestedOneWithoutTreatmentsInput
+    monitoringPlanPatient: MonitoringPlanPatientCreateNestedOneWithoutTreatmentsInput
     createdBy: UserCreateNestedOneWithoutCreatedTreatmentsInput
     files?: FileCreateNestedManyWithoutTreatmentInput
   }
@@ -29685,7 +29719,7 @@ export namespace Prisma {
   export type TreatmentUncheckedCreateWithoutPatientInput = {
     id?: string
     templateId?: string | null
-    studyPatientId: string
+    monitoringPlanPatientId: string
     createdById: string
     createdAt?: Date | string
     administeredAt: Date | string
@@ -29767,7 +29801,7 @@ export namespace Prisma {
     maxStorage?: IntFieldUpdateOperationsInput | number
     currentStorage?: IntFieldUpdateOperationsInput | number
     users?: UserUpdateManyWithoutPracticeNestedInput
-    studies?: StudyUpdateManyWithoutPracticeNestedInput
+    monitoringPlans?: MonitoringPlanUpdateManyWithoutPracticeNestedInput
     subscriptionHistory?: SubscriptionHistoryUpdateManyWithoutPracticeNestedInput
   }
 
@@ -29789,7 +29823,7 @@ export namespace Prisma {
     maxStorage?: IntFieldUpdateOperationsInput | number
     currentStorage?: IntFieldUpdateOperationsInput | number
     users?: UserUncheckedUpdateManyWithoutPracticeNestedInput
-    studies?: StudyUncheckedUpdateManyWithoutPracticeNestedInput
+    monitoringPlans?: MonitoringPlanUncheckedUpdateManyWithoutPracticeNestedInput
     subscriptionHistory?: SubscriptionHistoryUncheckedUpdateManyWithoutPracticeNestedInput
   }
 
@@ -29817,8 +29851,8 @@ export namespace Prisma {
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     practice?: PracticeUpdateOneWithoutUsersNestedInput
-    createdStudies?: StudyUpdateManyWithoutCreatedByNestedInput
-    assignedStudies?: StudyAssignmentUpdateManyWithoutUserNestedInput
+    createdMonitoringPlans?: MonitoringPlanUpdateManyWithoutCreatedByNestedInput
+    assignedMonitoringPlans?: MonitoringPlanAssignmentUpdateManyWithoutUserNestedInput
     createdTreatments?: TreatmentUpdateManyWithoutCreatedByNestedInput
     observations?: ObservationUpdateManyWithoutRecordedByNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
@@ -29837,39 +29871,39 @@ export namespace Prisma {
     practiceId?: NullableStringFieldUpdateOperationsInput | string | null
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdStudies?: StudyUncheckedUpdateManyWithoutCreatedByNestedInput
-    assignedStudies?: StudyAssignmentUncheckedUpdateManyWithoutUserNestedInput
+    createdMonitoringPlans?: MonitoringPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    assignedMonitoringPlans?: MonitoringPlanAssignmentUncheckedUpdateManyWithoutUserNestedInput
     createdTreatments?: TreatmentUncheckedUpdateManyWithoutCreatedByNestedInput
     observations?: ObservationUncheckedUpdateManyWithoutRecordedByNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
   }
 
-  export type StudyPatientUpsertWithWhereUniqueWithoutPatientInput = {
-    where: StudyPatientWhereUniqueInput
-    update: XOR<StudyPatientUpdateWithoutPatientInput, StudyPatientUncheckedUpdateWithoutPatientInput>
-    create: XOR<StudyPatientCreateWithoutPatientInput, StudyPatientUncheckedCreateWithoutPatientInput>
+  export type MonitoringPlanPatientUpsertWithWhereUniqueWithoutPatientInput = {
+    where: MonitoringPlanPatientWhereUniqueInput
+    update: XOR<MonitoringPlanPatientUpdateWithoutPatientInput, MonitoringPlanPatientUncheckedUpdateWithoutPatientInput>
+    create: XOR<MonitoringPlanPatientCreateWithoutPatientInput, MonitoringPlanPatientUncheckedCreateWithoutPatientInput>
   }
 
-  export type StudyPatientUpdateWithWhereUniqueWithoutPatientInput = {
-    where: StudyPatientWhereUniqueInput
-    data: XOR<StudyPatientUpdateWithoutPatientInput, StudyPatientUncheckedUpdateWithoutPatientInput>
+  export type MonitoringPlanPatientUpdateWithWhereUniqueWithoutPatientInput = {
+    where: MonitoringPlanPatientWhereUniqueInput
+    data: XOR<MonitoringPlanPatientUpdateWithoutPatientInput, MonitoringPlanPatientUncheckedUpdateWithoutPatientInput>
   }
 
-  export type StudyPatientUpdateManyWithWhereWithoutPatientInput = {
-    where: StudyPatientScalarWhereInput
-    data: XOR<StudyPatientUpdateManyMutationInput, StudyPatientUncheckedUpdateManyWithoutPatientInput>
+  export type MonitoringPlanPatientUpdateManyWithWhereWithoutPatientInput = {
+    where: MonitoringPlanPatientScalarWhereInput
+    data: XOR<MonitoringPlanPatientUpdateManyMutationInput, MonitoringPlanPatientUncheckedUpdateManyWithoutPatientInput>
   }
 
-  export type StudyPatientScalarWhereInput = {
-    AND?: StudyPatientScalarWhereInput | StudyPatientScalarWhereInput[]
-    OR?: StudyPatientScalarWhereInput[]
-    NOT?: StudyPatientScalarWhereInput | StudyPatientScalarWhereInput[]
-    id?: StringFilter<"StudyPatient"> | string
-    studyId?: StringFilter<"StudyPatient"> | string
-    patientId?: StringFilter<"StudyPatient"> | string
-    enrollmentDate?: DateTimeFilter<"StudyPatient"> | Date | string
-    exitDate?: DateTimeNullableFilter<"StudyPatient"> | Date | string | null
-    isActive?: BoolFilter<"StudyPatient"> | boolean
+  export type MonitoringPlanPatientScalarWhereInput = {
+    AND?: MonitoringPlanPatientScalarWhereInput | MonitoringPlanPatientScalarWhereInput[]
+    OR?: MonitoringPlanPatientScalarWhereInput[]
+    NOT?: MonitoringPlanPatientScalarWhereInput | MonitoringPlanPatientScalarWhereInput[]
+    id?: StringFilter<"MonitoringPlanPatient"> | string
+    monitoringPlanId?: StringFilter<"MonitoringPlanPatient"> | string
+    patientId?: StringFilter<"MonitoringPlanPatient"> | string
+    enrollmentDate?: DateTimeFilter<"MonitoringPlanPatient"> | Date | string
+    exitDate?: DateTimeNullableFilter<"MonitoringPlanPatient"> | Date | string | null
+    isActive?: BoolFilter<"MonitoringPlanPatient"> | boolean
   }
 
   export type ObservationUpsertWithWhereUniqueWithoutPatientInput = {
@@ -29935,7 +29969,7 @@ export namespace Prisma {
     treatmentId?: StringNullableFilter<"File"> | string | null
   }
 
-  export type PracticeCreateWithoutStudiesInput = {
+  export type PracticeCreateWithoutMonitoringPlansInput = {
     id?: string
     name: string
     address?: string | null
@@ -29957,7 +29991,7 @@ export namespace Prisma {
     subscriptionHistory?: SubscriptionHistoryCreateNestedManyWithoutPracticeInput
   }
 
-  export type PracticeUncheckedCreateWithoutStudiesInput = {
+  export type PracticeUncheckedCreateWithoutMonitoringPlansInput = {
     id?: string
     name: string
     address?: string | null
@@ -29979,12 +30013,12 @@ export namespace Prisma {
     subscriptionHistory?: SubscriptionHistoryUncheckedCreateNestedManyWithoutPracticeInput
   }
 
-  export type PracticeCreateOrConnectWithoutStudiesInput = {
+  export type PracticeCreateOrConnectWithoutMonitoringPlansInput = {
     where: PracticeWhereUniqueInput
-    create: XOR<PracticeCreateWithoutStudiesInput, PracticeUncheckedCreateWithoutStudiesInput>
+    create: XOR<PracticeCreateWithoutMonitoringPlansInput, PracticeUncheckedCreateWithoutMonitoringPlansInput>
   }
 
-  export type UserCreateWithoutCreatedStudiesInput = {
+  export type UserCreateWithoutCreatedMonitoringPlansInput = {
     id?: string
     email: string
     password: string
@@ -29997,14 +30031,14 @@ export namespace Prisma {
     resetToken?: string | null
     resetTokenExpiry?: Date | string | null
     practice?: PracticeCreateNestedOneWithoutUsersInput
-    assignedStudies?: StudyAssignmentCreateNestedManyWithoutUserInput
+    assignedMonitoringPlans?: MonitoringPlanAssignmentCreateNestedManyWithoutUserInput
     createdTreatments?: TreatmentCreateNestedManyWithoutCreatedByInput
     observations?: ObservationCreateNestedManyWithoutRecordedByInput
     createdPatients?: PatientCreateNestedManyWithoutCreatedByInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
   }
 
-  export type UserUncheckedCreateWithoutCreatedStudiesInput = {
+  export type UserUncheckedCreateWithoutCreatedMonitoringPlansInput = {
     id?: string
     email: string
     password: string
@@ -30017,73 +30051,73 @@ export namespace Prisma {
     practiceId?: string | null
     resetToken?: string | null
     resetTokenExpiry?: Date | string | null
-    assignedStudies?: StudyAssignmentUncheckedCreateNestedManyWithoutUserInput
+    assignedMonitoringPlans?: MonitoringPlanAssignmentUncheckedCreateNestedManyWithoutUserInput
     createdTreatments?: TreatmentUncheckedCreateNestedManyWithoutCreatedByInput
     observations?: ObservationUncheckedCreateNestedManyWithoutRecordedByInput
     createdPatients?: PatientUncheckedCreateNestedManyWithoutCreatedByInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
   }
 
-  export type UserCreateOrConnectWithoutCreatedStudiesInput = {
+  export type UserCreateOrConnectWithoutCreatedMonitoringPlansInput = {
     where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutCreatedStudiesInput, UserUncheckedCreateWithoutCreatedStudiesInput>
+    create: XOR<UserCreateWithoutCreatedMonitoringPlansInput, UserUncheckedCreateWithoutCreatedMonitoringPlansInput>
   }
 
-  export type StudyPatientCreateWithoutStudyInput = {
+  export type MonitoringPlanPatientCreateWithoutMonitoringPlanInput = {
     id?: string
     enrollmentDate?: Date | string
     exitDate?: Date | string | null
     isActive?: boolean
-    patient: PatientCreateNestedOneWithoutStudiesInput
-    observations?: ObservationCreateNestedManyWithoutStudyPatientInput
-    treatments?: TreatmentCreateNestedManyWithoutStudyPatientInput
+    patient: PatientCreateNestedOneWithoutMonitoringPlansInput
+    observations?: ObservationCreateNestedManyWithoutMonitoringPlanPatientInput
+    treatments?: TreatmentCreateNestedManyWithoutMonitoringPlanPatientInput
   }
 
-  export type StudyPatientUncheckedCreateWithoutStudyInput = {
+  export type MonitoringPlanPatientUncheckedCreateWithoutMonitoringPlanInput = {
     id?: string
     patientId: string
     enrollmentDate?: Date | string
     exitDate?: Date | string | null
     isActive?: boolean
-    observations?: ObservationUncheckedCreateNestedManyWithoutStudyPatientInput
-    treatments?: TreatmentUncheckedCreateNestedManyWithoutStudyPatientInput
+    observations?: ObservationUncheckedCreateNestedManyWithoutMonitoringPlanPatientInput
+    treatments?: TreatmentUncheckedCreateNestedManyWithoutMonitoringPlanPatientInput
   }
 
-  export type StudyPatientCreateOrConnectWithoutStudyInput = {
-    where: StudyPatientWhereUniqueInput
-    create: XOR<StudyPatientCreateWithoutStudyInput, StudyPatientUncheckedCreateWithoutStudyInput>
+  export type MonitoringPlanPatientCreateOrConnectWithoutMonitoringPlanInput = {
+    where: MonitoringPlanPatientWhereUniqueInput
+    create: XOR<MonitoringPlanPatientCreateWithoutMonitoringPlanInput, MonitoringPlanPatientUncheckedCreateWithoutMonitoringPlanInput>
   }
 
-  export type StudyPatientCreateManyStudyInputEnvelope = {
-    data: StudyPatientCreateManyStudyInput | StudyPatientCreateManyStudyInput[]
+  export type MonitoringPlanPatientCreateManyMonitoringPlanInputEnvelope = {
+    data: MonitoringPlanPatientCreateManyMonitoringPlanInput | MonitoringPlanPatientCreateManyMonitoringPlanInput[]
     skipDuplicates?: boolean
   }
 
-  export type StudyAssignmentCreateWithoutStudyInput = {
+  export type MonitoringPlanAssignmentCreateWithoutMonitoringPlanInput = {
     id?: string
     assignedAt?: Date | string
-    role: $Enums.StudyRole
-    user: UserCreateNestedOneWithoutAssignedStudiesInput
+    role: $Enums.MonitoringPlanRole
+    user: UserCreateNestedOneWithoutAssignedMonitoringPlansInput
   }
 
-  export type StudyAssignmentUncheckedCreateWithoutStudyInput = {
+  export type MonitoringPlanAssignmentUncheckedCreateWithoutMonitoringPlanInput = {
     id?: string
     userId: string
     assignedAt?: Date | string
-    role: $Enums.StudyRole
+    role: $Enums.MonitoringPlanRole
   }
 
-  export type StudyAssignmentCreateOrConnectWithoutStudyInput = {
-    where: StudyAssignmentWhereUniqueInput
-    create: XOR<StudyAssignmentCreateWithoutStudyInput, StudyAssignmentUncheckedCreateWithoutStudyInput>
+  export type MonitoringPlanAssignmentCreateOrConnectWithoutMonitoringPlanInput = {
+    where: MonitoringPlanAssignmentWhereUniqueInput
+    create: XOR<MonitoringPlanAssignmentCreateWithoutMonitoringPlanInput, MonitoringPlanAssignmentUncheckedCreateWithoutMonitoringPlanInput>
   }
 
-  export type StudyAssignmentCreateManyStudyInputEnvelope = {
-    data: StudyAssignmentCreateManyStudyInput | StudyAssignmentCreateManyStudyInput[]
+  export type MonitoringPlanAssignmentCreateManyMonitoringPlanInputEnvelope = {
+    data: MonitoringPlanAssignmentCreateManyMonitoringPlanInput | MonitoringPlanAssignmentCreateManyMonitoringPlanInput[]
     skipDuplicates?: boolean
   }
 
-  export type SymptomTemplateCreateWithoutStudyInput = {
+  export type SymptomTemplateCreateWithoutMonitoringPlanInput = {
     id?: string
     name: string
     description?: string | null
@@ -30099,7 +30133,7 @@ export namespace Prisma {
     alertThresholds?: AlertThresholdCreateNestedManyWithoutSymptomTemplateInput
   }
 
-  export type SymptomTemplateUncheckedCreateWithoutStudyInput = {
+  export type SymptomTemplateUncheckedCreateWithoutMonitoringPlanInput = {
     id?: string
     name: string
     description?: string | null
@@ -30115,17 +30149,17 @@ export namespace Prisma {
     alertThresholds?: AlertThresholdUncheckedCreateNestedManyWithoutSymptomTemplateInput
   }
 
-  export type SymptomTemplateCreateOrConnectWithoutStudyInput = {
+  export type SymptomTemplateCreateOrConnectWithoutMonitoringPlanInput = {
     where: SymptomTemplateWhereUniqueInput
-    create: XOR<SymptomTemplateCreateWithoutStudyInput, SymptomTemplateUncheckedCreateWithoutStudyInput>
+    create: XOR<SymptomTemplateCreateWithoutMonitoringPlanInput, SymptomTemplateUncheckedCreateWithoutMonitoringPlanInput>
   }
 
-  export type SymptomTemplateCreateManyStudyInputEnvelope = {
-    data: SymptomTemplateCreateManyStudyInput | SymptomTemplateCreateManyStudyInput[]
+  export type SymptomTemplateCreateManyMonitoringPlanInputEnvelope = {
+    data: SymptomTemplateCreateManyMonitoringPlanInput | SymptomTemplateCreateManyMonitoringPlanInput[]
     skipDuplicates?: boolean
   }
 
-  export type TreatmentTemplateCreateWithoutStudyInput = {
+  export type TreatmentTemplateCreateWithoutMonitoringPlanInput = {
     id?: string
     name: string
     description?: string | null
@@ -30135,7 +30169,7 @@ export namespace Prisma {
     treatments?: TreatmentCreateNestedManyWithoutTemplateInput
   }
 
-  export type TreatmentTemplateUncheckedCreateWithoutStudyInput = {
+  export type TreatmentTemplateUncheckedCreateWithoutMonitoringPlanInput = {
     id?: string
     name: string
     description?: string | null
@@ -30145,52 +30179,52 @@ export namespace Prisma {
     treatments?: TreatmentUncheckedCreateNestedManyWithoutTemplateInput
   }
 
-  export type TreatmentTemplateCreateOrConnectWithoutStudyInput = {
+  export type TreatmentTemplateCreateOrConnectWithoutMonitoringPlanInput = {
     where: TreatmentTemplateWhereUniqueInput
-    create: XOR<TreatmentTemplateCreateWithoutStudyInput, TreatmentTemplateUncheckedCreateWithoutStudyInput>
+    create: XOR<TreatmentTemplateCreateWithoutMonitoringPlanInput, TreatmentTemplateUncheckedCreateWithoutMonitoringPlanInput>
   }
 
-  export type TreatmentTemplateCreateManyStudyInputEnvelope = {
-    data: TreatmentTemplateCreateManyStudyInput | TreatmentTemplateCreateManyStudyInput[]
+  export type TreatmentTemplateCreateManyMonitoringPlanInputEnvelope = {
+    data: TreatmentTemplateCreateManyMonitoringPlanInput | TreatmentTemplateCreateManyMonitoringPlanInput[]
     skipDuplicates?: boolean
   }
 
-  export type StudyNoteCreateWithoutStudyInput = {
+  export type MonitoringPlanNoteCreateWithoutMonitoringPlanInput = {
     id?: string
     content: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
-  export type StudyNoteUncheckedCreateWithoutStudyInput = {
+  export type MonitoringPlanNoteUncheckedCreateWithoutMonitoringPlanInput = {
     id?: string
     content: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
-  export type StudyNoteCreateOrConnectWithoutStudyInput = {
-    where: StudyNoteWhereUniqueInput
-    create: XOR<StudyNoteCreateWithoutStudyInput, StudyNoteUncheckedCreateWithoutStudyInput>
+  export type MonitoringPlanNoteCreateOrConnectWithoutMonitoringPlanInput = {
+    where: MonitoringPlanNoteWhereUniqueInput
+    create: XOR<MonitoringPlanNoteCreateWithoutMonitoringPlanInput, MonitoringPlanNoteUncheckedCreateWithoutMonitoringPlanInput>
   }
 
-  export type StudyNoteCreateManyStudyInputEnvelope = {
-    data: StudyNoteCreateManyStudyInput | StudyNoteCreateManyStudyInput[]
+  export type MonitoringPlanNoteCreateManyMonitoringPlanInputEnvelope = {
+    data: MonitoringPlanNoteCreateManyMonitoringPlanInput | MonitoringPlanNoteCreateManyMonitoringPlanInput[]
     skipDuplicates?: boolean
   }
 
-  export type PracticeUpsertWithoutStudiesInput = {
-    update: XOR<PracticeUpdateWithoutStudiesInput, PracticeUncheckedUpdateWithoutStudiesInput>
-    create: XOR<PracticeCreateWithoutStudiesInput, PracticeUncheckedCreateWithoutStudiesInput>
+  export type PracticeUpsertWithoutMonitoringPlansInput = {
+    update: XOR<PracticeUpdateWithoutMonitoringPlansInput, PracticeUncheckedUpdateWithoutMonitoringPlansInput>
+    create: XOR<PracticeCreateWithoutMonitoringPlansInput, PracticeUncheckedCreateWithoutMonitoringPlansInput>
     where?: PracticeWhereInput
   }
 
-  export type PracticeUpdateToOneWithWhereWithoutStudiesInput = {
+  export type PracticeUpdateToOneWithWhereWithoutMonitoringPlansInput = {
     where?: PracticeWhereInput
-    data: XOR<PracticeUpdateWithoutStudiesInput, PracticeUncheckedUpdateWithoutStudiesInput>
+    data: XOR<PracticeUpdateWithoutMonitoringPlansInput, PracticeUncheckedUpdateWithoutMonitoringPlansInput>
   }
 
-  export type PracticeUpdateWithoutStudiesInput = {
+  export type PracticeUpdateWithoutMonitoringPlansInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     address?: NullableStringFieldUpdateOperationsInput | string | null
@@ -30212,7 +30246,7 @@ export namespace Prisma {
     subscriptionHistory?: SubscriptionHistoryUpdateManyWithoutPracticeNestedInput
   }
 
-  export type PracticeUncheckedUpdateWithoutStudiesInput = {
+  export type PracticeUncheckedUpdateWithoutMonitoringPlansInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     address?: NullableStringFieldUpdateOperationsInput | string | null
@@ -30234,18 +30268,18 @@ export namespace Prisma {
     subscriptionHistory?: SubscriptionHistoryUncheckedUpdateManyWithoutPracticeNestedInput
   }
 
-  export type UserUpsertWithoutCreatedStudiesInput = {
-    update: XOR<UserUpdateWithoutCreatedStudiesInput, UserUncheckedUpdateWithoutCreatedStudiesInput>
-    create: XOR<UserCreateWithoutCreatedStudiesInput, UserUncheckedCreateWithoutCreatedStudiesInput>
+  export type UserUpsertWithoutCreatedMonitoringPlansInput = {
+    update: XOR<UserUpdateWithoutCreatedMonitoringPlansInput, UserUncheckedUpdateWithoutCreatedMonitoringPlansInput>
+    create: XOR<UserCreateWithoutCreatedMonitoringPlansInput, UserUncheckedCreateWithoutCreatedMonitoringPlansInput>
     where?: UserWhereInput
   }
 
-  export type UserUpdateToOneWithWhereWithoutCreatedStudiesInput = {
+  export type UserUpdateToOneWithWhereWithoutCreatedMonitoringPlansInput = {
     where?: UserWhereInput
-    data: XOR<UserUpdateWithoutCreatedStudiesInput, UserUncheckedUpdateWithoutCreatedStudiesInput>
+    data: XOR<UserUpdateWithoutCreatedMonitoringPlansInput, UserUncheckedUpdateWithoutCreatedMonitoringPlansInput>
   }
 
-  export type UserUpdateWithoutCreatedStudiesInput = {
+  export type UserUpdateWithoutCreatedMonitoringPlansInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
@@ -30258,14 +30292,14 @@ export namespace Prisma {
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     practice?: PracticeUpdateOneWithoutUsersNestedInput
-    assignedStudies?: StudyAssignmentUpdateManyWithoutUserNestedInput
+    assignedMonitoringPlans?: MonitoringPlanAssignmentUpdateManyWithoutUserNestedInput
     createdTreatments?: TreatmentUpdateManyWithoutCreatedByNestedInput
     observations?: ObservationUpdateManyWithoutRecordedByNestedInput
     createdPatients?: PatientUpdateManyWithoutCreatedByNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
   }
 
-  export type UserUncheckedUpdateWithoutCreatedStudiesInput = {
+  export type UserUncheckedUpdateWithoutCreatedMonitoringPlansInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
@@ -30278,59 +30312,59 @@ export namespace Prisma {
     practiceId?: NullableStringFieldUpdateOperationsInput | string | null
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    assignedStudies?: StudyAssignmentUncheckedUpdateManyWithoutUserNestedInput
+    assignedMonitoringPlans?: MonitoringPlanAssignmentUncheckedUpdateManyWithoutUserNestedInput
     createdTreatments?: TreatmentUncheckedUpdateManyWithoutCreatedByNestedInput
     observations?: ObservationUncheckedUpdateManyWithoutRecordedByNestedInput
     createdPatients?: PatientUncheckedUpdateManyWithoutCreatedByNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
   }
 
-  export type StudyPatientUpsertWithWhereUniqueWithoutStudyInput = {
-    where: StudyPatientWhereUniqueInput
-    update: XOR<StudyPatientUpdateWithoutStudyInput, StudyPatientUncheckedUpdateWithoutStudyInput>
-    create: XOR<StudyPatientCreateWithoutStudyInput, StudyPatientUncheckedCreateWithoutStudyInput>
+  export type MonitoringPlanPatientUpsertWithWhereUniqueWithoutMonitoringPlanInput = {
+    where: MonitoringPlanPatientWhereUniqueInput
+    update: XOR<MonitoringPlanPatientUpdateWithoutMonitoringPlanInput, MonitoringPlanPatientUncheckedUpdateWithoutMonitoringPlanInput>
+    create: XOR<MonitoringPlanPatientCreateWithoutMonitoringPlanInput, MonitoringPlanPatientUncheckedCreateWithoutMonitoringPlanInput>
   }
 
-  export type StudyPatientUpdateWithWhereUniqueWithoutStudyInput = {
-    where: StudyPatientWhereUniqueInput
-    data: XOR<StudyPatientUpdateWithoutStudyInput, StudyPatientUncheckedUpdateWithoutStudyInput>
+  export type MonitoringPlanPatientUpdateWithWhereUniqueWithoutMonitoringPlanInput = {
+    where: MonitoringPlanPatientWhereUniqueInput
+    data: XOR<MonitoringPlanPatientUpdateWithoutMonitoringPlanInput, MonitoringPlanPatientUncheckedUpdateWithoutMonitoringPlanInput>
   }
 
-  export type StudyPatientUpdateManyWithWhereWithoutStudyInput = {
-    where: StudyPatientScalarWhereInput
-    data: XOR<StudyPatientUpdateManyMutationInput, StudyPatientUncheckedUpdateManyWithoutStudyInput>
+  export type MonitoringPlanPatientUpdateManyWithWhereWithoutMonitoringPlanInput = {
+    where: MonitoringPlanPatientScalarWhereInput
+    data: XOR<MonitoringPlanPatientUpdateManyMutationInput, MonitoringPlanPatientUncheckedUpdateManyWithoutMonitoringPlanInput>
   }
 
-  export type StudyAssignmentUpsertWithWhereUniqueWithoutStudyInput = {
-    where: StudyAssignmentWhereUniqueInput
-    update: XOR<StudyAssignmentUpdateWithoutStudyInput, StudyAssignmentUncheckedUpdateWithoutStudyInput>
-    create: XOR<StudyAssignmentCreateWithoutStudyInput, StudyAssignmentUncheckedCreateWithoutStudyInput>
+  export type MonitoringPlanAssignmentUpsertWithWhereUniqueWithoutMonitoringPlanInput = {
+    where: MonitoringPlanAssignmentWhereUniqueInput
+    update: XOR<MonitoringPlanAssignmentUpdateWithoutMonitoringPlanInput, MonitoringPlanAssignmentUncheckedUpdateWithoutMonitoringPlanInput>
+    create: XOR<MonitoringPlanAssignmentCreateWithoutMonitoringPlanInput, MonitoringPlanAssignmentUncheckedCreateWithoutMonitoringPlanInput>
   }
 
-  export type StudyAssignmentUpdateWithWhereUniqueWithoutStudyInput = {
-    where: StudyAssignmentWhereUniqueInput
-    data: XOR<StudyAssignmentUpdateWithoutStudyInput, StudyAssignmentUncheckedUpdateWithoutStudyInput>
+  export type MonitoringPlanAssignmentUpdateWithWhereUniqueWithoutMonitoringPlanInput = {
+    where: MonitoringPlanAssignmentWhereUniqueInput
+    data: XOR<MonitoringPlanAssignmentUpdateWithoutMonitoringPlanInput, MonitoringPlanAssignmentUncheckedUpdateWithoutMonitoringPlanInput>
   }
 
-  export type StudyAssignmentUpdateManyWithWhereWithoutStudyInput = {
-    where: StudyAssignmentScalarWhereInput
-    data: XOR<StudyAssignmentUpdateManyMutationInput, StudyAssignmentUncheckedUpdateManyWithoutStudyInput>
+  export type MonitoringPlanAssignmentUpdateManyWithWhereWithoutMonitoringPlanInput = {
+    where: MonitoringPlanAssignmentScalarWhereInput
+    data: XOR<MonitoringPlanAssignmentUpdateManyMutationInput, MonitoringPlanAssignmentUncheckedUpdateManyWithoutMonitoringPlanInput>
   }
 
-  export type SymptomTemplateUpsertWithWhereUniqueWithoutStudyInput = {
+  export type SymptomTemplateUpsertWithWhereUniqueWithoutMonitoringPlanInput = {
     where: SymptomTemplateWhereUniqueInput
-    update: XOR<SymptomTemplateUpdateWithoutStudyInput, SymptomTemplateUncheckedUpdateWithoutStudyInput>
-    create: XOR<SymptomTemplateCreateWithoutStudyInput, SymptomTemplateUncheckedCreateWithoutStudyInput>
+    update: XOR<SymptomTemplateUpdateWithoutMonitoringPlanInput, SymptomTemplateUncheckedUpdateWithoutMonitoringPlanInput>
+    create: XOR<SymptomTemplateCreateWithoutMonitoringPlanInput, SymptomTemplateUncheckedCreateWithoutMonitoringPlanInput>
   }
 
-  export type SymptomTemplateUpdateWithWhereUniqueWithoutStudyInput = {
+  export type SymptomTemplateUpdateWithWhereUniqueWithoutMonitoringPlanInput = {
     where: SymptomTemplateWhereUniqueInput
-    data: XOR<SymptomTemplateUpdateWithoutStudyInput, SymptomTemplateUncheckedUpdateWithoutStudyInput>
+    data: XOR<SymptomTemplateUpdateWithoutMonitoringPlanInput, SymptomTemplateUncheckedUpdateWithoutMonitoringPlanInput>
   }
 
-  export type SymptomTemplateUpdateManyWithWhereWithoutStudyInput = {
+  export type SymptomTemplateUpdateManyWithWhereWithoutMonitoringPlanInput = {
     where: SymptomTemplateScalarWhereInput
-    data: XOR<SymptomTemplateUpdateManyMutationInput, SymptomTemplateUncheckedUpdateManyWithoutStudyInput>
+    data: XOR<SymptomTemplateUpdateManyMutationInput, SymptomTemplateUncheckedUpdateManyWithoutMonitoringPlanInput>
   }
 
   export type SymptomTemplateScalarWhereInput = {
@@ -30346,25 +30380,25 @@ export namespace Prisma {
     minValue?: FloatNullableFilter<"SymptomTemplate"> | number | null
     maxValue?: FloatNullableFilter<"SymptomTemplate"> | number | null
     options?: JsonNullableFilter<"SymptomTemplate">
-    studyId?: StringFilter<"SymptomTemplate"> | string
+    monitoringPlanId?: StringFilter<"SymptomTemplate"> | string
     createdAt?: DateTimeFilter<"SymptomTemplate"> | Date | string
     updatedAt?: DateTimeFilter<"SymptomTemplate"> | Date | string
   }
 
-  export type TreatmentTemplateUpsertWithWhereUniqueWithoutStudyInput = {
+  export type TreatmentTemplateUpsertWithWhereUniqueWithoutMonitoringPlanInput = {
     where: TreatmentTemplateWhereUniqueInput
-    update: XOR<TreatmentTemplateUpdateWithoutStudyInput, TreatmentTemplateUncheckedUpdateWithoutStudyInput>
-    create: XOR<TreatmentTemplateCreateWithoutStudyInput, TreatmentTemplateUncheckedCreateWithoutStudyInput>
+    update: XOR<TreatmentTemplateUpdateWithoutMonitoringPlanInput, TreatmentTemplateUncheckedUpdateWithoutMonitoringPlanInput>
+    create: XOR<TreatmentTemplateCreateWithoutMonitoringPlanInput, TreatmentTemplateUncheckedCreateWithoutMonitoringPlanInput>
   }
 
-  export type TreatmentTemplateUpdateWithWhereUniqueWithoutStudyInput = {
+  export type TreatmentTemplateUpdateWithWhereUniqueWithoutMonitoringPlanInput = {
     where: TreatmentTemplateWhereUniqueInput
-    data: XOR<TreatmentTemplateUpdateWithoutStudyInput, TreatmentTemplateUncheckedUpdateWithoutStudyInput>
+    data: XOR<TreatmentTemplateUpdateWithoutMonitoringPlanInput, TreatmentTemplateUncheckedUpdateWithoutMonitoringPlanInput>
   }
 
-  export type TreatmentTemplateUpdateManyWithWhereWithoutStudyInput = {
+  export type TreatmentTemplateUpdateManyWithWhereWithoutMonitoringPlanInput = {
     where: TreatmentTemplateScalarWhereInput
-    data: XOR<TreatmentTemplateUpdateManyMutationInput, TreatmentTemplateUncheckedUpdateManyWithoutStudyInput>
+    data: XOR<TreatmentTemplateUpdateManyMutationInput, TreatmentTemplateUncheckedUpdateManyWithoutMonitoringPlanInput>
   }
 
   export type TreatmentTemplateScalarWhereInput = {
@@ -30375,39 +30409,39 @@ export namespace Prisma {
     name?: StringFilter<"TreatmentTemplate"> | string
     description?: StringNullableFilter<"TreatmentTemplate"> | string | null
     protocol?: JsonNullableFilter<"TreatmentTemplate">
-    studyId?: StringFilter<"TreatmentTemplate"> | string
+    monitoringPlanId?: StringFilter<"TreatmentTemplate"> | string
     createdAt?: DateTimeFilter<"TreatmentTemplate"> | Date | string
     updatedAt?: DateTimeFilter<"TreatmentTemplate"> | Date | string
   }
 
-  export type StudyNoteUpsertWithWhereUniqueWithoutStudyInput = {
-    where: StudyNoteWhereUniqueInput
-    update: XOR<StudyNoteUpdateWithoutStudyInput, StudyNoteUncheckedUpdateWithoutStudyInput>
-    create: XOR<StudyNoteCreateWithoutStudyInput, StudyNoteUncheckedCreateWithoutStudyInput>
+  export type MonitoringPlanNoteUpsertWithWhereUniqueWithoutMonitoringPlanInput = {
+    where: MonitoringPlanNoteWhereUniqueInput
+    update: XOR<MonitoringPlanNoteUpdateWithoutMonitoringPlanInput, MonitoringPlanNoteUncheckedUpdateWithoutMonitoringPlanInput>
+    create: XOR<MonitoringPlanNoteCreateWithoutMonitoringPlanInput, MonitoringPlanNoteUncheckedCreateWithoutMonitoringPlanInput>
   }
 
-  export type StudyNoteUpdateWithWhereUniqueWithoutStudyInput = {
-    where: StudyNoteWhereUniqueInput
-    data: XOR<StudyNoteUpdateWithoutStudyInput, StudyNoteUncheckedUpdateWithoutStudyInput>
+  export type MonitoringPlanNoteUpdateWithWhereUniqueWithoutMonitoringPlanInput = {
+    where: MonitoringPlanNoteWhereUniqueInput
+    data: XOR<MonitoringPlanNoteUpdateWithoutMonitoringPlanInput, MonitoringPlanNoteUncheckedUpdateWithoutMonitoringPlanInput>
   }
 
-  export type StudyNoteUpdateManyWithWhereWithoutStudyInput = {
-    where: StudyNoteScalarWhereInput
-    data: XOR<StudyNoteUpdateManyMutationInput, StudyNoteUncheckedUpdateManyWithoutStudyInput>
+  export type MonitoringPlanNoteUpdateManyWithWhereWithoutMonitoringPlanInput = {
+    where: MonitoringPlanNoteScalarWhereInput
+    data: XOR<MonitoringPlanNoteUpdateManyMutationInput, MonitoringPlanNoteUncheckedUpdateManyWithoutMonitoringPlanInput>
   }
 
-  export type StudyNoteScalarWhereInput = {
-    AND?: StudyNoteScalarWhereInput | StudyNoteScalarWhereInput[]
-    OR?: StudyNoteScalarWhereInput[]
-    NOT?: StudyNoteScalarWhereInput | StudyNoteScalarWhereInput[]
-    id?: StringFilter<"StudyNote"> | string
-    studyId?: StringFilter<"StudyNote"> | string
-    content?: StringFilter<"StudyNote"> | string
-    createdAt?: DateTimeFilter<"StudyNote"> | Date | string
-    updatedAt?: DateTimeFilter<"StudyNote"> | Date | string
+  export type MonitoringPlanNoteScalarWhereInput = {
+    AND?: MonitoringPlanNoteScalarWhereInput | MonitoringPlanNoteScalarWhereInput[]
+    OR?: MonitoringPlanNoteScalarWhereInput[]
+    NOT?: MonitoringPlanNoteScalarWhereInput | MonitoringPlanNoteScalarWhereInput[]
+    id?: StringFilter<"MonitoringPlanNote"> | string
+    monitoringPlanId?: StringFilter<"MonitoringPlanNote"> | string
+    content?: StringFilter<"MonitoringPlanNote"> | string
+    createdAt?: DateTimeFilter<"MonitoringPlanNote"> | Date | string
+    updatedAt?: DateTimeFilter<"MonitoringPlanNote"> | Date | string
   }
 
-  export type StudyCreateWithoutPatientsInput = {
+  export type MonitoringPlanCreateWithoutPatientsInput = {
     id?: string
     title: string
     description?: string | null
@@ -30416,17 +30450,18 @@ export namespace Prisma {
     updatedAt?: Date | string
     startDate?: Date | string | null
     endDate?: Date | string | null
-    status?: $Enums.StudyStatus
+    status?: $Enums.MonitoringPlanStatus
     isTemplate?: boolean
-    practice: PracticeCreateNestedOneWithoutStudiesInput
-    createdBy: UserCreateNestedOneWithoutCreatedStudiesInput
-    assignedUsers?: StudyAssignmentCreateNestedManyWithoutStudyInput
-    symptomTemplates?: SymptomTemplateCreateNestedManyWithoutStudyInput
-    treatmentTemplates?: TreatmentTemplateCreateNestedManyWithoutStudyInput
-    notes?: StudyNoteCreateNestedManyWithoutStudyInput
+    shareToken?: string | null
+    practice: PracticeCreateNestedOneWithoutMonitoringPlansInput
+    createdBy: UserCreateNestedOneWithoutCreatedMonitoringPlansInput
+    assignedUsers?: MonitoringPlanAssignmentCreateNestedManyWithoutMonitoringPlanInput
+    symptomTemplates?: SymptomTemplateCreateNestedManyWithoutMonitoringPlanInput
+    treatmentTemplates?: TreatmentTemplateCreateNestedManyWithoutMonitoringPlanInput
+    notes?: MonitoringPlanNoteCreateNestedManyWithoutMonitoringPlanInput
   }
 
-  export type StudyUncheckedCreateWithoutPatientsInput = {
+  export type MonitoringPlanUncheckedCreateWithoutPatientsInput = {
     id?: string
     title: string
     description?: string | null
@@ -30437,20 +30472,21 @@ export namespace Prisma {
     updatedAt?: Date | string
     startDate?: Date | string | null
     endDate?: Date | string | null
-    status?: $Enums.StudyStatus
+    status?: $Enums.MonitoringPlanStatus
     isTemplate?: boolean
-    assignedUsers?: StudyAssignmentUncheckedCreateNestedManyWithoutStudyInput
-    symptomTemplates?: SymptomTemplateUncheckedCreateNestedManyWithoutStudyInput
-    treatmentTemplates?: TreatmentTemplateUncheckedCreateNestedManyWithoutStudyInput
-    notes?: StudyNoteUncheckedCreateNestedManyWithoutStudyInput
+    shareToken?: string | null
+    assignedUsers?: MonitoringPlanAssignmentUncheckedCreateNestedManyWithoutMonitoringPlanInput
+    symptomTemplates?: SymptomTemplateUncheckedCreateNestedManyWithoutMonitoringPlanInput
+    treatmentTemplates?: TreatmentTemplateUncheckedCreateNestedManyWithoutMonitoringPlanInput
+    notes?: MonitoringPlanNoteUncheckedCreateNestedManyWithoutMonitoringPlanInput
   }
 
-  export type StudyCreateOrConnectWithoutPatientsInput = {
-    where: StudyWhereUniqueInput
-    create: XOR<StudyCreateWithoutPatientsInput, StudyUncheckedCreateWithoutPatientsInput>
+  export type MonitoringPlanCreateOrConnectWithoutPatientsInput = {
+    where: MonitoringPlanWhereUniqueInput
+    create: XOR<MonitoringPlanCreateWithoutPatientsInput, MonitoringPlanUncheckedCreateWithoutPatientsInput>
   }
 
-  export type PatientCreateWithoutStudiesInput = {
+  export type PatientCreateWithoutMonitoringPlansInput = {
     id?: string
     name: string
     species: string
@@ -30473,7 +30509,7 @@ export namespace Prisma {
     files?: FileCreateNestedManyWithoutPatientInput
   }
 
-  export type PatientUncheckedCreateWithoutStudiesInput = {
+  export type PatientUncheckedCreateWithoutMonitoringPlansInput = {
     id?: string
     name: string
     species: string
@@ -30496,12 +30532,12 @@ export namespace Prisma {
     files?: FileUncheckedCreateNestedManyWithoutPatientInput
   }
 
-  export type PatientCreateOrConnectWithoutStudiesInput = {
+  export type PatientCreateOrConnectWithoutMonitoringPlansInput = {
     where: PatientWhereUniqueInput
-    create: XOR<PatientCreateWithoutStudiesInput, PatientUncheckedCreateWithoutStudiesInput>
+    create: XOR<PatientCreateWithoutMonitoringPlansInput, PatientUncheckedCreateWithoutMonitoringPlansInput>
   }
 
-  export type ObservationCreateWithoutStudyPatientInput = {
+  export type ObservationCreateWithoutMonitoringPlanPatientInput = {
     id?: string
     recordedAt?: Date | string
     value: JsonNullValueInput | InputJsonValue
@@ -30513,7 +30549,7 @@ export namespace Prisma {
     alerts?: AlertCreateNestedManyWithoutObservationInput
   }
 
-  export type ObservationUncheckedCreateWithoutStudyPatientInput = {
+  export type ObservationUncheckedCreateWithoutMonitoringPlanPatientInput = {
     id?: string
     symptomTemplateId: string
     patientId: string
@@ -30525,17 +30561,17 @@ export namespace Prisma {
     alerts?: AlertUncheckedCreateNestedManyWithoutObservationInput
   }
 
-  export type ObservationCreateOrConnectWithoutStudyPatientInput = {
+  export type ObservationCreateOrConnectWithoutMonitoringPlanPatientInput = {
     where: ObservationWhereUniqueInput
-    create: XOR<ObservationCreateWithoutStudyPatientInput, ObservationUncheckedCreateWithoutStudyPatientInput>
+    create: XOR<ObservationCreateWithoutMonitoringPlanPatientInput, ObservationUncheckedCreateWithoutMonitoringPlanPatientInput>
   }
 
-  export type ObservationCreateManyStudyPatientInputEnvelope = {
-    data: ObservationCreateManyStudyPatientInput | ObservationCreateManyStudyPatientInput[]
+  export type ObservationCreateManyMonitoringPlanPatientInputEnvelope = {
+    data: ObservationCreateManyMonitoringPlanPatientInput | ObservationCreateManyMonitoringPlanPatientInput[]
     skipDuplicates?: boolean
   }
 
-  export type TreatmentCreateWithoutStudyPatientInput = {
+  export type TreatmentCreateWithoutMonitoringPlanPatientInput = {
     id?: string
     createdAt?: Date | string
     administeredAt: Date | string
@@ -30549,7 +30585,7 @@ export namespace Prisma {
     files?: FileCreateNestedManyWithoutTreatmentInput
   }
 
-  export type TreatmentUncheckedCreateWithoutStudyPatientInput = {
+  export type TreatmentUncheckedCreateWithoutMonitoringPlanPatientInput = {
     id?: string
     templateId?: string | null
     patientId: string
@@ -30563,28 +30599,28 @@ export namespace Prisma {
     files?: FileUncheckedCreateNestedManyWithoutTreatmentInput
   }
 
-  export type TreatmentCreateOrConnectWithoutStudyPatientInput = {
+  export type TreatmentCreateOrConnectWithoutMonitoringPlanPatientInput = {
     where: TreatmentWhereUniqueInput
-    create: XOR<TreatmentCreateWithoutStudyPatientInput, TreatmentUncheckedCreateWithoutStudyPatientInput>
+    create: XOR<TreatmentCreateWithoutMonitoringPlanPatientInput, TreatmentUncheckedCreateWithoutMonitoringPlanPatientInput>
   }
 
-  export type TreatmentCreateManyStudyPatientInputEnvelope = {
-    data: TreatmentCreateManyStudyPatientInput | TreatmentCreateManyStudyPatientInput[]
+  export type TreatmentCreateManyMonitoringPlanPatientInputEnvelope = {
+    data: TreatmentCreateManyMonitoringPlanPatientInput | TreatmentCreateManyMonitoringPlanPatientInput[]
     skipDuplicates?: boolean
   }
 
-  export type StudyUpsertWithoutPatientsInput = {
-    update: XOR<StudyUpdateWithoutPatientsInput, StudyUncheckedUpdateWithoutPatientsInput>
-    create: XOR<StudyCreateWithoutPatientsInput, StudyUncheckedCreateWithoutPatientsInput>
-    where?: StudyWhereInput
+  export type MonitoringPlanUpsertWithoutPatientsInput = {
+    update: XOR<MonitoringPlanUpdateWithoutPatientsInput, MonitoringPlanUncheckedUpdateWithoutPatientsInput>
+    create: XOR<MonitoringPlanCreateWithoutPatientsInput, MonitoringPlanUncheckedCreateWithoutPatientsInput>
+    where?: MonitoringPlanWhereInput
   }
 
-  export type StudyUpdateToOneWithWhereWithoutPatientsInput = {
-    where?: StudyWhereInput
-    data: XOR<StudyUpdateWithoutPatientsInput, StudyUncheckedUpdateWithoutPatientsInput>
+  export type MonitoringPlanUpdateToOneWithWhereWithoutPatientsInput = {
+    where?: MonitoringPlanWhereInput
+    data: XOR<MonitoringPlanUpdateWithoutPatientsInput, MonitoringPlanUncheckedUpdateWithoutPatientsInput>
   }
 
-  export type StudyUpdateWithoutPatientsInput = {
+  export type MonitoringPlanUpdateWithoutPatientsInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -30593,17 +30629,18 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    status?: EnumStudyStatusFieldUpdateOperationsInput | $Enums.StudyStatus
+    status?: EnumMonitoringPlanStatusFieldUpdateOperationsInput | $Enums.MonitoringPlanStatus
     isTemplate?: BoolFieldUpdateOperationsInput | boolean
-    practice?: PracticeUpdateOneRequiredWithoutStudiesNestedInput
-    createdBy?: UserUpdateOneRequiredWithoutCreatedStudiesNestedInput
-    assignedUsers?: StudyAssignmentUpdateManyWithoutStudyNestedInput
-    symptomTemplates?: SymptomTemplateUpdateManyWithoutStudyNestedInput
-    treatmentTemplates?: TreatmentTemplateUpdateManyWithoutStudyNestedInput
-    notes?: StudyNoteUpdateManyWithoutStudyNestedInput
+    shareToken?: NullableStringFieldUpdateOperationsInput | string | null
+    practice?: PracticeUpdateOneRequiredWithoutMonitoringPlansNestedInput
+    createdBy?: UserUpdateOneRequiredWithoutCreatedMonitoringPlansNestedInput
+    assignedUsers?: MonitoringPlanAssignmentUpdateManyWithoutMonitoringPlanNestedInput
+    symptomTemplates?: SymptomTemplateUpdateManyWithoutMonitoringPlanNestedInput
+    treatmentTemplates?: TreatmentTemplateUpdateManyWithoutMonitoringPlanNestedInput
+    notes?: MonitoringPlanNoteUpdateManyWithoutMonitoringPlanNestedInput
   }
 
-  export type StudyUncheckedUpdateWithoutPatientsInput = {
+  export type MonitoringPlanUncheckedUpdateWithoutPatientsInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -30614,26 +30651,27 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    status?: EnumStudyStatusFieldUpdateOperationsInput | $Enums.StudyStatus
+    status?: EnumMonitoringPlanStatusFieldUpdateOperationsInput | $Enums.MonitoringPlanStatus
     isTemplate?: BoolFieldUpdateOperationsInput | boolean
-    assignedUsers?: StudyAssignmentUncheckedUpdateManyWithoutStudyNestedInput
-    symptomTemplates?: SymptomTemplateUncheckedUpdateManyWithoutStudyNestedInput
-    treatmentTemplates?: TreatmentTemplateUncheckedUpdateManyWithoutStudyNestedInput
-    notes?: StudyNoteUncheckedUpdateManyWithoutStudyNestedInput
+    shareToken?: NullableStringFieldUpdateOperationsInput | string | null
+    assignedUsers?: MonitoringPlanAssignmentUncheckedUpdateManyWithoutMonitoringPlanNestedInput
+    symptomTemplates?: SymptomTemplateUncheckedUpdateManyWithoutMonitoringPlanNestedInput
+    treatmentTemplates?: TreatmentTemplateUncheckedUpdateManyWithoutMonitoringPlanNestedInput
+    notes?: MonitoringPlanNoteUncheckedUpdateManyWithoutMonitoringPlanNestedInput
   }
 
-  export type PatientUpsertWithoutStudiesInput = {
-    update: XOR<PatientUpdateWithoutStudiesInput, PatientUncheckedUpdateWithoutStudiesInput>
-    create: XOR<PatientCreateWithoutStudiesInput, PatientUncheckedCreateWithoutStudiesInput>
+  export type PatientUpsertWithoutMonitoringPlansInput = {
+    update: XOR<PatientUpdateWithoutMonitoringPlansInput, PatientUncheckedUpdateWithoutMonitoringPlansInput>
+    create: XOR<PatientCreateWithoutMonitoringPlansInput, PatientUncheckedCreateWithoutMonitoringPlansInput>
     where?: PatientWhereInput
   }
 
-  export type PatientUpdateToOneWithWhereWithoutStudiesInput = {
+  export type PatientUpdateToOneWithWhereWithoutMonitoringPlansInput = {
     where?: PatientWhereInput
-    data: XOR<PatientUpdateWithoutStudiesInput, PatientUncheckedUpdateWithoutStudiesInput>
+    data: XOR<PatientUpdateWithoutMonitoringPlansInput, PatientUncheckedUpdateWithoutMonitoringPlansInput>
   }
 
-  export type PatientUpdateWithoutStudiesInput = {
+  export type PatientUpdateWithoutMonitoringPlansInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     species?: StringFieldUpdateOperationsInput | string
@@ -30656,7 +30694,7 @@ export namespace Prisma {
     files?: FileUpdateManyWithoutPatientNestedInput
   }
 
-  export type PatientUncheckedUpdateWithoutStudiesInput = {
+  export type PatientUncheckedUpdateWithoutMonitoringPlansInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     species?: StringFieldUpdateOperationsInput | string
@@ -30679,39 +30717,39 @@ export namespace Prisma {
     files?: FileUncheckedUpdateManyWithoutPatientNestedInput
   }
 
-  export type ObservationUpsertWithWhereUniqueWithoutStudyPatientInput = {
+  export type ObservationUpsertWithWhereUniqueWithoutMonitoringPlanPatientInput = {
     where: ObservationWhereUniqueInput
-    update: XOR<ObservationUpdateWithoutStudyPatientInput, ObservationUncheckedUpdateWithoutStudyPatientInput>
-    create: XOR<ObservationCreateWithoutStudyPatientInput, ObservationUncheckedCreateWithoutStudyPatientInput>
+    update: XOR<ObservationUpdateWithoutMonitoringPlanPatientInput, ObservationUncheckedUpdateWithoutMonitoringPlanPatientInput>
+    create: XOR<ObservationCreateWithoutMonitoringPlanPatientInput, ObservationUncheckedCreateWithoutMonitoringPlanPatientInput>
   }
 
-  export type ObservationUpdateWithWhereUniqueWithoutStudyPatientInput = {
+  export type ObservationUpdateWithWhereUniqueWithoutMonitoringPlanPatientInput = {
     where: ObservationWhereUniqueInput
-    data: XOR<ObservationUpdateWithoutStudyPatientInput, ObservationUncheckedUpdateWithoutStudyPatientInput>
+    data: XOR<ObservationUpdateWithoutMonitoringPlanPatientInput, ObservationUncheckedUpdateWithoutMonitoringPlanPatientInput>
   }
 
-  export type ObservationUpdateManyWithWhereWithoutStudyPatientInput = {
+  export type ObservationUpdateManyWithWhereWithoutMonitoringPlanPatientInput = {
     where: ObservationScalarWhereInput
-    data: XOR<ObservationUpdateManyMutationInput, ObservationUncheckedUpdateManyWithoutStudyPatientInput>
+    data: XOR<ObservationUpdateManyMutationInput, ObservationUncheckedUpdateManyWithoutMonitoringPlanPatientInput>
   }
 
-  export type TreatmentUpsertWithWhereUniqueWithoutStudyPatientInput = {
+  export type TreatmentUpsertWithWhereUniqueWithoutMonitoringPlanPatientInput = {
     where: TreatmentWhereUniqueInput
-    update: XOR<TreatmentUpdateWithoutStudyPatientInput, TreatmentUncheckedUpdateWithoutStudyPatientInput>
-    create: XOR<TreatmentCreateWithoutStudyPatientInput, TreatmentUncheckedCreateWithoutStudyPatientInput>
+    update: XOR<TreatmentUpdateWithoutMonitoringPlanPatientInput, TreatmentUncheckedUpdateWithoutMonitoringPlanPatientInput>
+    create: XOR<TreatmentCreateWithoutMonitoringPlanPatientInput, TreatmentUncheckedCreateWithoutMonitoringPlanPatientInput>
   }
 
-  export type TreatmentUpdateWithWhereUniqueWithoutStudyPatientInput = {
+  export type TreatmentUpdateWithWhereUniqueWithoutMonitoringPlanPatientInput = {
     where: TreatmentWhereUniqueInput
-    data: XOR<TreatmentUpdateWithoutStudyPatientInput, TreatmentUncheckedUpdateWithoutStudyPatientInput>
+    data: XOR<TreatmentUpdateWithoutMonitoringPlanPatientInput, TreatmentUncheckedUpdateWithoutMonitoringPlanPatientInput>
   }
 
-  export type TreatmentUpdateManyWithWhereWithoutStudyPatientInput = {
+  export type TreatmentUpdateManyWithWhereWithoutMonitoringPlanPatientInput = {
     where: TreatmentScalarWhereInput
-    data: XOR<TreatmentUpdateManyMutationInput, TreatmentUncheckedUpdateManyWithoutStudyPatientInput>
+    data: XOR<TreatmentUpdateManyMutationInput, TreatmentUncheckedUpdateManyWithoutMonitoringPlanPatientInput>
   }
 
-  export type StudyCreateWithoutAssignedUsersInput = {
+  export type MonitoringPlanCreateWithoutAssignedUsersInput = {
     id?: string
     title: string
     description?: string | null
@@ -30720,17 +30758,18 @@ export namespace Prisma {
     updatedAt?: Date | string
     startDate?: Date | string | null
     endDate?: Date | string | null
-    status?: $Enums.StudyStatus
+    status?: $Enums.MonitoringPlanStatus
     isTemplate?: boolean
-    practice: PracticeCreateNestedOneWithoutStudiesInput
-    createdBy: UserCreateNestedOneWithoutCreatedStudiesInput
-    patients?: StudyPatientCreateNestedManyWithoutStudyInput
-    symptomTemplates?: SymptomTemplateCreateNestedManyWithoutStudyInput
-    treatmentTemplates?: TreatmentTemplateCreateNestedManyWithoutStudyInput
-    notes?: StudyNoteCreateNestedManyWithoutStudyInput
+    shareToken?: string | null
+    practice: PracticeCreateNestedOneWithoutMonitoringPlansInput
+    createdBy: UserCreateNestedOneWithoutCreatedMonitoringPlansInput
+    patients?: MonitoringPlanPatientCreateNestedManyWithoutMonitoringPlanInput
+    symptomTemplates?: SymptomTemplateCreateNestedManyWithoutMonitoringPlanInput
+    treatmentTemplates?: TreatmentTemplateCreateNestedManyWithoutMonitoringPlanInput
+    notes?: MonitoringPlanNoteCreateNestedManyWithoutMonitoringPlanInput
   }
 
-  export type StudyUncheckedCreateWithoutAssignedUsersInput = {
+  export type MonitoringPlanUncheckedCreateWithoutAssignedUsersInput = {
     id?: string
     title: string
     description?: string | null
@@ -30741,20 +30780,21 @@ export namespace Prisma {
     updatedAt?: Date | string
     startDate?: Date | string | null
     endDate?: Date | string | null
-    status?: $Enums.StudyStatus
+    status?: $Enums.MonitoringPlanStatus
     isTemplate?: boolean
-    patients?: StudyPatientUncheckedCreateNestedManyWithoutStudyInput
-    symptomTemplates?: SymptomTemplateUncheckedCreateNestedManyWithoutStudyInput
-    treatmentTemplates?: TreatmentTemplateUncheckedCreateNestedManyWithoutStudyInput
-    notes?: StudyNoteUncheckedCreateNestedManyWithoutStudyInput
+    shareToken?: string | null
+    patients?: MonitoringPlanPatientUncheckedCreateNestedManyWithoutMonitoringPlanInput
+    symptomTemplates?: SymptomTemplateUncheckedCreateNestedManyWithoutMonitoringPlanInput
+    treatmentTemplates?: TreatmentTemplateUncheckedCreateNestedManyWithoutMonitoringPlanInput
+    notes?: MonitoringPlanNoteUncheckedCreateNestedManyWithoutMonitoringPlanInput
   }
 
-  export type StudyCreateOrConnectWithoutAssignedUsersInput = {
-    where: StudyWhereUniqueInput
-    create: XOR<StudyCreateWithoutAssignedUsersInput, StudyUncheckedCreateWithoutAssignedUsersInput>
+  export type MonitoringPlanCreateOrConnectWithoutAssignedUsersInput = {
+    where: MonitoringPlanWhereUniqueInput
+    create: XOR<MonitoringPlanCreateWithoutAssignedUsersInput, MonitoringPlanUncheckedCreateWithoutAssignedUsersInput>
   }
 
-  export type UserCreateWithoutAssignedStudiesInput = {
+  export type UserCreateWithoutAssignedMonitoringPlansInput = {
     id?: string
     email: string
     password: string
@@ -30767,14 +30807,14 @@ export namespace Prisma {
     resetToken?: string | null
     resetTokenExpiry?: Date | string | null
     practice?: PracticeCreateNestedOneWithoutUsersInput
-    createdStudies?: StudyCreateNestedManyWithoutCreatedByInput
+    createdMonitoringPlans?: MonitoringPlanCreateNestedManyWithoutCreatedByInput
     createdTreatments?: TreatmentCreateNestedManyWithoutCreatedByInput
     observations?: ObservationCreateNestedManyWithoutRecordedByInput
     createdPatients?: PatientCreateNestedManyWithoutCreatedByInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
   }
 
-  export type UserUncheckedCreateWithoutAssignedStudiesInput = {
+  export type UserUncheckedCreateWithoutAssignedMonitoringPlansInput = {
     id?: string
     email: string
     password: string
@@ -30787,30 +30827,30 @@ export namespace Prisma {
     practiceId?: string | null
     resetToken?: string | null
     resetTokenExpiry?: Date | string | null
-    createdStudies?: StudyUncheckedCreateNestedManyWithoutCreatedByInput
+    createdMonitoringPlans?: MonitoringPlanUncheckedCreateNestedManyWithoutCreatedByInput
     createdTreatments?: TreatmentUncheckedCreateNestedManyWithoutCreatedByInput
     observations?: ObservationUncheckedCreateNestedManyWithoutRecordedByInput
     createdPatients?: PatientUncheckedCreateNestedManyWithoutCreatedByInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
   }
 
-  export type UserCreateOrConnectWithoutAssignedStudiesInput = {
+  export type UserCreateOrConnectWithoutAssignedMonitoringPlansInput = {
     where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutAssignedStudiesInput, UserUncheckedCreateWithoutAssignedStudiesInput>
+    create: XOR<UserCreateWithoutAssignedMonitoringPlansInput, UserUncheckedCreateWithoutAssignedMonitoringPlansInput>
   }
 
-  export type StudyUpsertWithoutAssignedUsersInput = {
-    update: XOR<StudyUpdateWithoutAssignedUsersInput, StudyUncheckedUpdateWithoutAssignedUsersInput>
-    create: XOR<StudyCreateWithoutAssignedUsersInput, StudyUncheckedCreateWithoutAssignedUsersInput>
-    where?: StudyWhereInput
+  export type MonitoringPlanUpsertWithoutAssignedUsersInput = {
+    update: XOR<MonitoringPlanUpdateWithoutAssignedUsersInput, MonitoringPlanUncheckedUpdateWithoutAssignedUsersInput>
+    create: XOR<MonitoringPlanCreateWithoutAssignedUsersInput, MonitoringPlanUncheckedCreateWithoutAssignedUsersInput>
+    where?: MonitoringPlanWhereInput
   }
 
-  export type StudyUpdateToOneWithWhereWithoutAssignedUsersInput = {
-    where?: StudyWhereInput
-    data: XOR<StudyUpdateWithoutAssignedUsersInput, StudyUncheckedUpdateWithoutAssignedUsersInput>
+  export type MonitoringPlanUpdateToOneWithWhereWithoutAssignedUsersInput = {
+    where?: MonitoringPlanWhereInput
+    data: XOR<MonitoringPlanUpdateWithoutAssignedUsersInput, MonitoringPlanUncheckedUpdateWithoutAssignedUsersInput>
   }
 
-  export type StudyUpdateWithoutAssignedUsersInput = {
+  export type MonitoringPlanUpdateWithoutAssignedUsersInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -30819,17 +30859,18 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    status?: EnumStudyStatusFieldUpdateOperationsInput | $Enums.StudyStatus
+    status?: EnumMonitoringPlanStatusFieldUpdateOperationsInput | $Enums.MonitoringPlanStatus
     isTemplate?: BoolFieldUpdateOperationsInput | boolean
-    practice?: PracticeUpdateOneRequiredWithoutStudiesNestedInput
-    createdBy?: UserUpdateOneRequiredWithoutCreatedStudiesNestedInput
-    patients?: StudyPatientUpdateManyWithoutStudyNestedInput
-    symptomTemplates?: SymptomTemplateUpdateManyWithoutStudyNestedInput
-    treatmentTemplates?: TreatmentTemplateUpdateManyWithoutStudyNestedInput
-    notes?: StudyNoteUpdateManyWithoutStudyNestedInput
+    shareToken?: NullableStringFieldUpdateOperationsInput | string | null
+    practice?: PracticeUpdateOneRequiredWithoutMonitoringPlansNestedInput
+    createdBy?: UserUpdateOneRequiredWithoutCreatedMonitoringPlansNestedInput
+    patients?: MonitoringPlanPatientUpdateManyWithoutMonitoringPlanNestedInput
+    symptomTemplates?: SymptomTemplateUpdateManyWithoutMonitoringPlanNestedInput
+    treatmentTemplates?: TreatmentTemplateUpdateManyWithoutMonitoringPlanNestedInput
+    notes?: MonitoringPlanNoteUpdateManyWithoutMonitoringPlanNestedInput
   }
 
-  export type StudyUncheckedUpdateWithoutAssignedUsersInput = {
+  export type MonitoringPlanUncheckedUpdateWithoutAssignedUsersInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -30840,26 +30881,27 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    status?: EnumStudyStatusFieldUpdateOperationsInput | $Enums.StudyStatus
+    status?: EnumMonitoringPlanStatusFieldUpdateOperationsInput | $Enums.MonitoringPlanStatus
     isTemplate?: BoolFieldUpdateOperationsInput | boolean
-    patients?: StudyPatientUncheckedUpdateManyWithoutStudyNestedInput
-    symptomTemplates?: SymptomTemplateUncheckedUpdateManyWithoutStudyNestedInput
-    treatmentTemplates?: TreatmentTemplateUncheckedUpdateManyWithoutStudyNestedInput
-    notes?: StudyNoteUncheckedUpdateManyWithoutStudyNestedInput
+    shareToken?: NullableStringFieldUpdateOperationsInput | string | null
+    patients?: MonitoringPlanPatientUncheckedUpdateManyWithoutMonitoringPlanNestedInput
+    symptomTemplates?: SymptomTemplateUncheckedUpdateManyWithoutMonitoringPlanNestedInput
+    treatmentTemplates?: TreatmentTemplateUncheckedUpdateManyWithoutMonitoringPlanNestedInput
+    notes?: MonitoringPlanNoteUncheckedUpdateManyWithoutMonitoringPlanNestedInput
   }
 
-  export type UserUpsertWithoutAssignedStudiesInput = {
-    update: XOR<UserUpdateWithoutAssignedStudiesInput, UserUncheckedUpdateWithoutAssignedStudiesInput>
-    create: XOR<UserCreateWithoutAssignedStudiesInput, UserUncheckedCreateWithoutAssignedStudiesInput>
+  export type UserUpsertWithoutAssignedMonitoringPlansInput = {
+    update: XOR<UserUpdateWithoutAssignedMonitoringPlansInput, UserUncheckedUpdateWithoutAssignedMonitoringPlansInput>
+    create: XOR<UserCreateWithoutAssignedMonitoringPlansInput, UserUncheckedCreateWithoutAssignedMonitoringPlansInput>
     where?: UserWhereInput
   }
 
-  export type UserUpdateToOneWithWhereWithoutAssignedStudiesInput = {
+  export type UserUpdateToOneWithWhereWithoutAssignedMonitoringPlansInput = {
     where?: UserWhereInput
-    data: XOR<UserUpdateWithoutAssignedStudiesInput, UserUncheckedUpdateWithoutAssignedStudiesInput>
+    data: XOR<UserUpdateWithoutAssignedMonitoringPlansInput, UserUncheckedUpdateWithoutAssignedMonitoringPlansInput>
   }
 
-  export type UserUpdateWithoutAssignedStudiesInput = {
+  export type UserUpdateWithoutAssignedMonitoringPlansInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
@@ -30872,14 +30914,14 @@ export namespace Prisma {
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     practice?: PracticeUpdateOneWithoutUsersNestedInput
-    createdStudies?: StudyUpdateManyWithoutCreatedByNestedInput
+    createdMonitoringPlans?: MonitoringPlanUpdateManyWithoutCreatedByNestedInput
     createdTreatments?: TreatmentUpdateManyWithoutCreatedByNestedInput
     observations?: ObservationUpdateManyWithoutRecordedByNestedInput
     createdPatients?: PatientUpdateManyWithoutCreatedByNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
   }
 
-  export type UserUncheckedUpdateWithoutAssignedStudiesInput = {
+  export type UserUncheckedUpdateWithoutAssignedMonitoringPlansInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
@@ -30892,14 +30934,14 @@ export namespace Prisma {
     practiceId?: NullableStringFieldUpdateOperationsInput | string | null
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdStudies?: StudyUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdMonitoringPlans?: MonitoringPlanUncheckedUpdateManyWithoutCreatedByNestedInput
     createdTreatments?: TreatmentUncheckedUpdateManyWithoutCreatedByNestedInput
     observations?: ObservationUncheckedUpdateManyWithoutRecordedByNestedInput
     createdPatients?: PatientUncheckedUpdateManyWithoutCreatedByNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
   }
 
-  export type StudyCreateWithoutNotesInput = {
+  export type MonitoringPlanCreateWithoutNotesInput = {
     id?: string
     title: string
     description?: string | null
@@ -30908,17 +30950,18 @@ export namespace Prisma {
     updatedAt?: Date | string
     startDate?: Date | string | null
     endDate?: Date | string | null
-    status?: $Enums.StudyStatus
+    status?: $Enums.MonitoringPlanStatus
     isTemplate?: boolean
-    practice: PracticeCreateNestedOneWithoutStudiesInput
-    createdBy: UserCreateNestedOneWithoutCreatedStudiesInput
-    patients?: StudyPatientCreateNestedManyWithoutStudyInput
-    assignedUsers?: StudyAssignmentCreateNestedManyWithoutStudyInput
-    symptomTemplates?: SymptomTemplateCreateNestedManyWithoutStudyInput
-    treatmentTemplates?: TreatmentTemplateCreateNestedManyWithoutStudyInput
+    shareToken?: string | null
+    practice: PracticeCreateNestedOneWithoutMonitoringPlansInput
+    createdBy: UserCreateNestedOneWithoutCreatedMonitoringPlansInput
+    patients?: MonitoringPlanPatientCreateNestedManyWithoutMonitoringPlanInput
+    assignedUsers?: MonitoringPlanAssignmentCreateNestedManyWithoutMonitoringPlanInput
+    symptomTemplates?: SymptomTemplateCreateNestedManyWithoutMonitoringPlanInput
+    treatmentTemplates?: TreatmentTemplateCreateNestedManyWithoutMonitoringPlanInput
   }
 
-  export type StudyUncheckedCreateWithoutNotesInput = {
+  export type MonitoringPlanUncheckedCreateWithoutNotesInput = {
     id?: string
     title: string
     description?: string | null
@@ -30929,31 +30972,32 @@ export namespace Prisma {
     updatedAt?: Date | string
     startDate?: Date | string | null
     endDate?: Date | string | null
-    status?: $Enums.StudyStatus
+    status?: $Enums.MonitoringPlanStatus
     isTemplate?: boolean
-    patients?: StudyPatientUncheckedCreateNestedManyWithoutStudyInput
-    assignedUsers?: StudyAssignmentUncheckedCreateNestedManyWithoutStudyInput
-    symptomTemplates?: SymptomTemplateUncheckedCreateNestedManyWithoutStudyInput
-    treatmentTemplates?: TreatmentTemplateUncheckedCreateNestedManyWithoutStudyInput
+    shareToken?: string | null
+    patients?: MonitoringPlanPatientUncheckedCreateNestedManyWithoutMonitoringPlanInput
+    assignedUsers?: MonitoringPlanAssignmentUncheckedCreateNestedManyWithoutMonitoringPlanInput
+    symptomTemplates?: SymptomTemplateUncheckedCreateNestedManyWithoutMonitoringPlanInput
+    treatmentTemplates?: TreatmentTemplateUncheckedCreateNestedManyWithoutMonitoringPlanInput
   }
 
-  export type StudyCreateOrConnectWithoutNotesInput = {
-    where: StudyWhereUniqueInput
-    create: XOR<StudyCreateWithoutNotesInput, StudyUncheckedCreateWithoutNotesInput>
+  export type MonitoringPlanCreateOrConnectWithoutNotesInput = {
+    where: MonitoringPlanWhereUniqueInput
+    create: XOR<MonitoringPlanCreateWithoutNotesInput, MonitoringPlanUncheckedCreateWithoutNotesInput>
   }
 
-  export type StudyUpsertWithoutNotesInput = {
-    update: XOR<StudyUpdateWithoutNotesInput, StudyUncheckedUpdateWithoutNotesInput>
-    create: XOR<StudyCreateWithoutNotesInput, StudyUncheckedCreateWithoutNotesInput>
-    where?: StudyWhereInput
+  export type MonitoringPlanUpsertWithoutNotesInput = {
+    update: XOR<MonitoringPlanUpdateWithoutNotesInput, MonitoringPlanUncheckedUpdateWithoutNotesInput>
+    create: XOR<MonitoringPlanCreateWithoutNotesInput, MonitoringPlanUncheckedCreateWithoutNotesInput>
+    where?: MonitoringPlanWhereInput
   }
 
-  export type StudyUpdateToOneWithWhereWithoutNotesInput = {
-    where?: StudyWhereInput
-    data: XOR<StudyUpdateWithoutNotesInput, StudyUncheckedUpdateWithoutNotesInput>
+  export type MonitoringPlanUpdateToOneWithWhereWithoutNotesInput = {
+    where?: MonitoringPlanWhereInput
+    data: XOR<MonitoringPlanUpdateWithoutNotesInput, MonitoringPlanUncheckedUpdateWithoutNotesInput>
   }
 
-  export type StudyUpdateWithoutNotesInput = {
+  export type MonitoringPlanUpdateWithoutNotesInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -30962,17 +31006,18 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    status?: EnumStudyStatusFieldUpdateOperationsInput | $Enums.StudyStatus
+    status?: EnumMonitoringPlanStatusFieldUpdateOperationsInput | $Enums.MonitoringPlanStatus
     isTemplate?: BoolFieldUpdateOperationsInput | boolean
-    practice?: PracticeUpdateOneRequiredWithoutStudiesNestedInput
-    createdBy?: UserUpdateOneRequiredWithoutCreatedStudiesNestedInput
-    patients?: StudyPatientUpdateManyWithoutStudyNestedInput
-    assignedUsers?: StudyAssignmentUpdateManyWithoutStudyNestedInput
-    symptomTemplates?: SymptomTemplateUpdateManyWithoutStudyNestedInput
-    treatmentTemplates?: TreatmentTemplateUpdateManyWithoutStudyNestedInput
+    shareToken?: NullableStringFieldUpdateOperationsInput | string | null
+    practice?: PracticeUpdateOneRequiredWithoutMonitoringPlansNestedInput
+    createdBy?: UserUpdateOneRequiredWithoutCreatedMonitoringPlansNestedInput
+    patients?: MonitoringPlanPatientUpdateManyWithoutMonitoringPlanNestedInput
+    assignedUsers?: MonitoringPlanAssignmentUpdateManyWithoutMonitoringPlanNestedInput
+    symptomTemplates?: SymptomTemplateUpdateManyWithoutMonitoringPlanNestedInput
+    treatmentTemplates?: TreatmentTemplateUpdateManyWithoutMonitoringPlanNestedInput
   }
 
-  export type StudyUncheckedUpdateWithoutNotesInput = {
+  export type MonitoringPlanUncheckedUpdateWithoutNotesInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -30983,15 +31028,16 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    status?: EnumStudyStatusFieldUpdateOperationsInput | $Enums.StudyStatus
+    status?: EnumMonitoringPlanStatusFieldUpdateOperationsInput | $Enums.MonitoringPlanStatus
     isTemplate?: BoolFieldUpdateOperationsInput | boolean
-    patients?: StudyPatientUncheckedUpdateManyWithoutStudyNestedInput
-    assignedUsers?: StudyAssignmentUncheckedUpdateManyWithoutStudyNestedInput
-    symptomTemplates?: SymptomTemplateUncheckedUpdateManyWithoutStudyNestedInput
-    treatmentTemplates?: TreatmentTemplateUncheckedUpdateManyWithoutStudyNestedInput
+    shareToken?: NullableStringFieldUpdateOperationsInput | string | null
+    patients?: MonitoringPlanPatientUncheckedUpdateManyWithoutMonitoringPlanNestedInput
+    assignedUsers?: MonitoringPlanAssignmentUncheckedUpdateManyWithoutMonitoringPlanNestedInput
+    symptomTemplates?: SymptomTemplateUncheckedUpdateManyWithoutMonitoringPlanNestedInput
+    treatmentTemplates?: TreatmentTemplateUncheckedUpdateManyWithoutMonitoringPlanNestedInput
   }
 
-  export type StudyCreateWithoutSymptomTemplatesInput = {
+  export type MonitoringPlanCreateWithoutSymptomTemplatesInput = {
     id?: string
     title: string
     description?: string | null
@@ -31000,17 +31046,18 @@ export namespace Prisma {
     updatedAt?: Date | string
     startDate?: Date | string | null
     endDate?: Date | string | null
-    status?: $Enums.StudyStatus
+    status?: $Enums.MonitoringPlanStatus
     isTemplate?: boolean
-    practice: PracticeCreateNestedOneWithoutStudiesInput
-    createdBy: UserCreateNestedOneWithoutCreatedStudiesInput
-    patients?: StudyPatientCreateNestedManyWithoutStudyInput
-    assignedUsers?: StudyAssignmentCreateNestedManyWithoutStudyInput
-    treatmentTemplates?: TreatmentTemplateCreateNestedManyWithoutStudyInput
-    notes?: StudyNoteCreateNestedManyWithoutStudyInput
+    shareToken?: string | null
+    practice: PracticeCreateNestedOneWithoutMonitoringPlansInput
+    createdBy: UserCreateNestedOneWithoutCreatedMonitoringPlansInput
+    patients?: MonitoringPlanPatientCreateNestedManyWithoutMonitoringPlanInput
+    assignedUsers?: MonitoringPlanAssignmentCreateNestedManyWithoutMonitoringPlanInput
+    treatmentTemplates?: TreatmentTemplateCreateNestedManyWithoutMonitoringPlanInput
+    notes?: MonitoringPlanNoteCreateNestedManyWithoutMonitoringPlanInput
   }
 
-  export type StudyUncheckedCreateWithoutSymptomTemplatesInput = {
+  export type MonitoringPlanUncheckedCreateWithoutSymptomTemplatesInput = {
     id?: string
     title: string
     description?: string | null
@@ -31021,17 +31068,18 @@ export namespace Prisma {
     updatedAt?: Date | string
     startDate?: Date | string | null
     endDate?: Date | string | null
-    status?: $Enums.StudyStatus
+    status?: $Enums.MonitoringPlanStatus
     isTemplate?: boolean
-    patients?: StudyPatientUncheckedCreateNestedManyWithoutStudyInput
-    assignedUsers?: StudyAssignmentUncheckedCreateNestedManyWithoutStudyInput
-    treatmentTemplates?: TreatmentTemplateUncheckedCreateNestedManyWithoutStudyInput
-    notes?: StudyNoteUncheckedCreateNestedManyWithoutStudyInput
+    shareToken?: string | null
+    patients?: MonitoringPlanPatientUncheckedCreateNestedManyWithoutMonitoringPlanInput
+    assignedUsers?: MonitoringPlanAssignmentUncheckedCreateNestedManyWithoutMonitoringPlanInput
+    treatmentTemplates?: TreatmentTemplateUncheckedCreateNestedManyWithoutMonitoringPlanInput
+    notes?: MonitoringPlanNoteUncheckedCreateNestedManyWithoutMonitoringPlanInput
   }
 
-  export type StudyCreateOrConnectWithoutSymptomTemplatesInput = {
-    where: StudyWhereUniqueInput
-    create: XOR<StudyCreateWithoutSymptomTemplatesInput, StudyUncheckedCreateWithoutSymptomTemplatesInput>
+  export type MonitoringPlanCreateOrConnectWithoutSymptomTemplatesInput = {
+    where: MonitoringPlanWhereUniqueInput
+    create: XOR<MonitoringPlanCreateWithoutSymptomTemplatesInput, MonitoringPlanUncheckedCreateWithoutSymptomTemplatesInput>
   }
 
   export type ObservationCreateWithoutSymptomTemplateInput = {
@@ -31040,7 +31088,7 @@ export namespace Prisma {
     value: JsonNullValueInput | InputJsonValue
     notes?: string | null
     patient: PatientCreateNestedOneWithoutObservationsInput
-    studyPatient: StudyPatientCreateNestedOneWithoutObservationsInput
+    monitoringPlanPatient: MonitoringPlanPatientCreateNestedOneWithoutObservationsInput
     recordedBy: UserCreateNestedOneWithoutObservationsInput
     files?: FileCreateNestedManyWithoutObservationInput
     alerts?: AlertCreateNestedManyWithoutObservationInput
@@ -31049,7 +31097,7 @@ export namespace Prisma {
   export type ObservationUncheckedCreateWithoutSymptomTemplateInput = {
     id?: string
     patientId: string
-    studyPatientId: string
+    monitoringPlanPatientId: string
     recordedById: string
     recordedAt?: Date | string
     value: JsonNullValueInput | InputJsonValue
@@ -31098,18 +31146,18 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type StudyUpsertWithoutSymptomTemplatesInput = {
-    update: XOR<StudyUpdateWithoutSymptomTemplatesInput, StudyUncheckedUpdateWithoutSymptomTemplatesInput>
-    create: XOR<StudyCreateWithoutSymptomTemplatesInput, StudyUncheckedCreateWithoutSymptomTemplatesInput>
-    where?: StudyWhereInput
+  export type MonitoringPlanUpsertWithoutSymptomTemplatesInput = {
+    update: XOR<MonitoringPlanUpdateWithoutSymptomTemplatesInput, MonitoringPlanUncheckedUpdateWithoutSymptomTemplatesInput>
+    create: XOR<MonitoringPlanCreateWithoutSymptomTemplatesInput, MonitoringPlanUncheckedCreateWithoutSymptomTemplatesInput>
+    where?: MonitoringPlanWhereInput
   }
 
-  export type StudyUpdateToOneWithWhereWithoutSymptomTemplatesInput = {
-    where?: StudyWhereInput
-    data: XOR<StudyUpdateWithoutSymptomTemplatesInput, StudyUncheckedUpdateWithoutSymptomTemplatesInput>
+  export type MonitoringPlanUpdateToOneWithWhereWithoutSymptomTemplatesInput = {
+    where?: MonitoringPlanWhereInput
+    data: XOR<MonitoringPlanUpdateWithoutSymptomTemplatesInput, MonitoringPlanUncheckedUpdateWithoutSymptomTemplatesInput>
   }
 
-  export type StudyUpdateWithoutSymptomTemplatesInput = {
+  export type MonitoringPlanUpdateWithoutSymptomTemplatesInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -31118,17 +31166,18 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    status?: EnumStudyStatusFieldUpdateOperationsInput | $Enums.StudyStatus
+    status?: EnumMonitoringPlanStatusFieldUpdateOperationsInput | $Enums.MonitoringPlanStatus
     isTemplate?: BoolFieldUpdateOperationsInput | boolean
-    practice?: PracticeUpdateOneRequiredWithoutStudiesNestedInput
-    createdBy?: UserUpdateOneRequiredWithoutCreatedStudiesNestedInput
-    patients?: StudyPatientUpdateManyWithoutStudyNestedInput
-    assignedUsers?: StudyAssignmentUpdateManyWithoutStudyNestedInput
-    treatmentTemplates?: TreatmentTemplateUpdateManyWithoutStudyNestedInput
-    notes?: StudyNoteUpdateManyWithoutStudyNestedInput
+    shareToken?: NullableStringFieldUpdateOperationsInput | string | null
+    practice?: PracticeUpdateOneRequiredWithoutMonitoringPlansNestedInput
+    createdBy?: UserUpdateOneRequiredWithoutCreatedMonitoringPlansNestedInput
+    patients?: MonitoringPlanPatientUpdateManyWithoutMonitoringPlanNestedInput
+    assignedUsers?: MonitoringPlanAssignmentUpdateManyWithoutMonitoringPlanNestedInput
+    treatmentTemplates?: TreatmentTemplateUpdateManyWithoutMonitoringPlanNestedInput
+    notes?: MonitoringPlanNoteUpdateManyWithoutMonitoringPlanNestedInput
   }
 
-  export type StudyUncheckedUpdateWithoutSymptomTemplatesInput = {
+  export type MonitoringPlanUncheckedUpdateWithoutSymptomTemplatesInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -31139,12 +31188,13 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    status?: EnumStudyStatusFieldUpdateOperationsInput | $Enums.StudyStatus
+    status?: EnumMonitoringPlanStatusFieldUpdateOperationsInput | $Enums.MonitoringPlanStatus
     isTemplate?: BoolFieldUpdateOperationsInput | boolean
-    patients?: StudyPatientUncheckedUpdateManyWithoutStudyNestedInput
-    assignedUsers?: StudyAssignmentUncheckedUpdateManyWithoutStudyNestedInput
-    treatmentTemplates?: TreatmentTemplateUncheckedUpdateManyWithoutStudyNestedInput
-    notes?: StudyNoteUncheckedUpdateManyWithoutStudyNestedInput
+    shareToken?: NullableStringFieldUpdateOperationsInput | string | null
+    patients?: MonitoringPlanPatientUncheckedUpdateManyWithoutMonitoringPlanNestedInput
+    assignedUsers?: MonitoringPlanAssignmentUncheckedUpdateManyWithoutMonitoringPlanNestedInput
+    treatmentTemplates?: TreatmentTemplateUncheckedUpdateManyWithoutMonitoringPlanNestedInput
+    notes?: MonitoringPlanNoteUncheckedUpdateManyWithoutMonitoringPlanNestedInput
   }
 
   export type ObservationUpsertWithWhereUniqueWithoutSymptomTemplateInput = {
@@ -31204,7 +31254,7 @@ export namespace Prisma {
     options?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
-    study: StudyCreateNestedOneWithoutSymptomTemplatesInput
+    monitoringPlan: MonitoringPlanCreateNestedOneWithoutSymptomTemplatesInput
     alertThresholds?: AlertThresholdCreateNestedManyWithoutSymptomTemplateInput
   }
 
@@ -31218,7 +31268,7 @@ export namespace Prisma {
     minValue?: number | null
     maxValue?: number | null
     options?: NullableJsonNullValueInput | InputJsonValue
-    studyId: string
+    monitoringPlanId: string
     createdAt?: Date | string
     updatedAt?: Date | string
     alertThresholds?: AlertThresholdUncheckedCreateNestedManyWithoutSymptomTemplateInput
@@ -31247,7 +31297,7 @@ export namespace Prisma {
     medicalHistory?: NullableJsonNullValueInput | InputJsonValue
     practice: PracticeCreateNestedOneWithoutPatientsInput
     createdBy: UserCreateNestedOneWithoutCreatedPatientsInput
-    studies?: StudyPatientCreateNestedManyWithoutPatientInput
+    monitoringPlans?: MonitoringPlanPatientCreateNestedManyWithoutPatientInput
     treatments?: TreatmentCreateNestedManyWithoutPatientInput
     files?: FileCreateNestedManyWithoutPatientInput
   }
@@ -31270,7 +31320,7 @@ export namespace Prisma {
     ownerEmail?: string | null
     ownerPhone?: string | null
     medicalHistory?: NullableJsonNullValueInput | InputJsonValue
-    studies?: StudyPatientUncheckedCreateNestedManyWithoutPatientInput
+    monitoringPlans?: MonitoringPlanPatientUncheckedCreateNestedManyWithoutPatientInput
     treatments?: TreatmentUncheckedCreateNestedManyWithoutPatientInput
     files?: FileUncheckedCreateNestedManyWithoutPatientInput
   }
@@ -31280,29 +31330,29 @@ export namespace Prisma {
     create: XOR<PatientCreateWithoutObservationsInput, PatientUncheckedCreateWithoutObservationsInput>
   }
 
-  export type StudyPatientCreateWithoutObservationsInput = {
+  export type MonitoringPlanPatientCreateWithoutObservationsInput = {
     id?: string
     enrollmentDate?: Date | string
     exitDate?: Date | string | null
     isActive?: boolean
-    study: StudyCreateNestedOneWithoutPatientsInput
-    patient: PatientCreateNestedOneWithoutStudiesInput
-    treatments?: TreatmentCreateNestedManyWithoutStudyPatientInput
+    monitoringPlan: MonitoringPlanCreateNestedOneWithoutPatientsInput
+    patient: PatientCreateNestedOneWithoutMonitoringPlansInput
+    treatments?: TreatmentCreateNestedManyWithoutMonitoringPlanPatientInput
   }
 
-  export type StudyPatientUncheckedCreateWithoutObservationsInput = {
+  export type MonitoringPlanPatientUncheckedCreateWithoutObservationsInput = {
     id?: string
-    studyId: string
+    monitoringPlanId: string
     patientId: string
     enrollmentDate?: Date | string
     exitDate?: Date | string | null
     isActive?: boolean
-    treatments?: TreatmentUncheckedCreateNestedManyWithoutStudyPatientInput
+    treatments?: TreatmentUncheckedCreateNestedManyWithoutMonitoringPlanPatientInput
   }
 
-  export type StudyPatientCreateOrConnectWithoutObservationsInput = {
-    where: StudyPatientWhereUniqueInput
-    create: XOR<StudyPatientCreateWithoutObservationsInput, StudyPatientUncheckedCreateWithoutObservationsInput>
+  export type MonitoringPlanPatientCreateOrConnectWithoutObservationsInput = {
+    where: MonitoringPlanPatientWhereUniqueInput
+    create: XOR<MonitoringPlanPatientCreateWithoutObservationsInput, MonitoringPlanPatientUncheckedCreateWithoutObservationsInput>
   }
 
   export type UserCreateWithoutObservationsInput = {
@@ -31318,8 +31368,8 @@ export namespace Prisma {
     resetToken?: string | null
     resetTokenExpiry?: Date | string | null
     practice?: PracticeCreateNestedOneWithoutUsersInput
-    createdStudies?: StudyCreateNestedManyWithoutCreatedByInput
-    assignedStudies?: StudyAssignmentCreateNestedManyWithoutUserInput
+    createdMonitoringPlans?: MonitoringPlanCreateNestedManyWithoutCreatedByInput
+    assignedMonitoringPlans?: MonitoringPlanAssignmentCreateNestedManyWithoutUserInput
     createdTreatments?: TreatmentCreateNestedManyWithoutCreatedByInput
     createdPatients?: PatientCreateNestedManyWithoutCreatedByInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
@@ -31338,8 +31388,8 @@ export namespace Prisma {
     practiceId?: string | null
     resetToken?: string | null
     resetTokenExpiry?: Date | string | null
-    createdStudies?: StudyUncheckedCreateNestedManyWithoutCreatedByInput
-    assignedStudies?: StudyAssignmentUncheckedCreateNestedManyWithoutUserInput
+    createdMonitoringPlans?: MonitoringPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    assignedMonitoringPlans?: MonitoringPlanAssignmentUncheckedCreateNestedManyWithoutUserInput
     createdTreatments?: TreatmentUncheckedCreateNestedManyWithoutCreatedByInput
     createdPatients?: PatientUncheckedCreateNestedManyWithoutCreatedByInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
@@ -31431,7 +31481,7 @@ export namespace Prisma {
     options?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    study?: StudyUpdateOneRequiredWithoutSymptomTemplatesNestedInput
+    monitoringPlan?: MonitoringPlanUpdateOneRequiredWithoutSymptomTemplatesNestedInput
     alertThresholds?: AlertThresholdUpdateManyWithoutSymptomTemplateNestedInput
   }
 
@@ -31445,7 +31495,7 @@ export namespace Prisma {
     minValue?: NullableFloatFieldUpdateOperationsInput | number | null
     maxValue?: NullableFloatFieldUpdateOperationsInput | number | null
     options?: NullableJsonNullValueInput | InputJsonValue
-    studyId?: StringFieldUpdateOperationsInput | string
+    monitoringPlanId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     alertThresholds?: AlertThresholdUncheckedUpdateManyWithoutSymptomTemplateNestedInput
@@ -31480,7 +31530,7 @@ export namespace Prisma {
     medicalHistory?: NullableJsonNullValueInput | InputJsonValue
     practice?: PracticeUpdateOneRequiredWithoutPatientsNestedInput
     createdBy?: UserUpdateOneRequiredWithoutCreatedPatientsNestedInput
-    studies?: StudyPatientUpdateManyWithoutPatientNestedInput
+    monitoringPlans?: MonitoringPlanPatientUpdateManyWithoutPatientNestedInput
     treatments?: TreatmentUpdateManyWithoutPatientNestedInput
     files?: FileUpdateManyWithoutPatientNestedInput
   }
@@ -31503,40 +31553,40 @@ export namespace Prisma {
     ownerEmail?: NullableStringFieldUpdateOperationsInput | string | null
     ownerPhone?: NullableStringFieldUpdateOperationsInput | string | null
     medicalHistory?: NullableJsonNullValueInput | InputJsonValue
-    studies?: StudyPatientUncheckedUpdateManyWithoutPatientNestedInput
+    monitoringPlans?: MonitoringPlanPatientUncheckedUpdateManyWithoutPatientNestedInput
     treatments?: TreatmentUncheckedUpdateManyWithoutPatientNestedInput
     files?: FileUncheckedUpdateManyWithoutPatientNestedInput
   }
 
-  export type StudyPatientUpsertWithoutObservationsInput = {
-    update: XOR<StudyPatientUpdateWithoutObservationsInput, StudyPatientUncheckedUpdateWithoutObservationsInput>
-    create: XOR<StudyPatientCreateWithoutObservationsInput, StudyPatientUncheckedCreateWithoutObservationsInput>
-    where?: StudyPatientWhereInput
+  export type MonitoringPlanPatientUpsertWithoutObservationsInput = {
+    update: XOR<MonitoringPlanPatientUpdateWithoutObservationsInput, MonitoringPlanPatientUncheckedUpdateWithoutObservationsInput>
+    create: XOR<MonitoringPlanPatientCreateWithoutObservationsInput, MonitoringPlanPatientUncheckedCreateWithoutObservationsInput>
+    where?: MonitoringPlanPatientWhereInput
   }
 
-  export type StudyPatientUpdateToOneWithWhereWithoutObservationsInput = {
-    where?: StudyPatientWhereInput
-    data: XOR<StudyPatientUpdateWithoutObservationsInput, StudyPatientUncheckedUpdateWithoutObservationsInput>
+  export type MonitoringPlanPatientUpdateToOneWithWhereWithoutObservationsInput = {
+    where?: MonitoringPlanPatientWhereInput
+    data: XOR<MonitoringPlanPatientUpdateWithoutObservationsInput, MonitoringPlanPatientUncheckedUpdateWithoutObservationsInput>
   }
 
-  export type StudyPatientUpdateWithoutObservationsInput = {
+  export type MonitoringPlanPatientUpdateWithoutObservationsInput = {
     id?: StringFieldUpdateOperationsInput | string
     enrollmentDate?: DateTimeFieldUpdateOperationsInput | Date | string
     exitDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
-    study?: StudyUpdateOneRequiredWithoutPatientsNestedInput
-    patient?: PatientUpdateOneRequiredWithoutStudiesNestedInput
-    treatments?: TreatmentUpdateManyWithoutStudyPatientNestedInput
+    monitoringPlan?: MonitoringPlanUpdateOneRequiredWithoutPatientsNestedInput
+    patient?: PatientUpdateOneRequiredWithoutMonitoringPlansNestedInput
+    treatments?: TreatmentUpdateManyWithoutMonitoringPlanPatientNestedInput
   }
 
-  export type StudyPatientUncheckedUpdateWithoutObservationsInput = {
+  export type MonitoringPlanPatientUncheckedUpdateWithoutObservationsInput = {
     id?: StringFieldUpdateOperationsInput | string
-    studyId?: StringFieldUpdateOperationsInput | string
+    monitoringPlanId?: StringFieldUpdateOperationsInput | string
     patientId?: StringFieldUpdateOperationsInput | string
     enrollmentDate?: DateTimeFieldUpdateOperationsInput | Date | string
     exitDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
-    treatments?: TreatmentUncheckedUpdateManyWithoutStudyPatientNestedInput
+    treatments?: TreatmentUncheckedUpdateManyWithoutMonitoringPlanPatientNestedInput
   }
 
   export type UserUpsertWithoutObservationsInput = {
@@ -31563,8 +31613,8 @@ export namespace Prisma {
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     practice?: PracticeUpdateOneWithoutUsersNestedInput
-    createdStudies?: StudyUpdateManyWithoutCreatedByNestedInput
-    assignedStudies?: StudyAssignmentUpdateManyWithoutUserNestedInput
+    createdMonitoringPlans?: MonitoringPlanUpdateManyWithoutCreatedByNestedInput
+    assignedMonitoringPlans?: MonitoringPlanAssignmentUpdateManyWithoutUserNestedInput
     createdTreatments?: TreatmentUpdateManyWithoutCreatedByNestedInput
     createdPatients?: PatientUpdateManyWithoutCreatedByNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
@@ -31583,8 +31633,8 @@ export namespace Prisma {
     practiceId?: NullableStringFieldUpdateOperationsInput | string | null
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdStudies?: StudyUncheckedUpdateManyWithoutCreatedByNestedInput
-    assignedStudies?: StudyAssignmentUncheckedUpdateManyWithoutUserNestedInput
+    createdMonitoringPlans?: MonitoringPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    assignedMonitoringPlans?: MonitoringPlanAssignmentUncheckedUpdateManyWithoutUserNestedInput
     createdTreatments?: TreatmentUncheckedUpdateManyWithoutCreatedByNestedInput
     createdPatients?: PatientUncheckedUpdateManyWithoutCreatedByNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
@@ -31633,7 +31683,7 @@ export namespace Prisma {
     resolvedAt?: DateTimeNullableFilter<"Alert"> | Date | string | null
   }
 
-  export type StudyCreateWithoutTreatmentTemplatesInput = {
+  export type MonitoringPlanCreateWithoutTreatmentTemplatesInput = {
     id?: string
     title: string
     description?: string | null
@@ -31642,17 +31692,18 @@ export namespace Prisma {
     updatedAt?: Date | string
     startDate?: Date | string | null
     endDate?: Date | string | null
-    status?: $Enums.StudyStatus
+    status?: $Enums.MonitoringPlanStatus
     isTemplate?: boolean
-    practice: PracticeCreateNestedOneWithoutStudiesInput
-    createdBy: UserCreateNestedOneWithoutCreatedStudiesInput
-    patients?: StudyPatientCreateNestedManyWithoutStudyInput
-    assignedUsers?: StudyAssignmentCreateNestedManyWithoutStudyInput
-    symptomTemplates?: SymptomTemplateCreateNestedManyWithoutStudyInput
-    notes?: StudyNoteCreateNestedManyWithoutStudyInput
+    shareToken?: string | null
+    practice: PracticeCreateNestedOneWithoutMonitoringPlansInput
+    createdBy: UserCreateNestedOneWithoutCreatedMonitoringPlansInput
+    patients?: MonitoringPlanPatientCreateNestedManyWithoutMonitoringPlanInput
+    assignedUsers?: MonitoringPlanAssignmentCreateNestedManyWithoutMonitoringPlanInput
+    symptomTemplates?: SymptomTemplateCreateNestedManyWithoutMonitoringPlanInput
+    notes?: MonitoringPlanNoteCreateNestedManyWithoutMonitoringPlanInput
   }
 
-  export type StudyUncheckedCreateWithoutTreatmentTemplatesInput = {
+  export type MonitoringPlanUncheckedCreateWithoutTreatmentTemplatesInput = {
     id?: string
     title: string
     description?: string | null
@@ -31663,17 +31714,18 @@ export namespace Prisma {
     updatedAt?: Date | string
     startDate?: Date | string | null
     endDate?: Date | string | null
-    status?: $Enums.StudyStatus
+    status?: $Enums.MonitoringPlanStatus
     isTemplate?: boolean
-    patients?: StudyPatientUncheckedCreateNestedManyWithoutStudyInput
-    assignedUsers?: StudyAssignmentUncheckedCreateNestedManyWithoutStudyInput
-    symptomTemplates?: SymptomTemplateUncheckedCreateNestedManyWithoutStudyInput
-    notes?: StudyNoteUncheckedCreateNestedManyWithoutStudyInput
+    shareToken?: string | null
+    patients?: MonitoringPlanPatientUncheckedCreateNestedManyWithoutMonitoringPlanInput
+    assignedUsers?: MonitoringPlanAssignmentUncheckedCreateNestedManyWithoutMonitoringPlanInput
+    symptomTemplates?: SymptomTemplateUncheckedCreateNestedManyWithoutMonitoringPlanInput
+    notes?: MonitoringPlanNoteUncheckedCreateNestedManyWithoutMonitoringPlanInput
   }
 
-  export type StudyCreateOrConnectWithoutTreatmentTemplatesInput = {
-    where: StudyWhereUniqueInput
-    create: XOR<StudyCreateWithoutTreatmentTemplatesInput, StudyUncheckedCreateWithoutTreatmentTemplatesInput>
+  export type MonitoringPlanCreateOrConnectWithoutTreatmentTemplatesInput = {
+    where: MonitoringPlanWhereUniqueInput
+    create: XOR<MonitoringPlanCreateWithoutTreatmentTemplatesInput, MonitoringPlanUncheckedCreateWithoutTreatmentTemplatesInput>
   }
 
   export type TreatmentCreateWithoutTemplateInput = {
@@ -31685,7 +31737,7 @@ export namespace Prisma {
     dosage?: string | null
     notes?: string | null
     patient: PatientCreateNestedOneWithoutTreatmentsInput
-    studyPatient: StudyPatientCreateNestedOneWithoutTreatmentsInput
+    monitoringPlanPatient: MonitoringPlanPatientCreateNestedOneWithoutTreatmentsInput
     createdBy: UserCreateNestedOneWithoutCreatedTreatmentsInput
     files?: FileCreateNestedManyWithoutTreatmentInput
   }
@@ -31693,7 +31745,7 @@ export namespace Prisma {
   export type TreatmentUncheckedCreateWithoutTemplateInput = {
     id?: string
     patientId: string
-    studyPatientId: string
+    monitoringPlanPatientId: string
     createdById: string
     createdAt?: Date | string
     administeredAt: Date | string
@@ -31714,18 +31766,18 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type StudyUpsertWithoutTreatmentTemplatesInput = {
-    update: XOR<StudyUpdateWithoutTreatmentTemplatesInput, StudyUncheckedUpdateWithoutTreatmentTemplatesInput>
-    create: XOR<StudyCreateWithoutTreatmentTemplatesInput, StudyUncheckedCreateWithoutTreatmentTemplatesInput>
-    where?: StudyWhereInput
+  export type MonitoringPlanUpsertWithoutTreatmentTemplatesInput = {
+    update: XOR<MonitoringPlanUpdateWithoutTreatmentTemplatesInput, MonitoringPlanUncheckedUpdateWithoutTreatmentTemplatesInput>
+    create: XOR<MonitoringPlanCreateWithoutTreatmentTemplatesInput, MonitoringPlanUncheckedCreateWithoutTreatmentTemplatesInput>
+    where?: MonitoringPlanWhereInput
   }
 
-  export type StudyUpdateToOneWithWhereWithoutTreatmentTemplatesInput = {
-    where?: StudyWhereInput
-    data: XOR<StudyUpdateWithoutTreatmentTemplatesInput, StudyUncheckedUpdateWithoutTreatmentTemplatesInput>
+  export type MonitoringPlanUpdateToOneWithWhereWithoutTreatmentTemplatesInput = {
+    where?: MonitoringPlanWhereInput
+    data: XOR<MonitoringPlanUpdateWithoutTreatmentTemplatesInput, MonitoringPlanUncheckedUpdateWithoutTreatmentTemplatesInput>
   }
 
-  export type StudyUpdateWithoutTreatmentTemplatesInput = {
+  export type MonitoringPlanUpdateWithoutTreatmentTemplatesInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -31734,17 +31786,18 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    status?: EnumStudyStatusFieldUpdateOperationsInput | $Enums.StudyStatus
+    status?: EnumMonitoringPlanStatusFieldUpdateOperationsInput | $Enums.MonitoringPlanStatus
     isTemplate?: BoolFieldUpdateOperationsInput | boolean
-    practice?: PracticeUpdateOneRequiredWithoutStudiesNestedInput
-    createdBy?: UserUpdateOneRequiredWithoutCreatedStudiesNestedInput
-    patients?: StudyPatientUpdateManyWithoutStudyNestedInput
-    assignedUsers?: StudyAssignmentUpdateManyWithoutStudyNestedInput
-    symptomTemplates?: SymptomTemplateUpdateManyWithoutStudyNestedInput
-    notes?: StudyNoteUpdateManyWithoutStudyNestedInput
+    shareToken?: NullableStringFieldUpdateOperationsInput | string | null
+    practice?: PracticeUpdateOneRequiredWithoutMonitoringPlansNestedInput
+    createdBy?: UserUpdateOneRequiredWithoutCreatedMonitoringPlansNestedInput
+    patients?: MonitoringPlanPatientUpdateManyWithoutMonitoringPlanNestedInput
+    assignedUsers?: MonitoringPlanAssignmentUpdateManyWithoutMonitoringPlanNestedInput
+    symptomTemplates?: SymptomTemplateUpdateManyWithoutMonitoringPlanNestedInput
+    notes?: MonitoringPlanNoteUpdateManyWithoutMonitoringPlanNestedInput
   }
 
-  export type StudyUncheckedUpdateWithoutTreatmentTemplatesInput = {
+  export type MonitoringPlanUncheckedUpdateWithoutTreatmentTemplatesInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -31755,12 +31808,13 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    status?: EnumStudyStatusFieldUpdateOperationsInput | $Enums.StudyStatus
+    status?: EnumMonitoringPlanStatusFieldUpdateOperationsInput | $Enums.MonitoringPlanStatus
     isTemplate?: BoolFieldUpdateOperationsInput | boolean
-    patients?: StudyPatientUncheckedUpdateManyWithoutStudyNestedInput
-    assignedUsers?: StudyAssignmentUncheckedUpdateManyWithoutStudyNestedInput
-    symptomTemplates?: SymptomTemplateUncheckedUpdateManyWithoutStudyNestedInput
-    notes?: StudyNoteUncheckedUpdateManyWithoutStudyNestedInput
+    shareToken?: NullableStringFieldUpdateOperationsInput | string | null
+    patients?: MonitoringPlanPatientUncheckedUpdateManyWithoutMonitoringPlanNestedInput
+    assignedUsers?: MonitoringPlanAssignmentUncheckedUpdateManyWithoutMonitoringPlanNestedInput
+    symptomTemplates?: SymptomTemplateUncheckedUpdateManyWithoutMonitoringPlanNestedInput
+    notes?: MonitoringPlanNoteUncheckedUpdateManyWithoutMonitoringPlanNestedInput
   }
 
   export type TreatmentUpsertWithWhereUniqueWithoutTemplateInput = {
@@ -31786,7 +31840,7 @@ export namespace Prisma {
     protocol?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
-    study: StudyCreateNestedOneWithoutTreatmentTemplatesInput
+    monitoringPlan: MonitoringPlanCreateNestedOneWithoutTreatmentTemplatesInput
   }
 
   export type TreatmentTemplateUncheckedCreateWithoutTreatmentsInput = {
@@ -31794,7 +31848,7 @@ export namespace Prisma {
     name: string
     description?: string | null
     protocol?: NullableJsonNullValueInput | InputJsonValue
-    studyId: string
+    monitoringPlanId: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -31822,7 +31876,7 @@ export namespace Prisma {
     medicalHistory?: NullableJsonNullValueInput | InputJsonValue
     practice: PracticeCreateNestedOneWithoutPatientsInput
     createdBy: UserCreateNestedOneWithoutCreatedPatientsInput
-    studies?: StudyPatientCreateNestedManyWithoutPatientInput
+    monitoringPlans?: MonitoringPlanPatientCreateNestedManyWithoutPatientInput
     observations?: ObservationCreateNestedManyWithoutPatientInput
     files?: FileCreateNestedManyWithoutPatientInput
   }
@@ -31845,7 +31899,7 @@ export namespace Prisma {
     ownerEmail?: string | null
     ownerPhone?: string | null
     medicalHistory?: NullableJsonNullValueInput | InputJsonValue
-    studies?: StudyPatientUncheckedCreateNestedManyWithoutPatientInput
+    monitoringPlans?: MonitoringPlanPatientUncheckedCreateNestedManyWithoutPatientInput
     observations?: ObservationUncheckedCreateNestedManyWithoutPatientInput
     files?: FileUncheckedCreateNestedManyWithoutPatientInput
   }
@@ -31855,29 +31909,29 @@ export namespace Prisma {
     create: XOR<PatientCreateWithoutTreatmentsInput, PatientUncheckedCreateWithoutTreatmentsInput>
   }
 
-  export type StudyPatientCreateWithoutTreatmentsInput = {
+  export type MonitoringPlanPatientCreateWithoutTreatmentsInput = {
     id?: string
     enrollmentDate?: Date | string
     exitDate?: Date | string | null
     isActive?: boolean
-    study: StudyCreateNestedOneWithoutPatientsInput
-    patient: PatientCreateNestedOneWithoutStudiesInput
-    observations?: ObservationCreateNestedManyWithoutStudyPatientInput
+    monitoringPlan: MonitoringPlanCreateNestedOneWithoutPatientsInput
+    patient: PatientCreateNestedOneWithoutMonitoringPlansInput
+    observations?: ObservationCreateNestedManyWithoutMonitoringPlanPatientInput
   }
 
-  export type StudyPatientUncheckedCreateWithoutTreatmentsInput = {
+  export type MonitoringPlanPatientUncheckedCreateWithoutTreatmentsInput = {
     id?: string
-    studyId: string
+    monitoringPlanId: string
     patientId: string
     enrollmentDate?: Date | string
     exitDate?: Date | string | null
     isActive?: boolean
-    observations?: ObservationUncheckedCreateNestedManyWithoutStudyPatientInput
+    observations?: ObservationUncheckedCreateNestedManyWithoutMonitoringPlanPatientInput
   }
 
-  export type StudyPatientCreateOrConnectWithoutTreatmentsInput = {
-    where: StudyPatientWhereUniqueInput
-    create: XOR<StudyPatientCreateWithoutTreatmentsInput, StudyPatientUncheckedCreateWithoutTreatmentsInput>
+  export type MonitoringPlanPatientCreateOrConnectWithoutTreatmentsInput = {
+    where: MonitoringPlanPatientWhereUniqueInput
+    create: XOR<MonitoringPlanPatientCreateWithoutTreatmentsInput, MonitoringPlanPatientUncheckedCreateWithoutTreatmentsInput>
   }
 
   export type UserCreateWithoutCreatedTreatmentsInput = {
@@ -31893,8 +31947,8 @@ export namespace Prisma {
     resetToken?: string | null
     resetTokenExpiry?: Date | string | null
     practice?: PracticeCreateNestedOneWithoutUsersInput
-    createdStudies?: StudyCreateNestedManyWithoutCreatedByInput
-    assignedStudies?: StudyAssignmentCreateNestedManyWithoutUserInput
+    createdMonitoringPlans?: MonitoringPlanCreateNestedManyWithoutCreatedByInput
+    assignedMonitoringPlans?: MonitoringPlanAssignmentCreateNestedManyWithoutUserInput
     observations?: ObservationCreateNestedManyWithoutRecordedByInput
     createdPatients?: PatientCreateNestedManyWithoutCreatedByInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
@@ -31913,8 +31967,8 @@ export namespace Prisma {
     practiceId?: string | null
     resetToken?: string | null
     resetTokenExpiry?: Date | string | null
-    createdStudies?: StudyUncheckedCreateNestedManyWithoutCreatedByInput
-    assignedStudies?: StudyAssignmentUncheckedCreateNestedManyWithoutUserInput
+    createdMonitoringPlans?: MonitoringPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    assignedMonitoringPlans?: MonitoringPlanAssignmentUncheckedCreateNestedManyWithoutUserInput
     observations?: ObservationUncheckedCreateNestedManyWithoutRecordedByInput
     createdPatients?: PatientUncheckedCreateNestedManyWithoutCreatedByInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
@@ -31975,7 +32029,7 @@ export namespace Prisma {
     protocol?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    study?: StudyUpdateOneRequiredWithoutTreatmentTemplatesNestedInput
+    monitoringPlan?: MonitoringPlanUpdateOneRequiredWithoutTreatmentTemplatesNestedInput
   }
 
   export type TreatmentTemplateUncheckedUpdateWithoutTreatmentsInput = {
@@ -31983,7 +32037,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     protocol?: NullableJsonNullValueInput | InputJsonValue
-    studyId?: StringFieldUpdateOperationsInput | string
+    monitoringPlanId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -32017,7 +32071,7 @@ export namespace Prisma {
     medicalHistory?: NullableJsonNullValueInput | InputJsonValue
     practice?: PracticeUpdateOneRequiredWithoutPatientsNestedInput
     createdBy?: UserUpdateOneRequiredWithoutCreatedPatientsNestedInput
-    studies?: StudyPatientUpdateManyWithoutPatientNestedInput
+    monitoringPlans?: MonitoringPlanPatientUpdateManyWithoutPatientNestedInput
     observations?: ObservationUpdateManyWithoutPatientNestedInput
     files?: FileUpdateManyWithoutPatientNestedInput
   }
@@ -32040,40 +32094,40 @@ export namespace Prisma {
     ownerEmail?: NullableStringFieldUpdateOperationsInput | string | null
     ownerPhone?: NullableStringFieldUpdateOperationsInput | string | null
     medicalHistory?: NullableJsonNullValueInput | InputJsonValue
-    studies?: StudyPatientUncheckedUpdateManyWithoutPatientNestedInput
+    monitoringPlans?: MonitoringPlanPatientUncheckedUpdateManyWithoutPatientNestedInput
     observations?: ObservationUncheckedUpdateManyWithoutPatientNestedInput
     files?: FileUncheckedUpdateManyWithoutPatientNestedInput
   }
 
-  export type StudyPatientUpsertWithoutTreatmentsInput = {
-    update: XOR<StudyPatientUpdateWithoutTreatmentsInput, StudyPatientUncheckedUpdateWithoutTreatmentsInput>
-    create: XOR<StudyPatientCreateWithoutTreatmentsInput, StudyPatientUncheckedCreateWithoutTreatmentsInput>
-    where?: StudyPatientWhereInput
+  export type MonitoringPlanPatientUpsertWithoutTreatmentsInput = {
+    update: XOR<MonitoringPlanPatientUpdateWithoutTreatmentsInput, MonitoringPlanPatientUncheckedUpdateWithoutTreatmentsInput>
+    create: XOR<MonitoringPlanPatientCreateWithoutTreatmentsInput, MonitoringPlanPatientUncheckedCreateWithoutTreatmentsInput>
+    where?: MonitoringPlanPatientWhereInput
   }
 
-  export type StudyPatientUpdateToOneWithWhereWithoutTreatmentsInput = {
-    where?: StudyPatientWhereInput
-    data: XOR<StudyPatientUpdateWithoutTreatmentsInput, StudyPatientUncheckedUpdateWithoutTreatmentsInput>
+  export type MonitoringPlanPatientUpdateToOneWithWhereWithoutTreatmentsInput = {
+    where?: MonitoringPlanPatientWhereInput
+    data: XOR<MonitoringPlanPatientUpdateWithoutTreatmentsInput, MonitoringPlanPatientUncheckedUpdateWithoutTreatmentsInput>
   }
 
-  export type StudyPatientUpdateWithoutTreatmentsInput = {
+  export type MonitoringPlanPatientUpdateWithoutTreatmentsInput = {
     id?: StringFieldUpdateOperationsInput | string
     enrollmentDate?: DateTimeFieldUpdateOperationsInput | Date | string
     exitDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
-    study?: StudyUpdateOneRequiredWithoutPatientsNestedInput
-    patient?: PatientUpdateOneRequiredWithoutStudiesNestedInput
-    observations?: ObservationUpdateManyWithoutStudyPatientNestedInput
+    monitoringPlan?: MonitoringPlanUpdateOneRequiredWithoutPatientsNestedInput
+    patient?: PatientUpdateOneRequiredWithoutMonitoringPlansNestedInput
+    observations?: ObservationUpdateManyWithoutMonitoringPlanPatientNestedInput
   }
 
-  export type StudyPatientUncheckedUpdateWithoutTreatmentsInput = {
+  export type MonitoringPlanPatientUncheckedUpdateWithoutTreatmentsInput = {
     id?: StringFieldUpdateOperationsInput | string
-    studyId?: StringFieldUpdateOperationsInput | string
+    monitoringPlanId?: StringFieldUpdateOperationsInput | string
     patientId?: StringFieldUpdateOperationsInput | string
     enrollmentDate?: DateTimeFieldUpdateOperationsInput | Date | string
     exitDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
-    observations?: ObservationUncheckedUpdateManyWithoutStudyPatientNestedInput
+    observations?: ObservationUncheckedUpdateManyWithoutMonitoringPlanPatientNestedInput
   }
 
   export type UserUpsertWithoutCreatedTreatmentsInput = {
@@ -32100,8 +32154,8 @@ export namespace Prisma {
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     practice?: PracticeUpdateOneWithoutUsersNestedInput
-    createdStudies?: StudyUpdateManyWithoutCreatedByNestedInput
-    assignedStudies?: StudyAssignmentUpdateManyWithoutUserNestedInput
+    createdMonitoringPlans?: MonitoringPlanUpdateManyWithoutCreatedByNestedInput
+    assignedMonitoringPlans?: MonitoringPlanAssignmentUpdateManyWithoutUserNestedInput
     observations?: ObservationUpdateManyWithoutRecordedByNestedInput
     createdPatients?: PatientUpdateManyWithoutCreatedByNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
@@ -32120,8 +32174,8 @@ export namespace Prisma {
     practiceId?: NullableStringFieldUpdateOperationsInput | string | null
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdStudies?: StudyUncheckedUpdateManyWithoutCreatedByNestedInput
-    assignedStudies?: StudyAssignmentUncheckedUpdateManyWithoutUserNestedInput
+    createdMonitoringPlans?: MonitoringPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    assignedMonitoringPlans?: MonitoringPlanAssignmentUncheckedUpdateManyWithoutUserNestedInput
     observations?: ObservationUncheckedUpdateManyWithoutRecordedByNestedInput
     createdPatients?: PatientUncheckedUpdateManyWithoutCreatedByNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
@@ -32155,7 +32209,7 @@ export namespace Prisma {
     options?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
-    study: StudyCreateNestedOneWithoutSymptomTemplatesInput
+    monitoringPlan: MonitoringPlanCreateNestedOneWithoutSymptomTemplatesInput
     observations?: ObservationCreateNestedManyWithoutSymptomTemplateInput
   }
 
@@ -32169,7 +32223,7 @@ export namespace Prisma {
     minValue?: number | null
     maxValue?: number | null
     options?: NullableJsonNullValueInput | InputJsonValue
-    studyId: string
+    monitoringPlanId: string
     createdAt?: Date | string
     updatedAt?: Date | string
     observations?: ObservationUncheckedCreateNestedManyWithoutSymptomTemplateInput
@@ -32229,7 +32283,7 @@ export namespace Prisma {
     options?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    study?: StudyUpdateOneRequiredWithoutSymptomTemplatesNestedInput
+    monitoringPlan?: MonitoringPlanUpdateOneRequiredWithoutSymptomTemplatesNestedInput
     observations?: ObservationUpdateManyWithoutSymptomTemplateNestedInput
   }
 
@@ -32243,7 +32297,7 @@ export namespace Prisma {
     minValue?: NullableFloatFieldUpdateOperationsInput | number | null
     maxValue?: NullableFloatFieldUpdateOperationsInput | number | null
     options?: NullableJsonNullValueInput | InputJsonValue
-    studyId?: StringFieldUpdateOperationsInput | string
+    monitoringPlanId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     observations?: ObservationUncheckedUpdateManyWithoutSymptomTemplateNestedInput
@@ -32297,7 +32351,7 @@ export namespace Prisma {
     notes?: string | null
     symptomTemplate: SymptomTemplateCreateNestedOneWithoutObservationsInput
     patient: PatientCreateNestedOneWithoutObservationsInput
-    studyPatient: StudyPatientCreateNestedOneWithoutObservationsInput
+    monitoringPlanPatient: MonitoringPlanPatientCreateNestedOneWithoutObservationsInput
     recordedBy: UserCreateNestedOneWithoutObservationsInput
     files?: FileCreateNestedManyWithoutObservationInput
   }
@@ -32306,7 +32360,7 @@ export namespace Prisma {
     id?: string
     symptomTemplateId: string
     patientId: string
-    studyPatientId: string
+    monitoringPlanPatientId: string
     recordedById: string
     recordedAt?: Date | string
     value: JsonNullValueInput | InputJsonValue
@@ -32398,7 +32452,7 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     symptomTemplate?: SymptomTemplateUpdateOneRequiredWithoutObservationsNestedInput
     patient?: PatientUpdateOneRequiredWithoutObservationsNestedInput
-    studyPatient?: StudyPatientUpdateOneRequiredWithoutObservationsNestedInput
+    monitoringPlanPatient?: MonitoringPlanPatientUpdateOneRequiredWithoutObservationsNestedInput
     recordedBy?: UserUpdateOneRequiredWithoutObservationsNestedInput
     files?: FileUpdateManyWithoutObservationNestedInput
   }
@@ -32407,7 +32461,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     symptomTemplateId?: StringFieldUpdateOperationsInput | string
     patientId?: StringFieldUpdateOperationsInput | string
-    studyPatientId?: StringFieldUpdateOperationsInput | string
+    monitoringPlanPatientId?: StringFieldUpdateOperationsInput | string
     recordedById?: StringFieldUpdateOperationsInput | string
     recordedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     value?: JsonNullValueInput | InputJsonValue
@@ -32444,8 +32498,8 @@ export namespace Prisma {
     resetToken?: string | null
     resetTokenExpiry?: Date | string | null
     practice?: PracticeCreateNestedOneWithoutUsersInput
-    createdStudies?: StudyCreateNestedManyWithoutCreatedByInput
-    assignedStudies?: StudyAssignmentCreateNestedManyWithoutUserInput
+    createdMonitoringPlans?: MonitoringPlanCreateNestedManyWithoutCreatedByInput
+    assignedMonitoringPlans?: MonitoringPlanAssignmentCreateNestedManyWithoutUserInput
     createdTreatments?: TreatmentCreateNestedManyWithoutCreatedByInput
     observations?: ObservationCreateNestedManyWithoutRecordedByInput
     createdPatients?: PatientCreateNestedManyWithoutCreatedByInput
@@ -32464,8 +32518,8 @@ export namespace Prisma {
     practiceId?: string | null
     resetToken?: string | null
     resetTokenExpiry?: Date | string | null
-    createdStudies?: StudyUncheckedCreateNestedManyWithoutCreatedByInput
-    assignedStudies?: StudyAssignmentUncheckedCreateNestedManyWithoutUserInput
+    createdMonitoringPlans?: MonitoringPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    assignedMonitoringPlans?: MonitoringPlanAssignmentUncheckedCreateNestedManyWithoutUserInput
     createdTreatments?: TreatmentUncheckedCreateNestedManyWithoutCreatedByInput
     observations?: ObservationUncheckedCreateNestedManyWithoutRecordedByInput
     createdPatients?: PatientUncheckedCreateNestedManyWithoutCreatedByInput
@@ -32521,8 +32575,8 @@ export namespace Prisma {
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     practice?: PracticeUpdateOneWithoutUsersNestedInput
-    createdStudies?: StudyUpdateManyWithoutCreatedByNestedInput
-    assignedStudies?: StudyAssignmentUpdateManyWithoutUserNestedInput
+    createdMonitoringPlans?: MonitoringPlanUpdateManyWithoutCreatedByNestedInput
+    assignedMonitoringPlans?: MonitoringPlanAssignmentUpdateManyWithoutUserNestedInput
     createdTreatments?: TreatmentUpdateManyWithoutCreatedByNestedInput
     observations?: ObservationUpdateManyWithoutRecordedByNestedInput
     createdPatients?: PatientUpdateManyWithoutCreatedByNestedInput
@@ -32541,8 +32595,8 @@ export namespace Prisma {
     practiceId?: NullableStringFieldUpdateOperationsInput | string | null
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdStudies?: StudyUncheckedUpdateManyWithoutCreatedByNestedInput
-    assignedStudies?: StudyAssignmentUncheckedUpdateManyWithoutUserNestedInput
+    createdMonitoringPlans?: MonitoringPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    assignedMonitoringPlans?: MonitoringPlanAssignmentUncheckedUpdateManyWithoutUserNestedInput
     createdTreatments?: TreatmentUncheckedUpdateManyWithoutCreatedByNestedInput
     observations?: ObservationUncheckedUpdateManyWithoutRecordedByNestedInput
     createdPatients?: PatientUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -32593,7 +32647,7 @@ export namespace Prisma {
     medicalHistory?: NullableJsonNullValueInput | InputJsonValue
     practice: PracticeCreateNestedOneWithoutPatientsInput
     createdBy: UserCreateNestedOneWithoutCreatedPatientsInput
-    studies?: StudyPatientCreateNestedManyWithoutPatientInput
+    monitoringPlans?: MonitoringPlanPatientCreateNestedManyWithoutPatientInput
     observations?: ObservationCreateNestedManyWithoutPatientInput
     treatments?: TreatmentCreateNestedManyWithoutPatientInput
   }
@@ -32616,7 +32670,7 @@ export namespace Prisma {
     ownerEmail?: string | null
     ownerPhone?: string | null
     medicalHistory?: NullableJsonNullValueInput | InputJsonValue
-    studies?: StudyPatientUncheckedCreateNestedManyWithoutPatientInput
+    monitoringPlans?: MonitoringPlanPatientUncheckedCreateNestedManyWithoutPatientInput
     observations?: ObservationUncheckedCreateNestedManyWithoutPatientInput
     treatments?: TreatmentUncheckedCreateNestedManyWithoutPatientInput
   }
@@ -32633,7 +32687,7 @@ export namespace Prisma {
     notes?: string | null
     symptomTemplate: SymptomTemplateCreateNestedOneWithoutObservationsInput
     patient: PatientCreateNestedOneWithoutObservationsInput
-    studyPatient: StudyPatientCreateNestedOneWithoutObservationsInput
+    monitoringPlanPatient: MonitoringPlanPatientCreateNestedOneWithoutObservationsInput
     recordedBy: UserCreateNestedOneWithoutObservationsInput
     alerts?: AlertCreateNestedManyWithoutObservationInput
   }
@@ -32642,7 +32696,7 @@ export namespace Prisma {
     id?: string
     symptomTemplateId: string
     patientId: string
-    studyPatientId: string
+    monitoringPlanPatientId: string
     recordedById: string
     recordedAt?: Date | string
     value: JsonNullValueInput | InputJsonValue
@@ -32665,7 +32719,7 @@ export namespace Prisma {
     notes?: string | null
     template?: TreatmentTemplateCreateNestedOneWithoutTreatmentsInput
     patient: PatientCreateNestedOneWithoutTreatmentsInput
-    studyPatient: StudyPatientCreateNestedOneWithoutTreatmentsInput
+    monitoringPlanPatient: MonitoringPlanPatientCreateNestedOneWithoutTreatmentsInput
     createdBy: UserCreateNestedOneWithoutCreatedTreatmentsInput
   }
 
@@ -32673,7 +32727,7 @@ export namespace Prisma {
     id?: string
     templateId?: string | null
     patientId: string
-    studyPatientId: string
+    monitoringPlanPatientId: string
     createdById: string
     createdAt?: Date | string
     administeredAt: Date | string
@@ -32717,7 +32771,7 @@ export namespace Prisma {
     medicalHistory?: NullableJsonNullValueInput | InputJsonValue
     practice?: PracticeUpdateOneRequiredWithoutPatientsNestedInput
     createdBy?: UserUpdateOneRequiredWithoutCreatedPatientsNestedInput
-    studies?: StudyPatientUpdateManyWithoutPatientNestedInput
+    monitoringPlans?: MonitoringPlanPatientUpdateManyWithoutPatientNestedInput
     observations?: ObservationUpdateManyWithoutPatientNestedInput
     treatments?: TreatmentUpdateManyWithoutPatientNestedInput
   }
@@ -32740,7 +32794,7 @@ export namespace Prisma {
     ownerEmail?: NullableStringFieldUpdateOperationsInput | string | null
     ownerPhone?: NullableStringFieldUpdateOperationsInput | string | null
     medicalHistory?: NullableJsonNullValueInput | InputJsonValue
-    studies?: StudyPatientUncheckedUpdateManyWithoutPatientNestedInput
+    monitoringPlans?: MonitoringPlanPatientUncheckedUpdateManyWithoutPatientNestedInput
     observations?: ObservationUncheckedUpdateManyWithoutPatientNestedInput
     treatments?: TreatmentUncheckedUpdateManyWithoutPatientNestedInput
   }
@@ -32763,7 +32817,7 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     symptomTemplate?: SymptomTemplateUpdateOneRequiredWithoutObservationsNestedInput
     patient?: PatientUpdateOneRequiredWithoutObservationsNestedInput
-    studyPatient?: StudyPatientUpdateOneRequiredWithoutObservationsNestedInput
+    monitoringPlanPatient?: MonitoringPlanPatientUpdateOneRequiredWithoutObservationsNestedInput
     recordedBy?: UserUpdateOneRequiredWithoutObservationsNestedInput
     alerts?: AlertUpdateManyWithoutObservationNestedInput
   }
@@ -32772,7 +32826,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     symptomTemplateId?: StringFieldUpdateOperationsInput | string
     patientId?: StringFieldUpdateOperationsInput | string
-    studyPatientId?: StringFieldUpdateOperationsInput | string
+    monitoringPlanPatientId?: StringFieldUpdateOperationsInput | string
     recordedById?: StringFieldUpdateOperationsInput | string
     recordedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     value?: JsonNullValueInput | InputJsonValue
@@ -32801,7 +32855,7 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     template?: TreatmentTemplateUpdateOneWithoutTreatmentsNestedInput
     patient?: PatientUpdateOneRequiredWithoutTreatmentsNestedInput
-    studyPatient?: StudyPatientUpdateOneRequiredWithoutTreatmentsNestedInput
+    monitoringPlanPatient?: MonitoringPlanPatientUpdateOneRequiredWithoutTreatmentsNestedInput
     createdBy?: UserUpdateOneRequiredWithoutCreatedTreatmentsNestedInput
   }
 
@@ -32809,7 +32863,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     templateId?: NullableStringFieldUpdateOperationsInput | string | null
     patientId?: StringFieldUpdateOperationsInput | string
-    studyPatientId?: StringFieldUpdateOperationsInput | string
+    monitoringPlanPatientId?: StringFieldUpdateOperationsInput | string
     createdById?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     administeredAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -32819,7 +32873,7 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type StudyCreateManyCreatedByInput = {
+  export type MonitoringPlanCreateManyCreatedByInput = {
     id?: string
     title: string
     description?: string | null
@@ -32829,22 +32883,23 @@ export namespace Prisma {
     updatedAt?: Date | string
     startDate?: Date | string | null
     endDate?: Date | string | null
-    status?: $Enums.StudyStatus
+    status?: $Enums.MonitoringPlanStatus
     isTemplate?: boolean
+    shareToken?: string | null
   }
 
-  export type StudyAssignmentCreateManyUserInput = {
+  export type MonitoringPlanAssignmentCreateManyUserInput = {
     id?: string
-    studyId: string
+    monitoringPlanId: string
     assignedAt?: Date | string
-    role: $Enums.StudyRole
+    role: $Enums.MonitoringPlanRole
   }
 
   export type TreatmentCreateManyCreatedByInput = {
     id?: string
     templateId?: string | null
     patientId: string
-    studyPatientId: string
+    monitoringPlanPatientId: string
     createdAt?: Date | string
     administeredAt: Date | string
     name: string
@@ -32857,7 +32912,7 @@ export namespace Prisma {
     id?: string
     symptomTemplateId: string
     patientId: string
-    studyPatientId: string
+    monitoringPlanPatientId: string
     recordedAt?: Date | string
     value: JsonNullValueInput | InputJsonValue
     notes?: string | null
@@ -32892,7 +32947,7 @@ export namespace Prisma {
     isRead?: boolean
   }
 
-  export type StudyUpdateWithoutCreatedByInput = {
+  export type MonitoringPlanUpdateWithoutCreatedByInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -32901,36 +32956,18 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    status?: EnumStudyStatusFieldUpdateOperationsInput | $Enums.StudyStatus
+    status?: EnumMonitoringPlanStatusFieldUpdateOperationsInput | $Enums.MonitoringPlanStatus
     isTemplate?: BoolFieldUpdateOperationsInput | boolean
-    practice?: PracticeUpdateOneRequiredWithoutStudiesNestedInput
-    patients?: StudyPatientUpdateManyWithoutStudyNestedInput
-    assignedUsers?: StudyAssignmentUpdateManyWithoutStudyNestedInput
-    symptomTemplates?: SymptomTemplateUpdateManyWithoutStudyNestedInput
-    treatmentTemplates?: TreatmentTemplateUpdateManyWithoutStudyNestedInput
-    notes?: StudyNoteUpdateManyWithoutStudyNestedInput
+    shareToken?: NullableStringFieldUpdateOperationsInput | string | null
+    practice?: PracticeUpdateOneRequiredWithoutMonitoringPlansNestedInput
+    patients?: MonitoringPlanPatientUpdateManyWithoutMonitoringPlanNestedInput
+    assignedUsers?: MonitoringPlanAssignmentUpdateManyWithoutMonitoringPlanNestedInput
+    symptomTemplates?: SymptomTemplateUpdateManyWithoutMonitoringPlanNestedInput
+    treatmentTemplates?: TreatmentTemplateUpdateManyWithoutMonitoringPlanNestedInput
+    notes?: MonitoringPlanNoteUpdateManyWithoutMonitoringPlanNestedInput
   }
 
-  export type StudyUncheckedUpdateWithoutCreatedByInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    protocol?: NullableJsonNullValueInput | InputJsonValue
-    practiceId?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    status?: EnumStudyStatusFieldUpdateOperationsInput | $Enums.StudyStatus
-    isTemplate?: BoolFieldUpdateOperationsInput | boolean
-    patients?: StudyPatientUncheckedUpdateManyWithoutStudyNestedInput
-    assignedUsers?: StudyAssignmentUncheckedUpdateManyWithoutStudyNestedInput
-    symptomTemplates?: SymptomTemplateUncheckedUpdateManyWithoutStudyNestedInput
-    treatmentTemplates?: TreatmentTemplateUncheckedUpdateManyWithoutStudyNestedInput
-    notes?: StudyNoteUncheckedUpdateManyWithoutStudyNestedInput
-  }
-
-  export type StudyUncheckedUpdateManyWithoutCreatedByInput = {
+  export type MonitoringPlanUncheckedUpdateWithoutCreatedByInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -32940,29 +32977,50 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    status?: EnumStudyStatusFieldUpdateOperationsInput | $Enums.StudyStatus
+    status?: EnumMonitoringPlanStatusFieldUpdateOperationsInput | $Enums.MonitoringPlanStatus
     isTemplate?: BoolFieldUpdateOperationsInput | boolean
+    shareToken?: NullableStringFieldUpdateOperationsInput | string | null
+    patients?: MonitoringPlanPatientUncheckedUpdateManyWithoutMonitoringPlanNestedInput
+    assignedUsers?: MonitoringPlanAssignmentUncheckedUpdateManyWithoutMonitoringPlanNestedInput
+    symptomTemplates?: SymptomTemplateUncheckedUpdateManyWithoutMonitoringPlanNestedInput
+    treatmentTemplates?: TreatmentTemplateUncheckedUpdateManyWithoutMonitoringPlanNestedInput
+    notes?: MonitoringPlanNoteUncheckedUpdateManyWithoutMonitoringPlanNestedInput
   }
 
-  export type StudyAssignmentUpdateWithoutUserInput = {
+  export type MonitoringPlanUncheckedUpdateManyWithoutCreatedByInput = {
     id?: StringFieldUpdateOperationsInput | string
-    assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    role?: EnumStudyRoleFieldUpdateOperationsInput | $Enums.StudyRole
-    study?: StudyUpdateOneRequiredWithoutAssignedUsersNestedInput
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    protocol?: NullableJsonNullValueInput | InputJsonValue
+    practiceId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumMonitoringPlanStatusFieldUpdateOperationsInput | $Enums.MonitoringPlanStatus
+    isTemplate?: BoolFieldUpdateOperationsInput | boolean
+    shareToken?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type StudyAssignmentUncheckedUpdateWithoutUserInput = {
+  export type MonitoringPlanAssignmentUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    studyId?: StringFieldUpdateOperationsInput | string
     assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    role?: EnumStudyRoleFieldUpdateOperationsInput | $Enums.StudyRole
+    role?: EnumMonitoringPlanRoleFieldUpdateOperationsInput | $Enums.MonitoringPlanRole
+    monitoringPlan?: MonitoringPlanUpdateOneRequiredWithoutAssignedUsersNestedInput
   }
 
-  export type StudyAssignmentUncheckedUpdateManyWithoutUserInput = {
+  export type MonitoringPlanAssignmentUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    studyId?: StringFieldUpdateOperationsInput | string
+    monitoringPlanId?: StringFieldUpdateOperationsInput | string
     assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    role?: EnumStudyRoleFieldUpdateOperationsInput | $Enums.StudyRole
+    role?: EnumMonitoringPlanRoleFieldUpdateOperationsInput | $Enums.MonitoringPlanRole
+  }
+
+  export type MonitoringPlanAssignmentUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    monitoringPlanId?: StringFieldUpdateOperationsInput | string
+    assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    role?: EnumMonitoringPlanRoleFieldUpdateOperationsInput | $Enums.MonitoringPlanRole
   }
 
   export type TreatmentUpdateWithoutCreatedByInput = {
@@ -32975,7 +33033,7 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     template?: TreatmentTemplateUpdateOneWithoutTreatmentsNestedInput
     patient?: PatientUpdateOneRequiredWithoutTreatmentsNestedInput
-    studyPatient?: StudyPatientUpdateOneRequiredWithoutTreatmentsNestedInput
+    monitoringPlanPatient?: MonitoringPlanPatientUpdateOneRequiredWithoutTreatmentsNestedInput
     files?: FileUpdateManyWithoutTreatmentNestedInput
   }
 
@@ -32983,7 +33041,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     templateId?: NullableStringFieldUpdateOperationsInput | string | null
     patientId?: StringFieldUpdateOperationsInput | string
-    studyPatientId?: StringFieldUpdateOperationsInput | string
+    monitoringPlanPatientId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     administeredAt?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
@@ -32997,7 +33055,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     templateId?: NullableStringFieldUpdateOperationsInput | string | null
     patientId?: StringFieldUpdateOperationsInput | string
-    studyPatientId?: StringFieldUpdateOperationsInput | string
+    monitoringPlanPatientId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     administeredAt?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
@@ -33013,7 +33071,7 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     symptomTemplate?: SymptomTemplateUpdateOneRequiredWithoutObservationsNestedInput
     patient?: PatientUpdateOneRequiredWithoutObservationsNestedInput
-    studyPatient?: StudyPatientUpdateOneRequiredWithoutObservationsNestedInput
+    monitoringPlanPatient?: MonitoringPlanPatientUpdateOneRequiredWithoutObservationsNestedInput
     files?: FileUpdateManyWithoutObservationNestedInput
     alerts?: AlertUpdateManyWithoutObservationNestedInput
   }
@@ -33022,7 +33080,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     symptomTemplateId?: StringFieldUpdateOperationsInput | string
     patientId?: StringFieldUpdateOperationsInput | string
-    studyPatientId?: StringFieldUpdateOperationsInput | string
+    monitoringPlanPatientId?: StringFieldUpdateOperationsInput | string
     recordedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     value?: JsonNullValueInput | InputJsonValue
     notes?: NullableStringFieldUpdateOperationsInput | string | null
@@ -33034,7 +33092,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     symptomTemplateId?: StringFieldUpdateOperationsInput | string
     patientId?: StringFieldUpdateOperationsInput | string
-    studyPatientId?: StringFieldUpdateOperationsInput | string
+    monitoringPlanPatientId?: StringFieldUpdateOperationsInput | string
     recordedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     value?: JsonNullValueInput | InputJsonValue
     notes?: NullableStringFieldUpdateOperationsInput | string | null
@@ -33057,7 +33115,7 @@ export namespace Prisma {
     ownerPhone?: NullableStringFieldUpdateOperationsInput | string | null
     medicalHistory?: NullableJsonNullValueInput | InputJsonValue
     practice?: PracticeUpdateOneRequiredWithoutPatientsNestedInput
-    studies?: StudyPatientUpdateManyWithoutPatientNestedInput
+    monitoringPlans?: MonitoringPlanPatientUpdateManyWithoutPatientNestedInput
     observations?: ObservationUpdateManyWithoutPatientNestedInput
     treatments?: TreatmentUpdateManyWithoutPatientNestedInput
     files?: FileUpdateManyWithoutPatientNestedInput
@@ -33080,7 +33138,7 @@ export namespace Prisma {
     ownerEmail?: NullableStringFieldUpdateOperationsInput | string | null
     ownerPhone?: NullableStringFieldUpdateOperationsInput | string | null
     medicalHistory?: NullableJsonNullValueInput | InputJsonValue
-    studies?: StudyPatientUncheckedUpdateManyWithoutPatientNestedInput
+    monitoringPlans?: MonitoringPlanPatientUncheckedUpdateManyWithoutPatientNestedInput
     observations?: ObservationUncheckedUpdateManyWithoutPatientNestedInput
     treatments?: TreatmentUncheckedUpdateManyWithoutPatientNestedInput
     files?: FileUncheckedUpdateManyWithoutPatientNestedInput
@@ -33168,7 +33226,7 @@ export namespace Prisma {
     medicalHistory?: NullableJsonNullValueInput | InputJsonValue
   }
 
-  export type StudyCreateManyPracticeInput = {
+  export type MonitoringPlanCreateManyPracticeInput = {
     id?: string
     title: string
     description?: string | null
@@ -33178,8 +33236,9 @@ export namespace Prisma {
     updatedAt?: Date | string
     startDate?: Date | string | null
     endDate?: Date | string | null
-    status?: $Enums.StudyStatus
+    status?: $Enums.MonitoringPlanStatus
     isTemplate?: boolean
+    shareToken?: string | null
   }
 
   export type SubscriptionHistoryCreateManyPracticeInput = {
@@ -33204,8 +33263,8 @@ export namespace Prisma {
     isActive?: BoolFieldUpdateOperationsInput | boolean
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdStudies?: StudyUpdateManyWithoutCreatedByNestedInput
-    assignedStudies?: StudyAssignmentUpdateManyWithoutUserNestedInput
+    createdMonitoringPlans?: MonitoringPlanUpdateManyWithoutCreatedByNestedInput
+    assignedMonitoringPlans?: MonitoringPlanAssignmentUpdateManyWithoutUserNestedInput
     createdTreatments?: TreatmentUpdateManyWithoutCreatedByNestedInput
     observations?: ObservationUpdateManyWithoutRecordedByNestedInput
     createdPatients?: PatientUpdateManyWithoutCreatedByNestedInput
@@ -33224,8 +33283,8 @@ export namespace Prisma {
     isActive?: BoolFieldUpdateOperationsInput | boolean
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdStudies?: StudyUncheckedUpdateManyWithoutCreatedByNestedInput
-    assignedStudies?: StudyAssignmentUncheckedUpdateManyWithoutUserNestedInput
+    createdMonitoringPlans?: MonitoringPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    assignedMonitoringPlans?: MonitoringPlanAssignmentUncheckedUpdateManyWithoutUserNestedInput
     createdTreatments?: TreatmentUncheckedUpdateManyWithoutCreatedByNestedInput
     observations?: ObservationUncheckedUpdateManyWithoutRecordedByNestedInput
     createdPatients?: PatientUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -33263,7 +33322,7 @@ export namespace Prisma {
     ownerPhone?: NullableStringFieldUpdateOperationsInput | string | null
     medicalHistory?: NullableJsonNullValueInput | InputJsonValue
     createdBy?: UserUpdateOneRequiredWithoutCreatedPatientsNestedInput
-    studies?: StudyPatientUpdateManyWithoutPatientNestedInput
+    monitoringPlans?: MonitoringPlanPatientUpdateManyWithoutPatientNestedInput
     observations?: ObservationUpdateManyWithoutPatientNestedInput
     treatments?: TreatmentUpdateManyWithoutPatientNestedInput
     files?: FileUpdateManyWithoutPatientNestedInput
@@ -33286,7 +33345,7 @@ export namespace Prisma {
     ownerEmail?: NullableStringFieldUpdateOperationsInput | string | null
     ownerPhone?: NullableStringFieldUpdateOperationsInput | string | null
     medicalHistory?: NullableJsonNullValueInput | InputJsonValue
-    studies?: StudyPatientUncheckedUpdateManyWithoutPatientNestedInput
+    monitoringPlans?: MonitoringPlanPatientUncheckedUpdateManyWithoutPatientNestedInput
     observations?: ObservationUncheckedUpdateManyWithoutPatientNestedInput
     treatments?: TreatmentUncheckedUpdateManyWithoutPatientNestedInput
     files?: FileUncheckedUpdateManyWithoutPatientNestedInput
@@ -33311,7 +33370,7 @@ export namespace Prisma {
     medicalHistory?: NullableJsonNullValueInput | InputJsonValue
   }
 
-  export type StudyUpdateWithoutPracticeInput = {
+  export type MonitoringPlanUpdateWithoutPracticeInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -33320,17 +33379,18 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    status?: EnumStudyStatusFieldUpdateOperationsInput | $Enums.StudyStatus
+    status?: EnumMonitoringPlanStatusFieldUpdateOperationsInput | $Enums.MonitoringPlanStatus
     isTemplate?: BoolFieldUpdateOperationsInput | boolean
-    createdBy?: UserUpdateOneRequiredWithoutCreatedStudiesNestedInput
-    patients?: StudyPatientUpdateManyWithoutStudyNestedInput
-    assignedUsers?: StudyAssignmentUpdateManyWithoutStudyNestedInput
-    symptomTemplates?: SymptomTemplateUpdateManyWithoutStudyNestedInput
-    treatmentTemplates?: TreatmentTemplateUpdateManyWithoutStudyNestedInput
-    notes?: StudyNoteUpdateManyWithoutStudyNestedInput
+    shareToken?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: UserUpdateOneRequiredWithoutCreatedMonitoringPlansNestedInput
+    patients?: MonitoringPlanPatientUpdateManyWithoutMonitoringPlanNestedInput
+    assignedUsers?: MonitoringPlanAssignmentUpdateManyWithoutMonitoringPlanNestedInput
+    symptomTemplates?: SymptomTemplateUpdateManyWithoutMonitoringPlanNestedInput
+    treatmentTemplates?: TreatmentTemplateUpdateManyWithoutMonitoringPlanNestedInput
+    notes?: MonitoringPlanNoteUpdateManyWithoutMonitoringPlanNestedInput
   }
 
-  export type StudyUncheckedUpdateWithoutPracticeInput = {
+  export type MonitoringPlanUncheckedUpdateWithoutPracticeInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -33340,16 +33400,17 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    status?: EnumStudyStatusFieldUpdateOperationsInput | $Enums.StudyStatus
+    status?: EnumMonitoringPlanStatusFieldUpdateOperationsInput | $Enums.MonitoringPlanStatus
     isTemplate?: BoolFieldUpdateOperationsInput | boolean
-    patients?: StudyPatientUncheckedUpdateManyWithoutStudyNestedInput
-    assignedUsers?: StudyAssignmentUncheckedUpdateManyWithoutStudyNestedInput
-    symptomTemplates?: SymptomTemplateUncheckedUpdateManyWithoutStudyNestedInput
-    treatmentTemplates?: TreatmentTemplateUncheckedUpdateManyWithoutStudyNestedInput
-    notes?: StudyNoteUncheckedUpdateManyWithoutStudyNestedInput
+    shareToken?: NullableStringFieldUpdateOperationsInput | string | null
+    patients?: MonitoringPlanPatientUncheckedUpdateManyWithoutMonitoringPlanNestedInput
+    assignedUsers?: MonitoringPlanAssignmentUncheckedUpdateManyWithoutMonitoringPlanNestedInput
+    symptomTemplates?: SymptomTemplateUncheckedUpdateManyWithoutMonitoringPlanNestedInput
+    treatmentTemplates?: TreatmentTemplateUncheckedUpdateManyWithoutMonitoringPlanNestedInput
+    notes?: MonitoringPlanNoteUncheckedUpdateManyWithoutMonitoringPlanNestedInput
   }
 
-  export type StudyUncheckedUpdateManyWithoutPracticeInput = {
+  export type MonitoringPlanUncheckedUpdateManyWithoutPracticeInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -33359,8 +33420,9 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    status?: EnumStudyStatusFieldUpdateOperationsInput | $Enums.StudyStatus
+    status?: EnumMonitoringPlanStatusFieldUpdateOperationsInput | $Enums.MonitoringPlanStatus
     isTemplate?: BoolFieldUpdateOperationsInput | boolean
+    shareToken?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type SubscriptionHistoryUpdateWithoutPracticeInput = {
@@ -33393,9 +33455,9 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type StudyPatientCreateManyPatientInput = {
+  export type MonitoringPlanPatientCreateManyPatientInput = {
     id?: string
-    studyId: string
+    monitoringPlanId: string
     enrollmentDate?: Date | string
     exitDate?: Date | string | null
     isActive?: boolean
@@ -33404,7 +33466,7 @@ export namespace Prisma {
   export type ObservationCreateManyPatientInput = {
     id?: string
     symptomTemplateId: string
-    studyPatientId: string
+    monitoringPlanPatientId: string
     recordedById: string
     recordedAt?: Date | string
     value: JsonNullValueInput | InputJsonValue
@@ -33414,7 +33476,7 @@ export namespace Prisma {
   export type TreatmentCreateManyPatientInput = {
     id?: string
     templateId?: string | null
-    studyPatientId: string
+    monitoringPlanPatientId: string
     createdById: string
     createdAt?: Date | string
     administeredAt: Date | string
@@ -33435,29 +33497,29 @@ export namespace Prisma {
     treatmentId?: string | null
   }
 
-  export type StudyPatientUpdateWithoutPatientInput = {
+  export type MonitoringPlanPatientUpdateWithoutPatientInput = {
     id?: StringFieldUpdateOperationsInput | string
     enrollmentDate?: DateTimeFieldUpdateOperationsInput | Date | string
     exitDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
-    study?: StudyUpdateOneRequiredWithoutPatientsNestedInput
-    observations?: ObservationUpdateManyWithoutStudyPatientNestedInput
-    treatments?: TreatmentUpdateManyWithoutStudyPatientNestedInput
+    monitoringPlan?: MonitoringPlanUpdateOneRequiredWithoutPatientsNestedInput
+    observations?: ObservationUpdateManyWithoutMonitoringPlanPatientNestedInput
+    treatments?: TreatmentUpdateManyWithoutMonitoringPlanPatientNestedInput
   }
 
-  export type StudyPatientUncheckedUpdateWithoutPatientInput = {
+  export type MonitoringPlanPatientUncheckedUpdateWithoutPatientInput = {
     id?: StringFieldUpdateOperationsInput | string
-    studyId?: StringFieldUpdateOperationsInput | string
+    monitoringPlanId?: StringFieldUpdateOperationsInput | string
     enrollmentDate?: DateTimeFieldUpdateOperationsInput | Date | string
     exitDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
-    observations?: ObservationUncheckedUpdateManyWithoutStudyPatientNestedInput
-    treatments?: TreatmentUncheckedUpdateManyWithoutStudyPatientNestedInput
+    observations?: ObservationUncheckedUpdateManyWithoutMonitoringPlanPatientNestedInput
+    treatments?: TreatmentUncheckedUpdateManyWithoutMonitoringPlanPatientNestedInput
   }
 
-  export type StudyPatientUncheckedUpdateManyWithoutPatientInput = {
+  export type MonitoringPlanPatientUncheckedUpdateManyWithoutPatientInput = {
     id?: StringFieldUpdateOperationsInput | string
-    studyId?: StringFieldUpdateOperationsInput | string
+    monitoringPlanId?: StringFieldUpdateOperationsInput | string
     enrollmentDate?: DateTimeFieldUpdateOperationsInput | Date | string
     exitDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
@@ -33469,7 +33531,7 @@ export namespace Prisma {
     value?: JsonNullValueInput | InputJsonValue
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     symptomTemplate?: SymptomTemplateUpdateOneRequiredWithoutObservationsNestedInput
-    studyPatient?: StudyPatientUpdateOneRequiredWithoutObservationsNestedInput
+    monitoringPlanPatient?: MonitoringPlanPatientUpdateOneRequiredWithoutObservationsNestedInput
     recordedBy?: UserUpdateOneRequiredWithoutObservationsNestedInput
     files?: FileUpdateManyWithoutObservationNestedInput
     alerts?: AlertUpdateManyWithoutObservationNestedInput
@@ -33478,7 +33540,7 @@ export namespace Prisma {
   export type ObservationUncheckedUpdateWithoutPatientInput = {
     id?: StringFieldUpdateOperationsInput | string
     symptomTemplateId?: StringFieldUpdateOperationsInput | string
-    studyPatientId?: StringFieldUpdateOperationsInput | string
+    monitoringPlanPatientId?: StringFieldUpdateOperationsInput | string
     recordedById?: StringFieldUpdateOperationsInput | string
     recordedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     value?: JsonNullValueInput | InputJsonValue
@@ -33490,7 +33552,7 @@ export namespace Prisma {
   export type ObservationUncheckedUpdateManyWithoutPatientInput = {
     id?: StringFieldUpdateOperationsInput | string
     symptomTemplateId?: StringFieldUpdateOperationsInput | string
-    studyPatientId?: StringFieldUpdateOperationsInput | string
+    monitoringPlanPatientId?: StringFieldUpdateOperationsInput | string
     recordedById?: StringFieldUpdateOperationsInput | string
     recordedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     value?: JsonNullValueInput | InputJsonValue
@@ -33506,7 +33568,7 @@ export namespace Prisma {
     dosage?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     template?: TreatmentTemplateUpdateOneWithoutTreatmentsNestedInput
-    studyPatient?: StudyPatientUpdateOneRequiredWithoutTreatmentsNestedInput
+    monitoringPlanPatient?: MonitoringPlanPatientUpdateOneRequiredWithoutTreatmentsNestedInput
     createdBy?: UserUpdateOneRequiredWithoutCreatedTreatmentsNestedInput
     files?: FileUpdateManyWithoutTreatmentNestedInput
   }
@@ -33514,7 +33576,7 @@ export namespace Prisma {
   export type TreatmentUncheckedUpdateWithoutPatientInput = {
     id?: StringFieldUpdateOperationsInput | string
     templateId?: NullableStringFieldUpdateOperationsInput | string | null
-    studyPatientId?: StringFieldUpdateOperationsInput | string
+    monitoringPlanPatientId?: StringFieldUpdateOperationsInput | string
     createdById?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     administeredAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -33528,7 +33590,7 @@ export namespace Prisma {
   export type TreatmentUncheckedUpdateManyWithoutPatientInput = {
     id?: StringFieldUpdateOperationsInput | string
     templateId?: NullableStringFieldUpdateOperationsInput | string | null
-    studyPatientId?: StringFieldUpdateOperationsInput | string
+    monitoringPlanPatientId?: StringFieldUpdateOperationsInput | string
     createdById?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     administeredAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -33571,7 +33633,7 @@ export namespace Prisma {
     treatmentId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type StudyPatientCreateManyStudyInput = {
+  export type MonitoringPlanPatientCreateManyMonitoringPlanInput = {
     id?: string
     patientId: string
     enrollmentDate?: Date | string
@@ -33579,14 +33641,14 @@ export namespace Prisma {
     isActive?: boolean
   }
 
-  export type StudyAssignmentCreateManyStudyInput = {
+  export type MonitoringPlanAssignmentCreateManyMonitoringPlanInput = {
     id?: string
     userId: string
     assignedAt?: Date | string
-    role: $Enums.StudyRole
+    role: $Enums.MonitoringPlanRole
   }
 
-  export type SymptomTemplateCreateManyStudyInput = {
+  export type SymptomTemplateCreateManyMonitoringPlanInput = {
     id?: string
     name: string
     description?: string | null
@@ -33600,7 +33662,7 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type TreatmentTemplateCreateManyStudyInput = {
+  export type TreatmentTemplateCreateManyMonitoringPlanInput = {
     id?: string
     name: string
     description?: string | null
@@ -33609,34 +33671,34 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type StudyNoteCreateManyStudyInput = {
+  export type MonitoringPlanNoteCreateManyMonitoringPlanInput = {
     id?: string
     content: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
-  export type StudyPatientUpdateWithoutStudyInput = {
+  export type MonitoringPlanPatientUpdateWithoutMonitoringPlanInput = {
     id?: StringFieldUpdateOperationsInput | string
     enrollmentDate?: DateTimeFieldUpdateOperationsInput | Date | string
     exitDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
-    patient?: PatientUpdateOneRequiredWithoutStudiesNestedInput
-    observations?: ObservationUpdateManyWithoutStudyPatientNestedInput
-    treatments?: TreatmentUpdateManyWithoutStudyPatientNestedInput
+    patient?: PatientUpdateOneRequiredWithoutMonitoringPlansNestedInput
+    observations?: ObservationUpdateManyWithoutMonitoringPlanPatientNestedInput
+    treatments?: TreatmentUpdateManyWithoutMonitoringPlanPatientNestedInput
   }
 
-  export type StudyPatientUncheckedUpdateWithoutStudyInput = {
+  export type MonitoringPlanPatientUncheckedUpdateWithoutMonitoringPlanInput = {
     id?: StringFieldUpdateOperationsInput | string
     patientId?: StringFieldUpdateOperationsInput | string
     enrollmentDate?: DateTimeFieldUpdateOperationsInput | Date | string
     exitDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
-    observations?: ObservationUncheckedUpdateManyWithoutStudyPatientNestedInput
-    treatments?: TreatmentUncheckedUpdateManyWithoutStudyPatientNestedInput
+    observations?: ObservationUncheckedUpdateManyWithoutMonitoringPlanPatientNestedInput
+    treatments?: TreatmentUncheckedUpdateManyWithoutMonitoringPlanPatientNestedInput
   }
 
-  export type StudyPatientUncheckedUpdateManyWithoutStudyInput = {
+  export type MonitoringPlanPatientUncheckedUpdateManyWithoutMonitoringPlanInput = {
     id?: StringFieldUpdateOperationsInput | string
     patientId?: StringFieldUpdateOperationsInput | string
     enrollmentDate?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -33644,28 +33706,28 @@ export namespace Prisma {
     isActive?: BoolFieldUpdateOperationsInput | boolean
   }
 
-  export type StudyAssignmentUpdateWithoutStudyInput = {
+  export type MonitoringPlanAssignmentUpdateWithoutMonitoringPlanInput = {
     id?: StringFieldUpdateOperationsInput | string
     assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    role?: EnumStudyRoleFieldUpdateOperationsInput | $Enums.StudyRole
-    user?: UserUpdateOneRequiredWithoutAssignedStudiesNestedInput
+    role?: EnumMonitoringPlanRoleFieldUpdateOperationsInput | $Enums.MonitoringPlanRole
+    user?: UserUpdateOneRequiredWithoutAssignedMonitoringPlansNestedInput
   }
 
-  export type StudyAssignmentUncheckedUpdateWithoutStudyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    role?: EnumStudyRoleFieldUpdateOperationsInput | $Enums.StudyRole
-  }
-
-  export type StudyAssignmentUncheckedUpdateManyWithoutStudyInput = {
+  export type MonitoringPlanAssignmentUncheckedUpdateWithoutMonitoringPlanInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    role?: EnumStudyRoleFieldUpdateOperationsInput | $Enums.StudyRole
+    role?: EnumMonitoringPlanRoleFieldUpdateOperationsInput | $Enums.MonitoringPlanRole
   }
 
-  export type SymptomTemplateUpdateWithoutStudyInput = {
+  export type MonitoringPlanAssignmentUncheckedUpdateManyWithoutMonitoringPlanInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    role?: EnumMonitoringPlanRoleFieldUpdateOperationsInput | $Enums.MonitoringPlanRole
+  }
+
+  export type SymptomTemplateUpdateWithoutMonitoringPlanInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -33681,7 +33743,7 @@ export namespace Prisma {
     alertThresholds?: AlertThresholdUpdateManyWithoutSymptomTemplateNestedInput
   }
 
-  export type SymptomTemplateUncheckedUpdateWithoutStudyInput = {
+  export type SymptomTemplateUncheckedUpdateWithoutMonitoringPlanInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -33697,7 +33759,7 @@ export namespace Prisma {
     alertThresholds?: AlertThresholdUncheckedUpdateManyWithoutSymptomTemplateNestedInput
   }
 
-  export type SymptomTemplateUncheckedUpdateManyWithoutStudyInput = {
+  export type SymptomTemplateUncheckedUpdateManyWithoutMonitoringPlanInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -33711,7 +33773,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type TreatmentTemplateUpdateWithoutStudyInput = {
+  export type TreatmentTemplateUpdateWithoutMonitoringPlanInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -33721,7 +33783,7 @@ export namespace Prisma {
     treatments?: TreatmentUpdateManyWithoutTemplateNestedInput
   }
 
-  export type TreatmentTemplateUncheckedUpdateWithoutStudyInput = {
+  export type TreatmentTemplateUncheckedUpdateWithoutMonitoringPlanInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -33731,7 +33793,7 @@ export namespace Prisma {
     treatments?: TreatmentUncheckedUpdateManyWithoutTemplateNestedInput
   }
 
-  export type TreatmentTemplateUncheckedUpdateManyWithoutStudyInput = {
+  export type TreatmentTemplateUncheckedUpdateManyWithoutMonitoringPlanInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -33740,28 +33802,28 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type StudyNoteUpdateWithoutStudyInput = {
+  export type MonitoringPlanNoteUpdateWithoutMonitoringPlanInput = {
     id?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type StudyNoteUncheckedUpdateWithoutStudyInput = {
+  export type MonitoringPlanNoteUncheckedUpdateWithoutMonitoringPlanInput = {
     id?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type StudyNoteUncheckedUpdateManyWithoutStudyInput = {
+  export type MonitoringPlanNoteUncheckedUpdateManyWithoutMonitoringPlanInput = {
     id?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type ObservationCreateManyStudyPatientInput = {
+  export type ObservationCreateManyMonitoringPlanPatientInput = {
     id?: string
     symptomTemplateId: string
     patientId: string
@@ -33771,7 +33833,7 @@ export namespace Prisma {
     notes?: string | null
   }
 
-  export type TreatmentCreateManyStudyPatientInput = {
+  export type TreatmentCreateManyMonitoringPlanPatientInput = {
     id?: string
     templateId?: string | null
     patientId: string
@@ -33784,7 +33846,7 @@ export namespace Prisma {
     notes?: string | null
   }
 
-  export type ObservationUpdateWithoutStudyPatientInput = {
+  export type ObservationUpdateWithoutMonitoringPlanPatientInput = {
     id?: StringFieldUpdateOperationsInput | string
     recordedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     value?: JsonNullValueInput | InputJsonValue
@@ -33796,7 +33858,7 @@ export namespace Prisma {
     alerts?: AlertUpdateManyWithoutObservationNestedInput
   }
 
-  export type ObservationUncheckedUpdateWithoutStudyPatientInput = {
+  export type ObservationUncheckedUpdateWithoutMonitoringPlanPatientInput = {
     id?: StringFieldUpdateOperationsInput | string
     symptomTemplateId?: StringFieldUpdateOperationsInput | string
     patientId?: StringFieldUpdateOperationsInput | string
@@ -33808,7 +33870,7 @@ export namespace Prisma {
     alerts?: AlertUncheckedUpdateManyWithoutObservationNestedInput
   }
 
-  export type ObservationUncheckedUpdateManyWithoutStudyPatientInput = {
+  export type ObservationUncheckedUpdateManyWithoutMonitoringPlanPatientInput = {
     id?: StringFieldUpdateOperationsInput | string
     symptomTemplateId?: StringFieldUpdateOperationsInput | string
     patientId?: StringFieldUpdateOperationsInput | string
@@ -33818,7 +33880,7 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type TreatmentUpdateWithoutStudyPatientInput = {
+  export type TreatmentUpdateWithoutMonitoringPlanPatientInput = {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     administeredAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -33832,7 +33894,7 @@ export namespace Prisma {
     files?: FileUpdateManyWithoutTreatmentNestedInput
   }
 
-  export type TreatmentUncheckedUpdateWithoutStudyPatientInput = {
+  export type TreatmentUncheckedUpdateWithoutMonitoringPlanPatientInput = {
     id?: StringFieldUpdateOperationsInput | string
     templateId?: NullableStringFieldUpdateOperationsInput | string | null
     patientId?: StringFieldUpdateOperationsInput | string
@@ -33846,7 +33908,7 @@ export namespace Prisma {
     files?: FileUncheckedUpdateManyWithoutTreatmentNestedInput
   }
 
-  export type TreatmentUncheckedUpdateManyWithoutStudyPatientInput = {
+  export type TreatmentUncheckedUpdateManyWithoutMonitoringPlanPatientInput = {
     id?: StringFieldUpdateOperationsInput | string
     templateId?: NullableStringFieldUpdateOperationsInput | string | null
     patientId?: StringFieldUpdateOperationsInput | string
@@ -33862,7 +33924,7 @@ export namespace Prisma {
   export type ObservationCreateManySymptomTemplateInput = {
     id?: string
     patientId: string
-    studyPatientId: string
+    monitoringPlanPatientId: string
     recordedById: string
     recordedAt?: Date | string
     value: JsonNullValueInput | InputJsonValue
@@ -33884,7 +33946,7 @@ export namespace Prisma {
     value?: JsonNullValueInput | InputJsonValue
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     patient?: PatientUpdateOneRequiredWithoutObservationsNestedInput
-    studyPatient?: StudyPatientUpdateOneRequiredWithoutObservationsNestedInput
+    monitoringPlanPatient?: MonitoringPlanPatientUpdateOneRequiredWithoutObservationsNestedInput
     recordedBy?: UserUpdateOneRequiredWithoutObservationsNestedInput
     files?: FileUpdateManyWithoutObservationNestedInput
     alerts?: AlertUpdateManyWithoutObservationNestedInput
@@ -33893,7 +33955,7 @@ export namespace Prisma {
   export type ObservationUncheckedUpdateWithoutSymptomTemplateInput = {
     id?: StringFieldUpdateOperationsInput | string
     patientId?: StringFieldUpdateOperationsInput | string
-    studyPatientId?: StringFieldUpdateOperationsInput | string
+    monitoringPlanPatientId?: StringFieldUpdateOperationsInput | string
     recordedById?: StringFieldUpdateOperationsInput | string
     recordedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     value?: JsonNullValueInput | InputJsonValue
@@ -33905,7 +33967,7 @@ export namespace Prisma {
   export type ObservationUncheckedUpdateManyWithoutSymptomTemplateInput = {
     id?: StringFieldUpdateOperationsInput | string
     patientId?: StringFieldUpdateOperationsInput | string
-    studyPatientId?: StringFieldUpdateOperationsInput | string
+    monitoringPlanPatientId?: StringFieldUpdateOperationsInput | string
     recordedById?: StringFieldUpdateOperationsInput | string
     recordedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     value?: JsonNullValueInput | InputJsonValue
@@ -34018,7 +34080,7 @@ export namespace Prisma {
   export type TreatmentCreateManyTemplateInput = {
     id?: string
     patientId: string
-    studyPatientId: string
+    monitoringPlanPatientId: string
     createdById: string
     createdAt?: Date | string
     administeredAt: Date | string
@@ -34037,7 +34099,7 @@ export namespace Prisma {
     dosage?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     patient?: PatientUpdateOneRequiredWithoutTreatmentsNestedInput
-    studyPatient?: StudyPatientUpdateOneRequiredWithoutTreatmentsNestedInput
+    monitoringPlanPatient?: MonitoringPlanPatientUpdateOneRequiredWithoutTreatmentsNestedInput
     createdBy?: UserUpdateOneRequiredWithoutCreatedTreatmentsNestedInput
     files?: FileUpdateManyWithoutTreatmentNestedInput
   }
@@ -34045,7 +34107,7 @@ export namespace Prisma {
   export type TreatmentUncheckedUpdateWithoutTemplateInput = {
     id?: StringFieldUpdateOperationsInput | string
     patientId?: StringFieldUpdateOperationsInput | string
-    studyPatientId?: StringFieldUpdateOperationsInput | string
+    monitoringPlanPatientId?: StringFieldUpdateOperationsInput | string
     createdById?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     administeredAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -34059,7 +34121,7 @@ export namespace Prisma {
   export type TreatmentUncheckedUpdateManyWithoutTemplateInput = {
     id?: StringFieldUpdateOperationsInput | string
     patientId?: StringFieldUpdateOperationsInput | string
-    studyPatientId?: StringFieldUpdateOperationsInput | string
+    monitoringPlanPatientId?: StringFieldUpdateOperationsInput | string
     createdById?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     administeredAt?: DateTimeFieldUpdateOperationsInput | Date | string
