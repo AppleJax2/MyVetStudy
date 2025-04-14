@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Outlet, Link, useLocation } from 'react-router-dom';
+import { Outlet, Link, useLocation, useNavigate } from 'react-router-dom';
 import '../index.css';
 import InstallPWAButton from '../components/InstallPWAButton';
 import { useAuth } from '../context/AuthContext';
@@ -8,6 +8,7 @@ const MainLayout: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
   const { isAuthenticated, logout, user } = useAuth();
+  const navigate = useNavigate();
   
   const isActive = (path: string) => location.pathname === path;
   
@@ -20,6 +21,7 @@ const MainLayout: React.FC = () => {
     if (isMenuOpen) {
       toggleMenu();
     }
+    navigate('/login');
   };
 
   return (

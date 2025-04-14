@@ -1,5 +1,4 @@
 import React, { createContext, useState, useContext, useEffect, ReactNode } from 'react';
-import { useNavigate } from 'react-router-dom';
 import api from '../services/api'; // Assuming api service is set up for requests
 import { User, UserRole } from '../types/auth'; // Import User type
 import { Permission, hasPermission, hasAllPermissions, hasAnyPermission, isRoleHigherThan } from '../utils/rolePermissions';
@@ -30,7 +29,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(!!localStorage.getItem('token'));
   const [isLoading, setIsLoading] = useState<boolean>(true); // Start loading
-  const navigate = useNavigate();
 
   useEffect(() => {
     const storedToken = localStorage.getItem('token');
@@ -87,7 +85,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     setToken(null);
     setUser(null);
     setIsAuthenticated(false);
-    navigate('/login');
   };
 
   // Function to check if user has specific role(s)

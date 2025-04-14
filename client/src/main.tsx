@@ -19,4 +19,4 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 )
 
 // Register service worker for PWA functionality
-// registerServiceWorker(); // Temporarily disable SW registration for debugging 
+// registerServiceWorker(); 
