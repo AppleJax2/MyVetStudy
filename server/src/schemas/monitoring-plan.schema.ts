@@ -1,26 +1,48 @@
 import { z } from 'zod';
 import { MonitoringPlanStatus, MonitoringPlanRole } from '../generated/prisma';
 
+// Define the reminder configuration schema
+const reminderConfigSchema = z.object({
+    enabled: z.boolean().default(true),
+    methods: z.object({
+        email: z.boolean().default(true),
+        push: z.boolean().default(true),
+        sms: z.boolean().optional()
+    }),
+    schedule: z.object({
+        sendBefore: z.number().int().min(0).default(15),
+        missedDataReminder: z.boolean().default(true),
+        reminderFrequency: z.enum(['once', 'hourly', 'daily']).default('daily')
+    }),
+    message: z.string().optional(),
+    phoneNumber: z.string().optional(),
+    recipientIds: z.array(z.string()).optional()
+});
+
 // Define the protocol schema for better type safety
 const protocolSchema = z.object({
     frequency: z.object({
         times: z.number().int().positive(),
         period: z.enum(['DAY', 'WEEK', 'MONTH'])
-    }).optional(),
-    duration: z.number().int().positive().optional(),
-    reminderEnabled: z.boolean().optional(),
-    shareableLink: z.boolean().optional()
+    }),
+    duration: z.number().int().positive(),
+    reminderEnabled: z.boolean().default(true),
+    shareableLink: z.boolean().default(false),
+    timeSlots: z.array(z.string()).optional(),
+    weeklyDays: z.array(z.number().int().min(0).max(6)).optional(),
+    monthlyDays: z.array(z.number().int().min(1).max(31)).optional(),
+    reminderConfig: reminderConfigSchema.optional()
 });
 
 // Base schema for common monitoring plan fields
 const monitoringPlanBaseSchema = z.object({
     title: z.string().min(3, 'Title must be at least 3 characters long').max(255),
     description: z.string().max(1000).optional(),
-    protocol: protocolSchema.optional(),
+    protocol: protocolSchema,
     startDate: z.coerce.date().optional(),
     endDate: z.coerce.date().optional(),
-    status: z.nativeEnum(MonitoringPlanStatus).optional().default(MonitoringPlanStatus.DRAFT),
-    isTemplate: z.boolean().optional().default(false),
+    status: z.nativeEnum(MonitoringPlanStatus).default(MonitoringPlanStatus.DRAFT),
+    isTemplate: z.boolean().default(false),
 });
 
 // Schema for creating a new monitoring plan
@@ -28,12 +50,40 @@ export const createMonitoringPlanSchema = z.object({
     body: monitoringPlanBaseSchema,
 });
 
-// Schema for updating an existing monitoring plan (most fields are optional)
+// Schema for updating an existing monitoring plan
 export const updateMonitoringPlanSchema = z.object({
     params: z.object({
-        id: z.string().uuid('Invalid monitoring plan ID format'),
+        id: z.string().uuid()
     }),
-    body: monitoringPlanBaseSchema.partial(), // Makes all fields in base optional
+    body: monitoringPlanBaseSchema.partial(),
+});
+
+// Schema for updating patient assignments
+export const updateMonitoringPlanPatientsSchema = z.object({
+    params: z.object({
+        id: z.string().uuid()
+    }),
+    body: z.object({
+        patientIds: z.array(z.string().uuid())
+    })
+});
+
+// Schema for generating a shareable link
+export const generateShareableLinkSchema = z.object({
+    params: z.object({
+        id: z.string().uuid()
+    }),
+    body: z.object({
+        expirationDays: z.number().int().min(0).default(30),
+        isPublic: z.boolean().default(true)
+    }).optional()
+});
+
+// Schema for retrieving a monitoring plan by share token
+export const getMonitoringPlanByShareTokenSchema = z.object({
+    params: z.object({
+        token: z.string()
+    })
 });
 
 // Schema for adding/removing a patient to/from a monitoring plan

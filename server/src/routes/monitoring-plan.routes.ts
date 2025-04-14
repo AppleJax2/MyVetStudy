@@ -15,6 +15,9 @@ import {
     updateSymptomTemplate,
     deleteSymptomTemplate,
     getMonitoringPlanByShareToken,
+    revokeShareableLink,
+    getPatientsByMonitoringPlanId,
+    updateMonitoringPlanPatients,
 } from '../controllers/monitoring-plan.controller';
 import { authenticate, authorize, authorizeVeterinarianOrHigher } from '../middleware/auth.middleware';
 import { validate } from '../middleware/validate.middleware';
@@ -26,6 +29,9 @@ import {
     symptomTemplateSchema,
     updateSymptomTemplateSchema,
     deleteSymptomTemplateSchema,
+    generateShareableLinkSchema,
+    getMonitoringPlanByShareTokenSchema,
+    updateMonitoringPlanPatientsSchema,
 } from '../schemas/monitoring-plan.schema';
 import symptomRoutes from './symptom.routes';
 import { UserRole } from '../../generated/prisma';
@@ -56,44 +62,6 @@ router.get(
     '/:id',
     validate(updateMonitoringPlanSchema.pick({ params: true })),
     getMonitoringPlanById
-);
-
-// Generate shareable link for a monitoring plan
-router.post(
-    '/:id/share',
-    validate(updateMonitoringPlanSchema.pick({ params: true })),
-    generateShareableLink
-);
-
-// Get monitoring plan via shareable token (public access)
-router.get(
-    '/shared/:token',
-    getMonitoringPlanByShareToken
-);
-
-// Symptom template routes
-router.get(
-    '/:id/symptoms',
-    validate(updateMonitoringPlanSchema.pick({ params: true })),
-    getSymptomTemplates
-);
-
-router.post(
-    '/:id/symptoms',
-    validate(symptomTemplateSchema),
-    createSymptomTemplate
-);
-
-router.put(
-    '/:id/symptoms/:symptomId',
-    validate(updateSymptomTemplateSchema),
-    updateSymptomTemplate
-);
-
-router.delete(
-    '/:id/symptoms/:symptomId',
-    validate(deleteSymptomTemplateSchema),
-    deleteSymptomTemplate
 );
 
 // Updating a monitoring plan requires at least veterinarian privileges
@@ -151,6 +119,45 @@ router.delete(
     authorizeVeterinarianOrHigher,
     validate(monitoringPlanPatientSchema.pick({ params: true })),
     unassignUserFromMonitoringPlan
+);
+
+// --- Monitoring Plan Patient Assignment --- //
+
+// Getting patients by monitoring plan ID
+router.get(
+    '/:id/patients',
+    validate(updateMonitoringPlanSchema.pick({ params: true })),
+    getPatientsByMonitoringPlanId
+);
+
+// Updating monitoring plan patients
+router.put(
+    '/:id/patients',
+    validate(updateMonitoringPlanPatientsSchema),
+    updateMonitoringPlanPatients
+);
+
+// --- Monitoring Plan Shareable Link Management --- //
+
+// Generating a shareable link
+router.post(
+    '/:id/share',
+    validate(generateShareableLinkSchema),
+    generateShareableLink
+);
+
+// Revoking a shareable link
+router.delete(
+    '/:id/share',
+    validate(updateMonitoringPlanSchema.pick({ params: true })),
+    revokeShareableLink
+);
+
+// Public route for accessing a monitoring plan via shareable link (no authentication required)
+router.get(
+    '/shared/:token',
+    validate(getMonitoringPlanByShareTokenSchema),
+    getMonitoringPlanByShareToken
 );
 
 export default router; 

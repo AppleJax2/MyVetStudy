@@ -1,220 +1,263 @@
-import React, { useState } from 'react';
-import { FaPlus, FaTrash, FaClock, FaCalendarAlt } from 'react-icons/fa';
-import { MonitoringPlanProtocol } from '../../types/monitoring-plan';
+import React from 'react';
+import { FaClock, FaCalendarAlt, FaCalendarDay } from 'react-icons/fa';
 
-interface FrequencySettingsProps {
-  protocol: MonitoringPlanProtocol;
-  onChange: (protocol: MonitoringPlanProtocol) => void;
+// Protocol types
+export interface FrequencyProtocol {
+  frequency: {
+    times: number;
+    period: 'DAY' | 'WEEK' | 'MONTH';
+  };
+  duration: number; // in days
+  reminderEnabled: boolean;
+  shareableLink: boolean;
+  timeSlots?: string[]; // Times of day for reminders
+  weeklyDays?: number[]; // Days of week (0-6, where 0 is Sunday)
+  monthlyDays?: number[]; // Days of month (1-31)
 }
 
-const FrequencySettings: React.FC<FrequencySettingsProps> = ({ protocol, onChange }) => {
-  const [showAdvancedSettings, setShowAdvancedSettings] = useState(false);
-  
-  // Create a deep copy to avoid mutating the props directly
-  const updateProtocol = (updates: Partial<MonitoringPlanProtocol>) => {
-    onChange({ ...protocol, ...updates });
-  };
-  
-  // Handle specific time of day additions
-  const addTimeOfDay = () => {
-    const times = protocol.specificTimeOfDay || [];
-    onChange({
-      ...protocol,
-      specificTimeOfDay: [...times, '08:00']
-    });
-  };
-  
-  const updateTimeOfDay = (index: number, value: string) => {
-    if (!protocol.specificTimeOfDay) return;
-    
-    const times = [...protocol.specificTimeOfDay];
-    times[index] = value;
-    onChange({
-      ...protocol,
-      specificTimeOfDay: times
-    });
-  };
-  
-  const removeTimeOfDay = (index: number) => {
-    if (!protocol.specificTimeOfDay) return;
-    
-    const times = [...protocol.specificTimeOfDay];
-    times.splice(index, 1);
-    onChange({
-      ...protocol,
-      specificTimeOfDay: times
-    });
-  };
-  
-  // Handle days of week selection
-  const toggleDayOfWeek = (day: number) => {
-    const currentDays = protocol.daysOfWeek || [];
-    const newDays = currentDays.includes(day)
-      ? currentDays.filter(d => d !== day)
-      : [...currentDays, day];
-    
-    onChange({
-      ...protocol,
-      daysOfWeek: newDays
-    });
-  };
-  
-  const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-  
-  return (
-    <div className="space-y-6">
-      {/* Basic Frequency Settings */}
-      <div className="grid grid-cols-2 gap-4">
-        <div>
-          <label htmlFor="frequency.times" className="block text-sm font-medium text-gray-700">
-            Frequency
-          </label>
-          <div className="mt-1 flex rounded-md shadow-sm">
-            <input
-              type="number"
-              id="frequency.times"
-              min={1}
-              value={protocol.frequency.times}
-              onChange={(e) => updateProtocol({
-                frequency: {
-                  ...protocol.frequency,
-                  times: parseInt(e.target.value) || 1
-                }
-              })}
-              className="block w-full rounded-none rounded-l-md border-gray-300 focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
-            />
-            <select
-              value={protocol.frequency.period}
-              onChange={(e) => updateProtocol({
-                frequency: {
-                  ...protocol.frequency,
-                  period: e.target.value as 'DAY' | 'WEEK' | 'MONTH'
-                }
-              })}
-              className="block w-full rounded-none rounded-r-md border-gray-300 focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
-            >
-              <option value="DAY">per day</option>
-              <option value="WEEK">per week</option>
-              <option value="MONTH">per month</option>
-            </select>
-          </div>
-        </div>
+interface FrequencySettingsProps {
+  protocol: FrequencyProtocol;
+  onChange: (field: string, value: any) => void;
+  errors: Record<string, string>;
+}
 
+const FrequencySettings: React.FC<FrequencySettingsProps> = ({ 
+  protocol, 
+  onChange, 
+  errors 
+}) => {
+  // Handles time-of-day selection for monitoring
+  const [timeSlots, setTimeSlots] = React.useState<string[]>(
+    protocol.frequency.times > 0 ? 
+      Array(protocol.frequency.times).fill('').map((_, i) => protocol.timeSlots?.[i] || '09:00') : 
+      []
+  );
+
+  // Update frequency times 
+  const handleFrequencyTimesChange = (value: number) => {
+    const newValue = Math.max(1, value); // Ensure at least 1
+    onChange('frequency.times', newValue);
+    
+    // Adjust time slots array to match the new number of times
+    if (newValue > timeSlots.length) {
+      // Add more time slots if needed
+      setTimeSlots([...timeSlots, ...Array(newValue - timeSlots.length).fill('09:00')]);
+    } else if (newValue < timeSlots.length) {
+      // Remove excess time slots
+      setTimeSlots(timeSlots.slice(0, newValue));
+    }
+  };
+
+  // Update time slot
+  const handleTimeSlotChange = (index: number, value: string) => {
+    const newTimeSlots = [...timeSlots];
+    newTimeSlots[index] = value;
+    setTimeSlots(newTimeSlots);
+    
+    // Update the protocol with the new time slots
+    onChange('timeSlots', newTimeSlots);
+  };
+
+  return (
+    <div className="bg-white shadow overflow-hidden rounded-lg">
+      <div className="px-4 py-5 border-b border-gray-200 sm:px-6">
+        <h3 className="text-lg font-medium leading-6 text-gray-900">Monitoring Settings</h3>
+        <p className="mt-1 text-sm text-gray-500">
+          Define how often symptoms should be monitored and for how long.
+        </p>
+      </div>
+      <div className="px-4 py-5 sm:p-6 space-y-6">
+        {/* Frequency Section */}
         <div>
-          <label htmlFor="duration" className="block text-sm font-medium text-gray-700">
-            Duration (days)
-          </label>
-          <input
-            type="number"
-            id="duration"
-            min={1}
-            value={protocol.duration}
-            onChange={(e) => updateProtocol({ duration: parseInt(e.target.value) || 1 })}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
-          />
-        </div>
-      </div>
-      
-      {/* Advanced Settings Toggle */}
-      <div>
-        <button
-          type="button"
-          onClick={() => setShowAdvancedSettings(!showAdvancedSettings)}
-          className="text-blue-600 hover:text-blue-800 text-sm inline-flex items-center"
-        >
-          {showAdvancedSettings ? 'Hide' : 'Show'} advanced frequency settings
-        </button>
-      </div>
-      
-      {showAdvancedSettings && (
-        <div className="bg-gray-50 p-4 rounded-md space-y-4">
-          {/* Specific Times of Day */}
-          <div>
-            <div className="flex justify-between items-center mb-2">
-              <label className="block text-sm font-medium text-gray-700">
-                <FaClock className="inline mr-1" /> Specific Times of Day
+          <h4 className="text-md font-medium text-gray-700 mb-3 flex items-center">
+            <FaCalendarAlt className="mr-2 text-blue-500" /> Monitoring Frequency
+          </h4>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label htmlFor="frequency-times" className="block text-sm font-medium text-gray-700">
+                Times per Period
               </label>
-              <button
-                type="button"
-                onClick={addTimeOfDay}
-                className="text-blue-600 hover:text-blue-800"
-              >
-                <FaPlus size={14} />
-              </button>
+              <div className="mt-1 flex rounded-md shadow-sm">
+                <input
+                  type="number"
+                  id="frequency-times"
+                  min={1}
+                  value={protocol.frequency.times}
+                  onChange={(e) => handleFrequencyTimesChange(parseInt(e.target.value))}
+                  className="block w-full rounded-none rounded-l-md border-gray-300 focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                />
+                <select
+                  value={protocol.frequency.period}
+                  onChange={(e) => onChange('frequency.period', e.target.value)}
+                  className="block w-full rounded-none rounded-r-md border-gray-300 focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                >
+                  <option value="DAY">per day</option>
+                  <option value="WEEK">per week</option>
+                  <option value="MONTH">per month</option>
+                </select>
+              </div>
+              {errors['frequency.times'] && (
+                <p className="mt-1 text-sm text-red-500">{errors['frequency.times']}</p>
+              )}
             </div>
             
-            {protocol.specificTimeOfDay && protocol.specificTimeOfDay.length > 0 ? (
-              <div className="space-y-2">
-                {protocol.specificTimeOfDay.map((time, index) => (
-                  <div key={index} className="flex items-center space-x-2">
-                    <input
-                      type="time"
-                      value={time}
-                      onChange={(e) => updateTimeOfDay(index, e.target.value)}
-                      className="block rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
-                    />
-                    <button
-                      type="button"
-                      onClick={() => removeTimeOfDay(index)}
-                      className="text-red-500 hover:text-red-700"
-                    >
-                      <FaTrash size={14} />
-                    </button>
-                  </div>
-                ))}
-                <p className="text-xs text-gray-500 mt-1">
-                  These times will be used for reminders (if enabled) and data collection prompts.
-                </p>
-              </div>
-            ) : (
-              <p className="text-sm text-gray-500">
-                No specific times set. Monitoring will occur at any time of day.
-              </p>
-            )}
-          </div>
-          
-          {/* Days of Week (for weekly schedules) */}
-          {protocol.frequency.period === 'WEEK' && (
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                <FaCalendarAlt className="inline mr-1" /> Days of the Week
+              <label htmlFor="duration" className="block text-sm font-medium text-gray-700">
+                Duration (days)
               </label>
+              <input
+                type="number"
+                id="duration"
+                min={1}
+                value={protocol.duration}
+                onChange={(e) => onChange('duration', parseInt(e.target.value))}
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+              />
+              {errors['duration'] && (
+                <p className="mt-1 text-sm text-red-500">{errors['duration']}</p>
+              )}
+            </div>
+          </div>
+        </div>
+        
+        {/* Time of Day for Daily Monitoring */}
+        {protocol.frequency.period === 'DAY' && protocol.frequency.times > 0 && (
+          <div>
+            <h4 className="text-md font-medium text-gray-700 mb-3 flex items-center">
+              <FaClock className="mr-2 text-blue-500" /> Preferred Time of Day
+            </h4>
+            
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+              {timeSlots.map((timeSlot, index) => (
+                <div key={index}>
+                  <label 
+                    htmlFor={`time-slot-${index}`} 
+                    className="block text-sm font-medium text-gray-700"
+                  >
+                    Time {index + 1}
+                  </label>
+                  <input
+                    type="time"
+                    id={`time-slot-${index}`}
+                    value={timeSlot}
+                    onChange={(e) => handleTimeSlotChange(index, e.target.value)}
+                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                  />
+                </div>
+              ))}
+            </div>
+            <p className="mt-2 text-sm text-gray-500">
+              These times will be used to schedule reminders (if enabled).
+            </p>
+          </div>
+        )}
+        
+        {/* Schedule for Weekly or Monthly */}
+        {protocol.frequency.period !== 'DAY' && protocol.frequency.times > 0 && (
+          <div>
+            <h4 className="text-md font-medium text-gray-700 mb-3 flex items-center">
+              <FaCalendarDay className="mr-2 text-blue-500" /> 
+              {protocol.frequency.period === 'WEEK' ? 'Days of Week' : 'Days of Month'}
+            </h4>
+            
+            <p className="text-sm text-gray-500 mb-3">
+              Configure the specific {protocol.frequency.period === 'WEEK' ? 'days of the week' : 'days of the month'} 
+              for monitoring.
+            </p>
+            
+            {protocol.frequency.period === 'WEEK' && (
               <div className="flex flex-wrap gap-2">
-                {dayNames.map((day, index) => (
+                {['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'].map((day, index) => (
                   <button
                     key={day}
                     type="button"
-                    onClick={() => toggleDayOfWeek(index)}
-                    className={`px-3 py-1 text-sm rounded-md ${
-                      protocol.daysOfWeek?.includes(index)
-                        ? 'bg-blue-600 text-white'
-                        : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                    className={`px-3 py-2 rounded-md text-sm font-medium ${
+                      protocol.weeklyDays?.includes(index) ? 
+                        'bg-blue-100 text-blue-800 border border-blue-300' : 
+                        'bg-gray-50 text-gray-800 border border-gray-300'
                     }`}
+                    onClick={() => {
+                      const currentDays = protocol.weeklyDays || [];
+                      const newDays = currentDays.includes(index) 
+                        ? currentDays.filter((d: number) => d !== index)
+                        : [...currentDays, index];
+                      
+                      // Ensure we don't exceed the frequency.times value
+                      if (newDays.length <= protocol.frequency.times) {
+                        onChange('weeklyDays', newDays);
+                      }
+                    }}
+                  >
+                    {day.substring(0, 3)}
+                  </button>
+                ))}
+              </div>
+            )}
+            
+            {protocol.frequency.period === 'MONTH' && (
+              <div className="flex flex-wrap gap-2">
+                {Array.from({ length: 31 }, (_, i) => i + 1).map(day => (
+                  <button
+                    key={day}
+                    type="button"
+                    className={`w-10 h-10 rounded-md text-sm font-medium ${
+                      protocol.monthlyDays?.includes(day) ? 
+                        'bg-blue-100 text-blue-800 border border-blue-300' : 
+                        'bg-gray-50 text-gray-800 border border-gray-300'
+                    }`}
+                    onClick={() => {
+                      const currentDays = protocol.monthlyDays || [];
+                      const newDays = currentDays.includes(day) 
+                        ? currentDays.filter((d: number) => d !== day)
+                        : [...currentDays, day];
+                      
+                      // Ensure we don't exceed the frequency.times value
+                      if (newDays.length <= protocol.frequency.times) {
+                        onChange('monthlyDays', newDays);
+                      }
+                    }}
                   >
                     {day}
                   </button>
                 ))}
               </div>
-              <p className="text-xs text-gray-500 mt-1">
-                Select which days of the week to monitor symptoms.
-              </p>
+            )}
+          </div>
+        )}
+        
+        {/* Additional Settings */}
+        <div>
+          <h4 className="text-md font-medium text-gray-700 mb-3">Additional Settings</h4>
+          
+          <div className="space-y-3">
+            <div className="flex items-center">
+              <input
+                type="checkbox"
+                id="reminderEnabled"
+                checked={protocol.reminderEnabled}
+                onChange={(e) => onChange('reminderEnabled', e.target.checked)}
+                className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+              />
+              <label htmlFor="reminderEnabled" className="ml-2 block text-sm text-gray-700">
+                Enable reminders for symptom logging
+              </label>
             </div>
-          )}
+            
+            <div className="flex items-center">
+              <input
+                type="checkbox"
+                id="shareableLink"
+                checked={protocol.shareableLink}
+                onChange={(e) => onChange('shareableLink', e.target.checked)}
+                className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+              />
+              <label htmlFor="shareableLink" className="ml-2 block text-sm text-gray-700">
+                Generate shareable link for this monitoring plan
+              </label>
+            </div>
+          </div>
         </div>
-      )}
-      
-      {/* Reminders */}
-      <div className="flex items-center">
-        <input
-          type="checkbox"
-          id="reminderEnabled"
-          checked={protocol.reminderEnabled}
-          onChange={(e) => updateProtocol({ reminderEnabled: e.target.checked })}
-          className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-        />
-        <label htmlFor="reminderEnabled" className="ml-2 block text-sm text-gray-700">
-          Enable reminders for symptom logging
-        </label>
       </div>
     </div>
   );

@@ -6,6 +6,8 @@ import AppError from '../utils/appError';
 import { AuthenticatedRequest } from '../middleware/auth.middleware';
 import { MonitoringPlanStatus } from '../generated/prisma';
 import prisma from '../utils/prisma.client';
+import crypto from 'crypto';
+import { createNotification } from '../services/notification.service';
 
 export const createMonitoringPlan = async (req: AuthenticatedRequest<{}, {}, CreateMonitoringPlanInput['body']>, res: Response, next: NextFunction) => {
     try {
@@ -281,7 +283,74 @@ export const unassignUserFromMonitoringPlan = async (req: AuthenticatedRequest<{
     }
 };
 
+/**
+ * Generate a shareable link for a monitoring plan
+ */
 export const generateShareableLink = async (req: AuthenticatedRequest<{ id: string }>, res: Response, next: NextFunction) => {
+    try {
+        const { id } = req.params;
+        const userId = req.user?.id;
+        const { expirationDays = 30, isPublic = true } = req.body || {};
+        
+        if (!userId) {
+            return next(new AppError('Authentication required', 401));
+        }
+        
+        // Generate a secure token for sharing
+        const randomBytes = crypto.randomBytes(32).toString('hex');
+        const timestamp = Date.now().toString(36);
+        const shareToken = Buffer.from(`${id}-${timestamp}-${randomBytes}`).toString('base64url');
+        
+        // Calculate expiration date if applicable
+        let expirationDate = null;
+        if (expirationDays > 0) {
+            expirationDate = new Date();
+            expirationDate.setDate(expirationDate.getDate() + expirationDays);
+        }
+        
+        // Save the shareable link settings
+        const updateData = {
+            shareToken,
+            protocol: {
+                shareableLink: true,
+                shareLinkSettings: {
+                    isPublic,
+                    expirationDate: expirationDate ? expirationDate.toISOString() : null,
+                    createdAt: new Date().toISOString(),
+                    createdBy: userId
+                }
+            }
+        };
+        
+        // Update the monitoring plan with the share token
+        const updatedPlan = await monitoringPlanService.updateMonitoringPlan(
+            id,
+            updateData,
+            userId
+        );
+        
+        // Create the full shareable link
+        const baseUrl = process.env.FRONTEND_URL || 'http://localhost:3000';
+        const shareableLink = `${baseUrl}/shared/monitoring-plan/${shareToken}`;
+        
+        res.status(200).json({
+            status: 'success',
+            message: 'Shareable link generated successfully',
+            data: {
+                shareableLink,
+                shareToken,
+                expiresAt: expirationDate
+            }
+        });
+    } catch (error) {
+        next(error);
+    }
+};
+
+/**
+ * Revoke a shareable link for a monitoring plan
+ */
+export const revokeShareableLink = async (req: AuthenticatedRequest<{ id: string }>, res: Response, next: NextFunction) => {
     try {
         const { id } = req.params;
         const userId = req.user?.id;
@@ -290,20 +359,13 @@ export const generateShareableLink = async (req: AuthenticatedRequest<{ id: stri
             return next(new AppError('Authentication required', 401));
         }
         
-        // Generate a unique token for sharing
-        const shareToken = Buffer.from(`${id}-${Date.now()}-${Math.random().toString(36).substring(2, 15)}`).toString('base64');
-        
-        // Create shareable link
-        const shareableLink = `${process.env.FRONTEND_URL || 'http://localhost:3000'}/shared/monitoring-plan/${shareToken}`;
-        
-        // Save the shareable link to the monitoring plan
+        // Update the monitoring plan to remove the share token
         const updatedPlan = await monitoringPlanService.updateMonitoringPlan(
             id,
             { 
-                shareToken, 
-                // Also make sure the protocol has the shareableLink flag enabled
-                protocol: { 
-                    shareableLink: true 
+                shareToken: null,
+                protocol: {
+                    shareableLink: false
                 }
             },
             userId
@@ -311,11 +373,44 @@ export const generateShareableLink = async (req: AuthenticatedRequest<{ id: stri
         
         res.status(200).json({
             status: 'success',
-            message: 'Shareable link generated successfully',
-            data: {
-                shareableLink,
-                shareToken
+            message: 'Shareable link revoked successfully'
+        });
+    } catch (error) {
+        next(error);
+    }
+};
+
+/**
+ * Get a monitoring plan by its share token (public access)
+ */
+export const getMonitoringPlanByShareToken = async (req: AuthenticatedRequest<{ token: string }>, res: Response, next: NextFunction) => {
+    try {
+        const { token } = req.params;
+        
+        // Get the monitoring plan by its share token
+        const monitoringPlan = await monitoringPlanService.getMonitoringPlanByShareToken(token);
+        
+        if (!monitoringPlan) {
+            return next(new AppError('Monitoring plan not found or link has expired', 404));
+        }
+        
+        // Check if the link has expired
+        const shareLinkSettings = monitoringPlan.protocol?.shareLinkSettings;
+        if (shareLinkSettings?.expirationDate) {
+            const expirationDate = new Date(shareLinkSettings.expirationDate);
+            if (expirationDate < new Date()) {
+                return next(new AppError('This shareable link has expired', 410));
             }
+        }
+        
+        // Check if the link requires authentication
+        if (!shareLinkSettings?.isPublic && !req.user) {
+            return next(new AppError('Authentication required to access this monitoring plan', 401));
+        }
+        
+        res.status(200).json({
+            status: 'success',
+            data: monitoringPlan
         });
     } catch (error) {
         next(error);
@@ -488,54 +583,6 @@ export const deleteSymptomTemplate = async (req: AuthenticatedRequest<DeleteSymp
         res.status(200).json({
             status: 'success',
             message: 'Symptom template deleted successfully'
-        });
-    } catch (error) {
-        next(error);
-    }
-};
-
-export const getMonitoringPlanByShareToken = async (req: Request, res: Response, next: NextFunction) => {
-    try {
-        const { token } = req.params;
-        
-        if (!token) {
-            return next(new AppError('Share token is required', 400));
-        }
-        
-        // Find the monitoring plan with the given share token
-        const monitoringPlan = await prisma.monitoringPlan.findUnique({
-            where: {
-                shareToken: token
-            },
-            include: {
-                symptomTemplates: true,
-                _count: {
-                    select: {
-                        patients: true
-                    }
-                }
-            }
-        });
-        
-        if (!monitoringPlan) {
-            return next(new AppError('Invalid or expired share token', 404));
-        }
-        
-        // Return a limited view of the monitoring plan for privacy
-        res.status(200).json({
-            status: 'success',
-            data: {
-                id: monitoringPlan.id,
-                title: monitoringPlan.title,
-                description: monitoringPlan.description,
-                protocol: monitoringPlan.protocol,
-                startDate: monitoringPlan.startDate,
-                endDate: monitoringPlan.endDate,
-                status: monitoringPlan.status,
-                symptomTemplates: monitoringPlan.symptomTemplates,
-                patientCount: monitoringPlan._count.patients,
-                shareableLink: true
-            }
         });
     } catch (error) {
         next(error);
