@@ -312,7 +312,7 @@ const MonitoringPlanFormPage: React.FC = () => {
 
   // Validate form data
   const validateForm = (): boolean => {
-    const newErrors: Partial<Record<string, string>> = {};
+    const newErrors: Partial<Record<keyof MonitoringPlanFormData | string, string>> = {};
     
     if (!formData.title.trim()) {
       newErrors.title = 'Title is required';

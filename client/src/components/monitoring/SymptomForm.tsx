@@ -31,7 +31,7 @@ interface SymptomFormProps {
   index: number;
   onChange: (index: number, field: keyof SymptomTemplate, value: any) => void;
   onRemove: (index: number) => void;
-  errors: Record<string, string>;
+  errors: Partial<Record<string, string>>;
 }
 
 const SymptomForm: React.FC<SymptomFormProps> = ({ 
@@ -60,7 +60,7 @@ const SymptomForm: React.FC<SymptomFormProps> = ({
     onChange(
       index, 
       'options', 
-      { items: currentOptions.filter((_, i) => i !== optionIndex) }
+      { items: currentOptions.filter((item: any, i: number) => i !== optionIndex) }
     );
   };
 
@@ -247,7 +247,7 @@ const SymptomForm: React.FC<SymptomFormProps> = ({
             Options
           </label>
           
-          {(symptom.options?.items || []).map((option, optionIndex) => (
+          {(symptom.options?.items || []).map((option: any, optionIndex: number) => (
             <div key={optionIndex} className="flex items-center mb-2">
               <input
                 type="text"

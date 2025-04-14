@@ -18,7 +18,7 @@ export interface FrequencyProtocol {
 interface FrequencySettingsProps {
   protocol: FrequencyProtocol;
   onChange: (field: string, value: any) => void;
-  errors: Record<string, string>;
+  errors: Partial<Record<string, string>>;
 }
 
 const FrequencySettings: React.FC<FrequencySettingsProps> = ({ 
