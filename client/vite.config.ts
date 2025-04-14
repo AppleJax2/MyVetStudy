@@ -8,21 +8,21 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['favicon.svg', 'apple-touch-icon.png', 'robots.txt'],
+      includeAssets: ['favicon.svg', 'apple-touch-icon.png'],
       manifest: {
         name: 'MyVetStudy',
         short_name: 'MyVetStudy',
-        description: 'Platform for veterinary research studies',
+        description: 'Veterinary Research Studies Platform',
         theme_color: '#2563eb',
         icons: [
           {
-            src: '/icon-192x192.png',
+            src: '/favicon.svg',
             sizes: '192x192',
-            type: 'image/png',
+            type: 'image/svg+xml',
             purpose: 'any maskable'
           },
           {
-            src: '/icon-512x512.png',
+            src: '/apple-touch-icon.png',
             sizes: '512x512',
             type: 'image/png',
             purpose: 'any maskable'
