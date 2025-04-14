@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { FaEdit, FaArrowLeft, FaArchive, FaTrash, FaClipboardList } from 'react-icons/fa';
+import { FaEdit, FaArrowLeft, FaArchive, FaTrash, FaClipboardList, FaNotesMedical } from 'react-icons/fa';
 import { toast } from 'react-hot-toast';
+import HealthHistoryTab from '../components/health/HealthHistoryTab';
 
-// Patient interface
+// Extended Patient interface with monitoring plan enrollments
 interface Patient {
   id: string;
   name: string;
@@ -18,6 +19,23 @@ interface Patient {
   isActive: boolean;
   createdAt: string;
   updatedAt: string;
+  monitoringPlans?: MonitoringPlanPatient[];
+}
+
+interface MonitoringPlanPatient {
+  id: string;
+  monitoringPlanId: string;
+  patientId: string;
+  enrollmentDate: string;
+  exitDate?: string;
+  isActive: boolean;
+  monitoringPlan: {
+    id: string;
+    title: string;
+    status: string;
+    startDate?: string;
+    endDate?: string;
+  };
 }
 
 const PatientDetailPage: React.FC = () => {
@@ -28,6 +46,7 @@ const PatientDetailPage: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [deleteConfirm, setDeleteConfirm] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [activeTab, setActiveTab] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchPatient = async () => {
@@ -47,6 +66,19 @@ const PatientDetailPage: React.FC = () => {
 
         const data = await response.json();
         setPatient(data.data.patient);
+        
+        // If we have active monitoring plans, set the first one as active tab
+        if (data.data.patient.monitoringPlans && 
+            data.data.patient.monitoringPlans.length > 0 && 
+            data.data.patient.monitoringPlans.some((plan: MonitoringPlanPatient) => plan.isActive)) {
+          // Set the first active plan as the default active tab
+          const firstActivePlan = data.data.patient.monitoringPlans.find(
+            (plan: MonitoringPlanPatient) => plan.isActive
+          );
+          if (firstActivePlan) {
+            setActiveTab(firstActivePlan.id);
+          }
+        }
       } catch (err) {
         setError(err instanceof Error ? err.message : 'An unknown error occurred');
         toast.error('Failed to load patient data');
@@ -148,6 +180,9 @@ const PatientDetailPage: React.FC = () => {
     }
     return <span className="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded">Archived</span>;
   };
+
+  const hasActiveMonitoringPlans = patient.monitoringPlans && 
+    patient.monitoringPlans.some(plan => plan.isActive);
 
   return (
     <div className="container mx-auto px-4 py-6">
@@ -304,12 +339,63 @@ const PatientDetailPage: React.FC = () => {
         </div>
       </div>
 
-      {/* Monitoring Plans Section - Placeholder for future implementation */}
+      {/* Health History Section (if there are active monitoring plans) */}
+      {hasActiveMonitoringPlans && (
+        <div className="mt-8">
+          <h2 className="text-xl font-semibold text-gray-800 mb-4">
+            <FaNotesMedical className="inline-block mr-2" />
+            Health History
+          </h2>
+          <div className="bg-white rounded-lg shadow-md overflow-hidden">
+            {/* Tabs for different monitoring plans (if more than one) */}
+            {patient.monitoringPlans && patient.monitoringPlans.filter(plan => plan.isActive).length > 1 && (
+              <div className="border-b border-gray-200">
+                <nav className="flex -mb-px">
+                  {patient.monitoringPlans
+                    .filter(plan => plan.isActive)
+                    .map(plan => (
+                      <button
+                        key={plan.id}
+                        onClick={() => setActiveTab(plan.id)}
+                        className={`py-3 px-4 text-sm font-medium whitespace-nowrap ${
+                          activeTab === plan.id
+                            ? 'border-b-2 border-blue-500 text-blue-600'
+                            : 'text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                        }`}
+                      >
+                        {plan.monitoringPlan.title}
+                      </button>
+                    ))}
+                </nav>
+              </div>
+            )}
+
+            {/* Active Tab Content */}
+            <div className="p-6">
+              {patient.monitoringPlans && activeTab && (
+                <HealthHistoryTab
+                  patientId={patient.id}
+                  monitoringPlanPatientId={activeTab}
+                />
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Monitoring Plans Section - modify existing placeholder */}
       <div className="mt-8">
         <h2 className="text-xl font-semibold text-gray-800 mb-4">Monitoring Plans</h2>
         <div className="bg-white rounded-lg shadow-md p-6">
           <div className="flex justify-between items-center mb-4">
-            <span className="text-gray-700">Active and past monitoring plans will be displayed here.</span>
+            <span className="text-gray-700">
+              {patient.monitoringPlans && patient.monitoringPlans.length > 0
+                ? `${patient.monitoringPlans.length} monitoring ${
+                    patient.monitoringPlans.length === 1 ? 'plan' : 'plans'
+                  } associated with this patient`
+                : 'No monitoring plans have been created yet.'
+              }
+            </span>
             <Link
               to={`/monitoring-plans/create?patientId=${id}`}
               className="inline-flex items-center px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors"
@@ -317,10 +403,53 @@ const PatientDetailPage: React.FC = () => {
               <FaClipboardList className="mr-2" /> Create New Plan
             </Link>
           </div>
-          {/* This section will be populated with monitoring plans in future implementations */}
-          <div className="bg-gray-50 p-4 rounded-md text-center text-gray-500">
-            No monitoring plans have been created yet.
-          </div>
+          
+          {/* List of monitoring plans */}
+          {patient.monitoringPlans && patient.monitoringPlans.length > 0 ? (
+            <div className="overflow-x-auto">
+              <table className="min-w-full divide-y divide-gray-200">
+                <thead className="bg-gray-50">
+                  <tr>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Title</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Enrollment Date</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                  </tr>
+                </thead>
+                <tbody className="bg-white divide-y divide-gray-200">
+                  {patient.monitoringPlans.map(plan => (
+                    <tr key={plan.id}>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="text-sm font-medium text-gray-900">{plan.monitoringPlan.title}</div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
+                          plan.isActive 
+                            ? 'bg-green-100 text-green-800' 
+                            : 'bg-gray-100 text-gray-800'
+                        }`}>
+                          {plan.isActive ? 'Active' : 'Inactive'}
+                        </span>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        {new Date(plan.enrollmentDate).toLocaleDateString()}
+                        {plan.exitDate && <span> to {new Date(plan.exitDate).toLocaleDateString()}</span>}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                        <Link to={`/monitoring-plans/${plan.monitoringPlanId}`} className="text-blue-600 hover:text-blue-900 mr-3">
+                          View
+                        </Link>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          ) : (
+            <div className="bg-gray-50 p-4 rounded-md text-center text-gray-500">
+              No monitoring plans have been created yet.
+            </div>
+          )}
         </div>
       </div>
     </div>
