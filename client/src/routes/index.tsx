@@ -24,6 +24,7 @@ const MonitoringPlanDetailPage = lazy(() => import('../pages/MonitoringPlanDetai
 const MonitoringPlanFormPage = lazy(() => import('../pages/MonitoringPlanFormPage'));
 const MonitoringPlanDashboardPage = lazy(() => import('../pages/MonitoringPlanDashboardPage'));
 const SharedMonitoringPlanPage = lazy(() => import('../pages/SharedMonitoringPlanPage'));
+const ReportingPage = lazy(() => import('../pages/ReportingPage'));
 const SymptomsPage = lazy(() => import('../pages/SymptomsPage'));
 const NotificationsPage = lazy(() => import('../pages/NotificationsPage'));
 const ProfilePage = lazy(() => import('../pages/ProfilePage'));
@@ -96,6 +97,7 @@ const router = createBrowserRouter([
           { path: 'monitoring-plans', element: <Suspense fallback={<LoadingSpinner />}><MonitoringPlansPage /></Suspense> },
           { path: 'monitoring-plans/:id', element: <Suspense fallback={<LoadingSpinner />}><MonitoringPlanDetailPage /></Suspense> },
           { path: 'monitoring-plans/:id/dashboard', element: <Suspense fallback={<LoadingSpinner />}><MonitoringPlanDashboardPage /></Suspense> },
+          { path: 'monitoring-plans/:id/reports', element: <Suspense fallback={<LoadingSpinner />}><ReportingPage /></Suspense> },
           { path: 'monitoring-plans/:id/symptoms', element: <Suspense fallback={<LoadingSpinner />}><SymptomsPage /></Suspense> },
           
           // Legacy Study Routes (redirect handled within MonitoringPlansPage/MonitoringPlanDetailPage)

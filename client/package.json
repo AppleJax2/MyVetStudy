@@ -21,7 +21,10 @@
     "bootstrap": "^5.3.5",
     "chart.js": "^4.4.8",
     "date-fns": "^4.1.0",
+    "file-saver": "^2.0.5",
     "formik": "^2.4.6",
+    "jspdf": "^3.0.1",
+    "jspdf-autotable": "^5.0.2",
     "postcss": "^8.5.3",
     "qrcode.react": "^4.2.0",
     "react": "^19.0.0",
@@ -40,6 +43,7 @@
     "workbox-routing": "^7.3.0",
     "workbox-strategies": "^7.3.0",
     "workbox-window": "^7.3.0",
+    "xlsx": "^0.18.5",
     "yup": "^1.6.1"
   },
   "devDependencies": {
@@ -47,6 +51,7 @@
     "@tailwindcss/postcss7-compat": "^2.2.17",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
+    "@types/file-saver": "^2.0.7",
     "@types/jest": "^29.5.14",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
