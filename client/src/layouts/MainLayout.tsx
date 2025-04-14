@@ -38,7 +38,9 @@ const MainLayout: React.FC = () => {
           <nav className="hidden md:flex md:items-center">
             <ul className="flex space-x-6 mr-4">
               <li><Link to="/" className={`hover:text-blue-200 transition-colors ${isActive('/') ? 'font-bold' : ''}`}>Dashboard</Link></li>
-              <li><Link to="/studies" className={`hover:text-blue-200 transition-colors ${isActive('/studies') ? 'font-bold' : ''}`}>Studies</Link></li>
+              <li><Link to="/monitoring-plans" className={`hover:text-blue-200 transition-colors ${
+                isActive('/monitoring-plans') || location.pathname.startsWith('/monitoring-plans/') ? 'font-bold' : ''
+              }`}>Monitoring Plans</Link></li>
               <li><Link to="/notifications" className={`hover:text-blue-200 transition-colors ${isActive('/notifications') ? 'font-bold' : ''}`}>Notifications</Link></li>
               <li><Link to="/profile" className={`hover:text-blue-200 transition-colors ${isActive('/profile') ? 'font-bold' : ''}`}>Profile</Link></li>
               <li><Link to="/subscription" className={`hover:text-blue-200 transition-colors ${isActive('/subscription') ? 'font-bold' : ''}`}>Subscription</Link></li>
@@ -56,7 +58,9 @@ const MainLayout: React.FC = () => {
           <nav className="md:hidden">
             <ul className="flex flex-col bg-blue-700 p-4">
               <li className="py-2"><Link to="/" className={`block ${isActive('/') ? 'font-bold' : ''}`} onClick={toggleMenu}>Dashboard</Link></li>
-              <li className="py-2"><Link to="/studies" className={`block ${isActive('/studies') ? 'font-bold' : ''}`} onClick={toggleMenu}>Studies</Link></li>
+              <li className="py-2"><Link to="/monitoring-plans" className={`block ${
+                isActive('/monitoring-plans') || location.pathname.startsWith('/monitoring-plans/') ? 'font-bold' : ''
+              }`} onClick={toggleMenu}>Monitoring Plans</Link></li>
               <li className="py-2"><Link to="/notifications" className={`block ${isActive('/notifications') ? 'font-bold' : ''}`} onClick={toggleMenu}>Notifications</Link></li>
               <li className="py-2"><Link to="/profile" className={`block ${isActive('/profile') ? 'font-bold' : ''}`} onClick={toggleMenu}>Profile</Link></li>
               <li className="py-2"><Link to="/subscription" className={`block ${isActive('/subscription') ? 'font-bold' : ''}`} onClick={toggleMenu}>Subscription</Link></li>

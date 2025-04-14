@@ -6,8 +6,8 @@ import LoadingSpinner from '../components/LoadingSpinner'; // Import the new spi
 // import LoginPage from '../pages/LoginPage';
 // import RegisterPage from '../pages/RegisterPage';
 // import DashboardPage from '../pages/DashboardPage'; // Keep as placeholder for now
-// import StudiesPage from '../pages/StudiesPage';
-// import StudyDetailPage from '../pages/StudyDetailPage';
+// import MonitoringPlansPage from '../pages/MonitoringPlansPage';
+// import MonitoringPlanDetailPage from '../pages/MonitoringPlanDetailPage';
 // import SymptomsPage from '../pages/SymptomsPage';
 // import NotificationsPage from '../pages/NotificationsPage';
 // import ProfilePage from '../pages/ProfilePage';
@@ -17,8 +17,8 @@ import LoadingSpinner from '../components/LoadingSpinner'; // Import the new spi
 const LoginPage = lazy(() => import('../pages/LoginPage'));
 const RegisterPage = lazy(() => import('../pages/RegisterPage'));
 const DashboardPage = lazy(() => import('../pages/DashboardPage'));
-const StudiesPage = lazy(() => import('../pages/StudiesPage'));
-const StudyDetailPage = lazy(() => import('../pages/StudyDetailPage'));
+const MonitoringPlansPage = lazy(() => import('../pages/MonitoringPlansPage'));
+const MonitoringPlanDetailPage = lazy(() => import('../pages/MonitoringPlanDetailPage'));
 const SymptomsPage = lazy(() => import('../pages/SymptomsPage'));
 const NotificationsPage = lazy(() => import('../pages/NotificationsPage'));
 const ProfilePage = lazy(() => import('../pages/ProfilePage'));
@@ -36,8 +36,11 @@ const router = createBrowserRouter([
       { index: true, element: <Suspense fallback={<LoadingSpinner />}><DashboardPage /></Suspense> }, // Dashboard as home
       { path: 'login', element: <Suspense fallback={<LoadingSpinner />}><LoginPage /></Suspense> }, // Use actual Login Page
       { path: 'register', element: <Suspense fallback={<LoadingSpinner />}><RegisterPage /></Suspense> }, // Use actual Register Page
-      { path: 'studies', element: <Suspense fallback={<LoadingSpinner />}><StudiesPage /></Suspense> },
-      { path: 'studies/:studyId', element: <Suspense fallback={<LoadingSpinner />}><StudyDetailPage /></Suspense> },
+      { path: 'monitoring-plans', element: <Suspense fallback={<LoadingSpinner />}><MonitoringPlansPage /></Suspense> },
+      { path: 'monitoring-plans/:id', element: <Suspense fallback={<LoadingSpinner />}><MonitoringPlanDetailPage /></Suspense> },
+      { path: 'monitoring-plans/:id/symptoms', element: <Suspense fallback={<LoadingSpinner />}><SymptomsPage /></Suspense> },
+      { path: 'studies', element: <Suspense fallback={<LoadingSpinner />}><MonitoringPlansPage /></Suspense> },
+      { path: 'studies/:studyId', element: <Suspense fallback={<LoadingSpinner />}><MonitoringPlanDetailPage /></Suspense> },
       { path: 'studies/:studyId/symptoms', element: <Suspense fallback={<LoadingSpinner />}><SymptomsPage /></Suspense> },
       { path: 'notifications', element: <Suspense fallback={<LoadingSpinner />}><NotificationsPage /></Suspense> },
       { path: 'profile', element: <Suspense fallback={<LoadingSpinner />}><ProfilePage /></Suspense> },
