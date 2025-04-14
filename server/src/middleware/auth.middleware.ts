@@ -2,11 +2,30 @@ import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 import prisma from '../utils/prisma';
 import AppError from '../utils/appError';
-import { User, UserRole } from '../../generated/prisma'; // Include UserRole enum
+import { User, UserRole } from '@prisma/client';
+import { getPermissionsForRole, Permission } from '../utils/rolePermissions';
 
 // Define an interface extending Express Request to include the user property
 export interface AuthenticatedRequest<P = {}, Q = {}, B = {}> extends Request<P, {}, B, Q> {
-    user?: User & { practiceId?: string | null }; // Make user optional initially, ensure practiceId is included
+    user?: {
+        userId: string;
+        practiceId: string | null;
+        role: UserRole;
+        permissions: Permission[];
+    }; 
+}
+
+declare global {
+    namespace Express {
+        interface Request {
+            user?: {
+                userId: string;
+                practiceId: string | null;
+                role: UserRole;
+                permissions: Permission[];
+            };
+        }
+    }
 }
 
 export const authenticate = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
@@ -31,17 +50,32 @@ export const authenticate = async (req: AuthenticatedRequest, res: Response, nex
         // 3) Check if user still exists
         const currentUser = await prisma.user.findUnique({
             where: { id: decoded.id },
-            // Optionally include related data like role or practice if needed frequently
-            // include: { practice: true } // Example
+            select: {
+                id: true,
+                email: true,
+                firstName: true,
+                lastName: true,
+                role: true,
+                practiceId: true,
+                isActive: true
+            }
         });
 
         if (!currentUser || !currentUser.isActive) {
             return next(new AppError('The user belonging to this token no longer exists or is inactive.', 401));
         }
 
-        // 4) Grant access to protected route
-        // Attach user to the request object
-        req.user = currentUser;
+        // 4) Get permissions based on user role
+        const permissions = getPermissionsForRole(currentUser.role);
+
+        // 5) Grant access to protected route
+        // Attach user data to the request object in a simplified format with permissions
+        req.user = {
+            userId: currentUser.id,
+            practiceId: currentUser.practiceId,
+            role: currentUser.role,
+            permissions: permissions
+        };
         next();
 
     } catch (error) {
@@ -63,7 +97,7 @@ export const authenticate = async (req: AuthenticatedRequest, res: Response, nex
  * @returns Middleware function that checks if the authenticated user has one of the allowed roles
  */
 export const authorize = (...roles: UserRole[]) => {
-    return (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+    return (req: Request, res: Response, next: NextFunction) => {
         // Check if user is authenticated
         if (!req.user) {
             return next(new AppError('You must be logged in to access this resource', 401));
@@ -83,7 +117,7 @@ export const authorize = (...roles: UserRole[]) => {
  * Practice owner authorization middleware
  * Used for operations that can only be performed by practice owners or managers
  */
-export const authorizePracticeOwner = (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+export const authorizePracticeOwner = (req: Request, res: Response, next: NextFunction) => {
     if (!req.user) {
         return next(new AppError('You must be logged in to access this resource', 401));
     }
@@ -99,7 +133,7 @@ export const authorizePracticeOwner = (req: AuthenticatedRequest, res: Response,
  * Veterinarian or higher authorization middleware
  * Used for operations that require at least veterinarian level access
  */
-export const authorizeVeterinarianOrHigher = (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+export const authorizeVeterinarianOrHigher = (req: Request, res: Response, next: NextFunction) => {
     if (!req.user) {
         return next(new AppError('You must be logged in to access this resource', 401));
     }

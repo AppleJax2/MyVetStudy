@@ -8,6 +8,7 @@ import notificationRoutes from './notification.routes';
 import { practiceSubscriptionRouter as subscriptionRoutes } from './subscription.routes';
 import teamRoutes from './team.routes';
 import healthRoutes from './health.routes';
+import practiceRoutes from './practice.routes';
 
 // Legacy routes (redirected or maintained for backward compatibility)
 import studyRoutes from './study.routes';
@@ -41,6 +42,9 @@ router.use('/subscriptions', subscriptionRoutes);
 
 // Team management routes
 router.use('/team', teamRoutes);
+
+// Practice management routes
+router.use('/practice', practiceRoutes);
 
 // Legacy routes (for backward compatibility)
 router.use('/studies', studyRoutes);

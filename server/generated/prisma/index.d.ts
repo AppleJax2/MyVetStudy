@@ -165,7 +165,8 @@ export const SymptomDataType: {
   SCALE: 'SCALE',
   ENUMERATION: 'ENUMERATION',
   TEXT: 'TEXT',
-  IMAGE: 'IMAGE'
+  IMAGE: 'IMAGE',
+  HEALTH_NOTE: 'HEALTH_NOTE'
 };
 
 export type SymptomDataType = (typeof SymptomDataType)[keyof typeof SymptomDataType]

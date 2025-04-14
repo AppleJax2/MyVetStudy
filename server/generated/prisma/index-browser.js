@@ -392,7 +392,8 @@ exports.SymptomDataType = exports.$Enums.SymptomDataType = {
   SCALE: 'SCALE',
   ENUMERATION: 'ENUMERATION',
   TEXT: 'TEXT',
-  IMAGE: 'IMAGE'
+  IMAGE: 'IMAGE',
+  HEALTH_NOTE: 'HEALTH_NOTE'
 };
 
 exports.AlertSeverity = exports.$Enums.AlertSeverity = {
