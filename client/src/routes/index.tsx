@@ -154,7 +154,9 @@ const router = createBrowserRouter([
     ]
   },
   // Add other top-level routes if necessary (e.g., a dedicated admin section without MainLayout)
-]);
+], {
+  basename: '/'
+});
 
 const AppRouter = () => {
   return <RouterProvider router={router} />;
