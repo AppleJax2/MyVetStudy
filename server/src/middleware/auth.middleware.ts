@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 import prisma from '../utils/prisma';
 import AppError from '../utils/appError';
-import { User } from '../../generated/prisma'; // Correct path for types
+import { User, UserRole } from '../../generated/prisma'; // Include UserRole enum
 
 // Define an interface extending Express Request to include the user property
 export interface AuthenticatedRequest<P = {}, Q = {}, B = {}> extends Request<P, {}, B, Q> {
@@ -56,12 +56,59 @@ export const authenticate = async (req: AuthenticatedRequest, res: Response, nex
     }
 };
 
-// TODO: Add authorization middleware (e.g., check roles)
-// export const authorize = (...roles: string[]) => {
-//     return (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
-//         if (!req.user || !roles.includes(req.user.role)) {
-//             return next(new AppError('You do not have permission to perform this action', 403));
-//         }
-//         next();
-//     };
-// }; 
+/**
+ * Role-based authorization middleware
+ * 
+ * @param roles - Array of allowed UserRole values
+ * @returns Middleware function that checks if the authenticated user has one of the allowed roles
+ */
+export const authorize = (...roles: UserRole[]) => {
+    return (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+        // Check if user is authenticated
+        if (!req.user) {
+            return next(new AppError('You must be logged in to access this resource', 401));
+        }
+        
+        // Check if user's role is in the allowed roles
+        if (!roles.includes(req.user.role)) {
+            return next(new AppError('You do not have permission to perform this action', 403));
+        }
+        
+        // User is authorized
+        next();
+    };
+};
+
+/**
+ * Practice owner authorization middleware
+ * Used for operations that can only be performed by practice owners or managers
+ */
+export const authorizePracticeOwner = (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+    if (!req.user) {
+        return next(new AppError('You must be logged in to access this resource', 401));
+    }
+    
+    if (req.user.role !== UserRole.PRACTICE_OWNER) {
+        return next(new AppError('Only practice owners can perform this action', 403));
+    }
+    
+    next();
+};
+
+/**
+ * Veterinarian or higher authorization middleware
+ * Used for operations that require at least veterinarian level access
+ */
+export const authorizeVeterinarianOrHigher = (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+    if (!req.user) {
+        return next(new AppError('You must be logged in to access this resource', 401));
+    }
+    
+    const allowedRoles = [UserRole.PRACTICE_OWNER, UserRole.VETERINARIAN];
+    
+    if (!allowedRoles.includes(req.user.role)) {
+        return next(new AppError('This action requires veterinarian or higher privileges', 403));
+    }
+    
+    next();
+}; 

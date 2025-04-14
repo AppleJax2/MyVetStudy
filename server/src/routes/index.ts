@@ -1,8 +1,9 @@
 import express from 'express';
 import authRoutes from './auth.routes';
-import studyRoutes from './study.routes'; // Import study routes
-import notificationRoutes from './notification.routes'; // Import notification routes
-import { practiceSubscriptionRouter, webhookRouter } from './subscription.routes'; // Import subscription routers
+import studyRoutes from './study.routes'; // Keep study routes for backward compatibility
+import monitoringPlanRoutes from './monitoring-plan.routes'; // Import new monitoring plan routes
+import notificationRoutes from './notification.routes';
+import { practiceSubscriptionRouter, webhookRouter } from './subscription.routes';
 // Import a router for practice details if it exists, or define routes here
 // import practiceRoutes from './practice.routes';
 
@@ -15,8 +16,9 @@ router.use('/webhooks', webhookRouter);
 router.get('/healthcheck', (_, res) => res.sendStatus(200));
 
 router.use('/auth', authRoutes);
-router.use('/studies', studyRoutes); // Mount study routes under /studies
-router.use('/notifications', notificationRoutes); // Mount notification routes
+router.use('/monitoring-plans', monitoringPlanRoutes); // Mount monitoring plan routes under /monitoring-plans
+router.use('/studies', studyRoutes); // Keep study routes for backward compatibility
+router.use('/notifications', notificationRoutes);
 
 // Mount practice-specific routes (including subscription management)
 // If a dedicated practice router exists:
