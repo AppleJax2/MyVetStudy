@@ -10,6 +10,9 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 3000;
 
+// Enable trust proxy *before* other middleware like CORS or rate limiters
+app.set('trust proxy', 1); // Trust the first hop (Render load balancer)
+
 // CORS configuration - Read allowed origins from environment variables or use defaults
 const allowedOrigins = process.env.NODE_ENV === 'production'
   ? process.env.CLIENT_URL
