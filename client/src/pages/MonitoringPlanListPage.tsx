@@ -1,15 +1,20 @@
 import React from 'react';
-import Layout from '../components/Layout';
+// Remove incorrect layout import
+// import MainLayout from '../layouts/MainLayout'; 
 import MonitoringPlanList from '../components/MonitoringPlanList';
-import { Container } from 'react-bootstrap';
+// Remove unused Container import if not needed elsewhere on page
+// import { Container } from 'react-bootstrap';
 
 const MonitoringPlanListPage: React.FC = () => {
   return (
-    <Layout>
-      <Container className="py-4">
-        <MonitoringPlanList />
-      </Container>
-    </Layout>
+    // Remove the layout wrapper
+    // <MainLayout>
+    // Use a simple div or fragment for the container if necessary
+    <div className="container mx-auto px-4 py-4">
+      {/* Adjust styling as needed - assuming tailwind container is used */}
+      <MonitoringPlanList />
+    </div>
+    // </MainLayout>
   );
 };
 
