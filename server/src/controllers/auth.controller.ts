@@ -30,7 +30,8 @@ export const register = async (req: Request, res: Response): Promise<Response> =
 
     // Validate required fields
     if (!email || !password || !firstName || !lastName || !roleString) {
-      return res.status(400).json({ message: 'All fields are required' });
+      res.status(400).json({ message: 'All fields are required' });
+      return;
     }
 
     // Validate the role string against the explicit list
@@ -38,9 +39,11 @@ export const register = async (req: Request, res: Response): Promise<Response> =
     if (!role) {
       // Add more specific error message if PET_OWNER is attempted but not supported
       if (roleString === 'PET_OWNER') {
-          return res.status(400).json({ message: `Role 'PET_OWNER' is not currently supported for registration.` });
+          res.status(400).json({ message: `Role 'PET_OWNER' is not currently supported for registration.` });
+          return;
       }
-      return res.status(400).json({ message: `Invalid or unsupported role provided: ${roleString}` });
+      res.status(400).json({ message: `Invalid or unsupported role provided: ${roleString}` });
+      return;
     }
 
     // Check if user already exists
@@ -49,7 +52,8 @@ export const register = async (req: Request, res: Response): Promise<Response> =
     });
 
     if (existingUser) {
-      return res.status(409).json({ message: 'User already exists' });
+      res.status(409).json({ message: 'User already exists' });
+      return;
     }
 
     // Hash password
@@ -84,13 +88,14 @@ export const register = async (req: Request, res: Response): Promise<Response> =
   }
 };
 
-export const login = async (req: Request, res: Response) => {
+export const login = async (req: Request, res: Response): Promise<Response | void> => {
   try {
     const { email, password } = req.body;
 
     // Validate required fields
     if (!email || !password) {
-      return res.status(400).json({ message: 'Email and password are required' });
+      res.status(400).json({ message: 'Email and password are required' });
+      return;
     }
 
     // Find user by email
@@ -99,19 +104,22 @@ export const login = async (req: Request, res: Response) => {
     });
 
     if (!user) {
-      return res.status(401).json({ message: 'Invalid credentials' });
+      res.status(401).json({ message: 'Invalid credentials' });
+      return;
     }
 
     // Check if user is active
     if (!user.isActive) {
-      return res.status(403).json({ message: 'Account is deactivated' });
+      res.status(403).json({ message: 'Account is deactivated' });
+      return;
     }
 
     // Verify password
     const isPasswordValid = await comparePasswords(password, user.password);
 
     if (!isPasswordValid) {
-      return res.status(401).json({ message: 'Invalid credentials' });
+      res.status(401).json({ message: 'Invalid credentials' });
+      return;
     }
 
     // Remove password from response
@@ -131,13 +139,14 @@ export const login = async (req: Request, res: Response) => {
   }
 };
 
-export const getMe = async (req: Request, res: Response) => {
+export const getMe = async (req: Request, res: Response): Promise<Response | void> => {
   try {
     // User ID is attached by auth middleware
-    const userId = req.user?.userId;
+    const userId = (req as any).user?.userId;
 
     if (!userId) {
-      return res.status(401).json({ message: 'Unauthorized' });
+      res.status(401).json({ message: 'Unauthorized' });
+      return;
     }
 
     const user = await prisma.user.findUnique({
@@ -145,7 +154,8 @@ export const getMe = async (req: Request, res: Response) => {
     });
 
     if (!user) {
-      return res.status(404).json({ message: 'User not found' });
+      res.status(404).json({ message: 'User not found' });
+      return;
     }
 
     // Remove password from response
