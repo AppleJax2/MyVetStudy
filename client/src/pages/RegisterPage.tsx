@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import api from '../services/api';
+import { UserRole, RegistrationData } from '../types/auth';
 
 // Registration validation schema
 const RegisterSchema = Yup.object().shape({
@@ -14,6 +16,9 @@ const RegisterSchema = Yup.object().shape({
   email: Yup.string()
     .email('Invalid email address')
     .required('Email is required'),
+  practiceName: Yup.string()
+    .required('Practice name is required')
+    .min(2, 'Practice name must be at least 2 characters'),
   password: Yup.string()
     .required('Password is required')
     .min(8, 'Password must be at least 8 characters')
@@ -32,19 +37,28 @@ const RegisterPage: React.FC = () => {
   const navigate = useNavigate();
   const [registerError, setRegisterError] = useState<string | null>(null);
 
-  const handleSubmit = async (values: any, { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }) => {
+  const handleSubmit = async (values: Omit<RegistrationData, 'role'>, { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }) => {
     try {
       setRegisterError(null);
-      // TODO: Replace with actual API call
-      console.log('Registration attempt:', values);
       
-      // For demo purposes - simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      // Create registration data with practice manager role
+      const registrationData: RegistrationData = {
+        ...values,
+        role: UserRole.PRACTICE_MANAGER
+      };
       
-      // Mock successful registration
-      navigate('/login', { state: { message: 'Registration successful! Please log in.' } });
-    } catch (error) {
-      setRegisterError('An error occurred during registration. Please try again.');
+      // Make API call to register
+      const response = await api.post('/auth/register', registrationData);
+      
+      // Navigate to login with success message
+      navigate('/login', { 
+        state: { 
+          message: 'Registration successful! Please log in to your new practice manager account.' 
+        } 
+      });
+    } catch (error: any) {
+      const errorMessage = error.response?.data?.message || 'An error occurred during registration. Please try again.';
+      setRegisterError(errorMessage);
       console.error('Registration error:', error);
     } finally {
       setSubmitting(false);
@@ -55,8 +69,8 @@ const RegisterPage: React.FC = () => {
     <div className="flex items-center justify-center min-h-screen bg-gray-100 px-4 py-12 fade-in">
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-800 mb-2">Create Account</h1>
-          <p className="text-gray-600">Sign up for MyVetStudy</p>
+          <h1 className="text-3xl font-bold text-gray-800 mb-2">Create Practice Account</h1>
+          <p className="text-gray-600">Sign up as a Practice Manager</p>
         </div>
 
         {registerError && (
@@ -70,6 +84,7 @@ const RegisterPage: React.FC = () => {
             firstName: '',
             lastName: '',
             email: '',
+            practiceName: '',
             password: '',
             confirmPassword: '',
             termsAccepted: false
@@ -115,6 +130,18 @@ const RegisterPage: React.FC = () => {
                   placeholder="john.doe@example.com" 
                 />
                 <ErrorMessage name="email" component="div" className="text-red-500 text-sm mt-1" />
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="practiceName" className="form-label">Practice Name</label>
+                <Field 
+                  id="practiceName" 
+                  name="practiceName" 
+                  type="text" 
+                  className="form-input" 
+                  placeholder="Happy Pets Veterinary Clinic" 
+                />
+                <ErrorMessage name="practiceName" component="div" className="text-red-500 text-sm mt-1" />
               </div>
 
               <div className="form-group">
@@ -165,9 +192,9 @@ const RegisterPage: React.FC = () => {
                         <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none"></circle>
                         <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                       </svg>
-                      Creating account...
+                      Creating practice account...
                     </span>
-                  ) : 'Create Account'}
+                  ) : 'Create Practice Account'}
                 </button>
               </div>
             </Form>

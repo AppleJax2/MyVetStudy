@@ -2,15 +2,24 @@ import React, { useState } from 'react';
 import { Outlet, Link, useLocation } from 'react-router-dom';
 import '../index.css';
 import InstallPWAButton from '../components/InstallPWAButton';
+import { useAuth } from '../context/AuthContext';
 
 const MainLayout: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
+  const { isAuthenticated, logout, user } = useAuth();
   
   const isActive = (path: string) => location.pathname === path;
   
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  const handleLogout = () => {
+    logout();
+    if (isMenuOpen) {
+      toggleMenu();
+    }
   };
 
   return (
@@ -19,48 +28,56 @@ const MainLayout: React.FC = () => {
         <div className="container mx-auto px-4 py-3 flex justify-between items-center">
           <Link to="/" className="text-xl font-bold">MyVetStudy</Link>
           
-          {/* Mobile menu button */}
-          <button 
-            className="md:hidden p-2 rounded focus:outline-none" 
-            onClick={toggleMenu}
-            aria-label="Toggle menu"
-          >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              {isMenuOpen ? (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              ) : (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              )}
-            </svg>
-          </button>
+          {isAuthenticated && (
+            <button 
+              className="md:hidden p-2 rounded focus:outline-none" 
+              onClick={toggleMenu}
+              aria-label="Toggle menu"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                {isMenuOpen ? (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                ) : (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                )}
+              </svg>
+            </button>
+          )}
           
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex md:items-center">
-            <ul className="flex space-x-6 mr-4">
-              <li><Link to="/" className={`hover:text-blue-200 transition-colors ${isActive('/') ? 'font-bold' : ''}`}>Dashboard</Link></li>
-              <li><Link to="/monitoring-plans" className={`hover:text-blue-200 transition-colors ${
-                isActive('/monitoring-plans') || location.pathname.startsWith('/monitoring-plans/') ? 'font-bold' : ''
-              }`}>Monitoring Plans</Link></li>
-              <li><Link to="/notifications" className={`hover:text-blue-200 transition-colors ${isActive('/notifications') ? 'font-bold' : ''}`}>Notifications</Link></li>
-              <li><Link to="/profile" className={`hover:text-blue-200 transition-colors ${isActive('/profile') ? 'font-bold' : ''}`}>Profile</Link></li>
-              <li><Link to="/subscription" className={`hover:text-blue-200 transition-colors ${isActive('/subscription') ? 'font-bold' : ''}`}>Subscription</Link></li>
-            </ul>
-            
-            <div className="flex items-center space-x-3">
-              <InstallPWAButton />
-              <Link to="/login" className="bg-white text-blue-600 px-4 py-1 rounded-full font-semibold hover:bg-blue-100 transition-colors">Login</Link>
-            </div>
-          </nav>
+          {isAuthenticated && (
+            <nav className="hidden md:flex md:items-center">
+              <ul className="flex space-x-6 mr-4">
+                <li><Link to="/" className={`hover:text-blue-200 transition-colors ${isActive('/') ? 'font-bold' : ''}`}>Dashboard</Link></li>
+                <li><Link to="/monitoring-plans" className={`hover:text-blue-200 transition-colors ${
+                  isActive('/monitoring-plans') || location.pathname.startsWith('/monitoring-plans/') ? 'font-bold' : ''
+                }`}>Monitoring Plans</Link></li>
+                <li><Link to="/patients" className={`hover:text-blue-200 transition-colors ${isActive('/patients') || location.pathname.startsWith('/patients/') ? 'font-bold' : ''}`}>Patients</Link></li>
+                <li><Link to="/notifications" className={`hover:text-blue-200 transition-colors ${isActive('/notifications') ? 'font-bold' : ''}`}>Notifications</Link></li>
+                <li><Link to="/profile" className={`hover:text-blue-200 transition-colors ${isActive('/profile') ? 'font-bold' : ''}`}>Profile</Link></li>
+                <li><Link to="/subscription" className={`hover:text-blue-200 transition-colors ${isActive('/subscription') ? 'font-bold' : ''}`}>Subscription</Link></li>
+              </ul>
+              
+              <div className="flex items-center space-x-3">
+                <InstallPWAButton />
+                <button 
+                  onClick={handleLogout} 
+                  className="bg-white text-blue-600 px-4 py-1 rounded-full font-semibold hover:bg-blue-100 transition-colors"
+                >
+                  Logout
+                </button>
+              </div>
+            </nav>
+          )}
         </div>
         
-        {/* Mobile Navigation */}
-        {isMenuOpen && (
+        {isAuthenticated && isMenuOpen && (
           <nav className="md:hidden">
             <ul className="flex flex-col bg-blue-700 p-4">
               <li className="py-2"><Link to="/" className={`block ${isActive('/') ? 'font-bold' : ''}`} onClick={toggleMenu}>Dashboard</Link></li>
               <li className="py-2"><Link to="/monitoring-plans" className={`block ${
                 isActive('/monitoring-plans') || location.pathname.startsWith('/monitoring-plans/') ? 'font-bold' : ''
               }`} onClick={toggleMenu}>Monitoring Plans</Link></li>
+              <li className="py-2"><Link to="/patients" className={`block ${isActive('/patients') || location.pathname.startsWith('/patients/') ? 'font-bold' : ''}`} onClick={toggleMenu}>Patients</Link></li>
               <li className="py-2"><Link to="/notifications" className={`block ${isActive('/notifications') ? 'font-bold' : ''}`} onClick={toggleMenu}>Notifications</Link></li>
               <li className="py-2"><Link to="/profile" className={`block ${isActive('/profile') ? 'font-bold' : ''}`} onClick={toggleMenu}>Profile</Link></li>
               <li className="py-2"><Link to="/subscription" className={`block ${isActive('/subscription') ? 'font-bold' : ''}`} onClick={toggleMenu}>Subscription</Link></li>
@@ -68,7 +85,12 @@ const MainLayout: React.FC = () => {
                 <InstallPWAButton />
               </li>
               <li className="py-2 mt-2">
-                <Link to="/login" className="block bg-white text-blue-600 px-4 py-2 rounded-full font-semibold text-center" onClick={toggleMenu}>Login</Link>
+                <button 
+                  onClick={handleLogout} 
+                  className="block w-full bg-white text-blue-600 px-4 py-2 rounded-full font-semibold text-center"
+                >
+                  Logout
+                </button>
               </li>
             </ul>
           </nav>

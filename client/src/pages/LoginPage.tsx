@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import { useAuth } from '../context/AuthContext';
+import api from '../services/api';
+import { LoginCredentials, LoginResponse } from '../types/auth';
 
 // Login validation schema
 const LoginSchema = Yup.object().shape({
@@ -15,23 +18,48 @@ const LoginSchema = Yup.object().shape({
 
 const LoginPage: React.FC = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { login } = useAuth();
   const [loginError, setLoginError] = useState<string | null>(null);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  
+  // Handle success message from registration or other redirects
+  useEffect(() => {
+    const state = location.state as { message?: string, from?: string };
+    if (state?.message) {
+      setSuccessMessage(state.message);
+    }
+  }, [location]);
 
-  const handleSubmit = async (values: { email: string; password: string }, { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }) => {
+  const handleSubmit = async (values: LoginCredentials, { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }) => {
     try {
       setLoginError(null);
-      // TODO: Replace with actual API call
-      console.log('Login attempt:', values);
       
-      // For demo purposes - simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      // Mock successful login
-      localStorage.setItem('isAuthenticated', 'true');
-      navigate('/');
-    } catch (error) {
-      setLoginError('Invalid email or password. Please try again.');
+      const response = await api.post<LoginResponse>('/auth/login', values);
+
+      if (response.data && response.data.token) {
+        login(response.data.token, response.data.user);
+        
+        // Get redirect path from location state or default to dashboard
+        const state = location.state as { from?: string };
+        const redirectPath = state?.from || '/';
+        
+        navigate(redirectPath);
+      } else {
+        throw new Error('Login failed: No token received');
+      }
+
+    } catch (error: any) {
       console.error('Login error:', error);
+
+      let errorMessage = 'Invalid email or password. Please try again.';
+      if (error.response && error.response.data && error.response.data.message) {
+        errorMessage = error.response.data.message;
+      } else if (error.message) {
+        errorMessage = error.message;
+      }
+      setLoginError(errorMessage);
+
     } finally {
       setSubmitting(false);
     }
@@ -44,6 +72,12 @@ const LoginPage: React.FC = () => {
           <h1 className="text-3xl font-bold text-gray-800 mb-2">Welcome Back</h1>
           <p className="text-gray-600">Sign in to continue to MyVetStudy</p>
         </div>
+
+        {successMessage && (
+          <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4" role="alert">
+            <span className="block sm:inline">{successMessage}</span>
+          </div>
+        )}
 
         {loginError && (
           <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4" role="alert">
@@ -111,7 +145,7 @@ const LoginPage: React.FC = () => {
           <p className="text-gray-600">
             Don't have an account?{' '}
             <Link to="/register" className="text-blue-600 hover:text-blue-800 font-medium">
-              Create an account
+              Create a practice account
             </Link>
           </p>
         </div>

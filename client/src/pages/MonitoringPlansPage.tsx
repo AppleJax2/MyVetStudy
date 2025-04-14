@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import api from '../services/api'; // Import the api service
+import { toast } from 'react-toastify'; // Import toast for error notifications
 
 // Types for our study data
 interface MonitoringPlan {
@@ -23,23 +25,21 @@ const MonitoringPlansPage: React.FC = () => {
   useEffect(() => {
     const fetchMonitoringPlans = async () => {
       try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/monitoring-plans`, {
-          method: 'GET',
-          headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`,
-            'Content-Type': 'application/json',
-          },
-        });
+        setLoading(true);
+        setError(null);
+        // Use api.get instead of fetch
+        const response = await api.get('/monitoring-plans'); 
 
-        if (!response.ok) {
-          throw new Error('Failed to fetch monitoring plans');
-        }
+        // Axios automatically checks for response.ok and throws for non-2xx statuses
+        // The data is directly available in response.data
+        setMonitoringPlans(response.data);
 
-        const data = await response.json();
-        setMonitoringPlans(data);
-        setLoading(false);
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'An unknown error occurred');
+      } catch (err: any) {
+        console.error("Failed to fetch monitoring plans:", err);
+        const errorMessage = err.response?.data?.message || err.message || 'Failed to fetch monitoring plans';
+        setError(errorMessage);
+        toast.error(errorMessage);
+      } finally {
         setLoading(false);
       }
     };
@@ -52,7 +52,7 @@ const MonitoringPlansPage: React.FC = () => {
   }
 
   if (error) {
-    return <div className="error">{error}</div>;
+    return <div className="error">Error: {error}</div>;
   }
 
   return (
