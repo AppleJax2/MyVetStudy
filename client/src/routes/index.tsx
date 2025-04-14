@@ -4,6 +4,7 @@ import MainLayout from '../layouts/MainLayout';
 import LoadingSpinner from '../components/LoadingSpinner';
 import ProtectedRoute from '../components/ProtectedRoute';
 import { UserRole } from '../types/auth';
+import { Permission } from '../utils/rolePermissions';
 // Import page components
 // import LoginPage from '../pages/LoginPage';
 // import RegisterPage from '../pages/RegisterPage';
@@ -32,6 +33,7 @@ const SubscriptionPage = lazy(() => import('../pages/SubscriptionPage'));
 const PatientsPage = lazy(() => import('../pages/PatientsPage'));
 const PatientDetailPage = lazy(() => import('../pages/PatientDetailPage'));
 const PatientFormPage = lazy(() => import('../pages/PatientFormPage'));
+const TeamManagementPage = lazy(() => import('../pages/TeamManagementPage'));
 
 // Remove the old LoadingFallback component
 // const LoadingFallback = () => <div>Loading...</div>;
@@ -67,15 +69,31 @@ const router = createBrowserRouter([
       
       // Practice Manager only routes
       {
-        element: <ProtectedRoute requiredRoles={UserRole.PRACTICE_MANAGER} />,
+        element: <ProtectedRoute 
+          requiredRoles={UserRole.PRACTICE_MANAGER}
+          requiredPermissions={Permission.MANAGE_SUBSCRIPTIONS}
+        />,
         children: [
           { path: 'subscription', element: <Suspense fallback={<LoadingSpinner />}><SubscriptionPage /></Suspense> },
         ]
       },
       
+      // Team Management (Practice Manager only)
+      {
+        element: <ProtectedRoute 
+          requiredPermissions={[Permission.INVITE_TEAM_MEMBERS, Permission.MANAGE_TEAM_ROLES]}
+          requireAllPermissions={false}
+        />,
+        children: [
+          { path: 'team', element: <Suspense fallback={<LoadingSpinner />}><TeamManagementPage /></Suspense> },
+        ]
+      },
+      
       // Routes accessible to Practice Managers and Veterinarians
       {
-        element: <ProtectedRoute requiredRoles={[UserRole.PRACTICE_MANAGER, UserRole.VETERINARIAN]} />,
+        element: <ProtectedRoute 
+          requiredPermissions={Permission.CREATE_MONITORING_PLAN}
+        />,
         children: [
           // Monitoring Plan Routes for creation/editing
           { path: 'monitoring-plans/new', element: <Suspense fallback={<LoadingSpinner />}><MonitoringPlanFormPage /></Suspense> },
@@ -85,13 +103,9 @@ const router = createBrowserRouter([
       
       // Routes accessible to all veterinary staff (not pet owners)
       {
-        element: <ProtectedRoute requiredRoles={[
-          UserRole.PRACTICE_MANAGER, 
-          UserRole.VETERINARIAN, 
-          UserRole.VET_TECHNICIAN, 
-          UserRole.VET_ASSISTANT, 
-          UserRole.RECEPTIONIST
-        ]} />,
+        element: <ProtectedRoute 
+          requiredPermissions={Permission.VIEW_MONITORING_PLAN}
+        />,
         children: [
           // Monitoring Plan Routes for viewing
           { path: 'monitoring-plans', element: <Suspense fallback={<LoadingSpinner />}><MonitoringPlansPage /></Suspense> },
@@ -104,11 +118,36 @@ const router = createBrowserRouter([
           { path: 'studies', element: <Suspense fallback={<LoadingSpinner />}><MonitoringPlansPage /></Suspense> },
           { path: 'studies/:studyId', element: <Suspense fallback={<LoadingSpinner />}><MonitoringPlanDetailPage /></Suspense> },
           { path: 'studies/:studyId/symptoms', element: <Suspense fallback={<LoadingSpinner />}><SymptomsPage /></Suspense> },
-          
-          // Patient Routes
+        ]
+      },
+      
+      // Patient Routes - accessible to all staff with patient view permission
+      {
+        element: <ProtectedRoute 
+          requiredPermissions={Permission.VIEW_PATIENT}
+        />,
+        children: [
           { path: 'patients', element: <Suspense fallback={<LoadingSpinner />}><PatientsPage /></Suspense> },
-          { path: 'patients/new', element: <Suspense fallback={<LoadingSpinner />}><PatientFormPage /></Suspense> },
           { path: 'patients/:id', element: <Suspense fallback={<LoadingSpinner />}><PatientDetailPage /></Suspense> },
+        ]
+      },
+      
+      // Patient creation/editing - restricted to those with proper permissions
+      {
+        element: <ProtectedRoute 
+          requiredPermissions={Permission.CREATE_PATIENT}
+        />,
+        children: [
+          { path: 'patients/new', element: <Suspense fallback={<LoadingSpinner />}><PatientFormPage /></Suspense> },
+        ]
+      },
+      
+      // Patient editing - restricted to those with proper permissions
+      {
+        element: <ProtectedRoute 
+          requiredPermissions={Permission.EDIT_PATIENT}
+        />,
+        children: [
           { path: 'patients/:id/edit', element: <Suspense fallback={<LoadingSpinner />}><PatientFormPage /></Suspense> },
         ]
       }

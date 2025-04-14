@@ -17,6 +17,17 @@ export interface User {
   practiceId?: string;   // For staff members
   createdAt: string;
   updatedAt: string;
+  practiceProfile?: PracticeProfile; // Profile details for practice
+}
+
+export interface PracticeProfile {
+  size: string;
+  type: string;
+  logo?: string;
+  address?: string;
+  phone?: string;
+  website?: string;
+  specialty?: string[];
 }
 
 export interface LoginCredentials {
@@ -37,4 +48,5 @@ export interface RegistrationData {
   practiceName: string;
   role: UserRole;
   termsAccepted: boolean;
+  practiceProfile?: PracticeProfile; // Added for practice details
 } 

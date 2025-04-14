@@ -5,7 +5,7 @@ import * as Yup from 'yup';
 import api from '../services/api';
 import { UserRole, RegistrationData } from '../types/auth';
 
-// Registration validation schema
+// Enhanced registration validation schema with veterinary focus
 const RegisterSchema = Yup.object().shape({
   firstName: Yup.string()
     .required('First name is required')
@@ -17,8 +17,12 @@ const RegisterSchema = Yup.object().shape({
     .email('Invalid email address')
     .required('Email is required'),
   practiceName: Yup.string()
-    .required('Practice name is required')
+    .required('Veterinary practice name is required')
     .min(2, 'Practice name must be at least 2 characters'),
+  practiceSize: Yup.string()
+    .required('Please select your practice size'),
+  practiceType: Yup.string()
+    .required('Please select your practice type'),
   password: Yup.string()
     .required('Password is required')
     .min(8, 'Password must be at least 8 characters')
@@ -33,18 +37,61 @@ const RegisterSchema = Yup.object().shape({
     .oneOf([true], 'You must accept the terms and conditions')
 });
 
+// Practice size options
+const practiceSizeOptions = [
+  { value: 'solo', label: 'Solo Practitioner' },
+  { value: 'small', label: 'Small (2-5 veterinarians)' },
+  { value: 'medium', label: 'Medium (6-15 veterinarians)' },
+  { value: 'large', label: 'Large (16+ veterinarians)' },
+  { value: 'hospital', label: 'Veterinary Hospital' },
+  { value: 'educational', label: 'Educational Institution' }
+];
+
+// Practice type options
+const practiceTypeOptions = [
+  { value: 'small-animal', label: 'Small Animal' },
+  { value: 'large-animal', label: 'Large Animal' },
+  { value: 'mixed', label: 'Mixed Practice' },
+  { value: 'exotic', label: 'Exotic Animal' },
+  { value: 'emergency', label: 'Emergency & Critical Care' },
+  { value: 'specialty', label: 'Specialty Practice' },
+  { value: 'mobile', label: 'Mobile Practice' },
+  { value: 'other', label: 'Other' }
+];
+
+interface RegisterFormValues {
+  firstName: string;
+  lastName: string;
+  email: string;
+  practiceName: string;
+  practiceSize: string;
+  practiceType: string;
+  password: string;
+  confirmPassword: string;
+  termsAccepted: boolean;
+}
+
 const RegisterPage: React.FC = () => {
   const navigate = useNavigate();
   const [registerError, setRegisterError] = useState<string | null>(null);
 
-  const handleSubmit = async (values: Omit<RegistrationData, 'role'>, { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }) => {
+  const handleSubmit = async (values: RegisterFormValues, { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }) => {
     try {
       setRegisterError(null);
       
       // Create registration data with practice manager role
       const registrationData: RegistrationData = {
-        ...values,
-        role: UserRole.PRACTICE_MANAGER
+        firstName: values.firstName,
+        lastName: values.lastName,
+        email: values.email,
+        password: values.password,
+        practiceName: values.practiceName,
+        role: UserRole.PRACTICE_MANAGER,
+        termsAccepted: values.termsAccepted,
+        practiceProfile: {
+          size: values.practiceSize,
+          type: values.practiceType
+        }
       };
       
       // Make API call to register
@@ -67,10 +114,10 @@ const RegisterPage: React.FC = () => {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100 px-4 py-12 fade-in">
-      <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+      <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-2xl">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-800 mb-2">Create Practice Account</h1>
-          <p className="text-gray-600">Sign up as a Practice Manager</p>
+          <h1 className="text-3xl font-bold text-gray-800 mb-2">Create Your Veterinary Practice Account</h1>
+          <p className="text-gray-600">Sign up as a Practice Manager to start monitoring your patients effectively</p>
         </div>
 
         {registerError && (
@@ -85,6 +132,8 @@ const RegisterPage: React.FC = () => {
             lastName: '',
             email: '',
             practiceName: '',
+            practiceSize: '',
+            practiceType: '',
             password: '',
             confirmPassword: '',
             termsAccepted: false
@@ -94,76 +143,124 @@ const RegisterPage: React.FC = () => {
         >
           {({ isSubmitting }) => (
             <Form className="space-y-4">
-              <div className="grid grid-cols-2 gap-4">
-                <div className="form-group">
-                  <label htmlFor="firstName" className="form-label">First Name</label>
-                  <Field 
-                    id="firstName" 
-                    name="firstName" 
-                    type="text" 
-                    className="form-input" 
-                    placeholder="John" 
-                  />
-                  <ErrorMessage name="firstName" component="div" className="text-red-500 text-sm mt-1" />
+              <div className="bg-blue-50 p-4 rounded-lg mb-4 border border-blue-100">
+                <h2 className="text-lg font-medium text-blue-800 mb-2">Practice Manager Information</h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="form-group">
+                    <label htmlFor="firstName" className="form-label">First Name</label>
+                    <Field 
+                      id="firstName" 
+                      name="firstName" 
+                      type="text" 
+                      className="form-input" 
+                      placeholder="John" 
+                    />
+                    <ErrorMessage name="firstName" component="div" className="text-red-500 text-sm mt-1" />
+                  </div>
+
+                  <div className="form-group">
+                    <label htmlFor="lastName" className="form-label">Last Name</label>
+                    <Field 
+                      id="lastName" 
+                      name="lastName" 
+                      type="text" 
+                      className="form-input" 
+                      placeholder="Doe" 
+                    />
+                    <ErrorMessage name="lastName" component="div" className="text-red-500 text-sm mt-1" />
+                  </div>
+                
+                  <div className="form-group">
+                    <label htmlFor="email" className="form-label">Email Address</label>
+                    <Field 
+                      id="email" 
+                      name="email" 
+                      type="email" 
+                      className="form-input" 
+                      placeholder="john.doe@vetpractice.com" 
+                    />
+                    <ErrorMessage name="email" component="div" className="text-red-500 text-sm mt-1" />
+                  </div>
                 </div>
+              </div>
 
-                <div className="form-group">
-                  <label htmlFor="lastName" className="form-label">Last Name</label>
-                  <Field 
-                    id="lastName" 
-                    name="lastName" 
-                    type="text" 
-                    className="form-input" 
-                    placeholder="Doe" 
-                  />
-                  <ErrorMessage name="lastName" component="div" className="text-red-500 text-sm mt-1" />
+              <div className="bg-green-50 p-4 rounded-lg mb-4 border border-green-100">
+                <h2 className="text-lg font-medium text-green-800 mb-2">Practice Information</h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="form-group md:col-span-2">
+                    <label htmlFor="practiceName" className="form-label">Practice Name</label>
+                    <Field 
+                      id="practiceName" 
+                      name="practiceName" 
+                      type="text" 
+                      className="form-input" 
+                      placeholder="Happy Pets Veterinary Clinic" 
+                    />
+                    <ErrorMessage name="practiceName" component="div" className="text-red-500 text-sm mt-1" />
+                  </div>
+
+                  <div className="form-group">
+                    <label htmlFor="practiceSize" className="form-label">Practice Size</label>
+                    <Field 
+                      as="select"
+                      id="practiceSize" 
+                      name="practiceSize" 
+                      className="form-select" 
+                    >
+                      <option value="">Select Practice Size</option>
+                      {practiceSizeOptions.map(option => (
+                        <option key={option.value} value={option.value}>{option.label}</option>
+                      ))}
+                    </Field>
+                    <ErrorMessage name="practiceSize" component="div" className="text-red-500 text-sm mt-1" />
+                  </div>
+
+                  <div className="form-group">
+                    <label htmlFor="practiceType" className="form-label">Practice Type</label>
+                    <Field 
+                      as="select"
+                      id="practiceType" 
+                      name="practiceType" 
+                      className="form-select" 
+                    >
+                      <option value="">Select Practice Type</option>
+                      {practiceTypeOptions.map(option => (
+                        <option key={option.value} value={option.value}>{option.label}</option>
+                      ))}
+                    </Field>
+                    <ErrorMessage name="practiceType" component="div" className="text-red-500 text-sm mt-1" />
+                  </div>
                 </div>
               </div>
 
-              <div className="form-group">
-                <label htmlFor="email" className="form-label">Email Address</label>
-                <Field 
-                  id="email" 
-                  name="email" 
-                  type="email" 
-                  className="form-input" 
-                  placeholder="john.doe@example.com" 
-                />
-                <ErrorMessage name="email" component="div" className="text-red-500 text-sm mt-1" />
-              </div>
+              <div className="bg-gray-50 p-4 rounded-lg mb-4 border border-gray-200">
+                <h2 className="text-lg font-medium text-gray-700 mb-2">Account Security</h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="form-group">
+                    <label htmlFor="password" className="form-label">Password</label>
+                    <Field 
+                      id="password" 
+                      name="password" 
+                      type="password" 
+                      className="form-input" 
+                    />
+                    <ErrorMessage name="password" component="div" className="text-red-500 text-sm mt-1" />
+                    <p className="text-xs text-gray-500 mt-1">
+                      Password must be at least 8 characters with uppercase, lowercase, number, and special character.
+                    </p>
+                  </div>
 
-              <div className="form-group">
-                <label htmlFor="practiceName" className="form-label">Practice Name</label>
-                <Field 
-                  id="practiceName" 
-                  name="practiceName" 
-                  type="text" 
-                  className="form-input" 
-                  placeholder="Happy Pets Veterinary Clinic" 
-                />
-                <ErrorMessage name="practiceName" component="div" className="text-red-500 text-sm mt-1" />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="password" className="form-label">Password</label>
-                <Field 
-                  id="password" 
-                  name="password" 
-                  type="password" 
-                  className="form-input" 
-                />
-                <ErrorMessage name="password" component="div" className="text-red-500 text-sm mt-1" />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="confirmPassword" className="form-label">Confirm Password</label>
-                <Field 
-                  id="confirmPassword" 
-                  name="confirmPassword" 
-                  type="password" 
-                  className="form-input" 
-                />
-                <ErrorMessage name="confirmPassword" component="div" className="text-red-500 text-sm mt-1" />
+                  <div className="form-group">
+                    <label htmlFor="confirmPassword" className="form-label">Confirm Password</label>
+                    <Field 
+                      id="confirmPassword" 
+                      name="confirmPassword" 
+                      type="password" 
+                      className="form-input" 
+                    />
+                    <ErrorMessage name="confirmPassword" component="div" className="text-red-500 text-sm mt-1" />
+                  </div>
+                </div>
               </div>
 
               <div className="form-group">
@@ -174,7 +271,8 @@ const RegisterPage: React.FC = () => {
                     className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
                   />
                   <span className="ml-2 text-sm text-gray-700">
-                    I agree to the <Link to="/terms" className="text-blue-600 hover:text-blue-800">Terms and Conditions</Link>
+                    I agree to the <Link to="/terms" className="text-blue-600 hover:text-blue-800">Terms and Conditions</Link> and 
+                    <Link to="/privacy" className="text-blue-600 hover:text-blue-800 ml-1">Privacy Policy</Link>
                   </span>
                 </label>
                 <ErrorMessage name="termsAccepted" component="div" className="text-red-500 text-sm mt-1" />
@@ -183,7 +281,7 @@ const RegisterPage: React.FC = () => {
               <div className="form-group">
                 <button 
                   type="submit" 
-                  className="btn-primary w-full flex justify-center"
+                  className="btn-primary w-full flex justify-center py-3"
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? (
@@ -194,7 +292,7 @@ const RegisterPage: React.FC = () => {
                       </svg>
                       Creating practice account...
                     </span>
-                  ) : 'Create Practice Account'}
+                  ) : 'Create Veterinary Practice Account'}
                 </button>
               </div>
             </Form>

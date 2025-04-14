@@ -2,6 +2,7 @@ import React, { createContext, useState, useContext, useEffect, ReactNode } from
 import { useNavigate } from 'react-router-dom';
 import api from '../services/api'; // Assuming api service is set up for requests
 import { User, UserRole } from '../types/auth'; // Import User type
+import { Permission, hasPermission, hasAllPermissions, hasAnyPermission, isRoleHigherThan } from '../utils/rolePermissions';
 
 interface AuthContextType {
   isAuthenticated: boolean;
@@ -10,7 +11,12 @@ interface AuthContextType {
   login: (token: string, userData: User) => void;
   logout: () => void;
   isLoading: boolean; // Add loading state
-  hasRole: (roles: UserRole | UserRole[]) => boolean; // Add role checking function
+  hasRole: (roles: UserRole | UserRole[]) => boolean; // Role checking function
+  hasPermission: (permission: Permission) => boolean; // Permission checking
+  hasAllPermissions: (permissions: Permission[]) => boolean; // Check multiple permissions (AND)
+  hasAnyPermission: (permissions: Permission[]) => boolean; // Check multiple permissions (OR)
+  isRoleHigherThan: (role: UserRole) => boolean; // Check if user's role is higher than given role
+  isPracticeStaff: () => boolean; // Check if user is part of practice staff (not a pet owner)
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -95,6 +101,36 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     return user.role === roles;
   };
 
+  // Check if user has a specific permission
+  const checkPermission = (permission: Permission): boolean => {
+    if (!user) return false;
+    return hasPermission(user.role, permission);
+  };
+
+  // Check if user has all specified permissions
+  const checkAllPermissions = (permissions: Permission[]): boolean => {
+    if (!user) return false;
+    return hasAllPermissions(user.role, permissions);
+  };
+
+  // Check if user has any of the specified permissions
+  const checkAnyPermission = (permissions: Permission[]): boolean => {
+    if (!user) return false;
+    return hasAnyPermission(user.role, permissions);
+  };
+
+  // Check if user's role is higher than a specified role
+  const checkRoleHigherThan = (role: UserRole): boolean => {
+    if (!user) return false;
+    return isRoleHigherThan(user.role, role);
+  };
+
+  // Check if user is practice staff (not a pet owner)
+  const checkIsPracticeStaff = (): boolean => {
+    if (!user) return false;
+    return user.role !== UserRole.PET_OWNER;
+  };
+
   return (
     <AuthContext.Provider value={{ 
       isAuthenticated, 
@@ -103,7 +139,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       login, 
       logout, 
       isLoading,
-      hasRole
+      hasRole,
+      hasPermission: checkPermission,
+      hasAllPermissions: checkAllPermissions,
+      hasAnyPermission: checkAnyPermission,
+      isRoleHigherThan: checkRoleHigherThan,
+      isPracticeStaff: checkIsPracticeStaff
     }}>
       {children}
     </AuthContext.Provider>
