@@ -213,9 +213,9 @@ const SymptomChart: React.FC<SymptomChartProps> = ({
     return (
       <div className="h-64">
         {chartType === 'line' ? (
-          <Line data={chartData} options={chartOptions} />
+          <Line data={chartData as ChartData<'line'>} options={chartOptions as ChartOptions<'line'>} />
         ) : (
-          <Bar data={chartData} options={chartOptions} />
+          <Bar data={chartData as ChartData<'bar'>} options={chartOptions as ChartOptions<'bar'>} />
         )}
       </div>
     );
