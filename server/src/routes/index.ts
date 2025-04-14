@@ -2,6 +2,7 @@ import express from 'express';
 import authRoutes from './auth.routes';
 import studyRoutes from './study.routes'; // Keep study routes for backward compatibility
 import monitoringPlanRoutes from './monitoring-plan.routes'; // Import new monitoring plan routes
+import patientRoutes from './patient.routes'; // Import patient routes
 import notificationRoutes from './notification.routes';
 import { practiceSubscriptionRouter, webhookRouter } from './subscription.routes';
 // Import a router for practice details if it exists, or define routes here
@@ -17,6 +18,7 @@ router.get('/healthcheck', (_, res) => res.sendStatus(200));
 
 router.use('/auth', authRoutes);
 router.use('/monitoring-plans', monitoringPlanRoutes); // Mount monitoring plan routes under /monitoring-plans
+router.use('/patients', patientRoutes); // Mount patient routes
 router.use('/studies', studyRoutes); // Keep study routes for backward compatibility
 router.use('/notifications', notificationRoutes);
 
