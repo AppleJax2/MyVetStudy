@@ -3,11 +3,13 @@ import { Outlet, Link, useLocation, useNavigate } from 'react-router-dom';
 import '../index.css';
 import InstallPWAButton from '../components/InstallPWAButton';
 import { useAuth } from '../context/AuthContext';
+import { UserRole } from '../types/auth';
+import { Permission } from '../utils/rolePermissions';
 
 const MainLayout: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
-  const { isAuthenticated, logout, user } = useAuth();
+  const { isAuthenticated, logout, user, hasPermission } = useAuth();
   const navigate = useNavigate();
   
   const isActive = (path: string) => location.pathname === path;
@@ -23,6 +25,12 @@ const MainLayout: React.FC = () => {
     }
     navigate('/login');
   };
+
+  // Check if user is a practice manager
+  const isPracticeManager = user?.role === UserRole.PRACTICE_MANAGER;
+  // Check permissions for practice statistics and management
+  const canViewPracticeStatistics = hasPermission(Permission.VIEW_PRACTICE_STATISTICS);
+  const canManagePracticeSettings = hasPermission(Permission.MANAGE_PRACTICE_SETTINGS);
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
@@ -50,13 +58,52 @@ const MainLayout: React.FC = () => {
             <nav className="hidden md:flex md:items-center">
               <ul className="flex space-x-6 mr-4">
                 <li><Link to="/" className={`hover:text-blue-200 transition-colors ${isActive('/') ? 'font-bold' : ''}`}>Dashboard</Link></li>
+                
+                {/* Practice Manager specific links */}
+                {isPracticeManager && (
+                  <>
+                    {canViewPracticeStatistics && (
+                      <li>
+                        <Link 
+                          to="/practice/dashboard" 
+                          className={`hover:text-blue-200 transition-colors ${isActive('/practice/dashboard') ? 'font-bold' : ''}`}
+                        >
+                          Practice Dashboard
+                        </Link>
+                      </li>
+                    )}
+                    
+                    {canManagePracticeSettings && (
+                      <li>
+                        <Link 
+                          to="/practice/settings" 
+                          className={`hover:text-blue-200 transition-colors ${isActive('/practice/settings') ? 'font-bold' : ''}`}
+                        >
+                          Practice Settings
+                        </Link>
+                      </li>
+                    )}
+                    
+                    <li>
+                      <Link 
+                        to="/team" 
+                        className={`hover:text-blue-200 transition-colors ${isActive('/team') ? 'font-bold' : ''}`}
+                      >
+                        Team
+                      </Link>
+                    </li>
+                  </>
+                )}
+                
                 <li><Link to="/monitoring-plans" className={`hover:text-blue-200 transition-colors ${
                   isActive('/monitoring-plans') || location.pathname.startsWith('/monitoring-plans/') ? 'font-bold' : ''
                 }`}>Monitoring Plans</Link></li>
                 <li><Link to="/patients" className={`hover:text-blue-200 transition-colors ${isActive('/patients') || location.pathname.startsWith('/patients/') ? 'font-bold' : ''}`}>Patients</Link></li>
                 <li><Link to="/notifications" className={`hover:text-blue-200 transition-colors ${isActive('/notifications') ? 'font-bold' : ''}`}>Notifications</Link></li>
                 <li><Link to="/profile" className={`hover:text-blue-200 transition-colors ${isActive('/profile') ? 'font-bold' : ''}`}>Profile</Link></li>
-                <li><Link to="/subscription" className={`hover:text-blue-200 transition-colors ${isActive('/subscription') ? 'font-bold' : ''}`}>Subscription</Link></li>
+                {isPracticeManager && (
+                  <li><Link to="/subscription" className={`hover:text-blue-200 transition-colors ${isActive('/subscription') ? 'font-bold' : ''}`}>Subscription</Link></li>
+                )}
               </ul>
               
               <div className="flex items-center space-x-3">
@@ -76,13 +123,55 @@ const MainLayout: React.FC = () => {
           <nav className="md:hidden">
             <ul className="flex flex-col bg-blue-700 p-4">
               <li className="py-2"><Link to="/" className={`block ${isActive('/') ? 'font-bold' : ''}`} onClick={toggleMenu}>Dashboard</Link></li>
+              
+              {/* Practice Manager specific links - Mobile */}
+              {isPracticeManager && (
+                <>
+                  {canViewPracticeStatistics && (
+                    <li className="py-2">
+                      <Link 
+                        to="/practice/dashboard" 
+                        className={`block ${isActive('/practice/dashboard') ? 'font-bold' : ''}`}
+                        onClick={toggleMenu}
+                      >
+                        Practice Dashboard
+                      </Link>
+                    </li>
+                  )}
+                  
+                  {canManagePracticeSettings && (
+                    <li className="py-2">
+                      <Link 
+                        to="/practice/settings" 
+                        className={`block ${isActive('/practice/settings') ? 'font-bold' : ''}`}
+                        onClick={toggleMenu}
+                      >
+                        Practice Settings
+                      </Link>
+                    </li>
+                  )}
+                  
+                  <li className="py-2">
+                    <Link 
+                      to="/team" 
+                      className={`block ${isActive('/team') ? 'font-bold' : ''}`}
+                      onClick={toggleMenu}
+                    >
+                      Team
+                    </Link>
+                  </li>
+                </>
+              )}
+              
               <li className="py-2"><Link to="/monitoring-plans" className={`block ${
                 isActive('/monitoring-plans') || location.pathname.startsWith('/monitoring-plans/') ? 'font-bold' : ''
               }`} onClick={toggleMenu}>Monitoring Plans</Link></li>
               <li className="py-2"><Link to="/patients" className={`block ${isActive('/patients') || location.pathname.startsWith('/patients/') ? 'font-bold' : ''}`} onClick={toggleMenu}>Patients</Link></li>
               <li className="py-2"><Link to="/notifications" className={`block ${isActive('/notifications') ? 'font-bold' : ''}`} onClick={toggleMenu}>Notifications</Link></li>
               <li className="py-2"><Link to="/profile" className={`block ${isActive('/profile') ? 'font-bold' : ''}`} onClick={toggleMenu}>Profile</Link></li>
-              <li className="py-2"><Link to="/subscription" className={`block ${isActive('/subscription') ? 'font-bold' : ''}`} onClick={toggleMenu}>Subscription</Link></li>
+              {isPracticeManager && (
+                <li className="py-2"><Link to="/subscription" className={`block ${isActive('/subscription') ? 'font-bold' : ''}`} onClick={toggleMenu}>Subscription</Link></li>
+              )}
               <li className="py-2 mt-4">
                 <InstallPWAButton />
               </li>

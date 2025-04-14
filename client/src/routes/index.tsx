@@ -34,6 +34,9 @@ const PatientsPage = lazy(() => import('../pages/PatientsPage'));
 const PatientDetailPage = lazy(() => import('../pages/PatientDetailPage'));
 const PatientFormPage = lazy(() => import('../pages/PatientFormPage'));
 const TeamManagementPage = lazy(() => import('../pages/TeamManagementPage'));
+const TeamInvitationAcceptPage = lazy(() => import('../pages/TeamInvitationAcceptPage'));
+const PracticeManagerDashboardPage = lazy(() => import('../pages/PracticeManagerDashboardPage'));
+const PracticeSettingsPage = lazy(() => import('../pages/PracticeSettingsPage'));
 
 // Remove the old LoadingFallback component
 // const LoadingFallback = () => <div>Loading...</div>;
@@ -53,6 +56,11 @@ const router = createBrowserRouter([
     element: <Suspense fallback={<LoadingSpinner />}><SharedMonitoringPlanPage /></Suspense>
   },
   {
+    // Team invitation acceptance route (public)
+    path: '/invitation/:token',
+    element: <Suspense fallback={<LoadingSpinner />}><TeamInvitationAcceptPage /></Suspense>
+  },
+  {
     // Protected routes - Use MainLayout and ProtectedRoute
     path: '/',
     element: <MainLayout />,
@@ -64,6 +72,28 @@ const router = createBrowserRouter([
           { index: true, element: <Suspense fallback={<LoadingSpinner />}><DashboardPage /></Suspense> },
           { path: 'profile', element: <Suspense fallback={<LoadingSpinner />}><ProfilePage /></Suspense> },
           { path: 'notifications', element: <Suspense fallback={<LoadingSpinner />}><NotificationsPage /></Suspense> },
+        ]
+      },
+      
+      // Practice Manager Dashboard (Practice Manager only)
+      {
+        element: <ProtectedRoute 
+          requiredRoles={UserRole.PRACTICE_MANAGER}
+          requiredPermissions={Permission.VIEW_PRACTICE_STATISTICS}
+        />,
+        children: [
+          { path: 'practice/dashboard', element: <Suspense fallback={<LoadingSpinner />}><PracticeManagerDashboardPage /></Suspense> },
+        ]
+      },
+      
+      // Practice Settings (Practice Manager only)
+      {
+        element: <ProtectedRoute 
+          requiredRoles={UserRole.PRACTICE_MANAGER}
+          requiredPermissions={Permission.MANAGE_PRACTICE_SETTINGS}
+        />,
+        children: [
+          { path: 'practice/settings', element: <Suspense fallback={<LoadingSpinner />}><PracticeSettingsPage /></Suspense> },
         ]
       },
       
