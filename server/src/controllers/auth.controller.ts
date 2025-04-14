@@ -1,7 +1,8 @@
 import { Request, Response } from 'express';
 import prisma from '../utils/prisma'; // Import shared Prisma instance
 import { hashPassword, comparePasswords, generateToken } from '../utils/auth.utils';
-import { UserRole } from '@prisma/client'; // Keep enum for type safety if possible, but don't use for runtime validation here
+// Import UserRole from the prisma client directly
+import { UserRole } from '../../generated/prisma';
 
 // Define valid roles explicitly for runtime validation
 // Map incoming role strings (from frontend/API) to the actual Prisma enum values
@@ -9,8 +10,10 @@ const validRoles: Record<string, UserRole> = {
   PRACTICE_MANAGER: UserRole.PRACTICE_OWNER, // Map incoming "PRACTICE_MANAGER" to the correct enum
   VETERINARIAN: UserRole.VETERINARIAN,
   TECHNICIAN: UserRole.TECHNICIAN,
-  ASSISTANT: UserRole.ASSISTANT,             // Add based on linter hint
-  RECEPTIONIST: UserRole.RECEPTIONIST,         // Add based on linter hint
+  VET_TECHNICIAN: UserRole.TECHNICIAN,      // Add mapping for VET_TECHNICIAN from frontend
+  ASSISTANT: UserRole.ASSISTANT,
+  VET_ASSISTANT: UserRole.ASSISTANT,        // Add mapping for VET_ASSISTANT from frontend  
+  RECEPTIONIST: UserRole.RECEPTIONIST,
   // PET_OWNER: UserRole.PET_OWNER // Comment out PET_OWNER if it doesn't exist in the backend enum
   // If PET_OWNER registration is needed, the backend enum must be updated first.
 };
