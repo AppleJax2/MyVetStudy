@@ -3,56 +3,19 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import { FaSave, FaArrowLeft, FaTimes, FaPlus, FaTrash } from 'react-icons/fa';
 import { toast } from 'react-hot-toast';
 
-// Enum types from backend
-enum MonitoringPlanStatus {
-  DRAFT = 'DRAFT',
-  ACTIVE = 'ACTIVE',
-  PAUSED = 'PAUSED',
-  COMPLETED = 'COMPLETED',
-  ARCHIVED = 'ARCHIVED'
-}
+// Import our types
+import { 
+  MonitoringPlanStatus, 
+  SymptomDataType, 
+  SymptomTemplate, 
+  MonitoringPlanFormData,
+  MonitoringPlanProtocol
+} from '../types/monitoring-plan';
 
-enum SymptomDataType {
-  NUMERIC = 'NUMERIC',
-  BOOLEAN = 'BOOLEAN',
-  SCALE = 'SCALE',
-  ENUMERATION = 'ENUMERATION',
-  TEXT = 'TEXT',
-  IMAGE = 'IMAGE'
-}
-
-// Interfaces
-interface MonitoringPlanFormData {
-  title: string;
-  description: string;
-  startDate: string;
-  endDate: string;
-  status: MonitoringPlanStatus;
-  isTemplate: boolean;
-  protocol: {
-    frequency: {
-      times: number;
-      period: 'DAY' | 'WEEK' | 'MONTH';
-    };
-    duration: number; // in days
-    reminderEnabled: boolean;
-    shareableLink: boolean;
-  };
-}
-
-interface SymptomTemplate {
-  id?: string;
-  name: string;
-  description: string;
-  category: string;
-  dataType: SymptomDataType;
-  units?: string;
-  minValue?: number;
-  maxValue?: number;
-  options?: Record<string, any>;
-  isNew?: boolean;
-  modified?: boolean;
-}
+// Import our custom components
+import SymptomSelector from '../components/monitoring-plan/SymptomSelector';
+import FrequencySettings from '../components/monitoring-plan/FrequencySettings';
+import ShareableLinkGenerator from '../components/monitoring-plan/ShareableLinkGenerator';
 
 interface Patient {
   id: string;
@@ -91,6 +54,7 @@ const MonitoringPlanFormPage: React.FC = () => {
   const [saving, setSaving] = useState(false);
   const [errors, setErrors] = useState<Partial<Record<keyof MonitoringPlanFormData | string, string>>>({});
   const [shareableUrl, setShareableUrl] = useState<string>('');
+  const [showSymptomSelector, setShowSymptomSelector] = useState(false);
   
   // Fetch monitoring plan data if in edit mode
   useEffect(() => {
@@ -147,8 +111,9 @@ const MonitoringPlanFormPage: React.FC = () => {
           }
           
           // Check if shareable link exists
-          if (planData.shareableLink) {
-            setShareableUrl(planData.shareableLink);
+          if (planData.shareToken) {
+            const shareableLink = `${window.location.origin}/shared/monitoring-plan/${planData.shareToken}`;
+            setShareableUrl(shareableLink);
           }
           
         } catch (err) {
@@ -229,23 +194,30 @@ const MonitoringPlanFormPage: React.FC = () => {
   };
   
   // Handle adding a new symptom template
-  const addSymptomTemplate = () => {
-    const newSymptom: SymptomTemplate = {
-      name: '',
-      description: '',
-      category: '',
-      dataType: SymptomDataType.SCALE,
-      isNew: true
-    };
-    
-    setSymptoms(prev => [...prev, newSymptom]);
+  const addSymptomTemplate = (symptom?: SymptomTemplate) => {
+    if (symptom) {
+      // Add a predefined symptom from the selector
+      setSymptoms(prev => [...prev, symptom]);
+      setShowSymptomSelector(false);
+    } else {
+      // Add an empty symptom
+      const newSymptom: SymptomTemplate = {
+        name: '',
+        description: '',
+        category: '',
+        dataType: SymptomDataType.SCALE,
+        isNew: true
+      };
+      
+      setSymptoms(prev => [...prev, newSymptom]);
+    }
   };
   
   // Handle updating symptom template fields
   const handleSymptomChange = (index: number, field: keyof SymptomTemplate, value: any) => {
     setSymptoms(prev => {
       const updated = [...prev];
-      updated[index] = { ...updated[index], [field]: value };
+      updated[index] = { ...updated[index], [field]: value, modified: true };
       return updated;
     });
   };
@@ -264,6 +236,30 @@ const MonitoringPlanFormPage: React.FC = () => {
         return [...prev, patientId];
       }
     });
+  };
+  
+  // Handle protocol updates from FrequencySettings component
+  const handleProtocolChange = (updatedProtocol: MonitoringPlanProtocol) => {
+    setFormData(prev => ({
+      ...prev,
+      protocol: updatedProtocol
+    }));
+  };
+  
+  // Handle shareableLink toggle
+  const handleShareableLinkToggle = (enabled: boolean) => {
+    setFormData(prev => ({
+      ...prev,
+      protocol: {
+        ...prev.protocol,
+        shareableLink: enabled
+      }
+    }));
+    
+    // If disabling, clear the shareable URL
+    if (!enabled) {
+      setShareableUrl('');
+    }
   };
 
   // Validate form data
@@ -319,11 +315,13 @@ const MonitoringPlanFormPage: React.FC = () => {
       }
       
       const data = await response.json();
-      setShareableUrl(data.shareableLink);
-      toast.success('Shareable link generated successfully!');
+      // Construct the full URL including the frontend origin
+      const fullShareableUrl = `${window.location.origin}/shared/monitoring-plan/${data.data.shareToken}`;
+      setShareableUrl(fullShareableUrl);
     } catch (err) {
       console.error(err);
       toast.error(err instanceof Error ? err.message : 'Failed to generate shareable link');
+      throw err; // Re-throw to be caught by the component
     }
   };
 
@@ -361,7 +359,7 @@ const MonitoringPlanFormPage: React.FC = () => {
       }
       
       const planData = await planResponse.json();
-      const planId = planData.id || id;
+      const planId = planData.data.monitoringPlan.id || id;
       
       // Create/update symptoms
       for (const symptom of symptoms) {
@@ -401,7 +399,12 @@ const MonitoringPlanFormPage: React.FC = () => {
       
       // Generate shareable link if requested and not already existing
       if (formData.protocol.shareableLink && !shareableUrl) {
-        await generateShareableLink();
+        try {
+          await generateShareableLink();
+        } catch (error) {
+          console.error('Error generating shareable link during save:', error);
+          // Continue with the save process even if generating link fails
+        }
       }
       
       toast.success(`Monitoring plan ${isEditMode ? 'updated' : 'created'} successfully`);
@@ -558,110 +561,27 @@ const MonitoringPlanFormPage: React.FC = () => {
               Define how often symptoms should be monitored and for how long.
             </p>
           </div>
-          <div className="px-4 py-5 sm:p-6 space-y-4">
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <label htmlFor="protocol.frequency.times" className="block text-sm font-medium text-gray-700">
-                  Frequency
-                </label>
-                <div className="mt-1 flex rounded-md shadow-sm">
-                  <input
-                    type="number"
-                    name="protocol.frequency.times"
-                    id="protocol.frequency.times"
-                    min={1}
-                    value={formData.protocol.frequency.times}
-                    onChange={handleChange}
-                    className="block w-full rounded-none rounded-l-md border-gray-300 focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
-                  />
-                  <select
-                    name="protocol.frequency.period"
-                    value={formData.protocol.frequency.period}
-                    onChange={handleChange}
-                    className="block w-full rounded-none rounded-r-md border-gray-300 focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
-                  >
-                    <option value="DAY">per day</option>
-                    <option value="WEEK">per week</option>
-                    <option value="MONTH">per month</option>
-                  </select>
-                </div>
-              </div>
-
-              <div>
-                <label htmlFor="protocol.duration" className="block text-sm font-medium text-gray-700">
-                  Duration (days)
-                </label>
-                <input
-                  type="number"
-                  name="protocol.duration"
-                  id="protocol.duration"
-                  min={1}
-                  value={formData.protocol.duration}
-                  onChange={handleChange}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
-                />
-              </div>
-            </div>
-
-            <div className="space-y-2">
-              <div className="flex items-center">
-                <input
-                  type="checkbox"
-                  name="protocol.reminderEnabled"
-                  id="protocol.reminderEnabled"
-                  checked={formData.protocol.reminderEnabled}
-                  onChange={(e) => setFormData(prev => ({
-                    ...prev,
-                    protocol: { ...prev.protocol, reminderEnabled: e.target.checked }
-                  }))}
-                  className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-                />
-                <label htmlFor="protocol.reminderEnabled" className="ml-2 block text-sm text-gray-700">
-                  Enable reminders for symptom logging
-                </label>
-              </div>
-
-              <div className="flex items-center">
-                <input
-                  type="checkbox"
-                  name="protocol.shareableLink"
-                  id="protocol.shareableLink"
-                  checked={formData.protocol.shareableLink}
-                  onChange={(e) => setFormData(prev => ({
-                    ...prev,
-                    protocol: { ...prev.protocol, shareableLink: e.target.checked }
-                  }))}
-                  className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-                />
-                <label htmlFor="protocol.shareableLink" className="ml-2 block text-sm text-gray-700">
-                  Create shareable link for this monitoring plan
-                </label>
-              </div>
-              
-              {shareableUrl && (
-                <div className="mt-2 p-2 bg-gray-50 rounded">
-                  <p className="text-sm text-gray-600">Shareable Link:</p>
-                  <div className="flex mt-1">
-                    <input
-                      type="text"
-                      readOnly
-                      value={shareableUrl}
-                      className="block w-full rounded-l-md border-gray-300 text-sm bg-white"
-                    />
-                    <button
-                      type="button"
-                      onClick={() => {
-                        navigator.clipboard.writeText(shareableUrl);
-                        toast.success('Link copied to clipboard!');
-                      }}
-                      className="inline-flex items-center px-3 py-2 border border-l-0 border-gray-300 rounded-r-md bg-gray-50 text-sm font-medium text-gray-700 hover:bg-gray-100"
-                    >
-                      Copy
-                    </button>
-                  </div>
-                </div>
-              )}
-            </div>
+          <div className="px-4 py-5 sm:p-6">
+            <FrequencySettings protocol={formData.protocol} onChange={handleProtocolChange} />
+          </div>
+        </div>
+        
+        {/* Shareable Link Section */}
+        <div className="bg-white shadow overflow-hidden rounded-lg">
+          <div className="px-4 py-5 border-b border-gray-200 sm:px-6">
+            <h3 className="text-lg font-medium leading-6 text-gray-900">Sharing</h3>
+            <p className="mt-1 text-sm text-gray-500">
+              Create a shareable link for this monitoring plan.
+            </p>
+          </div>
+          <div className="px-4 py-5 sm:p-6">
+            <ShareableLinkGenerator
+              monitoringPlanId={id}
+              shareableUrl={shareableUrl}
+              isEnabled={formData.protocol.shareableLink}
+              onToggleEnabled={handleShareableLinkToggle}
+              onGenerateLink={generateShareableLink}
+            />
           </div>
         </div>
 
@@ -676,13 +596,19 @@ const MonitoringPlanFormPage: React.FC = () => {
             </div>
             <button
               type="button"
-              onClick={addSymptomTemplate}
+              onClick={() => setShowSymptomSelector(!showSymptomSelector)}
               className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700"
             >
               <FaPlus className="mr-1" /> Add Symptom
             </button>
           </div>
           <div className="px-4 py-5 sm:p-6 space-y-4">
+            {/* Symptom Selector */}
+            {showSymptomSelector && (
+              <SymptomSelector onAdd={addSymptomTemplate} />
+            )}
+            
+            {/* Symptom List */}
             {symptoms.length === 0 ? (
               <div className="text-center py-4">
                 <p className="text-gray-500">No symptoms added yet. Click "Add Symptom" to get started.</p>
