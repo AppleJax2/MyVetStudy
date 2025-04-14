@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
-import prisma from '../utils/prisma.client';
+import prisma from '../utils/prisma';
 import AppError from '../utils/appError';
-import { User } from '../generated/prisma'; // Import User type
+import { User } from '../../generated/prisma'; // Correct path for types
 
 // Define an interface extending Express Request to include the user property
 export interface AuthenticatedRequest<P = {}, Q = {}, B = {}> extends Request<P, {}, B, Q> {
