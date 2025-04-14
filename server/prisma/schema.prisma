@@ -231,6 +231,7 @@ enum SymptomDataType {
   ENUMERATION
   TEXT
   IMAGE
+  HEALTH_NOTE
 }
 
 model Observation {

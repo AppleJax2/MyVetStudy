@@ -7,6 +7,7 @@ import observationRoutes from './observation.routes';
 import notificationRoutes from './notification.routes';
 import { practiceSubscriptionRouter as subscriptionRoutes } from './subscription.routes';
 import teamRoutes from './team.routes';
+import healthRoutes from './health.routes';
 
 // Legacy routes (redirected or maintained for backward compatibility)
 import studyRoutes from './study.routes';
@@ -28,6 +29,9 @@ router.use('/symptoms', symptomRoutes);
 
 // Observation routes
 router.use('/observations', observationRoutes);
+
+// Health Note routes (specific subset of observations)
+router.use('/patients/:patientId/plan-enrollments/:monitoringPlanPatientId/health-notes', healthRoutes);
 
 // Notification routes
 router.use('/notifications', notificationRoutes);

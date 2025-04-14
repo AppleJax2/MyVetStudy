@@ -7,6 +7,10 @@ import {
     ObservationParamsInput
 } from '../schemas/observation.schema';
 import AppError from '../utils/appError';
+import { PrismaClient, SymptomDataType, Observation } from '../../generated/prisma';
+import { findHealthNoteTemplate } from '../services/health-template.service';
+
+const prisma = new PrismaClient();
 
 // TODO: Add detailed logging
 
@@ -106,4 +110,176 @@ export const deleteObservation = async (
 };
 
 // Note: GetObservationById is less common, usually handled via getObservations with filters.
-// UpdateObservation might be needed depending on requirements. 
+// UpdateObservation might be needed depending on requirements.
+
+// --- Health Note Specific Functions ---
+
+// Define input types (Ideally replace with Zod schemas later)
+interface CreateHealthNoteParams {
+    patientId: string;
+    monitoringPlanPatientId: string;
+}
+interface CreateHealthNoteBody {
+    notes: string;
+}
+interface ListHealthNotesParams {
+    patientId: string;
+    monitoringPlanPatientId: string;
+}
+
+// Create a new health note observation
+export const createHealthNoteObservation = async (
+    req: AuthenticatedRequest<CreateHealthNoteParams, {}, CreateHealthNoteBody>,
+    res: Response,
+    next: NextFunction
+): Promise<void> => {
+    const { patientId, monitoringPlanPatientId } = req.params;
+    const { notes } = req.body;
+    const userId = req.user?.id;
+    const userPracticeId = req.user?.practiceId;
+
+    // Basic validation
+    if (!userId || !userPracticeId) {
+        return next(new AppError('Authentication required.', 401));
+    }
+    // Note: Param validation (patientId, monitoringPlanPatientId) should happen in routes/middleware ideally
+    if (!notes || typeof notes !== 'string' || notes.trim() === '') {
+        return next(new AppError('Notes content is required.', 400));
+    }
+
+    try {
+        // 1. Verify MonitoringPlanPatient record exists and belongs to the user's practice
+        const planPatientRecord = await prisma.monitoringPlanPatient.findUnique({
+            where: {
+                id: monitoringPlanPatientId,
+                patientId: patientId,
+                monitoringPlan: {
+                    practiceId: userPracticeId,
+                },
+            },
+            select: { id: true } // Only need to confirm existence
+        });
+
+        if (!planPatientRecord) {
+            return next(
+                new AppError(
+                    'Monitoring plan enrollment not found or access denied.',
+                    404
+                )
+            );
+        }
+
+        // 2. Find or create the HEALTH_NOTE template
+        const healthNoteTemplateId = await findHealthNoteTemplate(userPracticeId);
+
+        // 3. Create the observation
+        const newObservation: Observation = await prisma.observation.create({
+            data: {
+                symptomTemplateId: healthNoteTemplateId,
+                patientId: patientId,
+                monitoringPlanPatientId: monitoringPlanPatientId,
+                recordedById: userId,
+                recordedAt: new Date(),
+                notes: notes.trim(),
+                value: {}, // No specific value for HEALTH_NOTE type
+            },
+            include: {
+                recordedBy: { // Include user info for display
+                    select: {
+                        id: true,
+                        firstName: true,
+                        lastName: true,
+                    }
+                },
+            }
+        });
+
+        res.status(201).json({
+            status: 'success',
+            message: 'Health note recorded successfully',
+            data: newObservation,
+        });
+
+    } catch (error) {
+        // Let the global error handler manage AppErrors and log others
+        next(error);
+    }
+};
+
+// Get all health note observations for a specific monitoring plan enrollment
+export const getHealthNoteObservationsForPlanPatient = async (
+    req: AuthenticatedRequest<ListHealthNotesParams>, // Only params needed
+    res: Response,
+    next: NextFunction
+): Promise<void> => {
+    const { patientId, monitoringPlanPatientId } = req.params;
+    const userPracticeId = req.user?.practiceId;
+
+    if (!userPracticeId) {
+        return next(new AppError('Authentication required.', 401));
+    }
+    // Note: Param validation should happen in routes/middleware ideally
+
+    try {
+        // 1. Verify MonitoringPlanPatient record exists and belongs to the user's practice
+        // This check is important for security and data integrity.
+        const planPatientRecord = await prisma.monitoringPlanPatient.count({
+             where: {
+                id: monitoringPlanPatientId,
+                patientId: patientId,
+                monitoringPlan: {
+                    practiceId: userPracticeId,
+                },
+            },
+        });
+
+         if (planPatientRecord === 0) {
+            return next(
+                new AppError(
+                    'Monitoring plan enrollment not found or access denied.',
+                    404
+                )
+            );
+        }
+
+        // 2. Find the HEALTH_NOTE template ID
+        const healthNoteTemplateId = await findHealthNoteTemplate(userPracticeId);
+
+        // 3. Find observations
+        const observations = await prisma.observation.findMany({
+            where: {
+                // Ensure we only get records for the correct patient and plan enrollment
+                patientId: patientId,
+                monitoringPlanPatientId: monitoringPlanPatientId,
+                symptomTemplateId: healthNoteTemplateId, // Filter by the specific template
+            },
+            orderBy: {
+                recordedAt: 'desc', // Show newest first
+            },
+             include: {
+                recordedBy: {
+                    select: {
+                        id: true,
+                        firstName: true,
+                        lastName: true,
+                    }
+                },
+            }
+        });
+
+        res.status(200).json({
+            status: 'success',
+            message: 'Health notes retrieved successfully',
+            results: observations.length,
+            data: observations,
+            // Add pagination later if needed
+        });
+
+    } catch (error) {
+        next(error);
+    }
+};
+
+// --- Potential Future Enhancements ---
+// export const updateHealthNoteObservation = async (...) => { ... };
+// export const deleteHealthNoteObservation = async (...) => { ... }; 
