@@ -1,7 +1,19 @@
 import { Request, Response } from 'express';
 import prisma from '../utils/prisma'; // Import shared Prisma instance
 import { hashPassword, comparePasswords, generateToken } from '../utils/auth.utils';
-import { UserRole } from '@prisma/client'; // Correct import path for Prisma Client enums
+import { UserRole } from '@prisma/client'; // Keep enum for type safety if possible, but don't use for runtime validation here
+
+// Define valid roles explicitly for runtime validation
+// Map incoming role strings (from frontend/API) to the actual Prisma enum values
+const validRoles: Record<string, UserRole> = {
+  PRACTICE_MANAGER: UserRole.PRACTICE_OWNER, // Map incoming "PRACTICE_MANAGER" to the correct enum
+  VETERINARIAN: UserRole.VETERINARIAN,
+  TECHNICIAN: UserRole.TECHNICIAN,
+  ASSISTANT: UserRole.ASSISTANT,             // Add based on linter hint
+  RECEPTIONIST: UserRole.RECEPTIONIST,         // Add based on linter hint
+  // PET_OWNER: UserRole.PET_OWNER // Comment out PET_OWNER if it doesn't exist in the backend enum
+  // If PET_OWNER registration is needed, the backend enum must be updated first.
+};
 
 export const register = async (req: Request, res: Response): Promise<Response> => {
   try {
@@ -21,10 +33,14 @@ export const register = async (req: Request, res: Response): Promise<Response> =
       return res.status(400).json({ message: 'All fields are required' });
     }
 
-    // Validate the role string against the UserRole enum
-    const role = UserRole[roleString as keyof typeof UserRole];
+    // Validate the role string against the explicit list
+    const role: UserRole | undefined = validRoles[roleString];
     if (!role) {
-      return res.status(400).json({ message: `Invalid role provided: ${roleString}` });
+      // Add more specific error message if PET_OWNER is attempted but not supported
+      if (roleString === 'PET_OWNER') {
+          return res.status(400).json({ message: `Role 'PET_OWNER' is not currently supported for registration.` });
+      }
+      return res.status(400).json({ message: `Invalid or unsupported role provided: ${roleString}` });
     }
 
     // Check if user already exists
@@ -39,14 +55,14 @@ export const register = async (req: Request, res: Response): Promise<Response> =
     // Hash password
     const hashedPassword = await hashPassword(password);
 
-    // Create new user with the correct enum type for role
+    // Create new user with the validated enum value
     const newUser = await prisma.user.create({
       data: {
         email,
         password: hashedPassword,
         firstName,
         lastName,
-        role, // Use the validated enum value
+        role, // Use the validated role from our explicit list
         ...(practiceId && { practiceId })
       }
     });
