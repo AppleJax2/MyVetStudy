@@ -1,8 +1,11 @@
-import { PrismaClient } from '@prisma/client';
+// Import PrismaClient from the generated directory
+import { PrismaClient } from '../generated/prisma';
 
-// Initialize Prisma Client
-const prisma = new PrismaClient({
-  log: process.env.NODE_ENV === 'development' ? ['query', 'error', 'warn'] : ['error'],
-});
+// Create a new Prisma client instance
+const prisma = new PrismaClient();
 
-export default prisma; 
+// Export the Prisma client as the default export
+export default prisma;
+
+// Also export PrismaClient and all Prisma enums for use in other files
+export * from '../generated/prisma'; 

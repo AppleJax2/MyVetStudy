@@ -7,7 +7,7 @@
     "dev": "nodemon src/main.ts",
     "dev:nest": "nodemon src/main.ts",
     "build": "prisma generate && npx rimraf dist && TSC_COMPILE_ON_ERROR=true tsc --project tsconfig.build.json --skipLibCheck",
-    "build:bypass": "prisma generate && npx rimraf dist && TSC_COMPILE_ON_ERROR=true tsc --project tsconfig.build.json --skipLibCheck --noEmitOnError false",
+    "build:bypass": "prisma generate && npx rimraf dist && tsc --project tsconfig.build.json --skipLibCheck --noEmitOnError",
     "start": "node dist/main.js",
     "db:migrate:dev": "prisma migrate dev",
     "db:migrate:deploy": "prisma migrate deploy",
