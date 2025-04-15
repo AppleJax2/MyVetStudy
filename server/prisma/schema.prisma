@@ -6,8 +6,7 @@
 
 generator client {
   provider = "prisma-client-js"
-  // Generate in standard location
-  // output   = "../generated/prisma" 
+  output   = "../generated/prisma" 
   binaryTargets = ["native", "debian-openssl-3.0.x"]
 }
 
