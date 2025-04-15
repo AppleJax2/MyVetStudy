@@ -1,0 +1,64 @@
+# Web Application Implementation Workflow
+
+## PROMPT 1: Initial Application Design Input
+
+Your web application idea will be transformed into a production-ready implementation plan. Please describe your application concept in as much detail as possible, including:
+- Core functionality and purpose
+- Target users
+- Key features
+- Any design preferences or inspiration
+- Technical requirements or constraints
+
+<input field: Your web application design idea>
+
+## PROMPT 2: Phased Implementation Checklist Generator
+
+I'll analyze your web application concept and create a strategic implementation plan organized into 5 phases. This plan will systematically guide you from initial setup to a fully deployed, production-quality application.
+
+The implementation plan will include:
+- Backend development (API routes, database schema, business logic)
+- Frontend development (component structure, state management, user flows)
+- Third-party service integration
+- Complete UI/UX polish (theme consistency, responsive design, animations)
+- Deployment configuration (Render for backend, Netlify for frontend, PostgreSQL database)
+
+Each phase will be designed to produce functional increments that build upon each other, prioritizing a Minimum Viable Product (MVP) early in the process.
+
+## PROMPT 3: Implementation Task Selector
+
+Please paste your phased implementation checklist below. I'll help you identify which specific tasks to tackle next, ensuring we make systematic progress through your implementation plan.
+
+<input field: Paste your phased implementation checklist>
+
+Based on your implementation plan, I'll target the following tasks:
+1. Analyze which phase to work on next (never more than one complete phase at a time)
+2. Select specific tasks that make logical sense to implement together
+3. Provide a clear summary of what we'll accomplish in this work session
+4. Ensure we're building toward a deployable state at each step
+
+## PROMPT 4: Implementation Progress Tracker
+
+Now that we've completed some implementation work, let's document our progress. Please paste your current implementation checklist below, and I'll update it to reflect completed tasks and identify what remains to be done.
+
+<input field: Paste your current implementation checklist>
+
+I'll provide a comprehensive "shift change" report that includes:
+- Tasks completed (with brief description of implementation details)
+- Tasks partially completed (with notes on remaining work)
+- Tasks not yet started
+- Any challenges encountered and proposed solutions
+- Recommendations for the next work session
+
+## PROMPT 5: Implementation Continuation
+
+Based on the previous shift change report, I'll pick up where we left off and continue implementing your web application. Please paste the completed shift change form below.
+
+<input field: Paste the completed shift change form>
+
+I'll analyze:
+- Current state of implementation
+- Which tasks were previously completed
+- What needs to be implemented next
+- How to maintain progress toward a fully deployed PWA on Render (backend) and Netlify (frontend)
+
+My goal is to move your project systematically through all implementation phases until you have a complete, production-quality Progressive Web Application deployed and ready for users. 

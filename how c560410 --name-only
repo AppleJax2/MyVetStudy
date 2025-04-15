@@ -1,0 +1,3 @@
+[33mc560410[m[33m ([m[1;31morigin/main[m[33m)[m refactor: Convert services to NestJS, create DTOs, implement observation controller with NestJS decorators
+[33m9d81b4e[m refactor: Convert ObservationService to NestJS service class with dependency injection
+[33m78840f1[m refactor: Integrate standalone functions into MonitoringPlanService
