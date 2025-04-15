@@ -9,6 +9,7 @@
     "dev:server": "cd server && npm run dev:nest",
     "build:client": "cd client && npm run build",
     "build:server": "cd server && npm run build",
+    "build": "npm run build:client && cd server && npm install && npm run build",
     "deploy:client": "cd client && npm run build && netlify deploy --prod --dir=dist",
     "deploy:server": "echo 'Server deployment is managed through Render.com dashboard'",
     "prisma:studio": "cd server && npm run db:studio",
