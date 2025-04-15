@@ -1,28 +1,16 @@
-import { Request, Response, NextFunction } from 'express';
+import { Response } from 'express';
+import type { NextFunction } from 'express';
 import { UserRole } from '@prisma/client';
 import AppError from '../utils/appError';
 import { Permission } from '../utils/rolePermissions';
-
-// Type declarations to safely access user data from request
-declare global {
-  namespace Express {
-    interface Request {
-      user?: {
-        userId: string;
-        practiceId: string;
-        role: UserRole;
-        permissions?: string[];
-      };
-    }
-  }
-}
+import { AuthenticatedRequest } from './auth.middleware';
 
 /**
  * Middleware to restrict access based on user roles
  * @param roles - Allowed roles (one or more roles)
  */
 export const restrictToRoles = (roles: UserRole | UserRole[]) => {
-  return (req: Request, res: Response, next: NextFunction) => {
+  return (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
     try {
       // Check if user exists and has a role
       if (!req.user || !req.user.role) {
@@ -40,6 +28,7 @@ export const restrictToRoles = (roles: UserRole | UserRole[]) => {
       // User has an allowed role
       next();
     } catch (error) {
+      // Consider more specific error handling/logging
       next(new AppError('Authentication error', 500));
     }
   };
@@ -51,7 +40,7 @@ export const restrictToRoles = (roles: UserRole | UserRole[]) => {
  * @param requireAll - Whether all permissions are required (default: false)
  */
 export const restrictTo = (requiredPermissions: Permission | Permission[], requireAll = false) => {
-  return (req: Request, res: Response, next: NextFunction) => {
+  return (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
     try {
       // Check if user exists
       if (!req.user) {
@@ -64,19 +53,21 @@ export const restrictTo = (requiredPermissions: Permission | Permission[], requi
       }
 
       // Convert single permission to array for consistent handling
-      const permissions = Array.isArray(requiredPermissions) 
+      const permissionsToCheck = Array.isArray(requiredPermissions) 
         ? requiredPermissions 
         : [requiredPermissions];
 
-      // If user doesn't have permissions array attached (should be attached during authentication)
+      // Check if user doesn't have permissions array attached (should be attached during authentication)
       if (!req.user.permissions || !Array.isArray(req.user.permissions)) {
+        // Log this - indicates an issue in the auth middleware likely
+        console.error('Permissions array missing on req.user for user:', req.user.userId);
         return next(new AppError('Forbidden - Permissions not available', 403));
       }
 
       // Check permissions
       const hasPermission = requireAll
-        ? permissions.every(permission => req.user!.permissions!.includes(permission))
-        : permissions.some(permission => req.user!.permissions!.includes(permission));
+        ? permissionsToCheck.every(permission => req.user!.permissions!.includes(permission))
+        : permissionsToCheck.some(permission => req.user!.permissions!.includes(permission));
 
       if (!hasPermission) {
         return next(new AppError('Forbidden - You do not have the required permissions', 403));
@@ -85,6 +76,8 @@ export const restrictTo = (requiredPermissions: Permission | Permission[], requi
       // User has required permissions
       next();
     } catch (error) {
+      // Consider more specific error handling/logging
+      console.error('Permission verification error:', error);
       next(new AppError('Permission verification error', 500));
     }
   };

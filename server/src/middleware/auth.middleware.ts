@@ -1,44 +1,35 @@
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response } from 'express';
+import type { NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 import prisma from '../utils/prisma';
 import AppError from '../utils/appError';
-import { User, UserRole } from '@prisma/client';
+import { UserRole } from '@prisma/client';
 import { getPermissionsForRole, Permission } from '../utils/rolePermissions';
 
-// Define an interface extending Express Request to include the user property
-export interface AuthenticatedRequest<P = {}, Q = {}, B = {}> extends Request<P, {}, B, Q> {
+// Define and export an interface extending Express Request to include the user property
+// Use this consistently instead of relying on potentially failing declaration merging
+export interface AuthenticatedRequest extends Request {
     user?: {
         userId: string;
         practiceId: string | null;
         role: UserRole;
         permissions: Permission[];
     }; 
+    // If you need typed params/query/body consistently, add them here too
+    // params: { id?: string; token?: string; /* ... */ };
+    // query: { /* ... */ };
+    // body: { /* ... */ };
 }
 
-declare global {
-    namespace Express {
-        interface Request {
-            user?: {
-                userId: string;
-                practiceId: string | null;
-                role: UserRole;
-                permissions: Permission[];
-            };
-        }
-    }
-}
-
+// Use the explicit AuthenticatedRequest type in function signatures
 export const authenticate = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
     try {
         let token;
-        // 1) Check if token exists in headers
-        if (
-            req.headers.authorization &&
-            req.headers.authorization.startsWith('Bearer')
-        ) {
-            token = req.headers.authorization.split(' ')[1];
+        // Use bracket notation for header access
+        const authHeader = req.headers['authorization'];
+        if (authHeader && authHeader.startsWith('Bearer ')) {
+            token = authHeader.split(' ')[1];
         }
-        // TODO: Add check for token in cookies as well for web clients if needed
 
         if (!token) {
             return next(new AppError('You are not logged in! Please log in to get access.', 401));
@@ -69,7 +60,7 @@ export const authenticate = async (req: AuthenticatedRequest, res: Response, nex
         const permissions = getPermissionsForRole(currentUser.role);
 
         // 5) Grant access to protected route
-        // Attach user data to the request object in a simplified format with permissions
+        // Attach user data to the request object (req.user is now part of Request type)
         req.user = {
             userId: currentUser.id,
             practiceId: currentUser.practiceId,
@@ -97,18 +88,16 @@ export const authenticate = async (req: AuthenticatedRequest, res: Response, nex
  * @returns Middleware function that checks if the authenticated user has one of the allowed roles
  */
 export const authorize = (...roles: UserRole[]) => {
-    return (req: Request, res: Response, next: NextFunction) => {
-        // Check if user is authenticated
-        if (!req.user) {
+    // Use the explicit AuthenticatedRequest type
+    return (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+        if (!req.user) { // req.user comes from AuthenticatedRequest
             return next(new AppError('You must be logged in to access this resource', 401));
         }
         
-        // Check if user's role is in the allowed roles
         if (!roles.includes(req.user.role)) {
             return next(new AppError('You do not have permission to perform this action', 403));
         }
         
-        // User is authorized
         next();
     };
 };
@@ -116,9 +105,11 @@ export const authorize = (...roles: UserRole[]) => {
 /**
  * Practice owner authorization middleware
  * Used for operations that can only be performed by practice owners or managers
+ * Assumes 'authenticate' middleware runs before this.
  */
-export const authorizePracticeOwner = (req: Request, res: Response, next: NextFunction) => {
-    if (!req.user) {
+// Use the explicit AuthenticatedRequest type
+export const authorizePracticeOwner = (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+    if (!req.user) { // req.user comes from AuthenticatedRequest
         return next(new AppError('You must be logged in to access this resource', 401));
     }
     
@@ -132,15 +123,17 @@ export const authorizePracticeOwner = (req: Request, res: Response, next: NextFu
 /**
  * Veterinarian or higher authorization middleware
  * Used for operations that require at least veterinarian level access
+ * Assumes 'authenticate' middleware runs before this.
  */
-export const authorizeVeterinarianOrHigher = (req: Request, res: Response, next: NextFunction) => {
-    if (!req.user) {
+// Use the explicit AuthenticatedRequest type
+export const authorizeVeterinarianOrHigher = (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+    if (!req.user) { // req.user comes from AuthenticatedRequest
         return next(new AppError('You must be logged in to access this resource', 401));
     }
     
-    const allowedRoles = [UserRole.PRACTICE_OWNER, UserRole.VETERINARIAN];
+    const allowedRoles: UserRole[] = [UserRole.PRACTICE_OWNER, UserRole.VETERINARIAN];
     
-    if (!allowedRoles.includes(req.user.role)) {
+    if (!allowedRoles.includes(req.user.role)) { 
         return next(new AppError('This action requires veterinarian or higher privileges', 403));
     }
     

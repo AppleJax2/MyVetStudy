@@ -35,8 +35,37 @@ model User {
   observations       Observation[]
   createdPatients    Patient[]        @relation("PatientCreator")
   notifications      Notification[]
+  sentInvitations    Invitation[]     @relation("InvitationSender")
+  acceptedInvitations Invitation[]    @relation("InvitationAccepter")
   resetToken         String?
   resetTokenExpiry   DateTime?
+}
+
+// Team invitation model
+model Invitation {
+  id                 String           @id @default(uuid())
+  email              String
+  firstName          String
+  lastName           String
+  role               UserRole
+  token              String           @unique
+  status             InvitationStatus @default(PENDING)
+  practiceId         String
+  practice           Practice         @relation(fields: [practiceId], references: [id])
+  invitedByUserId    String
+  invitedByUser      User             @relation("InvitationSender", fields: [invitedByUserId], references: [id])
+  acceptedByUserId   String?
+  acceptedByUser     User?            @relation("InvitationAccepter", fields: [acceptedByUserId], references: [id])
+  createdAt          DateTime         @default(now())
+  updatedAt          DateTime         @updatedAt
+  acceptedAt         DateTime?
+}
+
+enum InvitationStatus {
+  PENDING
+  ACCEPTED
+  EXPIRED
+  CANCELED
 }
 
 enum UserRole {
@@ -63,6 +92,7 @@ model Practice {
   updatedAt         DateTime         @updatedAt
   isActive          Boolean          @default(true)
   users             User[]
+  invitations       Invitation[]
   patients          Patient[]
   monitoringPlans   MonitoringPlan[]
   customBranding    Json?

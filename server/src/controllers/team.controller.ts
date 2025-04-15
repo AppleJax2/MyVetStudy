@@ -3,16 +3,34 @@ import prisma from '../utils/prisma';
 import { v4 as uuidv4 } from 'uuid';
 import { hashPassword } from '../utils/auth.utils';
 import { sendEmail } from '../utils/email.utils'; // Assuming this utility exists or will be created
+import { UserRole } from '@prisma/client'; // Import UserRole enum
+import { AuthenticatedRequest } from '../middleware/auth.middleware'; // Import the shared interface
+
+// Define expected body types for clarity and type safety
+interface InviteBody {
+  email: string;
+  firstName: string;
+  lastName: string;
+  role: UserRole; 
+}
+
+interface AcceptInvitationBody {
+  password: string;
+}
+
+interface UpdateRoleBody {
+  role: UserRole;
+}
 
 /**
  * Get all team members for the current practice
  */
-export const getTeamMembers = async (req: Request, res: Response) => {
+export const getTeamMembers = async (req: AuthenticatedRequest, res: Response) => {
   try {
     const practiceId = req.user?.practiceId;
     
     if (!practiceId) {
-      return res.status(403).json({ message: 'Not authorized to view team members' });
+      return res.status(403).json({ message: 'Not associated with a practice' });
     }
     
     // Get all users for this practice
@@ -27,6 +45,7 @@ export const getTeamMembers = async (req: Request, res: Response) => {
         lastName: true,
         email: true,
         role: true,
+        isActive: true,
         lastActive: true,
         createdAt: true,
         updatedAt: true
@@ -36,34 +55,42 @@ export const getTeamMembers = async (req: Request, res: Response) => {
       }
     });
     
-    res.status(200).json({ members });
+    res.status(200).json(members);
   } catch (error) {
     console.error('Error fetching team members:', error);
-    res.status(500).json({ message: 'Error retrieving team members' });
+    res.status(500).json({ message: 'Error fetching team members' });
   }
 };
 
 /**
  * Invite a new team member to join the practice
  */
-export const inviteTeamMember = async (req: Request, res: Response) => {
+export const inviteTeamMember = async (req: AuthenticatedRequest, res: Response) => {
   try {
-    const { email, firstName, lastName, role, message } = req.body;
+    const { email, firstName, lastName, role }: InviteBody = req.body;
     const practiceId = req.user?.practiceId;
     const inviterId = req.user?.userId;
     
-    // Validate required fields
-    if (!email || !firstName || !lastName || !role || !practiceId || !inviterId) {
-      return res.status(400).json({ message: 'All fields are required' });
+    if (!email || !firstName || !lastName || !role) {
+      return res.status(400).json({ message: 'Email, first name, last name, and role are required' });
+    }
+    if (!practiceId || !inviterId) {
+      return res.status(403).json({ message: 'User information not found, cannot invite' });
+    }
+    if (!Object.values(UserRole).includes(role)) {
+      return res.status(400).json({ message: 'Invalid role specified' });
+    }
+    if (role === UserRole.PRACTICE_OWNER) {
+      return res.status(400).json({ message: 'Cannot invite a Practice Owner' });
     }
     
     // Check if user already exists
-    const existingUser = await prisma.user.findUnique({
+    const existingUser = await prisma.user.findFirst({
       where: { email }
     });
     
     if (existingUser) {
-      return res.status(409).json({ message: 'A user with this email already exists' });
+      return res.status(409).json({ message: 'User with this email already exists in the practice' });
     }
     
     // Check if there's a pending invitation
@@ -76,7 +103,7 @@ export const inviteTeamMember = async (req: Request, res: Response) => {
     });
     
     if (existingInvitation) {
-      return res.status(409).json({ message: 'An invitation for this email already exists' });
+      return res.status(409).json({ message: 'An active invitation already exists for this email address.' });
     }
     
     // Generate invitation token
@@ -90,10 +117,9 @@ export const inviteTeamMember = async (req: Request, res: Response) => {
         lastName,
         role,
         token,
-        message,
         status: 'PENDING',
         practiceId,
-        inviterId
+        invitedByUserId: inviterId
       }
     });
     
@@ -121,7 +147,6 @@ export const inviteTeamMember = async (req: Request, res: Response) => {
       html: `
         <h1>You've been invited to join ${practiceName} on MyVetStudy!</h1>
         <p>${inviterName} has invited you to join their veterinary practice as a ${role.replace('_', ' ').toLowerCase()}.</p>
-        <p>${message || ''}</p>
         <p>Click the link below to accept this invitation and create your account:</p>
         <p><a href="${invitationLink}" style="padding: 10px 15px; background-color: #4F46E5; color: white; text-decoration: none; border-radius: 5px;">Accept Invitation</a></p>
         <p>Or copy and paste this link: ${invitationLink}</p>
@@ -140,14 +165,14 @@ export const inviteTeamMember = async (req: Request, res: Response) => {
     });
   } catch (error) {
     console.error('Error inviting team member:', error);
-    res.status(500).json({ message: 'Error sending invitation' });
+    res.status(500).json({ message: 'Error inviting team member' });
   }
 };
 
 /**
  * Get all pending invitations for the practice
  */
-export const getPendingInvitations = async (req: Request, res: Response) => {
+export const getPendingInvitations = async (req: AuthenticatedRequest, res: Response) => {
   try {
     const practiceId = req.user?.practiceId;
     
@@ -175,7 +200,7 @@ export const getPendingInvitations = async (req: Request, res: Response) => {
 /**
  * Resend an invitation
  */
-export const resendInvitation = async (req: Request, res: Response) => {
+export const resendInvitation = async (req: AuthenticatedRequest, res: Response) => {
   try {
     const { id } = req.params;
     const practiceId = req.user?.practiceId;
@@ -239,7 +264,7 @@ export const resendInvitation = async (req: Request, res: Response) => {
 /**
  * Cancel an invitation
  */
-export const cancelInvitation = async (req: Request, res: Response) => {
+export const cancelInvitation = async (req: AuthenticatedRequest, res: Response) => {
   try {
     const { id } = req.params;
     const practiceId = req.user?.practiceId;
@@ -276,38 +301,39 @@ export const cancelInvitation = async (req: Request, res: Response) => {
 /**
  * Accept an invitation (used by invited users)
  */
-export const acceptInvitation = async (req: Request, res: Response) => {
+export const acceptInvitation = async (req: AuthenticatedRequest, res: Response) => {
+  const { token } = req.params;
+  const { password }: AcceptInvitationBody = req.body;
+
+  if (!token || !password) {
+    return res.status(400).json({ message: 'Token and password are required' });
+  }
+
   try {
-    const { token, password } = req.body;
-    
-    if (!token || !password) {
-      return res.status(400).json({ message: 'Token and password are required' });
-    }
-    
     // Find invitation by token
-    const invitation = await prisma.invitation.findFirst({
+    const invitation = await prisma.invitation.findUnique({
       where: {
         token,
         status: 'PENDING'
       }
     });
-    
+
     if (!invitation) {
-      return res.status(404).json({ message: 'Invalid or expired invitation' });
+      return res.status(404).json({ message: 'Invalid invitation token' });
     }
-    
+
     // Check if token is expired (7 days)
     const now = new Date();
-    const expirationDate = new Date(invitation.updatedAt);
+    const expirationDate = new Date(invitation.createdAt);
     expirationDate.setDate(expirationDate.getDate() + 7);
-    
+
     if (now > expirationDate) {
       return res.status(410).json({ message: 'Invitation has expired' });
     }
-    
+
     // Hash password
     const hashedPassword = await hashPassword(password);
-    
+
     // Create user
     const newUser = await prisma.user.create({
       data: {
@@ -320,18 +346,18 @@ export const acceptInvitation = async (req: Request, res: Response) => {
         isActive: true
       }
     });
-    
+
     // Mark invitation as accepted
     await prisma.invitation.update({
       where: { id: invitation.id },
-      data: { 
+      data: {
         status: 'ACCEPTED',
         acceptedAt: now,
         acceptedByUserId: newUser.id
       }
     });
-    
-    res.status(201).json({ 
+
+    res.status(201).json({
       message: 'Invitation accepted successfully',
       email: newUser.email
     });
@@ -344,14 +370,19 @@ export const acceptInvitation = async (req: Request, res: Response) => {
 /**
  * Update a team member's role
  */
-export const updateTeamMemberRole = async (req: Request, res: Response) => {
+export const updateTeamMemberRole = async (req: AuthenticatedRequest, res: Response) => {
   try {
     const { id } = req.params;
-    const { role } = req.body;
+    const { role }: UpdateRoleBody = req.body;
     const practiceId = req.user?.practiceId;
-    const userId = req.user?.userId;
+    const currentUserId = req.user?.userId;
     
+    if (!id || !role) {
+      return res.status(400).json({ message: 'User ID and Role are required.' });
+    }
+
     if (!practiceId) {
+      console.error('UpdateTeamMemberRole Error: practiceId missing from req.user');
       return res.status(403).json({ message: 'Not authorized to update team members' });
     }
     
@@ -368,13 +399,18 @@ export const updateTeamMemberRole = async (req: Request, res: Response) => {
     }
     
     // Cannot update own role
-    if (id === userId) {
+    if (id === currentUserId) {
       return res.status(403).json({ message: 'Cannot update your own role' });
     }
     
     // Cannot update practice manager role
-    if (user.role === 'PRACTICE_MANAGER') {
+    if (user.role === UserRole.PRACTICE_MANAGER) {
       return res.status(403).json({ message: 'Cannot update practice manager role' });
+    }
+    
+    // Cannot update practice owner role
+    if (user.role === UserRole.PRACTICE_OWNER) {
+      return res.status(403).json({ message: 'Cannot update practice owner role' });
     }
     
     // Update user role
@@ -393,13 +429,18 @@ export const updateTeamMemberRole = async (req: Request, res: Response) => {
 /**
  * Remove a team member
  */
-export const removeTeamMember = async (req: Request, res: Response) => {
+export const removeTeamMember = async (req: AuthenticatedRequest, res: Response) => {
   try {
     const { id } = req.params;
     const practiceId = req.user?.practiceId;
-    const userId = req.user?.userId;
+    const currentUserId = req.user?.userId;
     
+    if (!id) {
+      return res.status(400).json({ message: 'User ID is required.' });
+    }
+
     if (!practiceId) {
+      console.error('RemoveTeamMember Error: practiceId missing from req.user');
       return res.status(403).json({ message: 'Not authorized to remove team members' });
     }
     
@@ -416,19 +457,24 @@ export const removeTeamMember = async (req: Request, res: Response) => {
     }
     
     // Cannot remove self
-    if (id === userId) {
+    if (id === currentUserId) {
       return res.status(403).json({ message: 'Cannot remove yourself' });
     }
     
     // Cannot remove practice manager
-    if (user.role === 'PRACTICE_MANAGER') {
+    if (user.role === UserRole.PRACTICE_MANAGER) {
       return res.status(403).json({ message: 'Cannot remove practice manager' });
+    }
+    
+    // Cannot remove practice owner
+    if (user.role === UserRole.PRACTICE_OWNER) {
+      return res.status(403).json({ message: 'Cannot remove practice owner' });
     }
     
     // Soft delete the user (mark as inactive)
     await prisma.user.update({
       where: { id },
-      data: { 
+      data: {
         isActive: false
       }
     });
