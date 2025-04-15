@@ -199,4 +199,35 @@ export class ObservationController {
       throw new InternalServerErrorException('Failed to retrieve health notes');
     }
   }
-} 
+}
+
+// Add aliases for the route handler functions
+export const createObservation = (req, res, next) => {
+  const controller = new ObservationController(
+    req.app.get('observationService'),
+    req.app.get('symptomService'),
+    req.app.get('healthTemplateService'),
+    req.app.get('prisma')
+  );
+  return controller.createObservation(req.params, req.body, { user: req.user });
+};
+
+export const getObservations = (req, res, next) => {
+  const controller = new ObservationController(
+    req.app.get('observationService'),
+    req.app.get('symptomService'),
+    req.app.get('healthTemplateService'),
+    req.app.get('prisma')
+  );
+  return controller.getObservations(req.params, req.query, { user: req.user });
+};
+
+export const deleteObservation = (req, res, next) => {
+  const controller = new ObservationController(
+    req.app.get('observationService'),
+    req.app.get('symptomService'),
+    req.app.get('healthTemplateService'),
+    req.app.get('prisma')
+  );
+  return controller.deleteObservation(req.params, { user: req.user });
+}; 

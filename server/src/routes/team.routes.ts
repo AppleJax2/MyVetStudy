@@ -1,17 +1,19 @@
 import express from 'express';
-import { authMiddleware } from '../middleware/auth.middleware';
-import { 
-  getTeamMembers, 
-  inviteTeamMember, 
-  getPendingInvitations, 
-  resendInvitation, 
-  cancelInvitation, 
-  acceptInvitation, 
-  updateTeamMemberRole, 
-  removeTeamMember 
+import {
+    getTeamMembers,
+    sendInvitation,
+    cancelInvitation,
+    getInvitations,
+    getInvitationByToken,
+    acceptInvitation,
+    updateTeamMemberRole,
+    removeTeamMember,
 } from '../controllers/team.controller';
+import { authenticate, authorize } from '../middleware/auth.middleware';
+import { UserRole } from '@prisma/client';
+import { validate } from '../middleware/validate.middleware';
+import { sendInvitationSchema, cancelInvitationSchema, acceptInvitationSchema, updateTeamMemberSchema, removeTeamMemberSchema } from '../schemas/team.schema';
 import { roleMiddleware } from '../middleware/role.middleware';
-import { UserRole } from '../types/auth';
 
 const router = express.Router();
 

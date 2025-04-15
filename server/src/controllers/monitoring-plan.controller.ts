@@ -587,4 +587,48 @@ export const deleteSymptomTemplate = async (req: AuthenticatedRequest<DeleteSymp
     } catch (error) {
         next(error);
     }
+};
+
+// Add missing exported functions
+export const getPatientsByMonitoringPlanId = async (req: AuthenticatedRequest<{ id: string }>, res: Response, next: NextFunction) => {
+    try {
+        const monitoringPlanId = req.params.id;
+        
+        if (!req.user?.practiceId) {
+            return next(new AppError('Practice ID missing from authenticated user', 401));
+        }
+
+        const patients = await monitoringPlanService.getPatientsByMonitoringPlanId(monitoringPlanId, req.user.practiceId);
+
+        res.status(200).json({
+            status: 'success',
+            message: 'Patients retrieved successfully',
+            data: {
+                patients,
+            },
+        });
+    } catch (error) {
+        next(error);
+    }
+};
+
+export const updateMonitoringPlanPatients = async (req: AuthenticatedRequest<{ id: string }, {}, any>, res: Response, next: NextFunction) => {
+    try {
+        const monitoringPlanId = req.params.id;
+        const { patientIds } = req.body;
+        
+        if (!req.user?.practiceId) {
+            return next(new AppError('Practice ID missing from authenticated user', 401));
+        }
+
+        const result = await monitoringPlanService.updateMonitoringPlanPatients(monitoringPlanId, patientIds, req.user.practiceId);
+
+        res.status(200).json({
+            status: 'success',
+            message: 'Monitoring plan patients updated successfully',
+            data: result,
+        });
+    } catch (error) {
+        next(error);
+    }
 }; 

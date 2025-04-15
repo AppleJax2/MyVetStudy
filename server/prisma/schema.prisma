@@ -6,8 +6,8 @@
 
 generator client {
   provider = "prisma-client-js"
-  // Use standard node_modules location for generated client
-  output   = "../generated/prisma"
+  // Generate in standard location
+  // output   = "../generated/prisma" 
   binaryTargets = ["native", "debian-openssl-3.0.x"]
 }
 
