@@ -132,6 +132,22 @@ exports.Prisma.UserScalarFieldEnum = {
   resetTokenExpiry: 'resetTokenExpiry'
 };
 
+exports.Prisma.InvitationScalarFieldEnum = {
+  id: 'id',
+  email: 'email',
+  firstName: 'firstName',
+  lastName: 'lastName',
+  role: 'role',
+  token: 'token',
+  status: 'status',
+  practiceId: 'practiceId',
+  invitedByUserId: 'invitedByUserId',
+  acceptedByUserId: 'acceptedByUserId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  acceptedAt: 'acceptedAt'
+};
+
 exports.Prisma.PracticeScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -351,6 +367,13 @@ exports.UserRole = exports.$Enums.UserRole = {
   RECEPTIONIST: 'RECEPTIONIST'
 };
 
+exports.InvitationStatus = exports.$Enums.InvitationStatus = {
+  PENDING: 'PENDING',
+  ACCEPTED: 'ACCEPTED',
+  EXPIRED: 'EXPIRED',
+  CANCELED: 'CANCELED'
+};
+
 exports.SubscriptionTier = exports.$Enums.SubscriptionTier = {
   BASIC: 'BASIC',
   STANDARD: 'STANDARD',
@@ -404,6 +427,7 @@ exports.AlertSeverity = exports.$Enums.AlertSeverity = {
 
 exports.Prisma.ModelName = {
   User: 'User',
+  Invitation: 'Invitation',
   Practice: 'Practice',
   SubscriptionHistory: 'SubscriptionHistory',
   Patient: 'Patient',

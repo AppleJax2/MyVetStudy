@@ -19,6 +19,11 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
  */
 export type User = $Result.DefaultSelection<Prisma.$UserPayload>
 /**
+ * Model Invitation
+ * 
+ */
+export type Invitation = $Result.DefaultSelection<Prisma.$InvitationPayload>
+/**
  * Model Practice
  * 
  */
@@ -98,7 +103,17 @@ export type File = $Result.DefaultSelection<Prisma.$FilePayload>
  * Enums
  */
 export namespace $Enums {
-  export const UserRole: {
+  export const InvitationStatus: {
+  PENDING: 'PENDING',
+  ACCEPTED: 'ACCEPTED',
+  EXPIRED: 'EXPIRED',
+  CANCELED: 'CANCELED'
+};
+
+export type InvitationStatus = (typeof InvitationStatus)[keyof typeof InvitationStatus]
+
+
+export const UserRole: {
   PRACTICE_OWNER: 'PRACTICE_OWNER',
   VETERINARIAN: 'VETERINARIAN',
   TECHNICIAN: 'TECHNICIAN',
@@ -181,6 +196,10 @@ export const AlertSeverity: {
 export type AlertSeverity = (typeof AlertSeverity)[keyof typeof AlertSeverity]
 
 }
+
+export type InvitationStatus = $Enums.InvitationStatus
+
+export const InvitationStatus: typeof $Enums.InvitationStatus
 
 export type UserRole = $Enums.UserRole
 
@@ -348,6 +367,16 @@ export class PrismaClient<
     * ```
     */
   get user(): Prisma.UserDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.invitation`: Exposes CRUD operations for the **Invitation** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Invitations
+    * const invitations = await prisma.invitation.findMany()
+    * ```
+    */
+  get invitation(): Prisma.InvitationDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.practice`: Exposes CRUD operations for the **Practice** model.
@@ -939,6 +968,7 @@ export namespace Prisma {
 
   export const ModelName: {
     User: 'User',
+    Invitation: 'Invitation',
     Practice: 'Practice',
     SubscriptionHistory: 'SubscriptionHistory',
     Patient: 'Patient',
@@ -972,7 +1002,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "practice" | "subscriptionHistory" | "patient" | "monitoringPlan" | "monitoringPlanPatient" | "monitoringPlanAssignment" | "monitoringPlanNote" | "symptomTemplate" | "observation" | "treatmentTemplate" | "treatment" | "alertThreshold" | "alert" | "notification" | "file"
+      modelProps: "user" | "invitation" | "practice" | "subscriptionHistory" | "patient" | "monitoringPlan" | "monitoringPlanPatient" | "monitoringPlanAssignment" | "monitoringPlanNote" | "symptomTemplate" | "observation" | "treatmentTemplate" | "treatment" | "alertThreshold" | "alert" | "notification" | "file"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1047,6 +1077,80 @@ export namespace Prisma {
           count: {
             args: Prisma.UserCountArgs<ExtArgs>
             result: $Utils.Optional<UserCountAggregateOutputType> | number
+          }
+        }
+      }
+      Invitation: {
+        payload: Prisma.$InvitationPayload<ExtArgs>
+        fields: Prisma.InvitationFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.InvitationFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvitationPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.InvitationFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvitationPayload>
+          }
+          findFirst: {
+            args: Prisma.InvitationFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvitationPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.InvitationFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvitationPayload>
+          }
+          findMany: {
+            args: Prisma.InvitationFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvitationPayload>[]
+          }
+          create: {
+            args: Prisma.InvitationCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvitationPayload>
+          }
+          createMany: {
+            args: Prisma.InvitationCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.InvitationCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvitationPayload>[]
+          }
+          delete: {
+            args: Prisma.InvitationDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvitationPayload>
+          }
+          update: {
+            args: Prisma.InvitationUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvitationPayload>
+          }
+          deleteMany: {
+            args: Prisma.InvitationDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.InvitationUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.InvitationUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvitationPayload>[]
+          }
+          upsert: {
+            args: Prisma.InvitationUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvitationPayload>
+          }
+          aggregate: {
+            args: Prisma.InvitationAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateInvitation>
+          }
+          groupBy: {
+            args: Prisma.InvitationGroupByArgs<ExtArgs>
+            result: $Utils.Optional<InvitationGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.InvitationCountArgs<ExtArgs>
+            result: $Utils.Optional<InvitationCountAggregateOutputType> | number
           }
         }
       }
@@ -2245,6 +2349,7 @@ export namespace Prisma {
   }
   export type GlobalOmitConfig = {
     user?: UserOmit
+    invitation?: InvitationOmit
     practice?: PracticeOmit
     subscriptionHistory?: SubscriptionHistoryOmit
     patient?: PatientOmit
@@ -2360,6 +2465,8 @@ export namespace Prisma {
     observations: number
     createdPatients: number
     notifications: number
+    sentInvitations: number
+    acceptedInvitations: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2369,6 +2476,8 @@ export namespace Prisma {
     observations?: boolean | UserCountOutputTypeCountObservationsArgs
     createdPatients?: boolean | UserCountOutputTypeCountCreatedPatientsArgs
     notifications?: boolean | UserCountOutputTypeCountNotificationsArgs
+    sentInvitations?: boolean | UserCountOutputTypeCountSentInvitationsArgs
+    acceptedInvitations?: boolean | UserCountOutputTypeCountAcceptedInvitationsArgs
   }
 
   // Custom InputTypes
@@ -2424,6 +2533,20 @@ export namespace Prisma {
     where?: NotificationWhereInput
   }
 
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountSentInvitationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: InvitationWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountAcceptedInvitationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: InvitationWhereInput
+  }
+
 
   /**
    * Count Type PracticeCountOutputType
@@ -2431,6 +2554,7 @@ export namespace Prisma {
 
   export type PracticeCountOutputType = {
     users: number
+    invitations: number
     patients: number
     monitoringPlans: number
     subscriptionHistory: number
@@ -2438,6 +2562,7 @@ export namespace Prisma {
 
   export type PracticeCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     users?: boolean | PracticeCountOutputTypeCountUsersArgs
+    invitations?: boolean | PracticeCountOutputTypeCountInvitationsArgs
     patients?: boolean | PracticeCountOutputTypeCountPatientsArgs
     monitoringPlans?: boolean | PracticeCountOutputTypeCountMonitoringPlansArgs
     subscriptionHistory?: boolean | PracticeCountOutputTypeCountSubscriptionHistoryArgs
@@ -2459,6 +2584,13 @@ export namespace Prisma {
    */
   export type PracticeCountOutputTypeCountUsersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: UserWhereInput
+  }
+
+  /**
+   * PracticeCountOutputType without action
+   */
+  export type PracticeCountOutputTypeCountInvitationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: InvitationWhereInput
   }
 
   /**
@@ -3083,6 +3215,8 @@ export namespace Prisma {
     observations?: boolean | User$observationsArgs<ExtArgs>
     createdPatients?: boolean | User$createdPatientsArgs<ExtArgs>
     notifications?: boolean | User$notificationsArgs<ExtArgs>
+    sentInvitations?: boolean | User$sentInvitationsArgs<ExtArgs>
+    acceptedInvitations?: boolean | User$acceptedInvitationsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -3142,6 +3276,8 @@ export namespace Prisma {
     observations?: boolean | User$observationsArgs<ExtArgs>
     createdPatients?: boolean | User$createdPatientsArgs<ExtArgs>
     notifications?: boolean | User$notificationsArgs<ExtArgs>
+    sentInvitations?: boolean | User$sentInvitationsArgs<ExtArgs>
+    acceptedInvitations?: boolean | User$acceptedInvitationsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3161,6 +3297,8 @@ export namespace Prisma {
       observations: Prisma.$ObservationPayload<ExtArgs>[]
       createdPatients: Prisma.$PatientPayload<ExtArgs>[]
       notifications: Prisma.$NotificationPayload<ExtArgs>[]
+      sentInvitations: Prisma.$InvitationPayload<ExtArgs>[]
+      acceptedInvitations: Prisma.$InvitationPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -3576,6 +3714,8 @@ export namespace Prisma {
     observations<T extends User$observationsArgs<ExtArgs> = {}>(args?: Subset<T, User$observationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ObservationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     createdPatients<T extends User$createdPatientsArgs<ExtArgs> = {}>(args?: Subset<T, User$createdPatientsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PatientPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     notifications<T extends User$notificationsArgs<ExtArgs> = {}>(args?: Subset<T, User$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    sentInvitations<T extends User$sentInvitationsArgs<ExtArgs> = {}>(args?: Subset<T, User$sentInvitationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InvitationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    acceptedInvitations<T extends User$acceptedInvitationsArgs<ExtArgs> = {}>(args?: Subset<T, User$acceptedInvitationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InvitationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4176,6 +4316,54 @@ export namespace Prisma {
   }
 
   /**
+   * User.sentInvitations
+   */
+  export type User$sentInvitationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invitation
+     */
+    select?: InvitationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invitation
+     */
+    omit?: InvitationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvitationInclude<ExtArgs> | null
+    where?: InvitationWhereInput
+    orderBy?: InvitationOrderByWithRelationInput | InvitationOrderByWithRelationInput[]
+    cursor?: InvitationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: InvitationScalarFieldEnum | InvitationScalarFieldEnum[]
+  }
+
+  /**
+   * User.acceptedInvitations
+   */
+  export type User$acceptedInvitationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invitation
+     */
+    select?: InvitationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invitation
+     */
+    omit?: InvitationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvitationInclude<ExtArgs> | null
+    where?: InvitationWhereInput
+    orderBy?: InvitationOrderByWithRelationInput | InvitationOrderByWithRelationInput[]
+    cursor?: InvitationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: InvitationScalarFieldEnum | InvitationScalarFieldEnum[]
+  }
+
+  /**
    * User without action
    */
   export type UserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4191,6 +4379,1203 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: UserInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Invitation
+   */
+
+  export type AggregateInvitation = {
+    _count: InvitationCountAggregateOutputType | null
+    _min: InvitationMinAggregateOutputType | null
+    _max: InvitationMaxAggregateOutputType | null
+  }
+
+  export type InvitationMinAggregateOutputType = {
+    id: string | null
+    email: string | null
+    firstName: string | null
+    lastName: string | null
+    role: $Enums.UserRole | null
+    token: string | null
+    status: $Enums.InvitationStatus | null
+    practiceId: string | null
+    invitedByUserId: string | null
+    acceptedByUserId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    acceptedAt: Date | null
+  }
+
+  export type InvitationMaxAggregateOutputType = {
+    id: string | null
+    email: string | null
+    firstName: string | null
+    lastName: string | null
+    role: $Enums.UserRole | null
+    token: string | null
+    status: $Enums.InvitationStatus | null
+    practiceId: string | null
+    invitedByUserId: string | null
+    acceptedByUserId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    acceptedAt: Date | null
+  }
+
+  export type InvitationCountAggregateOutputType = {
+    id: number
+    email: number
+    firstName: number
+    lastName: number
+    role: number
+    token: number
+    status: number
+    practiceId: number
+    invitedByUserId: number
+    acceptedByUserId: number
+    createdAt: number
+    updatedAt: number
+    acceptedAt: number
+    _all: number
+  }
+
+
+  export type InvitationMinAggregateInputType = {
+    id?: true
+    email?: true
+    firstName?: true
+    lastName?: true
+    role?: true
+    token?: true
+    status?: true
+    practiceId?: true
+    invitedByUserId?: true
+    acceptedByUserId?: true
+    createdAt?: true
+    updatedAt?: true
+    acceptedAt?: true
+  }
+
+  export type InvitationMaxAggregateInputType = {
+    id?: true
+    email?: true
+    firstName?: true
+    lastName?: true
+    role?: true
+    token?: true
+    status?: true
+    practiceId?: true
+    invitedByUserId?: true
+    acceptedByUserId?: true
+    createdAt?: true
+    updatedAt?: true
+    acceptedAt?: true
+  }
+
+  export type InvitationCountAggregateInputType = {
+    id?: true
+    email?: true
+    firstName?: true
+    lastName?: true
+    role?: true
+    token?: true
+    status?: true
+    practiceId?: true
+    invitedByUserId?: true
+    acceptedByUserId?: true
+    createdAt?: true
+    updatedAt?: true
+    acceptedAt?: true
+    _all?: true
+  }
+
+  export type InvitationAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Invitation to aggregate.
+     */
+    where?: InvitationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Invitations to fetch.
+     */
+    orderBy?: InvitationOrderByWithRelationInput | InvitationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: InvitationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Invitations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Invitations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Invitations
+    **/
+    _count?: true | InvitationCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: InvitationMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: InvitationMaxAggregateInputType
+  }
+
+  export type GetInvitationAggregateType<T extends InvitationAggregateArgs> = {
+        [P in keyof T & keyof AggregateInvitation]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateInvitation[P]>
+      : GetScalarType<T[P], AggregateInvitation[P]>
+  }
+
+
+
+
+  export type InvitationGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: InvitationWhereInput
+    orderBy?: InvitationOrderByWithAggregationInput | InvitationOrderByWithAggregationInput[]
+    by: InvitationScalarFieldEnum[] | InvitationScalarFieldEnum
+    having?: InvitationScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: InvitationCountAggregateInputType | true
+    _min?: InvitationMinAggregateInputType
+    _max?: InvitationMaxAggregateInputType
+  }
+
+  export type InvitationGroupByOutputType = {
+    id: string
+    email: string
+    firstName: string
+    lastName: string
+    role: $Enums.UserRole
+    token: string
+    status: $Enums.InvitationStatus
+    practiceId: string
+    invitedByUserId: string
+    acceptedByUserId: string | null
+    createdAt: Date
+    updatedAt: Date
+    acceptedAt: Date | null
+    _count: InvitationCountAggregateOutputType | null
+    _min: InvitationMinAggregateOutputType | null
+    _max: InvitationMaxAggregateOutputType | null
+  }
+
+  type GetInvitationGroupByPayload<T extends InvitationGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<InvitationGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof InvitationGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], InvitationGroupByOutputType[P]>
+            : GetScalarType<T[P], InvitationGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type InvitationSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    email?: boolean
+    firstName?: boolean
+    lastName?: boolean
+    role?: boolean
+    token?: boolean
+    status?: boolean
+    practiceId?: boolean
+    invitedByUserId?: boolean
+    acceptedByUserId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    acceptedAt?: boolean
+    practice?: boolean | PracticeDefaultArgs<ExtArgs>
+    invitedByUser?: boolean | UserDefaultArgs<ExtArgs>
+    acceptedByUser?: boolean | Invitation$acceptedByUserArgs<ExtArgs>
+  }, ExtArgs["result"]["invitation"]>
+
+  export type InvitationSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    email?: boolean
+    firstName?: boolean
+    lastName?: boolean
+    role?: boolean
+    token?: boolean
+    status?: boolean
+    practiceId?: boolean
+    invitedByUserId?: boolean
+    acceptedByUserId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    acceptedAt?: boolean
+    practice?: boolean | PracticeDefaultArgs<ExtArgs>
+    invitedByUser?: boolean | UserDefaultArgs<ExtArgs>
+    acceptedByUser?: boolean | Invitation$acceptedByUserArgs<ExtArgs>
+  }, ExtArgs["result"]["invitation"]>
+
+  export type InvitationSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    email?: boolean
+    firstName?: boolean
+    lastName?: boolean
+    role?: boolean
+    token?: boolean
+    status?: boolean
+    practiceId?: boolean
+    invitedByUserId?: boolean
+    acceptedByUserId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    acceptedAt?: boolean
+    practice?: boolean | PracticeDefaultArgs<ExtArgs>
+    invitedByUser?: boolean | UserDefaultArgs<ExtArgs>
+    acceptedByUser?: boolean | Invitation$acceptedByUserArgs<ExtArgs>
+  }, ExtArgs["result"]["invitation"]>
+
+  export type InvitationSelectScalar = {
+    id?: boolean
+    email?: boolean
+    firstName?: boolean
+    lastName?: boolean
+    role?: boolean
+    token?: boolean
+    status?: boolean
+    practiceId?: boolean
+    invitedByUserId?: boolean
+    acceptedByUserId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    acceptedAt?: boolean
+  }
+
+  export type InvitationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "firstName" | "lastName" | "role" | "token" | "status" | "practiceId" | "invitedByUserId" | "acceptedByUserId" | "createdAt" | "updatedAt" | "acceptedAt", ExtArgs["result"]["invitation"]>
+  export type InvitationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    practice?: boolean | PracticeDefaultArgs<ExtArgs>
+    invitedByUser?: boolean | UserDefaultArgs<ExtArgs>
+    acceptedByUser?: boolean | Invitation$acceptedByUserArgs<ExtArgs>
+  }
+  export type InvitationIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    practice?: boolean | PracticeDefaultArgs<ExtArgs>
+    invitedByUser?: boolean | UserDefaultArgs<ExtArgs>
+    acceptedByUser?: boolean | Invitation$acceptedByUserArgs<ExtArgs>
+  }
+  export type InvitationIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    practice?: boolean | PracticeDefaultArgs<ExtArgs>
+    invitedByUser?: boolean | UserDefaultArgs<ExtArgs>
+    acceptedByUser?: boolean | Invitation$acceptedByUserArgs<ExtArgs>
+  }
+
+  export type $InvitationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Invitation"
+    objects: {
+      practice: Prisma.$PracticePayload<ExtArgs>
+      invitedByUser: Prisma.$UserPayload<ExtArgs>
+      acceptedByUser: Prisma.$UserPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      email: string
+      firstName: string
+      lastName: string
+      role: $Enums.UserRole
+      token: string
+      status: $Enums.InvitationStatus
+      practiceId: string
+      invitedByUserId: string
+      acceptedByUserId: string | null
+      createdAt: Date
+      updatedAt: Date
+      acceptedAt: Date | null
+    }, ExtArgs["result"]["invitation"]>
+    composites: {}
+  }
+
+  type InvitationGetPayload<S extends boolean | null | undefined | InvitationDefaultArgs> = $Result.GetResult<Prisma.$InvitationPayload, S>
+
+  type InvitationCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<InvitationFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: InvitationCountAggregateInputType | true
+    }
+
+  export interface InvitationDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Invitation'], meta: { name: 'Invitation' } }
+    /**
+     * Find zero or one Invitation that matches the filter.
+     * @param {InvitationFindUniqueArgs} args - Arguments to find a Invitation
+     * @example
+     * // Get one Invitation
+     * const invitation = await prisma.invitation.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends InvitationFindUniqueArgs>(args: SelectSubset<T, InvitationFindUniqueArgs<ExtArgs>>): Prisma__InvitationClient<$Result.GetResult<Prisma.$InvitationPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Invitation that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {InvitationFindUniqueOrThrowArgs} args - Arguments to find a Invitation
+     * @example
+     * // Get one Invitation
+     * const invitation = await prisma.invitation.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends InvitationFindUniqueOrThrowArgs>(args: SelectSubset<T, InvitationFindUniqueOrThrowArgs<ExtArgs>>): Prisma__InvitationClient<$Result.GetResult<Prisma.$InvitationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Invitation that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InvitationFindFirstArgs} args - Arguments to find a Invitation
+     * @example
+     * // Get one Invitation
+     * const invitation = await prisma.invitation.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends InvitationFindFirstArgs>(args?: SelectSubset<T, InvitationFindFirstArgs<ExtArgs>>): Prisma__InvitationClient<$Result.GetResult<Prisma.$InvitationPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Invitation that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InvitationFindFirstOrThrowArgs} args - Arguments to find a Invitation
+     * @example
+     * // Get one Invitation
+     * const invitation = await prisma.invitation.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends InvitationFindFirstOrThrowArgs>(args?: SelectSubset<T, InvitationFindFirstOrThrowArgs<ExtArgs>>): Prisma__InvitationClient<$Result.GetResult<Prisma.$InvitationPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Invitations that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InvitationFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Invitations
+     * const invitations = await prisma.invitation.findMany()
+     * 
+     * // Get first 10 Invitations
+     * const invitations = await prisma.invitation.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const invitationWithIdOnly = await prisma.invitation.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends InvitationFindManyArgs>(args?: SelectSubset<T, InvitationFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InvitationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Invitation.
+     * @param {InvitationCreateArgs} args - Arguments to create a Invitation.
+     * @example
+     * // Create one Invitation
+     * const Invitation = await prisma.invitation.create({
+     *   data: {
+     *     // ... data to create a Invitation
+     *   }
+     * })
+     * 
+     */
+    create<T extends InvitationCreateArgs>(args: SelectSubset<T, InvitationCreateArgs<ExtArgs>>): Prisma__InvitationClient<$Result.GetResult<Prisma.$InvitationPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Invitations.
+     * @param {InvitationCreateManyArgs} args - Arguments to create many Invitations.
+     * @example
+     * // Create many Invitations
+     * const invitation = await prisma.invitation.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends InvitationCreateManyArgs>(args?: SelectSubset<T, InvitationCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Invitations and returns the data saved in the database.
+     * @param {InvitationCreateManyAndReturnArgs} args - Arguments to create many Invitations.
+     * @example
+     * // Create many Invitations
+     * const invitation = await prisma.invitation.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Invitations and only return the `id`
+     * const invitationWithIdOnly = await prisma.invitation.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends InvitationCreateManyAndReturnArgs>(args?: SelectSubset<T, InvitationCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InvitationPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Invitation.
+     * @param {InvitationDeleteArgs} args - Arguments to delete one Invitation.
+     * @example
+     * // Delete one Invitation
+     * const Invitation = await prisma.invitation.delete({
+     *   where: {
+     *     // ... filter to delete one Invitation
+     *   }
+     * })
+     * 
+     */
+    delete<T extends InvitationDeleteArgs>(args: SelectSubset<T, InvitationDeleteArgs<ExtArgs>>): Prisma__InvitationClient<$Result.GetResult<Prisma.$InvitationPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Invitation.
+     * @param {InvitationUpdateArgs} args - Arguments to update one Invitation.
+     * @example
+     * // Update one Invitation
+     * const invitation = await prisma.invitation.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends InvitationUpdateArgs>(args: SelectSubset<T, InvitationUpdateArgs<ExtArgs>>): Prisma__InvitationClient<$Result.GetResult<Prisma.$InvitationPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Invitations.
+     * @param {InvitationDeleteManyArgs} args - Arguments to filter Invitations to delete.
+     * @example
+     * // Delete a few Invitations
+     * const { count } = await prisma.invitation.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends InvitationDeleteManyArgs>(args?: SelectSubset<T, InvitationDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Invitations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InvitationUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Invitations
+     * const invitation = await prisma.invitation.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends InvitationUpdateManyArgs>(args: SelectSubset<T, InvitationUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Invitations and returns the data updated in the database.
+     * @param {InvitationUpdateManyAndReturnArgs} args - Arguments to update many Invitations.
+     * @example
+     * // Update many Invitations
+     * const invitation = await prisma.invitation.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Invitations and only return the `id`
+     * const invitationWithIdOnly = await prisma.invitation.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends InvitationUpdateManyAndReturnArgs>(args: SelectSubset<T, InvitationUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InvitationPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Invitation.
+     * @param {InvitationUpsertArgs} args - Arguments to update or create a Invitation.
+     * @example
+     * // Update or create a Invitation
+     * const invitation = await prisma.invitation.upsert({
+     *   create: {
+     *     // ... data to create a Invitation
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Invitation we want to update
+     *   }
+     * })
+     */
+    upsert<T extends InvitationUpsertArgs>(args: SelectSubset<T, InvitationUpsertArgs<ExtArgs>>): Prisma__InvitationClient<$Result.GetResult<Prisma.$InvitationPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Invitations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InvitationCountArgs} args - Arguments to filter Invitations to count.
+     * @example
+     * // Count the number of Invitations
+     * const count = await prisma.invitation.count({
+     *   where: {
+     *     // ... the filter for the Invitations we want to count
+     *   }
+     * })
+    **/
+    count<T extends InvitationCountArgs>(
+      args?: Subset<T, InvitationCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], InvitationCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Invitation.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InvitationAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends InvitationAggregateArgs>(args: Subset<T, InvitationAggregateArgs>): Prisma.PrismaPromise<GetInvitationAggregateType<T>>
+
+    /**
+     * Group by Invitation.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InvitationGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends InvitationGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: InvitationGroupByArgs['orderBy'] }
+        : { orderBy?: InvitationGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, InvitationGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetInvitationGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Invitation model
+   */
+  readonly fields: InvitationFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Invitation.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__InvitationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    practice<T extends PracticeDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PracticeDefaultArgs<ExtArgs>>): Prisma__PracticeClient<$Result.GetResult<Prisma.$PracticePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    invitedByUser<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    acceptedByUser<T extends Invitation$acceptedByUserArgs<ExtArgs> = {}>(args?: Subset<T, Invitation$acceptedByUserArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Invitation model
+   */
+  interface InvitationFieldRefs {
+    readonly id: FieldRef<"Invitation", 'String'>
+    readonly email: FieldRef<"Invitation", 'String'>
+    readonly firstName: FieldRef<"Invitation", 'String'>
+    readonly lastName: FieldRef<"Invitation", 'String'>
+    readonly role: FieldRef<"Invitation", 'UserRole'>
+    readonly token: FieldRef<"Invitation", 'String'>
+    readonly status: FieldRef<"Invitation", 'InvitationStatus'>
+    readonly practiceId: FieldRef<"Invitation", 'String'>
+    readonly invitedByUserId: FieldRef<"Invitation", 'String'>
+    readonly acceptedByUserId: FieldRef<"Invitation", 'String'>
+    readonly createdAt: FieldRef<"Invitation", 'DateTime'>
+    readonly updatedAt: FieldRef<"Invitation", 'DateTime'>
+    readonly acceptedAt: FieldRef<"Invitation", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Invitation findUnique
+   */
+  export type InvitationFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invitation
+     */
+    select?: InvitationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invitation
+     */
+    omit?: InvitationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvitationInclude<ExtArgs> | null
+    /**
+     * Filter, which Invitation to fetch.
+     */
+    where: InvitationWhereUniqueInput
+  }
+
+  /**
+   * Invitation findUniqueOrThrow
+   */
+  export type InvitationFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invitation
+     */
+    select?: InvitationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invitation
+     */
+    omit?: InvitationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvitationInclude<ExtArgs> | null
+    /**
+     * Filter, which Invitation to fetch.
+     */
+    where: InvitationWhereUniqueInput
+  }
+
+  /**
+   * Invitation findFirst
+   */
+  export type InvitationFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invitation
+     */
+    select?: InvitationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invitation
+     */
+    omit?: InvitationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvitationInclude<ExtArgs> | null
+    /**
+     * Filter, which Invitation to fetch.
+     */
+    where?: InvitationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Invitations to fetch.
+     */
+    orderBy?: InvitationOrderByWithRelationInput | InvitationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Invitations.
+     */
+    cursor?: InvitationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Invitations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Invitations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Invitations.
+     */
+    distinct?: InvitationScalarFieldEnum | InvitationScalarFieldEnum[]
+  }
+
+  /**
+   * Invitation findFirstOrThrow
+   */
+  export type InvitationFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invitation
+     */
+    select?: InvitationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invitation
+     */
+    omit?: InvitationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvitationInclude<ExtArgs> | null
+    /**
+     * Filter, which Invitation to fetch.
+     */
+    where?: InvitationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Invitations to fetch.
+     */
+    orderBy?: InvitationOrderByWithRelationInput | InvitationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Invitations.
+     */
+    cursor?: InvitationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Invitations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Invitations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Invitations.
+     */
+    distinct?: InvitationScalarFieldEnum | InvitationScalarFieldEnum[]
+  }
+
+  /**
+   * Invitation findMany
+   */
+  export type InvitationFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invitation
+     */
+    select?: InvitationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invitation
+     */
+    omit?: InvitationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvitationInclude<ExtArgs> | null
+    /**
+     * Filter, which Invitations to fetch.
+     */
+    where?: InvitationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Invitations to fetch.
+     */
+    orderBy?: InvitationOrderByWithRelationInput | InvitationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Invitations.
+     */
+    cursor?: InvitationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Invitations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Invitations.
+     */
+    skip?: number
+    distinct?: InvitationScalarFieldEnum | InvitationScalarFieldEnum[]
+  }
+
+  /**
+   * Invitation create
+   */
+  export type InvitationCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invitation
+     */
+    select?: InvitationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invitation
+     */
+    omit?: InvitationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvitationInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Invitation.
+     */
+    data: XOR<InvitationCreateInput, InvitationUncheckedCreateInput>
+  }
+
+  /**
+   * Invitation createMany
+   */
+  export type InvitationCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Invitations.
+     */
+    data: InvitationCreateManyInput | InvitationCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Invitation createManyAndReturn
+   */
+  export type InvitationCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invitation
+     */
+    select?: InvitationSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invitation
+     */
+    omit?: InvitationOmit<ExtArgs> | null
+    /**
+     * The data used to create many Invitations.
+     */
+    data: InvitationCreateManyInput | InvitationCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvitationIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Invitation update
+   */
+  export type InvitationUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invitation
+     */
+    select?: InvitationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invitation
+     */
+    omit?: InvitationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvitationInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Invitation.
+     */
+    data: XOR<InvitationUpdateInput, InvitationUncheckedUpdateInput>
+    /**
+     * Choose, which Invitation to update.
+     */
+    where: InvitationWhereUniqueInput
+  }
+
+  /**
+   * Invitation updateMany
+   */
+  export type InvitationUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Invitations.
+     */
+    data: XOR<InvitationUpdateManyMutationInput, InvitationUncheckedUpdateManyInput>
+    /**
+     * Filter which Invitations to update
+     */
+    where?: InvitationWhereInput
+    /**
+     * Limit how many Invitations to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Invitation updateManyAndReturn
+   */
+  export type InvitationUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invitation
+     */
+    select?: InvitationSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invitation
+     */
+    omit?: InvitationOmit<ExtArgs> | null
+    /**
+     * The data used to update Invitations.
+     */
+    data: XOR<InvitationUpdateManyMutationInput, InvitationUncheckedUpdateManyInput>
+    /**
+     * Filter which Invitations to update
+     */
+    where?: InvitationWhereInput
+    /**
+     * Limit how many Invitations to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvitationIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Invitation upsert
+   */
+  export type InvitationUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invitation
+     */
+    select?: InvitationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invitation
+     */
+    omit?: InvitationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvitationInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Invitation to update in case it exists.
+     */
+    where: InvitationWhereUniqueInput
+    /**
+     * In case the Invitation found by the `where` argument doesn't exist, create a new Invitation with this data.
+     */
+    create: XOR<InvitationCreateInput, InvitationUncheckedCreateInput>
+    /**
+     * In case the Invitation was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<InvitationUpdateInput, InvitationUncheckedUpdateInput>
+  }
+
+  /**
+   * Invitation delete
+   */
+  export type InvitationDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invitation
+     */
+    select?: InvitationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invitation
+     */
+    omit?: InvitationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvitationInclude<ExtArgs> | null
+    /**
+     * Filter which Invitation to delete.
+     */
+    where: InvitationWhereUniqueInput
+  }
+
+  /**
+   * Invitation deleteMany
+   */
+  export type InvitationDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Invitations to delete
+     */
+    where?: InvitationWhereInput
+    /**
+     * Limit how many Invitations to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Invitation.acceptedByUser
+   */
+  export type Invitation$acceptedByUserArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
+   * Invitation without action
+   */
+  export type InvitationDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invitation
+     */
+    select?: InvitationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invitation
+     */
+    omit?: InvitationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvitationInclude<ExtArgs> | null
   }
 
 
@@ -4481,6 +5866,7 @@ export namespace Prisma {
     maxStorage?: boolean
     currentStorage?: boolean
     users?: boolean | Practice$usersArgs<ExtArgs>
+    invitations?: boolean | Practice$invitationsArgs<ExtArgs>
     patients?: boolean | Practice$patientsArgs<ExtArgs>
     monitoringPlans?: boolean | Practice$monitoringPlansArgs<ExtArgs>
     subscriptionHistory?: boolean | Practice$subscriptionHistoryArgs<ExtArgs>
@@ -4547,6 +5933,7 @@ export namespace Prisma {
   export type PracticeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "address" | "phone" | "email" | "logo" | "subscriptionTier" | "subscriptionStatus" | "subscriptionStartDate" | "subscriptionEndDate" | "createdAt" | "updatedAt" | "isActive" | "customBranding" | "maxStorage" | "currentStorage", ExtArgs["result"]["practice"]>
   export type PracticeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     users?: boolean | Practice$usersArgs<ExtArgs>
+    invitations?: boolean | Practice$invitationsArgs<ExtArgs>
     patients?: boolean | Practice$patientsArgs<ExtArgs>
     monitoringPlans?: boolean | Practice$monitoringPlansArgs<ExtArgs>
     subscriptionHistory?: boolean | Practice$subscriptionHistoryArgs<ExtArgs>
@@ -4559,6 +5946,7 @@ export namespace Prisma {
     name: "Practice"
     objects: {
       users: Prisma.$UserPayload<ExtArgs>[]
+      invitations: Prisma.$InvitationPayload<ExtArgs>[]
       patients: Prisma.$PatientPayload<ExtArgs>[]
       monitoringPlans: Prisma.$MonitoringPlanPayload<ExtArgs>[]
       subscriptionHistory: Prisma.$SubscriptionHistoryPayload<ExtArgs>[]
@@ -4975,6 +6363,7 @@ export namespace Prisma {
   export interface Prisma__PracticeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     users<T extends Practice$usersArgs<ExtArgs> = {}>(args?: Subset<T, Practice$usersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    invitations<T extends Practice$invitationsArgs<ExtArgs> = {}>(args?: Subset<T, Practice$invitationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InvitationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     patients<T extends Practice$patientsArgs<ExtArgs> = {}>(args?: Subset<T, Practice$patientsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PatientPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     monitoringPlans<T extends Practice$monitoringPlansArgs<ExtArgs> = {}>(args?: Subset<T, Practice$monitoringPlansArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MonitoringPlanPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     subscriptionHistory<T extends Practice$subscriptionHistoryArgs<ExtArgs> = {}>(args?: Subset<T, Practice$subscriptionHistoryArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SubscriptionHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -5432,6 +6821,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
+  }
+
+  /**
+   * Practice.invitations
+   */
+  export type Practice$invitationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invitation
+     */
+    select?: InvitationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invitation
+     */
+    omit?: InvitationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvitationInclude<ExtArgs> | null
+    where?: InvitationWhereInput
+    orderBy?: InvitationOrderByWithRelationInput | InvitationOrderByWithRelationInput[]
+    cursor?: InvitationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: InvitationScalarFieldEnum | InvitationScalarFieldEnum[]
   }
 
   /**
@@ -21913,6 +23326,25 @@ export namespace Prisma {
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
+  export const InvitationScalarFieldEnum: {
+    id: 'id',
+    email: 'email',
+    firstName: 'firstName',
+    lastName: 'lastName',
+    role: 'role',
+    token: 'token',
+    status: 'status',
+    practiceId: 'practiceId',
+    invitedByUserId: 'invitedByUserId',
+    acceptedByUserId: 'acceptedByUserId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    acceptedAt: 'acceptedAt'
+  };
+
+  export type InvitationScalarFieldEnum = (typeof InvitationScalarFieldEnum)[keyof typeof InvitationScalarFieldEnum]
+
+
   export const PracticeScalarFieldEnum: {
     id: 'id',
     name: 'name',
@@ -22243,6 +23675,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'InvitationStatus'
+   */
+  export type EnumInvitationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'InvitationStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'InvitationStatus[]'
+   */
+  export type ListEnumInvitationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'InvitationStatus[]'>
+    
+
+
+  /**
    * Reference to a field of type 'SubscriptionTier'
    */
   export type EnumSubscriptionTierFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SubscriptionTier'>
@@ -22408,6 +23854,8 @@ export namespace Prisma {
     observations?: ObservationListRelationFilter
     createdPatients?: PatientListRelationFilter
     notifications?: NotificationListRelationFilter
+    sentInvitations?: InvitationListRelationFilter
+    acceptedInvitations?: InvitationListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -22430,6 +23878,8 @@ export namespace Prisma {
     observations?: ObservationOrderByRelationAggregateInput
     createdPatients?: PatientOrderByRelationAggregateInput
     notifications?: NotificationOrderByRelationAggregateInput
+    sentInvitations?: InvitationOrderByRelationAggregateInput
+    acceptedInvitations?: InvitationOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -22455,6 +23905,8 @@ export namespace Prisma {
     observations?: ObservationListRelationFilter
     createdPatients?: PatientListRelationFilter
     notifications?: NotificationListRelationFilter
+    sentInvitations?: InvitationListRelationFilter
+    acceptedInvitations?: InvitationListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -22493,6 +23945,107 @@ export namespace Prisma {
     resetTokenExpiry?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
   }
 
+  export type InvitationWhereInput = {
+    AND?: InvitationWhereInput | InvitationWhereInput[]
+    OR?: InvitationWhereInput[]
+    NOT?: InvitationWhereInput | InvitationWhereInput[]
+    id?: StringFilter<"Invitation"> | string
+    email?: StringFilter<"Invitation"> | string
+    firstName?: StringFilter<"Invitation"> | string
+    lastName?: StringFilter<"Invitation"> | string
+    role?: EnumUserRoleFilter<"Invitation"> | $Enums.UserRole
+    token?: StringFilter<"Invitation"> | string
+    status?: EnumInvitationStatusFilter<"Invitation"> | $Enums.InvitationStatus
+    practiceId?: StringFilter<"Invitation"> | string
+    invitedByUserId?: StringFilter<"Invitation"> | string
+    acceptedByUserId?: StringNullableFilter<"Invitation"> | string | null
+    createdAt?: DateTimeFilter<"Invitation"> | Date | string
+    updatedAt?: DateTimeFilter<"Invitation"> | Date | string
+    acceptedAt?: DateTimeNullableFilter<"Invitation"> | Date | string | null
+    practice?: XOR<PracticeScalarRelationFilter, PracticeWhereInput>
+    invitedByUser?: XOR<UserScalarRelationFilter, UserWhereInput>
+    acceptedByUser?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+  }
+
+  export type InvitationOrderByWithRelationInput = {
+    id?: SortOrder
+    email?: SortOrder
+    firstName?: SortOrder
+    lastName?: SortOrder
+    role?: SortOrder
+    token?: SortOrder
+    status?: SortOrder
+    practiceId?: SortOrder
+    invitedByUserId?: SortOrder
+    acceptedByUserId?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    acceptedAt?: SortOrderInput | SortOrder
+    practice?: PracticeOrderByWithRelationInput
+    invitedByUser?: UserOrderByWithRelationInput
+    acceptedByUser?: UserOrderByWithRelationInput
+  }
+
+  export type InvitationWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    token?: string
+    AND?: InvitationWhereInput | InvitationWhereInput[]
+    OR?: InvitationWhereInput[]
+    NOT?: InvitationWhereInput | InvitationWhereInput[]
+    email?: StringFilter<"Invitation"> | string
+    firstName?: StringFilter<"Invitation"> | string
+    lastName?: StringFilter<"Invitation"> | string
+    role?: EnumUserRoleFilter<"Invitation"> | $Enums.UserRole
+    status?: EnumInvitationStatusFilter<"Invitation"> | $Enums.InvitationStatus
+    practiceId?: StringFilter<"Invitation"> | string
+    invitedByUserId?: StringFilter<"Invitation"> | string
+    acceptedByUserId?: StringNullableFilter<"Invitation"> | string | null
+    createdAt?: DateTimeFilter<"Invitation"> | Date | string
+    updatedAt?: DateTimeFilter<"Invitation"> | Date | string
+    acceptedAt?: DateTimeNullableFilter<"Invitation"> | Date | string | null
+    practice?: XOR<PracticeScalarRelationFilter, PracticeWhereInput>
+    invitedByUser?: XOR<UserScalarRelationFilter, UserWhereInput>
+    acceptedByUser?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+  }, "id" | "token">
+
+  export type InvitationOrderByWithAggregationInput = {
+    id?: SortOrder
+    email?: SortOrder
+    firstName?: SortOrder
+    lastName?: SortOrder
+    role?: SortOrder
+    token?: SortOrder
+    status?: SortOrder
+    practiceId?: SortOrder
+    invitedByUserId?: SortOrder
+    acceptedByUserId?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    acceptedAt?: SortOrderInput | SortOrder
+    _count?: InvitationCountOrderByAggregateInput
+    _max?: InvitationMaxOrderByAggregateInput
+    _min?: InvitationMinOrderByAggregateInput
+  }
+
+  export type InvitationScalarWhereWithAggregatesInput = {
+    AND?: InvitationScalarWhereWithAggregatesInput | InvitationScalarWhereWithAggregatesInput[]
+    OR?: InvitationScalarWhereWithAggregatesInput[]
+    NOT?: InvitationScalarWhereWithAggregatesInput | InvitationScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Invitation"> | string
+    email?: StringWithAggregatesFilter<"Invitation"> | string
+    firstName?: StringWithAggregatesFilter<"Invitation"> | string
+    lastName?: StringWithAggregatesFilter<"Invitation"> | string
+    role?: EnumUserRoleWithAggregatesFilter<"Invitation"> | $Enums.UserRole
+    token?: StringWithAggregatesFilter<"Invitation"> | string
+    status?: EnumInvitationStatusWithAggregatesFilter<"Invitation"> | $Enums.InvitationStatus
+    practiceId?: StringWithAggregatesFilter<"Invitation"> | string
+    invitedByUserId?: StringWithAggregatesFilter<"Invitation"> | string
+    acceptedByUserId?: StringNullableWithAggregatesFilter<"Invitation"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"Invitation"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Invitation"> | Date | string
+    acceptedAt?: DateTimeNullableWithAggregatesFilter<"Invitation"> | Date | string | null
+  }
+
   export type PracticeWhereInput = {
     AND?: PracticeWhereInput | PracticeWhereInput[]
     OR?: PracticeWhereInput[]
@@ -22514,6 +24067,7 @@ export namespace Prisma {
     maxStorage?: IntFilter<"Practice"> | number
     currentStorage?: IntFilter<"Practice"> | number
     users?: UserListRelationFilter
+    invitations?: InvitationListRelationFilter
     patients?: PatientListRelationFilter
     monitoringPlans?: MonitoringPlanListRelationFilter
     subscriptionHistory?: SubscriptionHistoryListRelationFilter
@@ -22537,6 +24091,7 @@ export namespace Prisma {
     maxStorage?: SortOrder
     currentStorage?: SortOrder
     users?: UserOrderByRelationAggregateInput
+    invitations?: InvitationOrderByRelationAggregateInput
     patients?: PatientOrderByRelationAggregateInput
     monitoringPlans?: MonitoringPlanOrderByRelationAggregateInput
     subscriptionHistory?: SubscriptionHistoryOrderByRelationAggregateInput
@@ -22563,6 +24118,7 @@ export namespace Prisma {
     maxStorage?: IntFilter<"Practice"> | number
     currentStorage?: IntFilter<"Practice"> | number
     users?: UserListRelationFilter
+    invitations?: InvitationListRelationFilter
     patients?: PatientListRelationFilter
     monitoringPlans?: MonitoringPlanListRelationFilter
     subscriptionHistory?: SubscriptionHistoryListRelationFilter
@@ -23767,6 +25323,8 @@ export namespace Prisma {
     observations?: ObservationCreateNestedManyWithoutRecordedByInput
     createdPatients?: PatientCreateNestedManyWithoutCreatedByInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
+    sentInvitations?: InvitationCreateNestedManyWithoutInvitedByUserInput
+    acceptedInvitations?: InvitationCreateNestedManyWithoutAcceptedByUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -23788,6 +25346,8 @@ export namespace Prisma {
     observations?: ObservationUncheckedCreateNestedManyWithoutRecordedByInput
     createdPatients?: PatientUncheckedCreateNestedManyWithoutCreatedByInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    sentInvitations?: InvitationUncheckedCreateNestedManyWithoutInvitedByUserInput
+    acceptedInvitations?: InvitationUncheckedCreateNestedManyWithoutAcceptedByUserInput
   }
 
   export type UserUpdateInput = {
@@ -23809,6 +25369,8 @@ export namespace Prisma {
     observations?: ObservationUpdateManyWithoutRecordedByNestedInput
     createdPatients?: PatientUpdateManyWithoutCreatedByNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
+    sentInvitations?: InvitationUpdateManyWithoutInvitedByUserNestedInput
+    acceptedInvitations?: InvitationUpdateManyWithoutAcceptedByUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -23830,6 +25392,8 @@ export namespace Prisma {
     observations?: ObservationUncheckedUpdateManyWithoutRecordedByNestedInput
     createdPatients?: PatientUncheckedUpdateManyWithoutCreatedByNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    sentInvitations?: InvitationUncheckedUpdateManyWithoutInvitedByUserNestedInput
+    acceptedInvitations?: InvitationUncheckedUpdateManyWithoutAcceptedByUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -23876,6 +25440,115 @@ export namespace Prisma {
     resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
+  export type InvitationCreateInput = {
+    id?: string
+    email: string
+    firstName: string
+    lastName: string
+    role: $Enums.UserRole
+    token: string
+    status?: $Enums.InvitationStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    acceptedAt?: Date | string | null
+    practice: PracticeCreateNestedOneWithoutInvitationsInput
+    invitedByUser: UserCreateNestedOneWithoutSentInvitationsInput
+    acceptedByUser?: UserCreateNestedOneWithoutAcceptedInvitationsInput
+  }
+
+  export type InvitationUncheckedCreateInput = {
+    id?: string
+    email: string
+    firstName: string
+    lastName: string
+    role: $Enums.UserRole
+    token: string
+    status?: $Enums.InvitationStatus
+    practiceId: string
+    invitedByUserId: string
+    acceptedByUserId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    acceptedAt?: Date | string | null
+  }
+
+  export type InvitationUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    token?: StringFieldUpdateOperationsInput | string
+    status?: EnumInvitationStatusFieldUpdateOperationsInput | $Enums.InvitationStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    acceptedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    practice?: PracticeUpdateOneRequiredWithoutInvitationsNestedInput
+    invitedByUser?: UserUpdateOneRequiredWithoutSentInvitationsNestedInput
+    acceptedByUser?: UserUpdateOneWithoutAcceptedInvitationsNestedInput
+  }
+
+  export type InvitationUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    token?: StringFieldUpdateOperationsInput | string
+    status?: EnumInvitationStatusFieldUpdateOperationsInput | $Enums.InvitationStatus
+    practiceId?: StringFieldUpdateOperationsInput | string
+    invitedByUserId?: StringFieldUpdateOperationsInput | string
+    acceptedByUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    acceptedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type InvitationCreateManyInput = {
+    id?: string
+    email: string
+    firstName: string
+    lastName: string
+    role: $Enums.UserRole
+    token: string
+    status?: $Enums.InvitationStatus
+    practiceId: string
+    invitedByUserId: string
+    acceptedByUserId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    acceptedAt?: Date | string | null
+  }
+
+  export type InvitationUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    token?: StringFieldUpdateOperationsInput | string
+    status?: EnumInvitationStatusFieldUpdateOperationsInput | $Enums.InvitationStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    acceptedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type InvitationUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    token?: StringFieldUpdateOperationsInput | string
+    status?: EnumInvitationStatusFieldUpdateOperationsInput | $Enums.InvitationStatus
+    practiceId?: StringFieldUpdateOperationsInput | string
+    invitedByUserId?: StringFieldUpdateOperationsInput | string
+    acceptedByUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    acceptedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
   export type PracticeCreateInput = {
     id?: string
     name: string
@@ -23894,6 +25567,7 @@ export namespace Prisma {
     maxStorage?: number
     currentStorage?: number
     users?: UserCreateNestedManyWithoutPracticeInput
+    invitations?: InvitationCreateNestedManyWithoutPracticeInput
     patients?: PatientCreateNestedManyWithoutPracticeInput
     monitoringPlans?: MonitoringPlanCreateNestedManyWithoutPracticeInput
     subscriptionHistory?: SubscriptionHistoryCreateNestedManyWithoutPracticeInput
@@ -23917,6 +25591,7 @@ export namespace Prisma {
     maxStorage?: number
     currentStorage?: number
     users?: UserUncheckedCreateNestedManyWithoutPracticeInput
+    invitations?: InvitationUncheckedCreateNestedManyWithoutPracticeInput
     patients?: PatientUncheckedCreateNestedManyWithoutPracticeInput
     monitoringPlans?: MonitoringPlanUncheckedCreateNestedManyWithoutPracticeInput
     subscriptionHistory?: SubscriptionHistoryUncheckedCreateNestedManyWithoutPracticeInput
@@ -23940,6 +25615,7 @@ export namespace Prisma {
     maxStorage?: IntFieldUpdateOperationsInput | number
     currentStorage?: IntFieldUpdateOperationsInput | number
     users?: UserUpdateManyWithoutPracticeNestedInput
+    invitations?: InvitationUpdateManyWithoutPracticeNestedInput
     patients?: PatientUpdateManyWithoutPracticeNestedInput
     monitoringPlans?: MonitoringPlanUpdateManyWithoutPracticeNestedInput
     subscriptionHistory?: SubscriptionHistoryUpdateManyWithoutPracticeNestedInput
@@ -23963,6 +25639,7 @@ export namespace Prisma {
     maxStorage?: IntFieldUpdateOperationsInput | number
     currentStorage?: IntFieldUpdateOperationsInput | number
     users?: UserUncheckedUpdateManyWithoutPracticeNestedInput
+    invitations?: InvitationUncheckedUpdateManyWithoutPracticeNestedInput
     patients?: PatientUncheckedUpdateManyWithoutPracticeNestedInput
     monitoringPlans?: MonitoringPlanUncheckedUpdateManyWithoutPracticeNestedInput
     subscriptionHistory?: SubscriptionHistoryUncheckedUpdateManyWithoutPracticeNestedInput
@@ -25319,6 +26996,12 @@ export namespace Prisma {
     none?: NotificationWhereInput
   }
 
+  export type InvitationListRelationFilter = {
+    every?: InvitationWhereInput
+    some?: InvitationWhereInput
+    none?: InvitationWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -25345,6 +27028,10 @@ export namespace Prisma {
   }
 
   export type NotificationOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type InvitationOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -25473,6 +27160,86 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedDateTimeNullableFilter<$PrismaModel>
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type EnumInvitationStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.InvitationStatus | EnumInvitationStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.InvitationStatus[] | ListEnumInvitationStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.InvitationStatus[] | ListEnumInvitationStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumInvitationStatusFilter<$PrismaModel> | $Enums.InvitationStatus
+  }
+
+  export type PracticeScalarRelationFilter = {
+    is?: PracticeWhereInput
+    isNot?: PracticeWhereInput
+  }
+
+  export type UserScalarRelationFilter = {
+    is?: UserWhereInput
+    isNot?: UserWhereInput
+  }
+
+  export type UserNullableScalarRelationFilter = {
+    is?: UserWhereInput | null
+    isNot?: UserWhereInput | null
+  }
+
+  export type InvitationCountOrderByAggregateInput = {
+    id?: SortOrder
+    email?: SortOrder
+    firstName?: SortOrder
+    lastName?: SortOrder
+    role?: SortOrder
+    token?: SortOrder
+    status?: SortOrder
+    practiceId?: SortOrder
+    invitedByUserId?: SortOrder
+    acceptedByUserId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    acceptedAt?: SortOrder
+  }
+
+  export type InvitationMaxOrderByAggregateInput = {
+    id?: SortOrder
+    email?: SortOrder
+    firstName?: SortOrder
+    lastName?: SortOrder
+    role?: SortOrder
+    token?: SortOrder
+    status?: SortOrder
+    practiceId?: SortOrder
+    invitedByUserId?: SortOrder
+    acceptedByUserId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    acceptedAt?: SortOrder
+  }
+
+  export type InvitationMinOrderByAggregateInput = {
+    id?: SortOrder
+    email?: SortOrder
+    firstName?: SortOrder
+    lastName?: SortOrder
+    role?: SortOrder
+    token?: SortOrder
+    status?: SortOrder
+    practiceId?: SortOrder
+    invitedByUserId?: SortOrder
+    acceptedByUserId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    acceptedAt?: SortOrder
+  }
+
+  export type EnumInvitationStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.InvitationStatus | EnumInvitationStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.InvitationStatus[] | ListEnumInvitationStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.InvitationStatus[] | ListEnumInvitationStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumInvitationStatusWithAggregatesFilter<$PrismaModel> | $Enums.InvitationStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumInvitationStatusFilter<$PrismaModel>
+    _max?: NestedEnumInvitationStatusFilter<$PrismaModel>
   }
 
   export type EnumSubscriptionTierFilter<$PrismaModel = never> = {
@@ -25681,11 +27448,6 @@ export namespace Prisma {
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
-  export type PracticeScalarRelationFilter = {
-    is?: PracticeWhereInput
-    isNot?: PracticeWhereInput
-  }
-
   export type SubscriptionHistoryCountOrderByAggregateInput = {
     id?: SortOrder
     practiceId?: SortOrder
@@ -25759,11 +27521,6 @@ export namespace Prisma {
     in?: $Enums.Sex[] | ListEnumSexFieldRefInput<$PrismaModel> | null
     notIn?: $Enums.Sex[] | ListEnumSexFieldRefInput<$PrismaModel> | null
     not?: NestedEnumSexNullableFilter<$PrismaModel> | $Enums.Sex | null
-  }
-
-  export type UserScalarRelationFilter = {
-    is?: UserWhereInput
-    isNot?: UserWhereInput
   }
 
   export type MonitoringPlanPatientListRelationFilter = {
@@ -26566,6 +28323,20 @@ export namespace Prisma {
     connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
   }
 
+  export type InvitationCreateNestedManyWithoutInvitedByUserInput = {
+    create?: XOR<InvitationCreateWithoutInvitedByUserInput, InvitationUncheckedCreateWithoutInvitedByUserInput> | InvitationCreateWithoutInvitedByUserInput[] | InvitationUncheckedCreateWithoutInvitedByUserInput[]
+    connectOrCreate?: InvitationCreateOrConnectWithoutInvitedByUserInput | InvitationCreateOrConnectWithoutInvitedByUserInput[]
+    createMany?: InvitationCreateManyInvitedByUserInputEnvelope
+    connect?: InvitationWhereUniqueInput | InvitationWhereUniqueInput[]
+  }
+
+  export type InvitationCreateNestedManyWithoutAcceptedByUserInput = {
+    create?: XOR<InvitationCreateWithoutAcceptedByUserInput, InvitationUncheckedCreateWithoutAcceptedByUserInput> | InvitationCreateWithoutAcceptedByUserInput[] | InvitationUncheckedCreateWithoutAcceptedByUserInput[]
+    connectOrCreate?: InvitationCreateOrConnectWithoutAcceptedByUserInput | InvitationCreateOrConnectWithoutAcceptedByUserInput[]
+    createMany?: InvitationCreateManyAcceptedByUserInputEnvelope
+    connect?: InvitationWhereUniqueInput | InvitationWhereUniqueInput[]
+  }
+
   export type MonitoringPlanUncheckedCreateNestedManyWithoutCreatedByInput = {
     create?: XOR<MonitoringPlanCreateWithoutCreatedByInput, MonitoringPlanUncheckedCreateWithoutCreatedByInput> | MonitoringPlanCreateWithoutCreatedByInput[] | MonitoringPlanUncheckedCreateWithoutCreatedByInput[]
     connectOrCreate?: MonitoringPlanCreateOrConnectWithoutCreatedByInput | MonitoringPlanCreateOrConnectWithoutCreatedByInput[]
@@ -26606,6 +28377,20 @@ export namespace Prisma {
     connectOrCreate?: NotificationCreateOrConnectWithoutUserInput | NotificationCreateOrConnectWithoutUserInput[]
     createMany?: NotificationCreateManyUserInputEnvelope
     connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+  }
+
+  export type InvitationUncheckedCreateNestedManyWithoutInvitedByUserInput = {
+    create?: XOR<InvitationCreateWithoutInvitedByUserInput, InvitationUncheckedCreateWithoutInvitedByUserInput> | InvitationCreateWithoutInvitedByUserInput[] | InvitationUncheckedCreateWithoutInvitedByUserInput[]
+    connectOrCreate?: InvitationCreateOrConnectWithoutInvitedByUserInput | InvitationCreateOrConnectWithoutInvitedByUserInput[]
+    createMany?: InvitationCreateManyInvitedByUserInputEnvelope
+    connect?: InvitationWhereUniqueInput | InvitationWhereUniqueInput[]
+  }
+
+  export type InvitationUncheckedCreateNestedManyWithoutAcceptedByUserInput = {
+    create?: XOR<InvitationCreateWithoutAcceptedByUserInput, InvitationUncheckedCreateWithoutAcceptedByUserInput> | InvitationCreateWithoutAcceptedByUserInput[] | InvitationUncheckedCreateWithoutAcceptedByUserInput[]
+    connectOrCreate?: InvitationCreateOrConnectWithoutAcceptedByUserInput | InvitationCreateOrConnectWithoutAcceptedByUserInput[]
+    createMany?: InvitationCreateManyAcceptedByUserInputEnvelope
+    connect?: InvitationWhereUniqueInput | InvitationWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -26726,6 +28511,34 @@ export namespace Prisma {
     deleteMany?: NotificationScalarWhereInput | NotificationScalarWhereInput[]
   }
 
+  export type InvitationUpdateManyWithoutInvitedByUserNestedInput = {
+    create?: XOR<InvitationCreateWithoutInvitedByUserInput, InvitationUncheckedCreateWithoutInvitedByUserInput> | InvitationCreateWithoutInvitedByUserInput[] | InvitationUncheckedCreateWithoutInvitedByUserInput[]
+    connectOrCreate?: InvitationCreateOrConnectWithoutInvitedByUserInput | InvitationCreateOrConnectWithoutInvitedByUserInput[]
+    upsert?: InvitationUpsertWithWhereUniqueWithoutInvitedByUserInput | InvitationUpsertWithWhereUniqueWithoutInvitedByUserInput[]
+    createMany?: InvitationCreateManyInvitedByUserInputEnvelope
+    set?: InvitationWhereUniqueInput | InvitationWhereUniqueInput[]
+    disconnect?: InvitationWhereUniqueInput | InvitationWhereUniqueInput[]
+    delete?: InvitationWhereUniqueInput | InvitationWhereUniqueInput[]
+    connect?: InvitationWhereUniqueInput | InvitationWhereUniqueInput[]
+    update?: InvitationUpdateWithWhereUniqueWithoutInvitedByUserInput | InvitationUpdateWithWhereUniqueWithoutInvitedByUserInput[]
+    updateMany?: InvitationUpdateManyWithWhereWithoutInvitedByUserInput | InvitationUpdateManyWithWhereWithoutInvitedByUserInput[]
+    deleteMany?: InvitationScalarWhereInput | InvitationScalarWhereInput[]
+  }
+
+  export type InvitationUpdateManyWithoutAcceptedByUserNestedInput = {
+    create?: XOR<InvitationCreateWithoutAcceptedByUserInput, InvitationUncheckedCreateWithoutAcceptedByUserInput> | InvitationCreateWithoutAcceptedByUserInput[] | InvitationUncheckedCreateWithoutAcceptedByUserInput[]
+    connectOrCreate?: InvitationCreateOrConnectWithoutAcceptedByUserInput | InvitationCreateOrConnectWithoutAcceptedByUserInput[]
+    upsert?: InvitationUpsertWithWhereUniqueWithoutAcceptedByUserInput | InvitationUpsertWithWhereUniqueWithoutAcceptedByUserInput[]
+    createMany?: InvitationCreateManyAcceptedByUserInputEnvelope
+    set?: InvitationWhereUniqueInput | InvitationWhereUniqueInput[]
+    disconnect?: InvitationWhereUniqueInput | InvitationWhereUniqueInput[]
+    delete?: InvitationWhereUniqueInput | InvitationWhereUniqueInput[]
+    connect?: InvitationWhereUniqueInput | InvitationWhereUniqueInput[]
+    update?: InvitationUpdateWithWhereUniqueWithoutAcceptedByUserInput | InvitationUpdateWithWhereUniqueWithoutAcceptedByUserInput[]
+    updateMany?: InvitationUpdateManyWithWhereWithoutAcceptedByUserInput | InvitationUpdateManyWithWhereWithoutAcceptedByUserInput[]
+    deleteMany?: InvitationScalarWhereInput | InvitationScalarWhereInput[]
+  }
+
   export type MonitoringPlanUncheckedUpdateManyWithoutCreatedByNestedInput = {
     create?: XOR<MonitoringPlanCreateWithoutCreatedByInput, MonitoringPlanUncheckedCreateWithoutCreatedByInput> | MonitoringPlanCreateWithoutCreatedByInput[] | MonitoringPlanUncheckedCreateWithoutCreatedByInput[]
     connectOrCreate?: MonitoringPlanCreateOrConnectWithoutCreatedByInput | MonitoringPlanCreateOrConnectWithoutCreatedByInput[]
@@ -26810,11 +28623,94 @@ export namespace Prisma {
     deleteMany?: NotificationScalarWhereInput | NotificationScalarWhereInput[]
   }
 
+  export type InvitationUncheckedUpdateManyWithoutInvitedByUserNestedInput = {
+    create?: XOR<InvitationCreateWithoutInvitedByUserInput, InvitationUncheckedCreateWithoutInvitedByUserInput> | InvitationCreateWithoutInvitedByUserInput[] | InvitationUncheckedCreateWithoutInvitedByUserInput[]
+    connectOrCreate?: InvitationCreateOrConnectWithoutInvitedByUserInput | InvitationCreateOrConnectWithoutInvitedByUserInput[]
+    upsert?: InvitationUpsertWithWhereUniqueWithoutInvitedByUserInput | InvitationUpsertWithWhereUniqueWithoutInvitedByUserInput[]
+    createMany?: InvitationCreateManyInvitedByUserInputEnvelope
+    set?: InvitationWhereUniqueInput | InvitationWhereUniqueInput[]
+    disconnect?: InvitationWhereUniqueInput | InvitationWhereUniqueInput[]
+    delete?: InvitationWhereUniqueInput | InvitationWhereUniqueInput[]
+    connect?: InvitationWhereUniqueInput | InvitationWhereUniqueInput[]
+    update?: InvitationUpdateWithWhereUniqueWithoutInvitedByUserInput | InvitationUpdateWithWhereUniqueWithoutInvitedByUserInput[]
+    updateMany?: InvitationUpdateManyWithWhereWithoutInvitedByUserInput | InvitationUpdateManyWithWhereWithoutInvitedByUserInput[]
+    deleteMany?: InvitationScalarWhereInput | InvitationScalarWhereInput[]
+  }
+
+  export type InvitationUncheckedUpdateManyWithoutAcceptedByUserNestedInput = {
+    create?: XOR<InvitationCreateWithoutAcceptedByUserInput, InvitationUncheckedCreateWithoutAcceptedByUserInput> | InvitationCreateWithoutAcceptedByUserInput[] | InvitationUncheckedCreateWithoutAcceptedByUserInput[]
+    connectOrCreate?: InvitationCreateOrConnectWithoutAcceptedByUserInput | InvitationCreateOrConnectWithoutAcceptedByUserInput[]
+    upsert?: InvitationUpsertWithWhereUniqueWithoutAcceptedByUserInput | InvitationUpsertWithWhereUniqueWithoutAcceptedByUserInput[]
+    createMany?: InvitationCreateManyAcceptedByUserInputEnvelope
+    set?: InvitationWhereUniqueInput | InvitationWhereUniqueInput[]
+    disconnect?: InvitationWhereUniqueInput | InvitationWhereUniqueInput[]
+    delete?: InvitationWhereUniqueInput | InvitationWhereUniqueInput[]
+    connect?: InvitationWhereUniqueInput | InvitationWhereUniqueInput[]
+    update?: InvitationUpdateWithWhereUniqueWithoutAcceptedByUserInput | InvitationUpdateWithWhereUniqueWithoutAcceptedByUserInput[]
+    updateMany?: InvitationUpdateManyWithWhereWithoutAcceptedByUserInput | InvitationUpdateManyWithWhereWithoutAcceptedByUserInput[]
+    deleteMany?: InvitationScalarWhereInput | InvitationScalarWhereInput[]
+  }
+
+  export type PracticeCreateNestedOneWithoutInvitationsInput = {
+    create?: XOR<PracticeCreateWithoutInvitationsInput, PracticeUncheckedCreateWithoutInvitationsInput>
+    connectOrCreate?: PracticeCreateOrConnectWithoutInvitationsInput
+    connect?: PracticeWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutSentInvitationsInput = {
+    create?: XOR<UserCreateWithoutSentInvitationsInput, UserUncheckedCreateWithoutSentInvitationsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutSentInvitationsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutAcceptedInvitationsInput = {
+    create?: XOR<UserCreateWithoutAcceptedInvitationsInput, UserUncheckedCreateWithoutAcceptedInvitationsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutAcceptedInvitationsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type EnumInvitationStatusFieldUpdateOperationsInput = {
+    set?: $Enums.InvitationStatus
+  }
+
+  export type PracticeUpdateOneRequiredWithoutInvitationsNestedInput = {
+    create?: XOR<PracticeCreateWithoutInvitationsInput, PracticeUncheckedCreateWithoutInvitationsInput>
+    connectOrCreate?: PracticeCreateOrConnectWithoutInvitationsInput
+    upsert?: PracticeUpsertWithoutInvitationsInput
+    connect?: PracticeWhereUniqueInput
+    update?: XOR<XOR<PracticeUpdateToOneWithWhereWithoutInvitationsInput, PracticeUpdateWithoutInvitationsInput>, PracticeUncheckedUpdateWithoutInvitationsInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutSentInvitationsNestedInput = {
+    create?: XOR<UserCreateWithoutSentInvitationsInput, UserUncheckedCreateWithoutSentInvitationsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutSentInvitationsInput
+    upsert?: UserUpsertWithoutSentInvitationsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutSentInvitationsInput, UserUpdateWithoutSentInvitationsInput>, UserUncheckedUpdateWithoutSentInvitationsInput>
+  }
+
+  export type UserUpdateOneWithoutAcceptedInvitationsNestedInput = {
+    create?: XOR<UserCreateWithoutAcceptedInvitationsInput, UserUncheckedCreateWithoutAcceptedInvitationsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutAcceptedInvitationsInput
+    upsert?: UserUpsertWithoutAcceptedInvitationsInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAcceptedInvitationsInput, UserUpdateWithoutAcceptedInvitationsInput>, UserUncheckedUpdateWithoutAcceptedInvitationsInput>
+  }
+
   export type UserCreateNestedManyWithoutPracticeInput = {
     create?: XOR<UserCreateWithoutPracticeInput, UserUncheckedCreateWithoutPracticeInput> | UserCreateWithoutPracticeInput[] | UserUncheckedCreateWithoutPracticeInput[]
     connectOrCreate?: UserCreateOrConnectWithoutPracticeInput | UserCreateOrConnectWithoutPracticeInput[]
     createMany?: UserCreateManyPracticeInputEnvelope
     connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+  }
+
+  export type InvitationCreateNestedManyWithoutPracticeInput = {
+    create?: XOR<InvitationCreateWithoutPracticeInput, InvitationUncheckedCreateWithoutPracticeInput> | InvitationCreateWithoutPracticeInput[] | InvitationUncheckedCreateWithoutPracticeInput[]
+    connectOrCreate?: InvitationCreateOrConnectWithoutPracticeInput | InvitationCreateOrConnectWithoutPracticeInput[]
+    createMany?: InvitationCreateManyPracticeInputEnvelope
+    connect?: InvitationWhereUniqueInput | InvitationWhereUniqueInput[]
   }
 
   export type PatientCreateNestedManyWithoutPracticeInput = {
@@ -26843,6 +28739,13 @@ export namespace Prisma {
     connectOrCreate?: UserCreateOrConnectWithoutPracticeInput | UserCreateOrConnectWithoutPracticeInput[]
     createMany?: UserCreateManyPracticeInputEnvelope
     connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+  }
+
+  export type InvitationUncheckedCreateNestedManyWithoutPracticeInput = {
+    create?: XOR<InvitationCreateWithoutPracticeInput, InvitationUncheckedCreateWithoutPracticeInput> | InvitationCreateWithoutPracticeInput[] | InvitationUncheckedCreateWithoutPracticeInput[]
+    connectOrCreate?: InvitationCreateOrConnectWithoutPracticeInput | InvitationCreateOrConnectWithoutPracticeInput[]
+    createMany?: InvitationCreateManyPracticeInputEnvelope
+    connect?: InvitationWhereUniqueInput | InvitationWhereUniqueInput[]
   }
 
   export type PatientUncheckedCreateNestedManyWithoutPracticeInput = {
@@ -26894,6 +28797,20 @@ export namespace Prisma {
     update?: UserUpdateWithWhereUniqueWithoutPracticeInput | UserUpdateWithWhereUniqueWithoutPracticeInput[]
     updateMany?: UserUpdateManyWithWhereWithoutPracticeInput | UserUpdateManyWithWhereWithoutPracticeInput[]
     deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
+  }
+
+  export type InvitationUpdateManyWithoutPracticeNestedInput = {
+    create?: XOR<InvitationCreateWithoutPracticeInput, InvitationUncheckedCreateWithoutPracticeInput> | InvitationCreateWithoutPracticeInput[] | InvitationUncheckedCreateWithoutPracticeInput[]
+    connectOrCreate?: InvitationCreateOrConnectWithoutPracticeInput | InvitationCreateOrConnectWithoutPracticeInput[]
+    upsert?: InvitationUpsertWithWhereUniqueWithoutPracticeInput | InvitationUpsertWithWhereUniqueWithoutPracticeInput[]
+    createMany?: InvitationCreateManyPracticeInputEnvelope
+    set?: InvitationWhereUniqueInput | InvitationWhereUniqueInput[]
+    disconnect?: InvitationWhereUniqueInput | InvitationWhereUniqueInput[]
+    delete?: InvitationWhereUniqueInput | InvitationWhereUniqueInput[]
+    connect?: InvitationWhereUniqueInput | InvitationWhereUniqueInput[]
+    update?: InvitationUpdateWithWhereUniqueWithoutPracticeInput | InvitationUpdateWithWhereUniqueWithoutPracticeInput[]
+    updateMany?: InvitationUpdateManyWithWhereWithoutPracticeInput | InvitationUpdateManyWithWhereWithoutPracticeInput[]
+    deleteMany?: InvitationScalarWhereInput | InvitationScalarWhereInput[]
   }
 
   export type PatientUpdateManyWithoutPracticeNestedInput = {
@@ -26950,6 +28867,20 @@ export namespace Prisma {
     update?: UserUpdateWithWhereUniqueWithoutPracticeInput | UserUpdateWithWhereUniqueWithoutPracticeInput[]
     updateMany?: UserUpdateManyWithWhereWithoutPracticeInput | UserUpdateManyWithWhereWithoutPracticeInput[]
     deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
+  }
+
+  export type InvitationUncheckedUpdateManyWithoutPracticeNestedInput = {
+    create?: XOR<InvitationCreateWithoutPracticeInput, InvitationUncheckedCreateWithoutPracticeInput> | InvitationCreateWithoutPracticeInput[] | InvitationUncheckedCreateWithoutPracticeInput[]
+    connectOrCreate?: InvitationCreateOrConnectWithoutPracticeInput | InvitationCreateOrConnectWithoutPracticeInput[]
+    upsert?: InvitationUpsertWithWhereUniqueWithoutPracticeInput | InvitationUpsertWithWhereUniqueWithoutPracticeInput[]
+    createMany?: InvitationCreateManyPracticeInputEnvelope
+    set?: InvitationWhereUniqueInput | InvitationWhereUniqueInput[]
+    disconnect?: InvitationWhereUniqueInput | InvitationWhereUniqueInput[]
+    delete?: InvitationWhereUniqueInput | InvitationWhereUniqueInput[]
+    connect?: InvitationWhereUniqueInput | InvitationWhereUniqueInput[]
+    update?: InvitationUpdateWithWhereUniqueWithoutPracticeInput | InvitationUpdateWithWhereUniqueWithoutPracticeInput[]
+    updateMany?: InvitationUpdateManyWithWhereWithoutPracticeInput | InvitationUpdateManyWithWhereWithoutPracticeInput[]
+    deleteMany?: InvitationScalarWhereInput | InvitationScalarWhereInput[]
   }
 
   export type PatientUncheckedUpdateManyWithoutPracticeNestedInput = {
@@ -28394,6 +30325,23 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
+  export type NestedEnumInvitationStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.InvitationStatus | EnumInvitationStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.InvitationStatus[] | ListEnumInvitationStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.InvitationStatus[] | ListEnumInvitationStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumInvitationStatusFilter<$PrismaModel> | $Enums.InvitationStatus
+  }
+
+  export type NestedEnumInvitationStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.InvitationStatus | EnumInvitationStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.InvitationStatus[] | ListEnumInvitationStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.InvitationStatus[] | ListEnumInvitationStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumInvitationStatusWithAggregatesFilter<$PrismaModel> | $Enums.InvitationStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumInvitationStatusFilter<$PrismaModel>
+    _max?: NestedEnumInvitationStatusFilter<$PrismaModel>
+  }
+
   export type NestedEnumSubscriptionTierFilter<$PrismaModel = never> = {
     equals?: $Enums.SubscriptionTier | EnumSubscriptionTierFieldRefInput<$PrismaModel>
     in?: $Enums.SubscriptionTier[] | ListEnumSubscriptionTierFieldRefInput<$PrismaModel>
@@ -28646,6 +30594,7 @@ export namespace Prisma {
     customBranding?: NullableJsonNullValueInput | InputJsonValue
     maxStorage?: number
     currentStorage?: number
+    invitations?: InvitationCreateNestedManyWithoutPracticeInput
     patients?: PatientCreateNestedManyWithoutPracticeInput
     monitoringPlans?: MonitoringPlanCreateNestedManyWithoutPracticeInput
     subscriptionHistory?: SubscriptionHistoryCreateNestedManyWithoutPracticeInput
@@ -28668,6 +30617,7 @@ export namespace Prisma {
     customBranding?: NullableJsonNullValueInput | InputJsonValue
     maxStorage?: number
     currentStorage?: number
+    invitations?: InvitationUncheckedCreateNestedManyWithoutPracticeInput
     patients?: PatientUncheckedCreateNestedManyWithoutPracticeInput
     monitoringPlans?: MonitoringPlanUncheckedCreateNestedManyWithoutPracticeInput
     subscriptionHistory?: SubscriptionHistoryUncheckedCreateNestedManyWithoutPracticeInput
@@ -28910,6 +30860,86 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type InvitationCreateWithoutInvitedByUserInput = {
+    id?: string
+    email: string
+    firstName: string
+    lastName: string
+    role: $Enums.UserRole
+    token: string
+    status?: $Enums.InvitationStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    acceptedAt?: Date | string | null
+    practice: PracticeCreateNestedOneWithoutInvitationsInput
+    acceptedByUser?: UserCreateNestedOneWithoutAcceptedInvitationsInput
+  }
+
+  export type InvitationUncheckedCreateWithoutInvitedByUserInput = {
+    id?: string
+    email: string
+    firstName: string
+    lastName: string
+    role: $Enums.UserRole
+    token: string
+    status?: $Enums.InvitationStatus
+    practiceId: string
+    acceptedByUserId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    acceptedAt?: Date | string | null
+  }
+
+  export type InvitationCreateOrConnectWithoutInvitedByUserInput = {
+    where: InvitationWhereUniqueInput
+    create: XOR<InvitationCreateWithoutInvitedByUserInput, InvitationUncheckedCreateWithoutInvitedByUserInput>
+  }
+
+  export type InvitationCreateManyInvitedByUserInputEnvelope = {
+    data: InvitationCreateManyInvitedByUserInput | InvitationCreateManyInvitedByUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type InvitationCreateWithoutAcceptedByUserInput = {
+    id?: string
+    email: string
+    firstName: string
+    lastName: string
+    role: $Enums.UserRole
+    token: string
+    status?: $Enums.InvitationStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    acceptedAt?: Date | string | null
+    practice: PracticeCreateNestedOneWithoutInvitationsInput
+    invitedByUser: UserCreateNestedOneWithoutSentInvitationsInput
+  }
+
+  export type InvitationUncheckedCreateWithoutAcceptedByUserInput = {
+    id?: string
+    email: string
+    firstName: string
+    lastName: string
+    role: $Enums.UserRole
+    token: string
+    status?: $Enums.InvitationStatus
+    practiceId: string
+    invitedByUserId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    acceptedAt?: Date | string | null
+  }
+
+  export type InvitationCreateOrConnectWithoutAcceptedByUserInput = {
+    where: InvitationWhereUniqueInput
+    create: XOR<InvitationCreateWithoutAcceptedByUserInput, InvitationUncheckedCreateWithoutAcceptedByUserInput>
+  }
+
+  export type InvitationCreateManyAcceptedByUserInputEnvelope = {
+    data: InvitationCreateManyAcceptedByUserInput | InvitationCreateManyAcceptedByUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type PracticeUpsertWithoutUsersInput = {
     update: XOR<PracticeUpdateWithoutUsersInput, PracticeUncheckedUpdateWithoutUsersInput>
     create: XOR<PracticeCreateWithoutUsersInput, PracticeUncheckedCreateWithoutUsersInput>
@@ -28938,6 +30968,7 @@ export namespace Prisma {
     customBranding?: NullableJsonNullValueInput | InputJsonValue
     maxStorage?: IntFieldUpdateOperationsInput | number
     currentStorage?: IntFieldUpdateOperationsInput | number
+    invitations?: InvitationUpdateManyWithoutPracticeNestedInput
     patients?: PatientUpdateManyWithoutPracticeNestedInput
     monitoringPlans?: MonitoringPlanUpdateManyWithoutPracticeNestedInput
     subscriptionHistory?: SubscriptionHistoryUpdateManyWithoutPracticeNestedInput
@@ -28960,6 +30991,7 @@ export namespace Prisma {
     customBranding?: NullableJsonNullValueInput | InputJsonValue
     maxStorage?: IntFieldUpdateOperationsInput | number
     currentStorage?: IntFieldUpdateOperationsInput | number
+    invitations?: InvitationUncheckedUpdateManyWithoutPracticeNestedInput
     patients?: PatientUncheckedUpdateManyWithoutPracticeNestedInput
     monitoringPlans?: MonitoringPlanUncheckedUpdateManyWithoutPracticeNestedInput
     subscriptionHistory?: SubscriptionHistoryUncheckedUpdateManyWithoutPracticeNestedInput
@@ -29159,6 +31191,373 @@ export namespace Prisma {
     isRead?: BoolFilter<"Notification"> | boolean
   }
 
+  export type InvitationUpsertWithWhereUniqueWithoutInvitedByUserInput = {
+    where: InvitationWhereUniqueInput
+    update: XOR<InvitationUpdateWithoutInvitedByUserInput, InvitationUncheckedUpdateWithoutInvitedByUserInput>
+    create: XOR<InvitationCreateWithoutInvitedByUserInput, InvitationUncheckedCreateWithoutInvitedByUserInput>
+  }
+
+  export type InvitationUpdateWithWhereUniqueWithoutInvitedByUserInput = {
+    where: InvitationWhereUniqueInput
+    data: XOR<InvitationUpdateWithoutInvitedByUserInput, InvitationUncheckedUpdateWithoutInvitedByUserInput>
+  }
+
+  export type InvitationUpdateManyWithWhereWithoutInvitedByUserInput = {
+    where: InvitationScalarWhereInput
+    data: XOR<InvitationUpdateManyMutationInput, InvitationUncheckedUpdateManyWithoutInvitedByUserInput>
+  }
+
+  export type InvitationScalarWhereInput = {
+    AND?: InvitationScalarWhereInput | InvitationScalarWhereInput[]
+    OR?: InvitationScalarWhereInput[]
+    NOT?: InvitationScalarWhereInput | InvitationScalarWhereInput[]
+    id?: StringFilter<"Invitation"> | string
+    email?: StringFilter<"Invitation"> | string
+    firstName?: StringFilter<"Invitation"> | string
+    lastName?: StringFilter<"Invitation"> | string
+    role?: EnumUserRoleFilter<"Invitation"> | $Enums.UserRole
+    token?: StringFilter<"Invitation"> | string
+    status?: EnumInvitationStatusFilter<"Invitation"> | $Enums.InvitationStatus
+    practiceId?: StringFilter<"Invitation"> | string
+    invitedByUserId?: StringFilter<"Invitation"> | string
+    acceptedByUserId?: StringNullableFilter<"Invitation"> | string | null
+    createdAt?: DateTimeFilter<"Invitation"> | Date | string
+    updatedAt?: DateTimeFilter<"Invitation"> | Date | string
+    acceptedAt?: DateTimeNullableFilter<"Invitation"> | Date | string | null
+  }
+
+  export type InvitationUpsertWithWhereUniqueWithoutAcceptedByUserInput = {
+    where: InvitationWhereUniqueInput
+    update: XOR<InvitationUpdateWithoutAcceptedByUserInput, InvitationUncheckedUpdateWithoutAcceptedByUserInput>
+    create: XOR<InvitationCreateWithoutAcceptedByUserInput, InvitationUncheckedCreateWithoutAcceptedByUserInput>
+  }
+
+  export type InvitationUpdateWithWhereUniqueWithoutAcceptedByUserInput = {
+    where: InvitationWhereUniqueInput
+    data: XOR<InvitationUpdateWithoutAcceptedByUserInput, InvitationUncheckedUpdateWithoutAcceptedByUserInput>
+  }
+
+  export type InvitationUpdateManyWithWhereWithoutAcceptedByUserInput = {
+    where: InvitationScalarWhereInput
+    data: XOR<InvitationUpdateManyMutationInput, InvitationUncheckedUpdateManyWithoutAcceptedByUserInput>
+  }
+
+  export type PracticeCreateWithoutInvitationsInput = {
+    id?: string
+    name: string
+    address?: string | null
+    phone?: string | null
+    email?: string | null
+    logo?: string | null
+    subscriptionTier?: $Enums.SubscriptionTier
+    subscriptionStatus?: $Enums.SubscriptionStatus
+    subscriptionStartDate?: Date | string | null
+    subscriptionEndDate?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    isActive?: boolean
+    customBranding?: NullableJsonNullValueInput | InputJsonValue
+    maxStorage?: number
+    currentStorage?: number
+    users?: UserCreateNestedManyWithoutPracticeInput
+    patients?: PatientCreateNestedManyWithoutPracticeInput
+    monitoringPlans?: MonitoringPlanCreateNestedManyWithoutPracticeInput
+    subscriptionHistory?: SubscriptionHistoryCreateNestedManyWithoutPracticeInput
+  }
+
+  export type PracticeUncheckedCreateWithoutInvitationsInput = {
+    id?: string
+    name: string
+    address?: string | null
+    phone?: string | null
+    email?: string | null
+    logo?: string | null
+    subscriptionTier?: $Enums.SubscriptionTier
+    subscriptionStatus?: $Enums.SubscriptionStatus
+    subscriptionStartDate?: Date | string | null
+    subscriptionEndDate?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    isActive?: boolean
+    customBranding?: NullableJsonNullValueInput | InputJsonValue
+    maxStorage?: number
+    currentStorage?: number
+    users?: UserUncheckedCreateNestedManyWithoutPracticeInput
+    patients?: PatientUncheckedCreateNestedManyWithoutPracticeInput
+    monitoringPlans?: MonitoringPlanUncheckedCreateNestedManyWithoutPracticeInput
+    subscriptionHistory?: SubscriptionHistoryUncheckedCreateNestedManyWithoutPracticeInput
+  }
+
+  export type PracticeCreateOrConnectWithoutInvitationsInput = {
+    where: PracticeWhereUniqueInput
+    create: XOR<PracticeCreateWithoutInvitationsInput, PracticeUncheckedCreateWithoutInvitationsInput>
+  }
+
+  export type UserCreateWithoutSentInvitationsInput = {
+    id?: string
+    email: string
+    password: string
+    firstName: string
+    lastName: string
+    role: $Enums.UserRole
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    isActive?: boolean
+    resetToken?: string | null
+    resetTokenExpiry?: Date | string | null
+    practice?: PracticeCreateNestedOneWithoutUsersInput
+    createdMonitoringPlans?: MonitoringPlanCreateNestedManyWithoutCreatedByInput
+    assignedMonitoringPlans?: MonitoringPlanAssignmentCreateNestedManyWithoutUserInput
+    createdTreatments?: TreatmentCreateNestedManyWithoutCreatedByInput
+    observations?: ObservationCreateNestedManyWithoutRecordedByInput
+    createdPatients?: PatientCreateNestedManyWithoutCreatedByInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    acceptedInvitations?: InvitationCreateNestedManyWithoutAcceptedByUserInput
+  }
+
+  export type UserUncheckedCreateWithoutSentInvitationsInput = {
+    id?: string
+    email: string
+    password: string
+    firstName: string
+    lastName: string
+    role: $Enums.UserRole
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    isActive?: boolean
+    practiceId?: string | null
+    resetToken?: string | null
+    resetTokenExpiry?: Date | string | null
+    createdMonitoringPlans?: MonitoringPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    assignedMonitoringPlans?: MonitoringPlanAssignmentUncheckedCreateNestedManyWithoutUserInput
+    createdTreatments?: TreatmentUncheckedCreateNestedManyWithoutCreatedByInput
+    observations?: ObservationUncheckedCreateNestedManyWithoutRecordedByInput
+    createdPatients?: PatientUncheckedCreateNestedManyWithoutCreatedByInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    acceptedInvitations?: InvitationUncheckedCreateNestedManyWithoutAcceptedByUserInput
+  }
+
+  export type UserCreateOrConnectWithoutSentInvitationsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutSentInvitationsInput, UserUncheckedCreateWithoutSentInvitationsInput>
+  }
+
+  export type UserCreateWithoutAcceptedInvitationsInput = {
+    id?: string
+    email: string
+    password: string
+    firstName: string
+    lastName: string
+    role: $Enums.UserRole
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    isActive?: boolean
+    resetToken?: string | null
+    resetTokenExpiry?: Date | string | null
+    practice?: PracticeCreateNestedOneWithoutUsersInput
+    createdMonitoringPlans?: MonitoringPlanCreateNestedManyWithoutCreatedByInput
+    assignedMonitoringPlans?: MonitoringPlanAssignmentCreateNestedManyWithoutUserInput
+    createdTreatments?: TreatmentCreateNestedManyWithoutCreatedByInput
+    observations?: ObservationCreateNestedManyWithoutRecordedByInput
+    createdPatients?: PatientCreateNestedManyWithoutCreatedByInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    sentInvitations?: InvitationCreateNestedManyWithoutInvitedByUserInput
+  }
+
+  export type UserUncheckedCreateWithoutAcceptedInvitationsInput = {
+    id?: string
+    email: string
+    password: string
+    firstName: string
+    lastName: string
+    role: $Enums.UserRole
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    isActive?: boolean
+    practiceId?: string | null
+    resetToken?: string | null
+    resetTokenExpiry?: Date | string | null
+    createdMonitoringPlans?: MonitoringPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    assignedMonitoringPlans?: MonitoringPlanAssignmentUncheckedCreateNestedManyWithoutUserInput
+    createdTreatments?: TreatmentUncheckedCreateNestedManyWithoutCreatedByInput
+    observations?: ObservationUncheckedCreateNestedManyWithoutRecordedByInput
+    createdPatients?: PatientUncheckedCreateNestedManyWithoutCreatedByInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    sentInvitations?: InvitationUncheckedCreateNestedManyWithoutInvitedByUserInput
+  }
+
+  export type UserCreateOrConnectWithoutAcceptedInvitationsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutAcceptedInvitationsInput, UserUncheckedCreateWithoutAcceptedInvitationsInput>
+  }
+
+  export type PracticeUpsertWithoutInvitationsInput = {
+    update: XOR<PracticeUpdateWithoutInvitationsInput, PracticeUncheckedUpdateWithoutInvitationsInput>
+    create: XOR<PracticeCreateWithoutInvitationsInput, PracticeUncheckedCreateWithoutInvitationsInput>
+    where?: PracticeWhereInput
+  }
+
+  export type PracticeUpdateToOneWithWhereWithoutInvitationsInput = {
+    where?: PracticeWhereInput
+    data: XOR<PracticeUpdateWithoutInvitationsInput, PracticeUncheckedUpdateWithoutInvitationsInput>
+  }
+
+  export type PracticeUpdateWithoutInvitationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    logo?: NullableStringFieldUpdateOperationsInput | string | null
+    subscriptionTier?: EnumSubscriptionTierFieldUpdateOperationsInput | $Enums.SubscriptionTier
+    subscriptionStatus?: EnumSubscriptionStatusFieldUpdateOperationsInput | $Enums.SubscriptionStatus
+    subscriptionStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    customBranding?: NullableJsonNullValueInput | InputJsonValue
+    maxStorage?: IntFieldUpdateOperationsInput | number
+    currentStorage?: IntFieldUpdateOperationsInput | number
+    users?: UserUpdateManyWithoutPracticeNestedInput
+    patients?: PatientUpdateManyWithoutPracticeNestedInput
+    monitoringPlans?: MonitoringPlanUpdateManyWithoutPracticeNestedInput
+    subscriptionHistory?: SubscriptionHistoryUpdateManyWithoutPracticeNestedInput
+  }
+
+  export type PracticeUncheckedUpdateWithoutInvitationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    logo?: NullableStringFieldUpdateOperationsInput | string | null
+    subscriptionTier?: EnumSubscriptionTierFieldUpdateOperationsInput | $Enums.SubscriptionTier
+    subscriptionStatus?: EnumSubscriptionStatusFieldUpdateOperationsInput | $Enums.SubscriptionStatus
+    subscriptionStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subscriptionEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    customBranding?: NullableJsonNullValueInput | InputJsonValue
+    maxStorage?: IntFieldUpdateOperationsInput | number
+    currentStorage?: IntFieldUpdateOperationsInput | number
+    users?: UserUncheckedUpdateManyWithoutPracticeNestedInput
+    patients?: PatientUncheckedUpdateManyWithoutPracticeNestedInput
+    monitoringPlans?: MonitoringPlanUncheckedUpdateManyWithoutPracticeNestedInput
+    subscriptionHistory?: SubscriptionHistoryUncheckedUpdateManyWithoutPracticeNestedInput
+  }
+
+  export type UserUpsertWithoutSentInvitationsInput = {
+    update: XOR<UserUpdateWithoutSentInvitationsInput, UserUncheckedUpdateWithoutSentInvitationsInput>
+    create: XOR<UserCreateWithoutSentInvitationsInput, UserUncheckedCreateWithoutSentInvitationsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutSentInvitationsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutSentInvitationsInput, UserUncheckedUpdateWithoutSentInvitationsInput>
+  }
+
+  export type UserUpdateWithoutSentInvitationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    resetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    practice?: PracticeUpdateOneWithoutUsersNestedInput
+    createdMonitoringPlans?: MonitoringPlanUpdateManyWithoutCreatedByNestedInput
+    assignedMonitoringPlans?: MonitoringPlanAssignmentUpdateManyWithoutUserNestedInput
+    createdTreatments?: TreatmentUpdateManyWithoutCreatedByNestedInput
+    observations?: ObservationUpdateManyWithoutRecordedByNestedInput
+    createdPatients?: PatientUpdateManyWithoutCreatedByNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    acceptedInvitations?: InvitationUpdateManyWithoutAcceptedByUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutSentInvitationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    practiceId?: NullableStringFieldUpdateOperationsInput | string | null
+    resetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdMonitoringPlans?: MonitoringPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    assignedMonitoringPlans?: MonitoringPlanAssignmentUncheckedUpdateManyWithoutUserNestedInput
+    createdTreatments?: TreatmentUncheckedUpdateManyWithoutCreatedByNestedInput
+    observations?: ObservationUncheckedUpdateManyWithoutRecordedByNestedInput
+    createdPatients?: PatientUncheckedUpdateManyWithoutCreatedByNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    acceptedInvitations?: InvitationUncheckedUpdateManyWithoutAcceptedByUserNestedInput
+  }
+
+  export type UserUpsertWithoutAcceptedInvitationsInput = {
+    update: XOR<UserUpdateWithoutAcceptedInvitationsInput, UserUncheckedUpdateWithoutAcceptedInvitationsInput>
+    create: XOR<UserCreateWithoutAcceptedInvitationsInput, UserUncheckedCreateWithoutAcceptedInvitationsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutAcceptedInvitationsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutAcceptedInvitationsInput, UserUncheckedUpdateWithoutAcceptedInvitationsInput>
+  }
+
+  export type UserUpdateWithoutAcceptedInvitationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    resetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    practice?: PracticeUpdateOneWithoutUsersNestedInput
+    createdMonitoringPlans?: MonitoringPlanUpdateManyWithoutCreatedByNestedInput
+    assignedMonitoringPlans?: MonitoringPlanAssignmentUpdateManyWithoutUserNestedInput
+    createdTreatments?: TreatmentUpdateManyWithoutCreatedByNestedInput
+    observations?: ObservationUpdateManyWithoutRecordedByNestedInput
+    createdPatients?: PatientUpdateManyWithoutCreatedByNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    sentInvitations?: InvitationUpdateManyWithoutInvitedByUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutAcceptedInvitationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    practiceId?: NullableStringFieldUpdateOperationsInput | string | null
+    resetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdMonitoringPlans?: MonitoringPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    assignedMonitoringPlans?: MonitoringPlanAssignmentUncheckedUpdateManyWithoutUserNestedInput
+    createdTreatments?: TreatmentUncheckedUpdateManyWithoutCreatedByNestedInput
+    observations?: ObservationUncheckedUpdateManyWithoutRecordedByNestedInput
+    createdPatients?: PatientUncheckedUpdateManyWithoutCreatedByNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    sentInvitations?: InvitationUncheckedUpdateManyWithoutInvitedByUserNestedInput
+  }
+
   export type UserCreateWithoutPracticeInput = {
     id?: string
     email: string
@@ -29177,6 +31576,8 @@ export namespace Prisma {
     observations?: ObservationCreateNestedManyWithoutRecordedByInput
     createdPatients?: PatientCreateNestedManyWithoutCreatedByInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
+    sentInvitations?: InvitationCreateNestedManyWithoutInvitedByUserInput
+    acceptedInvitations?: InvitationCreateNestedManyWithoutAcceptedByUserInput
   }
 
   export type UserUncheckedCreateWithoutPracticeInput = {
@@ -29197,6 +31598,8 @@ export namespace Prisma {
     observations?: ObservationUncheckedCreateNestedManyWithoutRecordedByInput
     createdPatients?: PatientUncheckedCreateNestedManyWithoutCreatedByInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    sentInvitations?: InvitationUncheckedCreateNestedManyWithoutInvitedByUserInput
+    acceptedInvitations?: InvitationUncheckedCreateNestedManyWithoutAcceptedByUserInput
   }
 
   export type UserCreateOrConnectWithoutPracticeInput = {
@@ -29206,6 +31609,46 @@ export namespace Prisma {
 
   export type UserCreateManyPracticeInputEnvelope = {
     data: UserCreateManyPracticeInput | UserCreateManyPracticeInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type InvitationCreateWithoutPracticeInput = {
+    id?: string
+    email: string
+    firstName: string
+    lastName: string
+    role: $Enums.UserRole
+    token: string
+    status?: $Enums.InvitationStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    acceptedAt?: Date | string | null
+    invitedByUser: UserCreateNestedOneWithoutSentInvitationsInput
+    acceptedByUser?: UserCreateNestedOneWithoutAcceptedInvitationsInput
+  }
+
+  export type InvitationUncheckedCreateWithoutPracticeInput = {
+    id?: string
+    email: string
+    firstName: string
+    lastName: string
+    role: $Enums.UserRole
+    token: string
+    status?: $Enums.InvitationStatus
+    invitedByUserId: string
+    acceptedByUserId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    acceptedAt?: Date | string | null
+  }
+
+  export type InvitationCreateOrConnectWithoutPracticeInput = {
+    where: InvitationWhereUniqueInput
+    create: XOR<InvitationCreateWithoutPracticeInput, InvitationUncheckedCreateWithoutPracticeInput>
+  }
+
+  export type InvitationCreateManyPracticeInputEnvelope = {
+    data: InvitationCreateManyPracticeInput | InvitationCreateManyPracticeInput[]
     skipDuplicates?: boolean
   }
 
@@ -29379,6 +31822,22 @@ export namespace Prisma {
     resetTokenExpiry?: DateTimeNullableFilter<"User"> | Date | string | null
   }
 
+  export type InvitationUpsertWithWhereUniqueWithoutPracticeInput = {
+    where: InvitationWhereUniqueInput
+    update: XOR<InvitationUpdateWithoutPracticeInput, InvitationUncheckedUpdateWithoutPracticeInput>
+    create: XOR<InvitationCreateWithoutPracticeInput, InvitationUncheckedCreateWithoutPracticeInput>
+  }
+
+  export type InvitationUpdateWithWhereUniqueWithoutPracticeInput = {
+    where: InvitationWhereUniqueInput
+    data: XOR<InvitationUpdateWithoutPracticeInput, InvitationUncheckedUpdateWithoutPracticeInput>
+  }
+
+  export type InvitationUpdateManyWithWhereWithoutPracticeInput = {
+    where: InvitationScalarWhereInput
+    data: XOR<InvitationUpdateManyMutationInput, InvitationUncheckedUpdateManyWithoutPracticeInput>
+  }
+
   export type PatientUpsertWithWhereUniqueWithoutPracticeInput = {
     where: PatientWhereUniqueInput
     update: XOR<PatientUpdateWithoutPracticeInput, PatientUncheckedUpdateWithoutPracticeInput>
@@ -29459,6 +31918,7 @@ export namespace Prisma {
     maxStorage?: number
     currentStorage?: number
     users?: UserCreateNestedManyWithoutPracticeInput
+    invitations?: InvitationCreateNestedManyWithoutPracticeInput
     patients?: PatientCreateNestedManyWithoutPracticeInput
     monitoringPlans?: MonitoringPlanCreateNestedManyWithoutPracticeInput
   }
@@ -29481,6 +31941,7 @@ export namespace Prisma {
     maxStorage?: number
     currentStorage?: number
     users?: UserUncheckedCreateNestedManyWithoutPracticeInput
+    invitations?: InvitationUncheckedCreateNestedManyWithoutPracticeInput
     patients?: PatientUncheckedCreateNestedManyWithoutPracticeInput
     monitoringPlans?: MonitoringPlanUncheckedCreateNestedManyWithoutPracticeInput
   }
@@ -29519,6 +31980,7 @@ export namespace Prisma {
     maxStorage?: IntFieldUpdateOperationsInput | number
     currentStorage?: IntFieldUpdateOperationsInput | number
     users?: UserUpdateManyWithoutPracticeNestedInput
+    invitations?: InvitationUpdateManyWithoutPracticeNestedInput
     patients?: PatientUpdateManyWithoutPracticeNestedInput
     monitoringPlans?: MonitoringPlanUpdateManyWithoutPracticeNestedInput
   }
@@ -29541,6 +32003,7 @@ export namespace Prisma {
     maxStorage?: IntFieldUpdateOperationsInput | number
     currentStorage?: IntFieldUpdateOperationsInput | number
     users?: UserUncheckedUpdateManyWithoutPracticeNestedInput
+    invitations?: InvitationUncheckedUpdateManyWithoutPracticeNestedInput
     patients?: PatientUncheckedUpdateManyWithoutPracticeNestedInput
     monitoringPlans?: MonitoringPlanUncheckedUpdateManyWithoutPracticeNestedInput
   }
@@ -29563,6 +32026,7 @@ export namespace Prisma {
     maxStorage?: number
     currentStorage?: number
     users?: UserCreateNestedManyWithoutPracticeInput
+    invitations?: InvitationCreateNestedManyWithoutPracticeInput
     monitoringPlans?: MonitoringPlanCreateNestedManyWithoutPracticeInput
     subscriptionHistory?: SubscriptionHistoryCreateNestedManyWithoutPracticeInput
   }
@@ -29585,6 +32049,7 @@ export namespace Prisma {
     maxStorage?: number
     currentStorage?: number
     users?: UserUncheckedCreateNestedManyWithoutPracticeInput
+    invitations?: InvitationUncheckedCreateNestedManyWithoutPracticeInput
     monitoringPlans?: MonitoringPlanUncheckedCreateNestedManyWithoutPracticeInput
     subscriptionHistory?: SubscriptionHistoryUncheckedCreateNestedManyWithoutPracticeInput
   }
@@ -29612,6 +32077,8 @@ export namespace Prisma {
     createdTreatments?: TreatmentCreateNestedManyWithoutCreatedByInput
     observations?: ObservationCreateNestedManyWithoutRecordedByInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
+    sentInvitations?: InvitationCreateNestedManyWithoutInvitedByUserInput
+    acceptedInvitations?: InvitationCreateNestedManyWithoutAcceptedByUserInput
   }
 
   export type UserUncheckedCreateWithoutCreatedPatientsInput = {
@@ -29632,6 +32099,8 @@ export namespace Prisma {
     createdTreatments?: TreatmentUncheckedCreateNestedManyWithoutCreatedByInput
     observations?: ObservationUncheckedCreateNestedManyWithoutRecordedByInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    sentInvitations?: InvitationUncheckedCreateNestedManyWithoutInvitedByUserInput
+    acceptedInvitations?: InvitationUncheckedCreateNestedManyWithoutAcceptedByUserInput
   }
 
   export type UserCreateOrConnectWithoutCreatedPatientsInput = {
@@ -29802,6 +32271,7 @@ export namespace Prisma {
     maxStorage?: IntFieldUpdateOperationsInput | number
     currentStorage?: IntFieldUpdateOperationsInput | number
     users?: UserUpdateManyWithoutPracticeNestedInput
+    invitations?: InvitationUpdateManyWithoutPracticeNestedInput
     monitoringPlans?: MonitoringPlanUpdateManyWithoutPracticeNestedInput
     subscriptionHistory?: SubscriptionHistoryUpdateManyWithoutPracticeNestedInput
   }
@@ -29824,6 +32294,7 @@ export namespace Prisma {
     maxStorage?: IntFieldUpdateOperationsInput | number
     currentStorage?: IntFieldUpdateOperationsInput | number
     users?: UserUncheckedUpdateManyWithoutPracticeNestedInput
+    invitations?: InvitationUncheckedUpdateManyWithoutPracticeNestedInput
     monitoringPlans?: MonitoringPlanUncheckedUpdateManyWithoutPracticeNestedInput
     subscriptionHistory?: SubscriptionHistoryUncheckedUpdateManyWithoutPracticeNestedInput
   }
@@ -29857,6 +32328,8 @@ export namespace Prisma {
     createdTreatments?: TreatmentUpdateManyWithoutCreatedByNestedInput
     observations?: ObservationUpdateManyWithoutRecordedByNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
+    sentInvitations?: InvitationUpdateManyWithoutInvitedByUserNestedInput
+    acceptedInvitations?: InvitationUpdateManyWithoutAcceptedByUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedPatientsInput = {
@@ -29877,6 +32350,8 @@ export namespace Prisma {
     createdTreatments?: TreatmentUncheckedUpdateManyWithoutCreatedByNestedInput
     observations?: ObservationUncheckedUpdateManyWithoutRecordedByNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    sentInvitations?: InvitationUncheckedUpdateManyWithoutInvitedByUserNestedInput
+    acceptedInvitations?: InvitationUncheckedUpdateManyWithoutAcceptedByUserNestedInput
   }
 
   export type MonitoringPlanPatientUpsertWithWhereUniqueWithoutPatientInput = {
@@ -29988,6 +32463,7 @@ export namespace Prisma {
     maxStorage?: number
     currentStorage?: number
     users?: UserCreateNestedManyWithoutPracticeInput
+    invitations?: InvitationCreateNestedManyWithoutPracticeInput
     patients?: PatientCreateNestedManyWithoutPracticeInput
     subscriptionHistory?: SubscriptionHistoryCreateNestedManyWithoutPracticeInput
   }
@@ -30010,6 +32486,7 @@ export namespace Prisma {
     maxStorage?: number
     currentStorage?: number
     users?: UserUncheckedCreateNestedManyWithoutPracticeInput
+    invitations?: InvitationUncheckedCreateNestedManyWithoutPracticeInput
     patients?: PatientUncheckedCreateNestedManyWithoutPracticeInput
     subscriptionHistory?: SubscriptionHistoryUncheckedCreateNestedManyWithoutPracticeInput
   }
@@ -30037,6 +32514,8 @@ export namespace Prisma {
     observations?: ObservationCreateNestedManyWithoutRecordedByInput
     createdPatients?: PatientCreateNestedManyWithoutCreatedByInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
+    sentInvitations?: InvitationCreateNestedManyWithoutInvitedByUserInput
+    acceptedInvitations?: InvitationCreateNestedManyWithoutAcceptedByUserInput
   }
 
   export type UserUncheckedCreateWithoutCreatedMonitoringPlansInput = {
@@ -30057,6 +32536,8 @@ export namespace Prisma {
     observations?: ObservationUncheckedCreateNestedManyWithoutRecordedByInput
     createdPatients?: PatientUncheckedCreateNestedManyWithoutCreatedByInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    sentInvitations?: InvitationUncheckedCreateNestedManyWithoutInvitedByUserInput
+    acceptedInvitations?: InvitationUncheckedCreateNestedManyWithoutAcceptedByUserInput
   }
 
   export type UserCreateOrConnectWithoutCreatedMonitoringPlansInput = {
@@ -30243,6 +32724,7 @@ export namespace Prisma {
     maxStorage?: IntFieldUpdateOperationsInput | number
     currentStorage?: IntFieldUpdateOperationsInput | number
     users?: UserUpdateManyWithoutPracticeNestedInput
+    invitations?: InvitationUpdateManyWithoutPracticeNestedInput
     patients?: PatientUpdateManyWithoutPracticeNestedInput
     subscriptionHistory?: SubscriptionHistoryUpdateManyWithoutPracticeNestedInput
   }
@@ -30265,6 +32747,7 @@ export namespace Prisma {
     maxStorage?: IntFieldUpdateOperationsInput | number
     currentStorage?: IntFieldUpdateOperationsInput | number
     users?: UserUncheckedUpdateManyWithoutPracticeNestedInput
+    invitations?: InvitationUncheckedUpdateManyWithoutPracticeNestedInput
     patients?: PatientUncheckedUpdateManyWithoutPracticeNestedInput
     subscriptionHistory?: SubscriptionHistoryUncheckedUpdateManyWithoutPracticeNestedInput
   }
@@ -30298,6 +32781,8 @@ export namespace Prisma {
     observations?: ObservationUpdateManyWithoutRecordedByNestedInput
     createdPatients?: PatientUpdateManyWithoutCreatedByNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
+    sentInvitations?: InvitationUpdateManyWithoutInvitedByUserNestedInput
+    acceptedInvitations?: InvitationUpdateManyWithoutAcceptedByUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedMonitoringPlansInput = {
@@ -30318,6 +32803,8 @@ export namespace Prisma {
     observations?: ObservationUncheckedUpdateManyWithoutRecordedByNestedInput
     createdPatients?: PatientUncheckedUpdateManyWithoutCreatedByNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    sentInvitations?: InvitationUncheckedUpdateManyWithoutInvitedByUserNestedInput
+    acceptedInvitations?: InvitationUncheckedUpdateManyWithoutAcceptedByUserNestedInput
   }
 
   export type MonitoringPlanPatientUpsertWithWhereUniqueWithoutMonitoringPlanInput = {
@@ -30813,6 +33300,8 @@ export namespace Prisma {
     observations?: ObservationCreateNestedManyWithoutRecordedByInput
     createdPatients?: PatientCreateNestedManyWithoutCreatedByInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
+    sentInvitations?: InvitationCreateNestedManyWithoutInvitedByUserInput
+    acceptedInvitations?: InvitationCreateNestedManyWithoutAcceptedByUserInput
   }
 
   export type UserUncheckedCreateWithoutAssignedMonitoringPlansInput = {
@@ -30833,6 +33322,8 @@ export namespace Prisma {
     observations?: ObservationUncheckedCreateNestedManyWithoutRecordedByInput
     createdPatients?: PatientUncheckedCreateNestedManyWithoutCreatedByInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    sentInvitations?: InvitationUncheckedCreateNestedManyWithoutInvitedByUserInput
+    acceptedInvitations?: InvitationUncheckedCreateNestedManyWithoutAcceptedByUserInput
   }
 
   export type UserCreateOrConnectWithoutAssignedMonitoringPlansInput = {
@@ -30920,6 +33411,8 @@ export namespace Prisma {
     observations?: ObservationUpdateManyWithoutRecordedByNestedInput
     createdPatients?: PatientUpdateManyWithoutCreatedByNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
+    sentInvitations?: InvitationUpdateManyWithoutInvitedByUserNestedInput
+    acceptedInvitations?: InvitationUpdateManyWithoutAcceptedByUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAssignedMonitoringPlansInput = {
@@ -30940,6 +33433,8 @@ export namespace Prisma {
     observations?: ObservationUncheckedUpdateManyWithoutRecordedByNestedInput
     createdPatients?: PatientUncheckedUpdateManyWithoutCreatedByNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    sentInvitations?: InvitationUncheckedUpdateManyWithoutInvitedByUserNestedInput
+    acceptedInvitations?: InvitationUncheckedUpdateManyWithoutAcceptedByUserNestedInput
   }
 
   export type MonitoringPlanCreateWithoutNotesInput = {
@@ -31374,6 +33869,8 @@ export namespace Prisma {
     createdTreatments?: TreatmentCreateNestedManyWithoutCreatedByInput
     createdPatients?: PatientCreateNestedManyWithoutCreatedByInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
+    sentInvitations?: InvitationCreateNestedManyWithoutInvitedByUserInput
+    acceptedInvitations?: InvitationCreateNestedManyWithoutAcceptedByUserInput
   }
 
   export type UserUncheckedCreateWithoutObservationsInput = {
@@ -31394,6 +33891,8 @@ export namespace Prisma {
     createdTreatments?: TreatmentUncheckedCreateNestedManyWithoutCreatedByInput
     createdPatients?: PatientUncheckedCreateNestedManyWithoutCreatedByInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    sentInvitations?: InvitationUncheckedCreateNestedManyWithoutInvitedByUserInput
+    acceptedInvitations?: InvitationUncheckedCreateNestedManyWithoutAcceptedByUserInput
   }
 
   export type UserCreateOrConnectWithoutObservationsInput = {
@@ -31619,6 +34118,8 @@ export namespace Prisma {
     createdTreatments?: TreatmentUpdateManyWithoutCreatedByNestedInput
     createdPatients?: PatientUpdateManyWithoutCreatedByNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
+    sentInvitations?: InvitationUpdateManyWithoutInvitedByUserNestedInput
+    acceptedInvitations?: InvitationUpdateManyWithoutAcceptedByUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutObservationsInput = {
@@ -31639,6 +34140,8 @@ export namespace Prisma {
     createdTreatments?: TreatmentUncheckedUpdateManyWithoutCreatedByNestedInput
     createdPatients?: PatientUncheckedUpdateManyWithoutCreatedByNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    sentInvitations?: InvitationUncheckedUpdateManyWithoutInvitedByUserNestedInput
+    acceptedInvitations?: InvitationUncheckedUpdateManyWithoutAcceptedByUserNestedInput
   }
 
   export type FileUpsertWithWhereUniqueWithoutObservationInput = {
@@ -31953,6 +34456,8 @@ export namespace Prisma {
     observations?: ObservationCreateNestedManyWithoutRecordedByInput
     createdPatients?: PatientCreateNestedManyWithoutCreatedByInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
+    sentInvitations?: InvitationCreateNestedManyWithoutInvitedByUserInput
+    acceptedInvitations?: InvitationCreateNestedManyWithoutAcceptedByUserInput
   }
 
   export type UserUncheckedCreateWithoutCreatedTreatmentsInput = {
@@ -31973,6 +34478,8 @@ export namespace Prisma {
     observations?: ObservationUncheckedCreateNestedManyWithoutRecordedByInput
     createdPatients?: PatientUncheckedCreateNestedManyWithoutCreatedByInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    sentInvitations?: InvitationUncheckedCreateNestedManyWithoutInvitedByUserInput
+    acceptedInvitations?: InvitationUncheckedCreateNestedManyWithoutAcceptedByUserInput
   }
 
   export type UserCreateOrConnectWithoutCreatedTreatmentsInput = {
@@ -32160,6 +34667,8 @@ export namespace Prisma {
     observations?: ObservationUpdateManyWithoutRecordedByNestedInput
     createdPatients?: PatientUpdateManyWithoutCreatedByNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
+    sentInvitations?: InvitationUpdateManyWithoutInvitedByUserNestedInput
+    acceptedInvitations?: InvitationUpdateManyWithoutAcceptedByUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedTreatmentsInput = {
@@ -32180,6 +34689,8 @@ export namespace Prisma {
     observations?: ObservationUncheckedUpdateManyWithoutRecordedByNestedInput
     createdPatients?: PatientUncheckedUpdateManyWithoutCreatedByNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    sentInvitations?: InvitationUncheckedUpdateManyWithoutInvitedByUserNestedInput
+    acceptedInvitations?: InvitationUncheckedUpdateManyWithoutAcceptedByUserNestedInput
   }
 
   export type FileUpsertWithWhereUniqueWithoutTreatmentInput = {
@@ -32504,6 +35015,8 @@ export namespace Prisma {
     createdTreatments?: TreatmentCreateNestedManyWithoutCreatedByInput
     observations?: ObservationCreateNestedManyWithoutRecordedByInput
     createdPatients?: PatientCreateNestedManyWithoutCreatedByInput
+    sentInvitations?: InvitationCreateNestedManyWithoutInvitedByUserInput
+    acceptedInvitations?: InvitationCreateNestedManyWithoutAcceptedByUserInput
   }
 
   export type UserUncheckedCreateWithoutNotificationsInput = {
@@ -32524,6 +35037,8 @@ export namespace Prisma {
     createdTreatments?: TreatmentUncheckedCreateNestedManyWithoutCreatedByInput
     observations?: ObservationUncheckedCreateNestedManyWithoutRecordedByInput
     createdPatients?: PatientUncheckedCreateNestedManyWithoutCreatedByInput
+    sentInvitations?: InvitationUncheckedCreateNestedManyWithoutInvitedByUserInput
+    acceptedInvitations?: InvitationUncheckedCreateNestedManyWithoutAcceptedByUserInput
   }
 
   export type UserCreateOrConnectWithoutNotificationsInput = {
@@ -32581,6 +35096,8 @@ export namespace Prisma {
     createdTreatments?: TreatmentUpdateManyWithoutCreatedByNestedInput
     observations?: ObservationUpdateManyWithoutRecordedByNestedInput
     createdPatients?: PatientUpdateManyWithoutCreatedByNestedInput
+    sentInvitations?: InvitationUpdateManyWithoutInvitedByUserNestedInput
+    acceptedInvitations?: InvitationUpdateManyWithoutAcceptedByUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutNotificationsInput = {
@@ -32601,6 +35118,8 @@ export namespace Prisma {
     createdTreatments?: TreatmentUncheckedUpdateManyWithoutCreatedByNestedInput
     observations?: ObservationUncheckedUpdateManyWithoutRecordedByNestedInput
     createdPatients?: PatientUncheckedUpdateManyWithoutCreatedByNestedInput
+    sentInvitations?: InvitationUncheckedUpdateManyWithoutInvitedByUserNestedInput
+    acceptedInvitations?: InvitationUncheckedUpdateManyWithoutAcceptedByUserNestedInput
   }
 
   export type AlertUpsertWithoutNotificationsInput = {
@@ -32948,6 +35467,36 @@ export namespace Prisma {
     isRead?: boolean
   }
 
+  export type InvitationCreateManyInvitedByUserInput = {
+    id?: string
+    email: string
+    firstName: string
+    lastName: string
+    role: $Enums.UserRole
+    token: string
+    status?: $Enums.InvitationStatus
+    practiceId: string
+    acceptedByUserId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    acceptedAt?: Date | string | null
+  }
+
+  export type InvitationCreateManyAcceptedByUserInput = {
+    id?: string
+    email: string
+    firstName: string
+    lastName: string
+    role: $Enums.UserRole
+    token: string
+    status?: $Enums.InvitationStatus
+    practiceId: string
+    invitedByUserId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    acceptedAt?: Date | string | null
+  }
+
   export type MonitoringPlanUpdateWithoutCreatedByInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
@@ -33194,6 +35743,96 @@ export namespace Prisma {
     isRead?: BoolFieldUpdateOperationsInput | boolean
   }
 
+  export type InvitationUpdateWithoutInvitedByUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    token?: StringFieldUpdateOperationsInput | string
+    status?: EnumInvitationStatusFieldUpdateOperationsInput | $Enums.InvitationStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    acceptedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    practice?: PracticeUpdateOneRequiredWithoutInvitationsNestedInput
+    acceptedByUser?: UserUpdateOneWithoutAcceptedInvitationsNestedInput
+  }
+
+  export type InvitationUncheckedUpdateWithoutInvitedByUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    token?: StringFieldUpdateOperationsInput | string
+    status?: EnumInvitationStatusFieldUpdateOperationsInput | $Enums.InvitationStatus
+    practiceId?: StringFieldUpdateOperationsInput | string
+    acceptedByUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    acceptedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type InvitationUncheckedUpdateManyWithoutInvitedByUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    token?: StringFieldUpdateOperationsInput | string
+    status?: EnumInvitationStatusFieldUpdateOperationsInput | $Enums.InvitationStatus
+    practiceId?: StringFieldUpdateOperationsInput | string
+    acceptedByUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    acceptedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type InvitationUpdateWithoutAcceptedByUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    token?: StringFieldUpdateOperationsInput | string
+    status?: EnumInvitationStatusFieldUpdateOperationsInput | $Enums.InvitationStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    acceptedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    practice?: PracticeUpdateOneRequiredWithoutInvitationsNestedInput
+    invitedByUser?: UserUpdateOneRequiredWithoutSentInvitationsNestedInput
+  }
+
+  export type InvitationUncheckedUpdateWithoutAcceptedByUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    token?: StringFieldUpdateOperationsInput | string
+    status?: EnumInvitationStatusFieldUpdateOperationsInput | $Enums.InvitationStatus
+    practiceId?: StringFieldUpdateOperationsInput | string
+    invitedByUserId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    acceptedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type InvitationUncheckedUpdateManyWithoutAcceptedByUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    token?: StringFieldUpdateOperationsInput | string
+    status?: EnumInvitationStatusFieldUpdateOperationsInput | $Enums.InvitationStatus
+    practiceId?: StringFieldUpdateOperationsInput | string
+    invitedByUserId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    acceptedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
   export type UserCreateManyPracticeInput = {
     id?: string
     email: string
@@ -33206,6 +35845,21 @@ export namespace Prisma {
     isActive?: boolean
     resetToken?: string | null
     resetTokenExpiry?: Date | string | null
+  }
+
+  export type InvitationCreateManyPracticeInput = {
+    id?: string
+    email: string
+    firstName: string
+    lastName: string
+    role: $Enums.UserRole
+    token: string
+    status?: $Enums.InvitationStatus
+    invitedByUserId: string
+    acceptedByUserId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    acceptedAt?: Date | string | null
   }
 
   export type PatientCreateManyPracticeInput = {
@@ -33270,6 +35924,8 @@ export namespace Prisma {
     observations?: ObservationUpdateManyWithoutRecordedByNestedInput
     createdPatients?: PatientUpdateManyWithoutCreatedByNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
+    sentInvitations?: InvitationUpdateManyWithoutInvitedByUserNestedInput
+    acceptedInvitations?: InvitationUpdateManyWithoutAcceptedByUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPracticeInput = {
@@ -33290,6 +35946,8 @@ export namespace Prisma {
     observations?: ObservationUncheckedUpdateManyWithoutRecordedByNestedInput
     createdPatients?: PatientUncheckedUpdateManyWithoutCreatedByNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    sentInvitations?: InvitationUncheckedUpdateManyWithoutInvitedByUserNestedInput
+    acceptedInvitations?: InvitationUncheckedUpdateManyWithoutAcceptedByUserNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutPracticeInput = {
@@ -33304,6 +35962,51 @@ export namespace Prisma {
     isActive?: BoolFieldUpdateOperationsInput | boolean
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type InvitationUpdateWithoutPracticeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    token?: StringFieldUpdateOperationsInput | string
+    status?: EnumInvitationStatusFieldUpdateOperationsInput | $Enums.InvitationStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    acceptedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    invitedByUser?: UserUpdateOneRequiredWithoutSentInvitationsNestedInput
+    acceptedByUser?: UserUpdateOneWithoutAcceptedInvitationsNestedInput
+  }
+
+  export type InvitationUncheckedUpdateWithoutPracticeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    token?: StringFieldUpdateOperationsInput | string
+    status?: EnumInvitationStatusFieldUpdateOperationsInput | $Enums.InvitationStatus
+    invitedByUserId?: StringFieldUpdateOperationsInput | string
+    acceptedByUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    acceptedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type InvitationUncheckedUpdateManyWithoutPracticeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    token?: StringFieldUpdateOperationsInput | string
+    status?: EnumInvitationStatusFieldUpdateOperationsInput | $Enums.InvitationStatus
+    invitedByUserId?: StringFieldUpdateOperationsInput | string
+    acceptedByUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    acceptedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type PatientUpdateWithoutPracticeInput = {

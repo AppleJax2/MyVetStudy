@@ -14,11 +14,11 @@ export interface AuthenticatedRequest extends Request {
         practiceId: string | null;
         role: UserRole;
         permissions: Permission[];
-    }; 
-    // If you need typed params/query/body consistently, add them here too
-    // params: { id?: string; token?: string; /* ... */ };
-    // query: { /* ... */ };
-    // body: { /* ... */ };
+    };
+    // Add explicit typing for commonly accessed properties
+    params: Record<string, string>;
+    body: any;
+    query: Record<string, string>;
 }
 
 // Use the explicit AuthenticatedRequest type in function signatures
