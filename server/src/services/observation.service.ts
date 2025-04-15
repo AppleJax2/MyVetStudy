@@ -2,14 +2,17 @@ import { Injectable, NotFoundException, BadRequestException, InternalServerError
 import { Prisma, Observation, SymptomDataType, AlertSeverity } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 import { FindAllParams } from '../utils/findAll.params';
-import { findSymptomTemplateById } from './symptom.service'; // TODO: Inject SymptomService in the future
+import { SymptomService } from './symptom.service';
 
 // TODO: Add detailed logging
 // TODO: Add permission checks (e.g., user role within study allows observation recording?)
 
 @Injectable()
 export class ObservationService {
-    constructor(private prisma: PrismaService) { }
+    constructor(
+        private readonly prisma: PrismaService,
+        private readonly symptomService: SymptomService
+    ) { }
 
     /**
      * Validates the observation value against the data type defined in the SymptomTemplate.
@@ -94,7 +97,7 @@ export class ObservationService {
     ): Promise<Observation> {
         try {
             // 1. Fetch the SymptomTemplate to validate value and ensure it belongs to the study/practice
-            const symptomTemplate = await findSymptomTemplateById(studyId, data.symptomTemplateId, practiceId);
+            const symptomTemplate = await this.symptomService.findSymptomTemplateById(studyId, data.symptomTemplateId, practiceId);
             if (!symptomTemplate) {
                 throw new NotFoundException('Symptom template not found or not associated with this study');
             }
