@@ -3,6 +3,8 @@
     "target": "ES2018",
     "module": "CommonJS",
     "lib": ["ES2018", "ESNext.AsyncIterable", "DOM", "ES2020"],
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "outDir": "dist",
     "rootDir": "src",
     "strict": false,
