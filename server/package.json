@@ -6,7 +6,7 @@
     "test": "jest",
     "dev": "nodemon src/main.ts",
     "dev:nest": "nodemon src/main.ts",
-    "build": "rm -rf dist && tsc --project tsconfig.build.json --skipLibCheck",
+    "build": "prisma generate && rm -rf dist && tsc --project tsconfig.build.json --skipLibCheck",
     "start": "node dist/main.js",
     "db:migrate:dev": "prisma migrate dev",
     "db:migrate:deploy": "prisma migrate deploy",
