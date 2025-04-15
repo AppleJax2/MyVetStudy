@@ -33,7 +33,7 @@ This document explains how to deploy the MyVetStudy application to production en
    - Branch: `main` (or your production branch)
    - Root Directory: (leave blank)
    - Build Command: `cd server && npm install && npm run build && npx prisma generate && npx prisma migrate deploy`
-   - Start Command: `node server/dist/index.js`
+   - Start Command: `cd server && node dist/main.js`
    - Instance Type: "Starter" ($7/month) or higher based on needs
 
 4. Add the following environment variables:
@@ -42,7 +42,7 @@ This document explains how to deploy the MyVetStudy application to production en
    - `JWT_EXPIRES_IN`: `1d` (or your preferred token expiration time)
    - `NODE_ENV`: `production`
    - `PORT`: `10000` (Render's default port)
-   - `CLIENT_URL`: Your Netlify app URL (e.g., `https://myvetstudyapp.netlify.app`)
+   - `CLIENT_URL`: Your Netlify app URL (e.g., `https://myvetstudy.netlify.app`)
 
 5. Click "Create Web Service"
 
@@ -54,20 +54,66 @@ This document explains how to deploy the MyVetStudy application to production en
 2. Click "Add new site" → "Import an existing project"
 3. Connect to GitHub and select your repository
 4. Configure build settings:
-   - Base directory: Leave blank (or `/` since the package.json is in the root)
+   - Base directory: `client`
    - Build command: `npm install && npm run build`
    - Publish directory: `dist` (Vite's default build output directory)
 
 ### 2. Configure Environment Variables
 
 In your Netlify site's "Site settings" → "Environment variables", add:
-   - `VITE_API_URL`: Your Render.com backend URL (e.g., `https://myvetstudyapi.onrender.com/api`)
+   - `VITE_API_URL`: Your Render.com backend URL (e.g., `https://myvetstudyapi.onrender.com/api/v1`)
 
-### 3. Trigger Deployment
+### 3. Manual Deployment (Alternative)
 
-1. Click "Deploy site" to start the deployment
-2. Netlify will provide a random subdomain (e.g., `random-name-123.netlify.app`)
-3. [Optional] Configure a custom domain under "Domain settings"
+If you prefer to deploy manually or via CI/CD:
+1. Navigate to your project root
+2. Run: `cd client && npm run build && netlify deploy --prod --dir=dist`
+
+## Common Issues and Troubleshooting
+
+### Render Deployment Issues
+
+1. **Database connection failures**:
+   - Ensure your `DATABASE_URL` environment variable matches the internal connection URL provided by Render
+   - Verify database is active and not paused due to inactivity
+   - Check that database migrations have been applied with `npx prisma migrate deploy`
+
+2. **Application crashes on startup**:
+   - Check Render logs for specific error messages
+   - Ensure the start command uses the correct entry point: `node dist/main.js`
+   - Verify that environment variables are set correctly
+
+### Netlify Deployment Issues
+
+1. **Build failures**:
+   - Check that the base directory is set to `client`
+   - Verify that all dependencies are resolved correctly
+   - Look for TypeScript or ESLint errors that might be blocking the build
+
+2. **API Connection Issues**:
+   - Ensure `VITE_API_URL` points to the correct API endpoint with the correct prefix (`/api/v1`)
+   - Check CORS settings in the backend to allow requests from your Netlify domain
+
+## Project Scripts (from root)
+
+For ease of development and deployment, you can use these npm scripts from the project root:
+
+- `npm run install:all`: Install dependencies for client, server, and root
+- `npm run dev:client`: Start the development server for the client
+- `npm run dev:server`: Start the development server for the backend
+- `npm run build:client`: Build the client for production
+- `npm run build:server`: Build the server for production
+- `npm run deploy:client`: Build and deploy the client to Netlify
+- `npm run prisma:migrate`: Run database migrations locally
+- `npm run prisma:deploy`: Deploy database migrations to production
+- `npm run prisma:generate`: Generate Prisma client
+
+## Monitoring & Maintenance
+
+- Monitor logs in Render dashboard for backend issues
+- Use Netlify analytics for frontend monitoring
+- Set up uptime monitoring through Render or a third-party service
+- Regularly update dependencies to address security vulnerabilities
 
 ## Post-Deployment Tasks
 
@@ -76,18 +122,6 @@ In your Netlify site's "Site settings" → "Environment variables", add:
 3. **Setup Database Backups**: Configure automatic backups for your PostgreSQL database in Render
 4. **Monitoring**: Set up monitoring and alerts to track application health
 5. **SSL Certificate**: Ensure both Render and Netlify have HTTPS enabled (this should be automatic)
-
-## Troubleshooting
-
-### Common Backend Issues
-- **Database Migrations Failing**: Run the migrations manually with `npx prisma migrate deploy`
-- **CORS Errors**: Check that your backend CORS configuration includes your Netlify domain
-- **Environment Variables**: Verify all required variables are correctly set in Render
-
-### Common Frontend Issues
-- **API Connection Errors**: Check that `VITE_API_URL` points to the correct Render.com backend URL
-- **Build Failures**: Check Netlify build logs for detailed error information
-- **White Screen**: Verify that the PWA manifest is correctly configured and icons are present
 
 ## Scaling Considerations
 

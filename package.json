@@ -1,13 +1,20 @@
 {
-  "name": "package.json",
+  "name": "myvetstudyapp",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
+    "install:all": "npm install && cd client && npm install && cd ../server && npm install",
+    "dev:client": "cd client && npm run dev",
+    "dev:server": "cd server && npm run dev:nest",
+    "build:client": "cd client && npm run build",
+    "build:server": "cd server && npm run build",
+    "deploy:client": "cd client && npm run build && netlify deploy --prod --dir=dist",
+    "deploy:server": "echo 'Server deployment is managed through Render.com dashboard'",
+    "prisma:studio": "cd server && npm run db:studio",
+    "prisma:migrate": "cd server && npm run db:migrate:dev",
+    "prisma:deploy": "cd server && npm run db:migrate:deploy",
+    "prisma:generate": "cd server && npm run db:generate"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.6.1",
