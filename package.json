@@ -10,6 +10,7 @@
     "build:client": "cd client && TSC_COMPILE_ON_ERROR=true npm run build",
     "build:server": "cd server && npx prisma generate ; npm run build",
     "build": "cd server && npm install && npx prisma generate ; npm run build",
+    "render:build": "cd server && chmod +x render-build.sh && ./render-build.sh",
     "deploy:client": "cd client && npm run build && netlify deploy --prod --dir=dist",
     "deploy:server": "echo 'Server deployment is managed through Render.com dashboard'",
     "prisma:studio": "cd server && npm run db:studio",
