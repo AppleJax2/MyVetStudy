@@ -1,103 +1,207 @@
-import { PrismaClient, SymptomDataType, SymptomTemplate } from '../../generated/prisma';
-import AppError from '../utils/appError';
+import { Injectable, NotFoundException, InternalServerErrorException } from '@nestjs/common';
+import { PrismaService } from '../prisma/prisma.service';
+import { Observation } from '@prisma/client';
 
-const prisma = new PrismaClient();
+@Injectable()
+export class HealthTemplateService {
+  constructor(private readonly prisma: PrismaService) {}
 
-/**
- * Ensures that a practice has a default HEALTH_NOTE template.
- * If one doesn't exist, it creates one.
- * 
- * @param practiceId The ID of the practice
- * @returns The ID of the health note template
- */
-export const ensureHealthNoteTemplate = async (practiceId: string): Promise<string> => {
-  try {
-    // Check if the practice exists
-    const practice = await prisma.practice.findUnique({
-      where: { id: practiceId },
-      select: { id: true }
-    });
-
-    if (!practice) {
-      throw new AppError(`Practice with id ${practiceId} not found`, 404);
-    }
-
-    // Look for an existing HEALTH_NOTE template
-    const existingTemplate = await prisma.symptomTemplate.findFirst({
-      where: {
-        monitoringPlan: {
-          practiceId
-        },
-        dataType: SymptomDataType.HEALTH_NOTE,
-      },
-      select: { id: true },
-    });
-
-    // If one exists, return its ID
-    if (existingTemplate) {
-      return existingTemplate.id;
-    }
-
-    // Otherwise, create a default one
-    // First, get a monitoringPlan for this practice to link the template to
-    const monitoringPlan = await prisma.monitoringPlan.findFirst({
-      where: { practiceId },
-      select: { id: true },
-    });
-
-    if (!monitoringPlan) {
-      throw new AppError(
-        'Cannot create health note template: No monitoring plan exists for this practice',
-        404
-      );
-    }
-
-    // Create the default health note template
-    const newTemplate = await prisma.symptomTemplate.create({
-      data: {
-        name: 'General Health Notes',
-        description: 'For recording general health observations and notes',
-        dataType: SymptomDataType.HEALTH_NOTE,
-        monitoringPlan: {
-          connect: { id: monitoringPlan.id }
+  /**
+   * Get or create the HEALTH_NOTE template for a practice
+   * @param practiceId - ID of the practice
+   * @returns The HEALTH_NOTE template object
+   * @throws InternalServerErrorException if template creation fails
+   */
+  async getOrCreateHealthNoteTemplate(practiceId: string) {
+    try {
+      // Try to find existing health note template
+      let healthNoteTemplate = await this.prisma.symptomTemplate.findFirst({
+        where: {
+          practiceId,
+          AND: [
+            { valueType: 'TEXT' },
+            { name: 'Health Note' }
+          ]
         }
-      },
-    });
+      });
 
-    return newTemplate.id;
-  } catch (error) {
-    if (error instanceof AppError) {
-      throw error;
+      // If no template exists, create one
+      if (!healthNoteTemplate) {
+        healthNoteTemplate = await this.prisma.symptomTemplate.create({
+          data: {
+            name: 'Health Note',
+            description: 'General health status notes',
+            practiceId,
+            isArchived: false,
+            valueType: 'TEXT',
+            valueOptions: {},
+            icon: 'clipboard-notes'
+          }
+        });
+      }
+
+      return healthNoteTemplate;
+    } catch (error) {
+      console.error(`Error getting/creating health note template for practice ${practiceId}:`, error);
+      throw new InternalServerErrorException('Could not retrieve health note template');
     }
-    console.error('Error ensuring health note template:', error);
-    throw new AppError('Failed to setup health note template', 500);
   }
-};
 
-/**
- * Finds or creates the HEALTH_NOTE template for a practice.
- * This is a wrapper function for findHealthNoteTemplate in observation.controller.ts
- */
-export const findHealthNoteTemplate = async (practiceId: string): Promise<string> => {
-  const healthNoteTemplates = await prisma.symptomTemplate.findMany({
-    where: {
-      monitoringPlan: {
-        practiceId,
-      },
-      dataType: SymptomDataType.HEALTH_NOTE,
-    },
-    select: { id: true },
-  });
+  /**
+   * Create a health note observation
+   * @param data - Health note data
+   * @returns The created observation
+   * @throws NotFoundException if prerequisites are not found
+   * @throws InternalServerErrorException on database error
+   */
+  async createHealthNote(data: {
+    patientId: string;
+    monitoringPlanPatientId: string;
+    notes: string;
+    recordedById: string;
+    practiceId: string;
+  }): Promise<Observation> {
+    const { patientId, monitoringPlanPatientId, notes, recordedById, practiceId } = data;
 
-  if (healthNoteTemplates.length === 0) {
-    return ensureHealthNoteTemplate(practiceId);
+    try {
+      // 1. Verify MonitoringPlanPatient record exists and belongs to the practice
+      const planPatientRecord = await this.prisma.monitoringPlanPatient.findFirst({
+        where: {
+          id: monitoringPlanPatientId,
+          patient: {
+            id: patientId
+          },
+          monitoringPlan: {
+            practiceId
+          }
+        },
+        select: { id: true } // Only need to confirm existence
+      });
+
+      if (!planPatientRecord) {
+        throw new NotFoundException('Monitoring plan enrollment not found or access denied');
+      }
+
+      // 2. Get or create the HEALTH_NOTE template
+      const healthNoteTemplate = await this.getOrCreateHealthNoteTemplate(practiceId);
+
+      // 3. Create the observation
+      const newObservation = await this.prisma.observation.create({
+        data: {
+          symptomTemplate: {
+            connect: {
+              id: healthNoteTemplate.id
+            }
+          },
+          patient: {
+            connect: {
+              id: patientId
+            }
+          },
+          monitoringPlanPatient: {
+            connect: {
+              id: monitoringPlanPatientId
+            }
+          },
+          recordedBy: {
+            connect: {
+              id: recordedById
+            }
+          },
+          recordedAt: new Date(),
+          notes: notes.trim(),
+          value: {}
+        },
+        include: {
+          recordedBy: { // Include user info for display
+            select: {
+              id: true,
+              firstName: true,
+              lastName: true,
+            }
+          },
+        }
+      });
+
+      return newObservation;
+    } catch (error) {
+      if (error instanceof NotFoundException) {
+        throw error;
+      }
+      console.error('Failed to create health note:', error);
+      throw new InternalServerErrorException('Failed to create health note');
+    }
   }
-  
-  if (healthNoteTemplates.length > 1) {
-    console.warn(
-      `Multiple HEALTH_NOTE templates found for practice ${practiceId}. Using the first one.`
-    );
+
+  /**
+   * Get health notes for a specific monitoring plan enrollment
+   * @param params - Parameters for health note retrieval
+   * @returns Array of health note observations
+   * @throws NotFoundException if prerequisites are not found
+   * @throws InternalServerErrorException on database error
+   */
+  async getHealthNotes(params: {
+    patientId: string;
+    monitoringPlanPatientId: string;
+    practiceId: string;
+  }) {
+    const { patientId, monitoringPlanPatientId, practiceId } = params;
+
+    try {
+      // 1. Verify MonitoringPlanPatient record exists and belongs to the practice
+      const planPatientExists = await this.prisma.monitoringPlanPatient.count({
+        where: {
+          id: monitoringPlanPatientId,
+          patient: {
+            id: patientId
+          },
+          monitoringPlan: {
+            practiceId
+          }
+        }
+      });
+
+      if (planPatientExists === 0) {
+        throw new NotFoundException('Monitoring plan enrollment not found or access denied');
+      }
+
+      // 2. Find the HEALTH_NOTE template
+      const healthNoteTemplate = await this.getOrCreateHealthNoteTemplate(practiceId);
+
+      // 3. Find observations
+      const observations = await this.prisma.observation.findMany({
+        where: {
+          patient: {
+            id: patientId
+          },
+          monitoringPlanPatient: {
+            id: monitoringPlanPatientId
+          },
+          symptomTemplate: {
+            id: healthNoteTemplate.id
+          }
+        },
+        orderBy: {
+          recordedAt: 'desc', // Show newest first
+        },
+        include: {
+          recordedBy: {
+            select: {
+              id: true,
+              firstName: true,
+              lastName: true,
+            }
+          },
+        }
+      });
+
+      return observations;
+    } catch (error) {
+      if (error instanceof NotFoundException) {
+        throw error;
+      }
+      console.error('Failed to retrieve health notes:', error);
+      throw new InternalServerErrorException('Failed to retrieve health notes');
+    }
   }
-  
-  return healthNoteTemplates[0].id;
-}; 
+} 
