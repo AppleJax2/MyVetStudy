@@ -1,5 +1,5 @@
 import prisma from '../utils/prisma.client';
-import { Prisma, Sex } from '../generated/prisma';
+import { Prisma, Sex } from '@prisma/client';
 import AppError from '../utils/appError';
 
 /**

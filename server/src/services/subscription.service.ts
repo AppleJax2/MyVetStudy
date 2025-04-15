@@ -1,6 +1,7 @@
-import prisma from '../utils/prisma.client';
-import { Prisma, Practice, SubscriptionHistory, SubscriptionTier, SubscriptionStatus } from '../generated/prisma';
+import prisma from '../utils/prisma';
+import { Prisma, Practice, SubscriptionHistory, SubscriptionTier, SubscriptionStatus } from '@prisma/client';
 import AppError from '../utils/appError';
+import { SubscriptionTier as PrismaSubscriptionTier, SubscriptionStatus as PrismaSubscriptionStatus } from '@prisma/client';
 
 // TODO: Add detailed logging
 // TODO: Integrate with payment provider (e.g., Stripe) for checkout sessions and webhook handling.

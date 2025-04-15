@@ -1,5 +1,5 @@
 import prisma from '../utils/prisma.client';
-import { Prisma, SymptomTemplate, SymptomDataType } from '../generated/prisma';
+import { Prisma, SymptomTemplate, SymptomDataType } from '@prisma/client';
 import AppError from '../utils/appError';
 
 // TODO: Add detailed logging
@@ -22,172 +22,176 @@ const checkStudyAccess = async (studyId: string, practiceId: string): Promise<vo
 };
 
 /**
- * Creates a new SymptomTemplate for a specific study.
- * @param studyId - ID of the study to associate the template with.
- * @param data - SymptomTemplate creation data (Validated Zod input body).
- * @param practiceId - ID of the practice (for authorization check on study).
+ * Creates a new symptom template associated with a Monitoring Plan.
+ * @param monitoringPlanId - ID of the Monitoring Plan.
+ * @param data - Symptom template data (Validated Zod input body).
+ * @param practiceId - ID of the practice (for authorization).
  * @returns The created SymptomTemplate.
- * @throws AppError if study access check fails or DB error.
+ * @throws AppError if validation fails or DB error.
  */
 export const createSymptomTemplate = async (
-    studyId: string,
-    data: Omit<Prisma.SymptomTemplateCreateInput, 'study' | 'studyId'>,
+    monitoringPlanId: string,
+    data: Omit<Prisma.SymptomTemplateCreateInput, 'monitoringPlan' | 'monitoringPlanId'>,
     practiceId: string
 ): Promise<SymptomTemplate> => {
-    await checkStudyAccess(studyId, practiceId); // Authorize access to study first
-
     try {
-        // Prepare the data for Prisma, ensuring type compatibility
+        // Verify the monitoring plan exists and belongs to the practice
+        const planCheck = await prisma.monitoringPlan.count({
+            where: { id: monitoringPlanId, practiceId }
+        });
+        if (planCheck === 0) {
+            throw new AppError('Monitoring Plan not found or not associated with this practice', 404);
+        }
+
+        // Prepare data for Prisma create
         const createData: Prisma.SymptomTemplateCreateInput = {
-            ...data, // Spread the validated input data (name, dataType, etc.)
-            study: { connect: { id: studyId } }, // Connect to the study
+            ...data,
+            monitoringPlan: { connect: { id: monitoringPlanId } },
         };
 
         const symptomTemplate = await prisma.symptomTemplate.create({ data: createData });
         return symptomTemplate;
     } catch (error) {
-        console.error(`Error creating symptom template for study ${studyId}:`, error);
+        if (error instanceof AppError) {
+            throw error;
+        }
+        console.error('Error creating symptom template:', error);
         throw new AppError('Could not create symptom template due to an internal error', 500);
     }
 };
 
 /**
- * Retrieves all SymptomTemplates associated with a specific study.
- * @param studyId - ID of the study.
- * @param practiceId - ID of the practice (for authorization check on study).
- * @returns An array of SymptomTemplates.
- * @throws AppError if study access check fails or DB error.
+ * Finds all symptom templates for a specific Monitoring Plan.
+ * @param monitoringPlanId - ID of the Monitoring Plan.
+ * @param practiceId - ID of the practice (for authorization).
+ * @returns Array of SymptomTemplates.
+ * @throws AppError if validation fails or DB error.
  */
-export const findSymptomTemplatesByStudy = async (studyId: string, practiceId: string): Promise<SymptomTemplate[]> => {
-    await checkStudyAccess(studyId, practiceId);
-
+export const findSymptomTemplatesByMonitoringPlan = async (monitoringPlanId: string, practiceId: string): Promise<SymptomTemplate[]> => {
     try {
-        const templates = await prisma.symptomTemplate.findMany({
-            where: { studyId },
-            orderBy: {
-                // Optional: order by name or creation date
-                name: 'asc',
-            },
+        // Verify the monitoring plan exists and belongs to the practice
+        const planCheck = await prisma.monitoringPlan.count({
+            where: { id: monitoringPlanId, practiceId }
         });
-        return templates;
+        if (planCheck === 0) {
+            throw new AppError('Monitoring Plan not found or not associated with this practice', 404);
+        }
+
+        const symptomTemplates = await prisma.symptomTemplate.findMany({
+            where: { monitoringPlanId },
+            orderBy: { name: 'asc' },
+        });
+        return symptomTemplates;
     } catch (error) {
-        console.error(`Error retrieving symptom templates for study ${studyId}:`, error);
+        console.error('Error finding symptom templates:', error);
         throw new AppError('Could not retrieve symptom templates due to an internal error', 500);
     }
 };
 
 /**
- * Retrieves a specific SymptomTemplate by its ID, ensuring it belongs to the correct study.
- * @param studyId - ID of the study.
- * @param symptomId - ID of the symptom template.
- * @param practiceId - ID of the practice (for authorization check on study).
+ * Finds a specific symptom template by its ID.
+ * @param monitoringPlanId - ID of the Monitoring Plan (optional, for context/auth).
+ * @param symptomTemplateId - ID of the Symptom Template.
+ * @param practiceId - ID of the practice (for authorization).
  * @returns The SymptomTemplate or null if not found.
- * @throws AppError if study access check fails initially.
+ * @throws AppError if validation fails or DB error.
  */
-export const findSymptomTemplateById = async (
-    studyId: string,
-    symptomId: string,
-    practiceId: string
-): Promise<SymptomTemplate | null> => {
-    await checkStudyAccess(studyId, practiceId);
-
+export const findSymptomTemplateById = async (monitoringPlanId: string | undefined, symptomTemplateId: string, practiceId: string): Promise<SymptomTemplate | null> => {
     try {
-        const template = await prisma.symptomTemplate.findFirst({
-            where: {
-                id: symptomId,
-                studyId: studyId, // Ensure it belongs to the specified study
-            },
-        });
-        return template;
+        const where: Prisma.SymptomTemplateWhereInput = {
+            id: symptomTemplateId,
+            monitoringPlan: { practiceId } // Ensure it belongs to the correct practice
+        };
+
+        // If monitoringPlanId is provided, ensure it matches
+        if (monitoringPlanId) {
+            where.monitoringPlanId = monitoringPlanId;
+        }
+
+        const symptomTemplate = await prisma.symptomTemplate.findFirst({ where });
+        return symptomTemplate;
     } catch (error) {
-        console.error(`Error finding symptom template ${symptomId} for study ${studyId}:`, error);
+        console.error('Error finding symptom template by ID:', error);
         throw new AppError('Could not retrieve symptom template due to an internal error', 500);
     }
 };
 
 /**
- * Updates an existing SymptomTemplate.
- * @param studyId - ID of the study.
- * @param symptomId - ID of the symptom template to update.
+ * Updates an existing symptom template.
+ * @param symptomTemplateId - ID of the Symptom Template to update.
  * @param data - Update data (Validated Zod input body).
- * @param practiceId - ID of the practice (for authorization check on study).
+ * @param practiceId - ID of the practice (for authorization).
  * @returns The updated SymptomTemplate.
- * @throws AppError if study access fails, template not found, or DB error.
+ * @throws AppError if validation fails, template not found, or DB error.
  */
 export const updateSymptomTemplate = async (
-    studyId: string,
-    symptomId: string,
-    data: Partial<Omit<Prisma.SymptomTemplateUpdateInput, 'study'> >,
+    symptomTemplateId: string,
+    data: Partial<Omit<Prisma.SymptomTemplateUpdateInput, 'monitoringPlan'>>,
     practiceId: string
 ): Promise<SymptomTemplate> => {
-    await checkStudyAccess(studyId, practiceId);
-
     try {
-        // Use updateMany to ensure the template exists and belongs to the study atomically
-        // Alternatively, find first then update, but updateMany is safer against race conditions
-        const updateResult = await prisma.symptomTemplate.updateMany({
+        // Verify the template exists and belongs to the practice
+        const existingTemplate = await prisma.symptomTemplate.findFirst({
             where: {
-                id: symptomId,
-                studyId: studyId,
-            },
-            data: data,
+                id: symptomTemplateId,
+                monitoringPlan: { practiceId }
+            }
         });
 
-        if (updateResult.count === 0) {
-            throw new AppError('Symptom template not found within this study', 404);
+        if (!existingTemplate) {
+            throw new AppError('Symptom template not found or you do not have permission to update it', 404);
         }
 
-        // Fetch the updated template to return it
-        const updatedTemplate = await findSymptomTemplateById(studyId, symptomId, practiceId);
-        if (!updatedTemplate) {
-             // Should not happen if updateResult.count > 0, but belts and suspenders
-            throw new AppError('Failed to retrieve updated symptom template', 500);
-        }
-        return updatedTemplate;
-
+        // Perform the update
+        const updatedSymptomTemplate = await prisma.symptomTemplate.update({
+            where: { id: symptomTemplateId },
+            data,
+        });
+        return updatedSymptomTemplate;
     } catch (error) {
-        if (error instanceof AppError) throw error;
-        console.error(`Error updating symptom template ${symptomId} for study ${studyId}:`, error);
+        if (error instanceof AppError) {
+            throw error;
+        }
+        console.error('Error updating symptom template:', error);
         throw new AppError('Could not update symptom template due to an internal error', 500);
     }
 };
 
 /**
- * Deletes a SymptomTemplate.
- * @param studyId - ID of the study.
- * @param symptomId - ID of the symptom template to delete.
- * @param practiceId - ID of the practice (for authorization check on study).
+ * Deletes a symptom template.
+ * @param symptomTemplateId - ID of the Symptom Template to delete.
+ * @param practiceId - ID of the practice (for authorization).
  * @returns True if deletion was successful.
- * @throws AppError if study access fails, template not found, associated observations exist, or DB error.
+ * @throws AppError if validation fails, template not found, or DB error.
  */
-export const deleteSymptomTemplate = async (studyId: string, symptomId: string, practiceId: string): Promise<boolean> => {
-    await checkStudyAccess(studyId, practiceId);
-
+export const deleteSymptomTemplate = async (symptomTemplateId: string, practiceId: string): Promise<boolean> => {
     try {
-        // Use deleteMany to ensure atomic check and delete
-        const deleteResult = await prisma.symptomTemplate.deleteMany({
+        // Verify the template exists and belongs to the practice
+        const templateCheck = await prisma.symptomTemplate.count({
             where: {
-                id: symptomId,
-                studyId: studyId,
-            },
+                id: symptomTemplateId,
+                monitoringPlan: { practiceId }
+            }
         });
 
-        if (deleteResult.count === 0) {
-            throw new AppError('Symptom template not found within this study', 404);
+        if (templateCheck === 0) {
+            throw new AppError('Symptom template not found or you do not have permission to delete it', 404);
         }
 
+        // Perform the delete
+        await prisma.symptomTemplate.delete({
+            where: { id: symptomTemplateId },
+        });
         return true;
-
     } catch (error) {
-        if (error instanceof AppError) throw error;
-         if (error instanceof Prisma.PrismaClientKnownRequestError) {
-            // Check for foreign key constraint violation (P2003/P2014)
-            // This means there are Observations linked to this template
-            if (error.code === 'P2003' || error.code === 'P2014') {
-                 throw new AppError('Cannot delete symptom template because it has associated observations', 409); // 409 Conflict
-            }
+        if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2014') {
+            // Handle case where observations exist and deletion is restricted
+            throw new AppError('Cannot delete symptom template with associated observations', 400);
         }
-        console.error(`Error deleting symptom template ${symptomId} for study ${studyId}:`, error);
+        if (error instanceof AppError) {
+            throw error;
+        }
+        console.error('Error deleting symptom template:', error);
         throw new AppError('Could not delete symptom template due to an internal error', 500);
     }
 }; 

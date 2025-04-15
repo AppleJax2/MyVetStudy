@@ -1,5 +1,5 @@
 import prisma from '../utils/prisma.client';
-import { Prisma, Observation, SymptomDataType } from '../generated/prisma';
+import { Prisma, Observation, SymptomDataType, AlertSeverity } from '@prisma/client';
 import AppError from '../utils/appError';
 import { findSymptomTemplateById } from './symptom.service'; // For validating value against template
 

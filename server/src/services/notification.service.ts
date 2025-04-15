@@ -1,5 +1,5 @@
 import prisma from '../utils/prisma.client';
-import { Prisma, Notification } from '../generated/prisma';
+import { Prisma, Notification } from '@prisma/client';
 import AppError from '../utils/appError';
 
 // TODO: Add detailed logging

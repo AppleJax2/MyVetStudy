@@ -1,17 +1,17 @@
 import prisma from '../utils/prisma.client';
-import { Prisma, StudyStatus, StudyRole, SubscriptionTier } from '../generated/prisma';
+import { Prisma, MonitoringPlanStatus, MonitoringPlanRole, SubscriptionTier } from '@prisma/client';
 import AppError from '../utils/appError'; // Assuming AppError utility exists
 import { findPracticeById } from './practice.service'; // Assuming practice service exists
 
 // TODO: Implement detailed error handling, logging, and access control checks
 
 /**
- * Checks if a practice can create another study based on its subscription tier.
+ * Checks if a practice can create another monitoring plan based on its subscription tier.
  * @param practiceId - ID of the practice.
- * @param currentActiveStudies - Number of currently active studies.
- * @returns True if the practice can create a new study, false otherwise.
+ * @param currentActiveMonitoringPlans - Number of currently active monitoring plans.
+ * @returns True if the practice can create a new monitoring plan, false otherwise.
  */
-const canCreateStudy = async (practiceId: string, currentActiveStudies: number): Promise<boolean> => {
+const canCreateMonitoringPlan = async (practiceId: string, currentActiveMonitoringPlans: number): Promise<boolean> => {
     const practice = await findPracticeById(practiceId);
     if (!practice) {
         throw new AppError('Practice not found', 404);
@@ -19,16 +19,16 @@ const canCreateStudy = async (practiceId: string, currentActiveStudies: number):
 
     // Check subscription status (only active or trial allowed)
     if (practice.subscriptionStatus !== 'ACTIVE' && practice.subscriptionStatus !== 'TRIAL') {
-        // Allow DRAFT studies even if subscription is inactive/expired?
-        // For now, strict check: only Active/Trial can create *any* new study.
+        // Allow DRAFT monitoring plans even if subscription is inactive/expired?
+        // For now, strict check: only Active/Trial can create *any* new monitoring plan.
         return false;
     }
 
     switch (practice.subscriptionTier) {
         case SubscriptionTier.BASIC:
-            return currentActiveStudies < 5;
+            return currentActiveMonitoringPlans < 5;
         case SubscriptionTier.STANDARD:
-            return currentActiveStudies < 20;
+            return currentActiveMonitoringPlans < 20;
         case SubscriptionTier.PREMIUM:
         case SubscriptionTier.TRIAL: // Trial gives premium access
             return true; // Unlimited
@@ -38,64 +38,64 @@ const canCreateStudy = async (practiceId: string, currentActiveStudies: number):
 };
 
 /**
- * Creates a new study, checking subscription limits.
- * @param data - Study creation data (Validated Zod input body).
- * @param userId - ID of the user creating the study.
- * @param practiceId - ID of the practice the study belongs to.
- * @returns The created study.
+ * Creates a new monitoring plan, checking subscription limits.
+ * @param data - Monitoring Plan creation data (Validated Zod input body).
+ * @param userId - ID of the user creating the monitoring plan.
+ * @param practiceId - ID of the practice the monitoring plan belongs to.
+ * @returns The created monitoring plan.
  * @throws AppError if practice not found, subscription limits exceeded, or database error occurs.
  */
-export const createStudy = async (data: Omit<Prisma.StudyCreateInput, 'createdBy' | 'practice' | 'practiceId' | 'createdById'>, userId: string, practiceId: string) => {
+export const createMonitoringPlan = async (data: Omit<Prisma.MonitoringPlanCreateInput, 'createdBy' | 'practice' | 'practiceId' | 'createdById'>, userId: string, practiceId: string) => {
     try {
-        // Count current active studies for the practice
-        const activeStudiesCount = await prisma.study.count({
+        // Count current active monitoring plans for the practice
+        const activeMonitoringPlansCount = await prisma.monitoringPlan.count({
             where: {
                 practiceId,
-                status: StudyStatus.ACTIVE, // Only count ACTIVE studies against the limit
+                status: MonitoringPlanStatus.ACTIVE, // Only count ACTIVE monitoring plans against the limit
             },
         });
 
         // Check subscription limits before creating
-        const allowedToCreate = await canCreateStudy(practiceId, activeStudiesCount);
+        const allowedToCreate = await canCreateMonitoringPlan(practiceId, activeMonitoringPlansCount);
         // Only block creation/update to ACTIVE status if limit is reached.
-        if (!allowedToCreate && (data.status === StudyStatus.ACTIVE)) {
-            throw new AppError('Subscription limit for active studies reached. Upgrade required.', 403);
+        if (!allowedToCreate && (data.status === MonitoringPlanStatus.ACTIVE)) {
+            throw new AppError('Subscription limit for active monitoring plans reached. Upgrade required.', 403);
         }
 
         // Prepare data for Prisma create
-        const createData: Prisma.StudyCreateInput = {
+        const createData: Prisma.MonitoringPlanCreateInput = {
             ...data, // Spread the validated input data (title, description, etc.)
             practice: { connect: { id: practiceId } },
             createdBy: { connect: { id: userId } },
             // Ensure default status if not provided, defaulting to DRAFT
-            status: data.status ?? StudyStatus.DRAFT,
+            status: data.status ?? MonitoringPlanStatus.DRAFT,
         };
 
         // Proceed with creation
-        const study = await prisma.study.create({ data: createData });
-        return study;
+        const monitoringPlan = await prisma.monitoringPlan.create({ data: createData });
+        return monitoringPlan;
     } catch (error) {
         if (error instanceof AppError) {
             throw error; // Re-throw known application errors
         }
         // Log the unexpected error
-        console.error('Error creating study:', error);
+        console.error('Error creating monitoring plan:', error);
         // Throw a generic error
-        throw new AppError('Could not create study due to an internal error', 500);
+        throw new AppError('Could not create monitoring plan due to an internal error', 500);
     }
 };
 
 /**
- * Finds studies associated with a practice, with optional filtering and pagination.
+ * Finds monitoring plans associated with a practice, with optional filtering and pagination.
  * @param practiceId - ID of the practice.
  * @param options - Optional query parameters (e.g., status, search, limit, page).
- * @returns A list of studies and pagination metadata.
+ * @returns A list of monitoring plans and pagination metadata.
  */
-export const findStudiesByPractice = async (practiceId: string, options: { status?: StudyStatus; search?: string; limit?: number; page?: number } = {}) => {
+export const findMonitoringPlansByPractice = async (practiceId: string, options: { status?: MonitoringPlanStatus; search?: string; limit?: number; page?: number } = {}) => {
     const { status, search, limit = 10, page = 1 } = options;
     const skip = (page - 1) * limit;
 
-    const where: Prisma.StudyWhereInput = {
+    const where: Prisma.MonitoringPlanWhereInput = {
         practiceId,
     };
 
@@ -112,7 +112,7 @@ export const findStudiesByPractice = async (practiceId: string, options: { statu
     }
 
     try {
-        const studies = await prisma.study.findMany({
+        const monitoringPlans = await prisma.monitoringPlan.findMany({
             where,
             skip,
             take: limit,
@@ -123,44 +123,44 @@ export const findStudiesByPractice = async (practiceId: string, options: { statu
             // include: { _count: { select: { patients: true, assignedUsers: true } } }
         });
 
-        const totalStudies = await prisma.study.count({ where });
+        const totalMonitoringPlans = await prisma.monitoringPlan.count({ where });
 
         return {
-            studies,
+            monitoringPlans,
             pagination: {
-                total: totalStudies,
+                total: totalMonitoringPlans,
                 page,
                 limit,
-                totalPages: Math.ceil(totalStudies / limit),
+                totalPages: Math.ceil(totalMonitoringPlans / limit),
             },
         };
     } catch (error) {
-        console.error('Error finding studies for practice:', practiceId, error);
-        throw new AppError('Could not retrieve studies due to an internal error', 500);
+        console.error('Error finding monitoring plans for practice:', practiceId, error);
+        throw new AppError('Could not retrieve monitoring plans due to an internal error', 500);
     }
 };
 
 /**
- * Finds a specific study by its ID, ensuring it belongs to the correct practice.
+ * Finds a specific monitoring plan by its ID, ensuring it belongs to the correct practice.
  * Includes related data like patients and assigned users.
- * @param studyId - ID of the study.
+ * @param monitoringPlanId - ID of the monitoring plan.
  * @param practiceId - ID of the practice (for authorization).
- * @returns The study object or null if not found or not belonging to the practice.
+ * @returns The monitoring plan object or null if not found or not belonging to the practice.
  */
-export const findStudyById = async (studyId: string, practiceId: string) => {
+export const findMonitoringPlanById = async (monitoringPlanId: string, practiceId: string) => {
     try {
-        const study = await prisma.study.findFirst({
+        const monitoringPlan = await prisma.monitoringPlan.findFirst({
             where: {
-                id: studyId,
-                practiceId, // Crucial: Ensure study belongs to the requesting user's practice
+                id: monitoringPlanId,
+                practiceId, // Crucial: Ensure monitoring plan belongs to the requesting user's practice
             },
-            // Include related data needed for displaying the study details
+            // Include related data needed for displaying the monitoring plan details
             include: {
                 createdBy: {
                     select: { id: true, firstName: true, lastName: true }, // Select only necessary user fields
                 },
                 patients: {
-                    // Include patient details within the StudyPatient link
+                    // Include patient details within the MonitoringPlanPatient link
                     include: {
                         patient: {
                             select: { id: true, name: true, species: true, breed: true }, // Select necessary patient fields
@@ -169,7 +169,7 @@ export const findStudyById = async (studyId: string, practiceId: string) => {
                     where: { isActive: true }, // Optionally filter included relations
                 },
                 assignedUsers: {
-                    // Include user details within the StudyAssignment link
+                    // Include user details within the MonitoringPlanAssignment link
                     include: {
                         user: {
                             select: { id: true, firstName: true, lastName: true, role: true }, // Select necessary user fields
@@ -185,59 +185,58 @@ export const findStudyById = async (studyId: string, practiceId: string) => {
             },
         });
 
-        if (!study) {
-            // Return null if not found or doesn't belong to the practice
+        if (!monitoringPlan) {
             return null;
         }
 
-        return study;
+        return monitoringPlan;
     } catch (error) {
-        console.error(`Error finding study by ID ${studyId} for practice ${practiceId}:`, error);
-        throw new AppError('Could not retrieve study details due to an internal error', 500);
+        console.error(`Error finding monitoring plan ${monitoringPlanId} for practice ${practiceId}:`, error);
+        throw new AppError('Could not retrieve monitoring plan details due to an internal error', 500);
     }
 };
 
 /**
- * Updates an existing study.
- * Ensures study exists and belongs to the practice before updating.
+ * Updates an existing monitoring plan.
+ * Ensures monitoring plan exists and belongs to the practice before updating.
  * Handles potential subscription limit issues if changing status to ACTIVE.
- * @param studyId - ID of the study to update.
+ * @param monitoringPlanId - ID of the monitoring plan to update.
  * @param data - Update data (Validated Zod input body).
  * @param practiceId - ID of the practice (for authorization).
- * @returns The updated study object.
- * @throws AppError if study not found, not authorized, subscription limits exceeded, or DB error.
+ * @returns The updated monitoring plan object.
+ * @throws AppError if monitoring plan not found, not authorized, subscription limits exceeded, or DB error.
  */
-export const updateStudy = async (
-    studyId: string,
-    data: Partial<Omit<Prisma.StudyUpdateInput, 'createdBy' | 'practice'> & { status?: StudyStatus }>,
+export const updateMonitoringPlan = async (
+    monitoringPlanId: string,
+    data: Partial<Omit<Prisma.MonitoringPlanUpdateInput, 'createdBy' | 'practice'> & { status?: MonitoringPlanStatus }>,
     practiceId: string
 ) => {
     try {
-        // 1. Verify the study exists and belongs to the practice
-        const existingStudy = await prisma.study.findFirst({
+        // 1. Verify the monitoring plan exists and belongs to the practice
+        const existingMonitoringPlan = await prisma.monitoringPlan.findFirst({
             where: {
-                id: studyId,
+                id: monitoringPlanId,
                 practiceId,
             },
             select: { status: true }, // Select only the current status for checks
         });
 
-        if (!existingStudy) {
-            throw new AppError('Study not found or you do not have permission to update it', 404);
+        if (!existingMonitoringPlan) {
+            throw new AppError('Monitoring Plan not found or you do not have permission to update it', 404);
         }
 
         // 2. Check subscription limits IF the status is being changed to ACTIVE
-        if (data.status === StudyStatus.ACTIVE && existingStudy.status !== StudyStatus.ACTIVE) {
-            const activeStudiesCount = await prisma.study.count({
+        if (data.status === MonitoringPlanStatus.ACTIVE && existingMonitoringPlan.status !== MonitoringPlanStatus.ACTIVE) {
+            const activeMonitoringPlansCount = await prisma.monitoringPlan.count({
                 where: {
                     practiceId,
-                    status: StudyStatus.ACTIVE,
+                    status: MonitoringPlanStatus.ACTIVE,
                 },
             });
-            // Use the same limit checking logic as in createStudy
-            const allowedToActivate = await canCreateStudy(practiceId, activeStudiesCount);
+            // Use the same limit checking logic as in createMonitoringPlan
+            const allowedToActivate = await canCreateMonitoringPlan(practiceId, activeMonitoringPlansCount);
             if (!allowedToActivate) {
-                throw new AppError('Cannot activate study. Subscription limit for active studies reached.', 403);
+                throw new AppError('Cannot activate monitoring plan. Subscription limit for active plans reached.', 403);
             }
         }
 
@@ -245,377 +244,322 @@ export const updateStudy = async (
         // Ensure fields like createdById and practiceId are not accidentally updated
         const { createdById, practiceId: _, ...updateData } = data;
 
-        const updatedStudy = await prisma.study.update({
-            where: {
-                id: studyId,
-                // Practice ID check here is redundant due to the findFirst above, but can be added for safety
-                // practiceId: practiceId,
-            },
+        const updatedMonitoringPlan = await prisma.monitoringPlan.update({
+            where: { id: monitoringPlanId },
             data: updateData,
-            // Optionally include relations if needed in the response
-            // include: { ... }
         });
 
-        return updatedStudy;
-
+        return updatedMonitoringPlan;
     } catch (error) {
         if (error instanceof AppError) {
             throw error;
         }
-        if (error instanceof Prisma.PrismaClientKnownRequestError) {
-            // Handle potential Prisma errors, e.g., unique constraint violation if any
-            // if (error.code === 'P2002') { ... }
-        }
-        console.error(`Error updating study ${studyId}:`, error);
-        throw new AppError('Could not update study due to an internal error', 500);
+        console.error(`Error updating monitoring plan ${monitoringPlanId}:`, error);
+        throw new AppError('Could not update monitoring plan due to an internal error', 500);
     }
 };
 
 /**
- * Deletes a study.
- * Ensures study exists and belongs to the practice before deletion.
- * @param studyId - ID of the study to delete.
+ * Deletes a monitoring plan (soft delete or hard delete based on policy).
+ * Ensures monitoring plan exists and belongs to the practice.
+ * @param monitoringPlanId - ID of the monitoring plan to delete.
  * @param practiceId - ID of the practice (for authorization).
  * @returns True if deletion was successful.
- * @throws AppError if study not found, not authorized, or DB error.
+ * @throws AppError if monitoring plan not found, not authorized, or DB error.
  */
-export const deleteStudy = async (studyId: string, practiceId: string): Promise<boolean> => {
+export const deleteMonitoringPlan = async (monitoringPlanId: string, practiceId: string) => {
     try {
-        // Use deleteMany with where clause to ensure study belongs to the practice
-        // This atomically checks existence and deletes if matched.
-        const deleteResult = await prisma.study.deleteMany({
-            where: {
-                id: studyId,
-                practiceId, // Authorization check
-            },
+        // Verify the monitoring plan exists and belongs to the practice
+        const monitoringPlanCheck = await prisma.monitoringPlan.count({
+            where: { id: monitoringPlanId, practiceId },
         });
 
-        // deleteMany returns a count of deleted records.
-        // If count is 0, it means the study wasn't found or didn't belong to the practice.
-        if (deleteResult.count === 0) {
-            throw new AppError('Study not found or you do not have permission to delete it', 404);
+        if (monitoringPlanCheck === 0) {
+            throw new AppError('Monitoring Plan not found or you do not have permission to delete it', 404);
         }
 
-        return true; // Deletion successful
+        // Perform the delete (consider soft delete: update status to ARCHIVED/DELETED)
+        // For hard delete:
+        // TODO: Handle cascading deletes or related data constraints properly.
+        // Example: delete related assignments, patient enrollments first if needed.
+        await prisma.monitoringPlanPatient.deleteMany({ where: { monitoringPlanId } });
+        await prisma.monitoringPlanAssignment.deleteMany({ where: { monitoringPlanId } });
+        // ... delete other related data ...
+        const deleteResult = await prisma.monitoringPlan.delete({
+            where: { id: monitoringPlanId },
+        });
 
+        return deleteResult;
     } catch (error) {
+        if (error instanceof Prisma.PrismaClientKnownRequestError) {
+            // Handle specific Prisma errors, e.g., foreign key constraints
+            console.error('Prisma error deleting monitoring plan:', error.code, error.message);
+            throw new AppError(`Could not delete monitoring plan due to related data (Error ${error.code})`, 409); // 409 Conflict
+        }
         if (error instanceof AppError) {
             throw error;
         }
-        // Handle potential Prisma errors (e.g., foreign key constraints if not handled by cascade deletes)
-        if (error instanceof Prisma.PrismaClientKnownRequestError) {
-            // Example: Foreign key constraint violation
-            if (error.code === 'P2003' || error.code === 'P2014') {
-                 console.error(`Deletion failed due to related records for study ${studyId}:`, error);
-                 // Depending on requirements, maybe try to soft delete or return a specific error
-                 throw new AppError('Cannot delete study because it has associated records (e.g., patients, observations). Archive it instead?', 409); // 409 Conflict
-            }
-        }
-        console.error(`Error deleting study ${studyId}:`, error);
-        throw new AppError('Could not delete study due to an internal error', 500);
+        console.error(`Error deleting monitoring plan ${monitoringPlanId}:`, error);
+        throw new AppError('Could not delete monitoring plan due to an internal error', 500);
     }
 };
 
-// --- Placeholder functions for additional management ---
-
 /**
- * Adds a patient to a specific study.
- * Checks if study and patient exist and belong to the same practice.
- * Checks for existing enrollment.
- * @param studyId - ID of the study.
+ * Enrolls a patient into a monitoring plan.
+ * Checks if plan and patient exist and belong to the practice.
+ * @param monitoringPlanId - ID of the monitoring plan.
  * @param patientId - ID of the patient.
  * @param practiceId - ID of the practice (for authorization).
- * @returns The created StudyPatient record.
- * @throws AppError if study/patient not found, not in the same practice, already enrolled, or DB error.
+ * @returns The MonitoringPlanPatient enrollment record.
+ * @throws AppError if plan/patient not found, already enrolled, or DB error.
  */
-export const addPatientToStudyService = async (studyId: string, patientId: string, practiceId: string) => {
+export const enrollPatientInMonitoringPlan = async (monitoringPlanId: string, patientId: string, practiceId: string) => {
     try {
-        // 1. Verify study exists and belongs to the practice
-        const study = await prisma.study.findFirst({
-            where: { id: studyId, practiceId },
-            select: { id: true, status: true }, // Select minimal fields
-        });
-        if (!study) {
-            throw new AppError('Study not found or not associated with this practice', 404);
-        }
-        // Optional: Add check based on study status (e.g., cannot add patients to COMPLETED study)
-        if ([StudyStatus.COMPLETED, StudyStatus.ARCHIVED].includes(study.status)) {
-             throw new AppError(`Cannot add patient to a study with status: ${study.status}`, 400);
+        // Verify monitoring plan exists and belongs to practice
+        const planCheck = await prisma.monitoringPlan.count({ where: { id: monitoringPlanId, practiceId } });
+        if (planCheck === 0) {
+            throw new AppError('Monitoring Plan not found or not associated with this practice', 404);
         }
 
-        // 2. Verify patient exists and belongs to the practice
-        const patient = await prisma.patient.findFirst({
-            where: { id: patientId, practiceId },
-            select: { id: true }, // Select minimal fields
-        });
-        if (!patient) {
+        // Verify patient exists and belongs to practice
+        const patientCheck = await prisma.patient.count({ where: { id: patientId, practiceId } });
+        if (patientCheck === 0) {
             throw new AppError('Patient not found or not associated with this practice', 404);
         }
 
-        // 3. Check if patient is already enrolled in this study
-        const existingEnrollment = await prisma.studyPatient.findUnique({
-            where: {
-                studyId_patientId: { studyId, patientId },
-            },
+        // Check if already enrolled
+        const existingEnrollment = await prisma.monitoringPlanPatient.findUnique({
+            where: { monitoringPlanId_patientId: { monitoringPlanId, patientId } },
         });
+
         if (existingEnrollment) {
-            // If already enrolled but inactive, maybe reactivate? Or just throw error?
-            // For now, throw error if any enrollment exists.
-            throw new AppError('Patient is already enrolled in this study', 409); // 409 Conflict
+            // If inactive, reactivate? Or throw error?
+            if (existingEnrollment.isActive) {
+                throw new AppError('Patient is already enrolled in this monitoring plan', 409);
+            } else {
+                // Optionally reactivate: update isActive to true and return existingEnrollment
+                const updatedEnrollment = await prisma.monitoringPlanPatient.update({
+                    where: { id: existingEnrollment.id },
+                    data: { isActive: true, exitDate: null }
+                });
+                return updatedEnrollment;
+            }
         }
 
-        // 4. Create the StudyPatient record (enrollment)
-        const newEnrollment = await prisma.studyPatient.create({
+        // Create the enrollment record
+        const enrollment = await prisma.monitoringPlanPatient.create({
             data: {
-                studyId,
-                patientId,
-                // Default enrollment date is handled by Prisma schema (@default(now()))
-                // Default isActive is true
+                monitoringPlan: { connect: { id: monitoringPlanId } },
+                patient: { connect: { id: patientId } },
+                isActive: true,
             },
-            // Include related data if needed in response
-            include: {
-                study: { select: { id: true, title: true } },
-                patient: { select: { id: true, name: true } },
-            }
         });
 
-        return newEnrollment;
-
+        return enrollment;
     } catch (error) {
         if (error instanceof AppError) {
             throw error;
         }
-        if (error instanceof Prisma.PrismaClientKnownRequestError) {
-            // Handle potential DB errors (e.g., unique constraints - already checked above but good practice)
-            // if (error.code === 'P2002') { ... }
-        }
-        console.error(`Error adding patient ${patientId} to study ${studyId}:`, error);
-        throw new AppError('Could not add patient to study due to an internal error', 500);
+        console.error(`Error enrolling patient ${patientId} in plan ${monitoringPlanId}:`, error);
+        throw new AppError('Could not enroll patient due to an internal error', 500);
     }
 };
 
 /**
- * Removes (or deactivates) a patient's enrollment from a study.
- * Checks if enrollment exists and belongs to the practice (implicitly via studyId/patientId).
- * @param studyId - ID of the study.
+ * Removes (or deactivates) a patient's enrollment from a monitoring plan.
+ * Checks if enrollment exists and belongs to the practice (implicitly via monitoringPlanId/patientId).
+ * @param monitoringPlanId - ID of the monitoring plan.
  * @param patientId - ID of the patient.
- * @param practiceId - ID of the practice (for authorization check on study/patient).
+ * @param practiceId - ID of the practice (for authorization check on monitoring plan/patient).
  * @returns True if removal/deactivation was successful.
  * @throws AppError if enrollment not found, or DB error.
  */
-export const removePatientFromStudyService = async (studyId: string, patientId: string, practiceId: string) => {
+export const removePatientFromMonitoringPlan = async (monitoringPlanId: string, patientId: string, practiceId: string) => {
     try {
         // We need to ensure the requestor has rights via the practiceId,
         // but the delete itself only needs the composite key.
-        // First, verify the study belongs to the practice to prevent unauthorized access
-        const studyCheck = await prisma.study.count({
-            where: { id: studyId, practiceId }
+        // First, verify the monitoring plan belongs to the practice to prevent unauthorized access
+        const planCheck = await prisma.monitoringPlan.count({
+            where: { id: monitoringPlanId, practiceId }
         });
-        if (studyCheck === 0) {
-             throw new AppError('Study not found or not associated with this practice', 404);
+        if (planCheck === 0) {
+             throw new AppError('Monitoring Plan not found or not associated with this practice', 404);
         }
-        // Optionally, verify patient also belongs to practice (though study check often suffices)
+        // Optionally, verify patient also belongs to practice (though plan check often suffices)
         // const patientCheck = await prisma.patient.count({ where: { id: patientId, practiceId }});
         // if (patientCheck === 0) { ... }
 
-        // Attempt to delete the StudyPatient record
+        // Attempt to delete the MonitoringPlanPatient record
         // Using deleteMany ensures it only deletes if the combo exists.
-        const deleteResult = await prisma.studyPatient.deleteMany({
+        const deleteResult = await prisma.monitoringPlanPatient.deleteMany({
             where: {
-                studyId: studyId,
+                monitoringPlanId: monitoringPlanId,
                 patientId: patientId,
-                // We don't need practiceId here as the studyId implicitly links to the practice
-                // and we already verified the study belongs to the practice.
+                // We don't need practiceId here as the monitoringPlanId implicitly links to the practice
+                // and we already verified the monitoring plan belongs to the practice.
             },
         });
 
         // If count is 0, the enrollment didn't exist.
         if (deleteResult.count === 0) {
-            throw new AppError('Patient enrollment in this study not found', 404);
+            throw new AppError('Patient enrollment in this monitoring plan not found', 404);
         }
 
-        // Instead of hard delete, consider soft delete (setting isActive = false)
-        // if historical data needs preservation:
-        /*
-        const updateResult = await prisma.studyPatient.updateMany({
-            where: {
-                studyId: studyId,
-                patientId: patientId,
-                study: { practiceId: practiceId } // Ensure it belongs to practice
-            },
-            data: { isActive: false, exitDate: new Date() },
-        });
-        if (updateResult.count === 0) {
-            throw new AppError('Patient enrollment not found or not associated with this practice', 404);
-        }
-        */
-
-        return true; // Removal successful
-
+        return true;
     } catch (error) {
         if (error instanceof AppError) {
             throw error;
         }
-         if (error instanceof Prisma.PrismaClientKnownRequestError) {
-            // Handle potential errors, e.g., related observations that might prevent deletion
-            // if (error.code === 'P2003' || error.code === 'P2014') { ... }
-        }
-        console.error(`Error removing patient ${patientId} from study ${studyId}:`, error);
-        throw new AppError('Could not remove patient from study due to an internal error', 500);
+        console.error(`Error removing patient ${patientId} from plan ${monitoringPlanId}:`, error);
+        throw new AppError('Could not remove patient from monitoring plan due to an internal error', 500);
     }
 };
 
 /**
- * Assigns a user to a specific study with a given role.
- * Checks if study and user exist and belong to the same practice.
- * Checks for existing assignment.
- * TODO: Add permission checks (e.g., only LEAD_RESEARCHER or PRACTICE_OWNER can assign others).
- * @param studyId - ID of the study.
+ * Assigns a user (staff member) to a monitoring plan with a specific role.
+ * @param monitoringPlanId - ID of the monitoring plan.
  * @param userId - ID of the user to assign.
- * @param role - The role to assign the user within the study.
+ * @param role - Role of the user in the monitoring plan.
  * @param practiceId - ID of the practice (for authorization).
- * @param assigningUserId - ID of the user performing the assignment (for permission checks).
- * @returns The created StudyAssignment record.
- * @throws AppError if study/user not found, not in practice, already assigned, no permission, or DB error.
+ * @returns The MonitoringPlanAssignment record.
+ * @throws AppError if plan/user not found, user not part of practice, or DB error.
  */
-export const assignUserToStudyService = async (studyId: string, userId: string, role: StudyRole, practiceId: string, assigningUserId: string) => {
+export const assignUserToMonitoringPlan = async (monitoringPlanId: string, userId: string, role: MonitoringPlanRole, practiceId: string) => {
     try {
-        // --- Permission Check (Placeholder - IMPLEMENT PROPERLY) ---
-        // Example: Fetch assigning user's role in the practice/study
-        // const assigner = await prisma.user.findUnique({ where: { id: assigningUserId }, include: { assignedStudies: { where: { studyId: studyId } } } });
-        // const assignerPracticeRole = assigner?.role;
-        // const assignerStudyRole = assigner?.assignedStudies[0]?.role;
-        // if (!assigner || !(assignerPracticeRole === UserRole.PRACTICE_OWNER || assignerStudyRole === StudyRole.LEAD_RESEARCHER)) {
-        //     throw new AppError('You do not have permission to assign users to this study', 403);
-        // }
-        console.log(`Assigning user ${userId} (Role: ${role}) to study ${studyId} by user ${assigningUserId}`); // Placeholder Log
-        // --------------------------------------------------------
-
-        // 1. Verify study exists and belongs to the practice
-        const study = await prisma.study.findFirst({
-            where: { id: studyId, practiceId },
-            select: { id: true },
-        });
-        if (!study) {
-            throw new AppError('Study not found or not associated with this practice', 404);
+        // Verify monitoring plan exists and belongs to practice
+        const planCheck = await prisma.monitoringPlan.count({ where: { id: monitoringPlanId, practiceId } });
+        if (planCheck === 0) {
+            throw new AppError('Monitoring Plan not found or not associated with this practice', 404);
         }
 
-        // 2. Verify user exists and belongs to the practice
-        const userToAssign = await prisma.user.findFirst({
-            where: { id: userId, practiceId },
-            select: { id: true },
-        });
-        if (!userToAssign) {
-            throw new AppError('User to assign not found or not associated with this practice', 404);
+        // Verify user exists and belongs to the same practice
+        const userCheck = await prisma.user.count({ where: { id: userId, practiceId } });
+        if (userCheck === 0) {
+            throw new AppError('User not found or not part of this practice', 404);
         }
 
-        // 3. Check if user is already assigned to this study
-        const existingAssignment = await prisma.studyAssignment.findUnique({
-            where: {
-                studyId_userId: { studyId, userId },
-            },
+        // Check if already assigned
+        const existingAssignment = await prisma.monitoringPlanAssignment.findUnique({
+            where: { monitoringPlanId_userId: { monitoringPlanId, userId } }
         });
+
         if (existingAssignment) {
-            // If already assigned, update the role instead of throwing an error
+            // If role is different, update it?
             if (existingAssignment.role !== role) {
-                const updatedAssignment = await prisma.studyAssignment.update({
+                const updatedAssignment = await prisma.monitoringPlanAssignment.update({
                     where: { id: existingAssignment.id },
                     data: { role },
-                     include: {
-                        study: { select: { id: true, title: true } },
-                        user: { select: { id: true, firstName: true, lastName: true, role: true } },
-                    }
                 });
-                return updatedAssignment; // Return the updated assignment
+                return updatedAssignment;
             } else {
-                 // If role is the same, just return the existing assignment info
-                return existingAssignment;
+                return existingAssignment; // Already assigned with the same role
             }
-            // Previous logic: throw new AppError('User is already assigned to this study', 409);
         }
 
-        // 4. Create the StudyAssignment record if not existing
-        const newAssignment = await prisma.studyAssignment.create({
+        // Create assignment
+        const assignment = await prisma.monitoringPlanAssignment.create({
             data: {
-                studyId,
-                userId,
-                role,
+                monitoringPlan: { connect: { id: monitoringPlanId } },
+                user: { connect: { id: userId } },
+                role: role,
             },
-            include: {
-                 study: { select: { id: true, title: true } },
-                 user: { select: { id: true, firstName: true, lastName: true, role: true } },
-            }
         });
 
-        return newAssignment;
-
+        return assignment;
     } catch (error) {
         if (error instanceof AppError) {
             throw error;
         }
-         if (error instanceof Prisma.PrismaClientKnownRequestError) {
-            // Handle potential DB errors (e.g., FK constraints if user/study deleted concurrently)
-        }
-        console.error(`Error assigning user ${userId} to study ${studyId}:`, error);
-        throw new AppError('Could not assign user to study due to an internal error', 500);
+        console.error(`Error assigning user ${userId} to plan ${monitoringPlanId}:`, error);
+        throw new AppError('Could not assign user to monitoring plan due to an internal error', 500);
     }
 };
 
 /**
- * Unassigns a user from a specific study.
- * Checks if the assignment exists and belongs to the practice.
- * TODO: Add permission checks (e.g., only LEAD_RESEARCHER/PRACTICE_OWNER can unassign, maybe user can unassign self?).
- * @param studyId - ID of the study.
- * @param userId - ID of the user to unassign.
+ * Removes a user assignment from a monitoring plan.
+ * @param monitoringPlanId - ID of the monitoring plan.
+ * @param userId - ID of the user to remove.
  * @param practiceId - ID of the practice (for authorization).
- * @param assigningUserId - ID of the user performing the action.
- * @returns True if unassignment was successful.
- * @throws AppError if assignment not found, no permission, or DB error.
+ * @returns True if removal was successful.
+ * @throws AppError if assignment not found or DB error.
  */
-export const unassignUserFromStudyService = async (studyId: string, userId: string, practiceId: string, assigningUserId: string) => {
+export const removeUserFromMonitoringPlan = async (monitoringPlanId: string, userId: string, practiceId: string) => {
     try {
-        // --- Permission Check (Placeholder - IMPLEMENT PROPERLY) ---
-        // Example: Allow self-unassignment OR admin/lead unassignment
-        // const assigner = await prisma.user.findUnique({ where: { id: assigningUserId }});
-        // if (!assigner) throw new AppError('Assigner not found', 403);
-        // const isSelf = assigningUserId === userId;
-        // const isAdminOrLead = [UserRole.PRACTICE_OWNER /*, StudyRole.LEAD_RESEARCHER */].includes(assigner.role);
-        // if (!isSelf && !isAdminOrLead) {
-        //      throw new AppError('You do not have permission to unassign this user', 403);
-        // }
-        console.log(`Unassigning user ${userId} from study ${studyId} by user ${assigningUserId}`); // Placeholder Log
-        // --------------------------------------------------------
-
-        // Verify study belongs to the practice first for authorization context
-        const studyCheck = await prisma.study.count({
-             where: { id: studyId, practiceId }
-        });
-        if (studyCheck === 0) {
-             throw new AppError('Study not found or not associated with this practice', 404);
+        // Verify monitoring plan exists and belongs to practice
+        const planCheck = await prisma.monitoringPlan.count({ where: { id: monitoringPlanId, practiceId } });
+        if (planCheck === 0) {
+            throw new AppError('Monitoring Plan not found or not associated with this practice', 404);
         }
 
-        // Attempt to delete the StudyAssignment record
-        const deleteResult = await prisma.studyAssignment.deleteMany({
+        // Attempt to delete the assignment
+        const deleteResult = await prisma.monitoringPlanAssignment.deleteMany({
             where: {
-                studyId: studyId,
+                monitoringPlanId: monitoringPlanId,
                 userId: userId,
-                // studyId implicitly links to practice, verified above
             },
         });
 
-        // If count is 0, the assignment didn't exist.
         if (deleteResult.count === 0) {
-            throw new AppError('User assignment to this study not found', 404);
+            throw new AppError('User assignment for this monitoring plan not found', 404);
         }
 
-        return true; // Unassignment successful
-
+        return true;
     } catch (error) {
         if (error instanceof AppError) {
             throw error;
         }
-        // Handle potential Prisma errors
-        console.error(`Error unassigning user ${userId} from study ${studyId}:`, error);
-        throw new AppError('Could not unassign user from study due to an internal error', 500);
+        console.error(`Error removing user ${userId} from plan ${monitoringPlanId}:`, error);
+        throw new AppError('Could not remove user from monitoring plan due to an internal error', 500);
+    }
+};
+
+/**
+ * Generates a unique share token for a monitoring plan.
+ * @param monitoringPlanId - ID of the monitoring plan.
+ * @param practiceId - ID of the practice (for authorization).
+ * @returns The generated share token.
+ * @throws AppError if plan not found or DB error.
+ */
+export const generateShareToken = async (monitoringPlanId: string, practiceId: string): Promise<string> => {
+    try {
+        const plan = await findMonitoringPlanById(monitoringPlanId, practiceId);
+        if (!plan) {
+            throw new AppError('Monitoring Plan not found', 404);
+        }
+
+        const shareToken = `${monitoringPlanId}-${Date.now().toString(36)}`; // Simple token generation
+        
+        await prisma.monitoringPlan.update({
+            where: { id: monitoringPlanId },
+            data: { shareToken },
+        });
+
+        return shareToken;
+    } catch (error) {
+        if (error instanceof AppError) throw error;
+        console.error(`Error generating share token for plan ${monitoringPlanId}:`, error);
+        throw new AppError('Could not generate share token due to an internal error', 500);
+    }
+};
+
+/**
+ * Finds a monitoring plan by its share token.
+ * @param token - The share token.
+ * @returns The monitoring plan object or null if not found.
+ * @throws AppError on DB error.
+ */
+export const findMonitoringPlanByShareToken = async (token: string) => {
+    try {
+        const monitoringPlan = await prisma.monitoringPlan.findUnique({
+            where: { shareToken: token },
+            include: { 
+                symptomTemplates: true, 
+                practice: { select: { name: true, logo: true } } // Include practice details
+            }
+        });
+        return monitoringPlan;
+    } catch (error) {
+        console.error(`Error finding monitoring plan by share token ${token}:`, error);
+        throw new AppError('Could not retrieve monitoring plan by share token due to an internal error', 500);
     }
 }; 
