@@ -14,7 +14,8 @@
     "prisma:studio": "cd server && npm run db:studio",
     "prisma:migrate": "cd server && npm run db:migrate:dev",
     "prisma:deploy": "cd server && npm run db:migrate:deploy",
-    "prisma:generate": "cd server && npm run db:generate"
+    "prisma:generate": "cd server && npm run db:generate",
+    "start": "cd server && npm run start"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.6.1",
